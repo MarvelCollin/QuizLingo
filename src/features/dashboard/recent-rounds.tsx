@@ -12,6 +12,7 @@ const MODE_NAMES: Record<string, string> = {
   'mock-test': 'Mock test',
   speaking: 'Speaking',
   basics: 'Starter path',
+  sounds: 'Sound pairs',
 };
 
 export const RecentRounds = ({ rounds }: RecentRoundsProps) => (

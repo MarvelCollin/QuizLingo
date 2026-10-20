@@ -16,6 +16,7 @@ export const MODES = [
   'mock-test',
   'speaking',
   'basics',
+  'sounds',
 ] as const;
 export type Mode = (typeof MODES)[number];
 

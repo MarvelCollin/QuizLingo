@@ -37,6 +37,7 @@ export const DEFAULT_CONFIG: RoundConfig = { mode: 'flashcard', set: 'new', leve
 export const OPTION_COUNT = 4;
 
 export const MORE_PRACTICE = [
+  { to: '/practice/sounds', label: 'Sound pairs', detail: 'Tell b from p, zh from z and an from ang by ear' },
   { to: '/practice/tones', label: 'Tones', detail: 'Native recordings of syllables and words, pick the tone you hear' },
   { to: '/practice/characters', label: 'Character quiz', detail: 'Recognise each character by its pinyin and meaning' },
   { to: '/practice/writing', label: 'Writing practice', detail: 'Draw the characters you need to write, stroke by stroke' },

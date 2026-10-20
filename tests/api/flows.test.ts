@@ -97,7 +97,7 @@ describe('progress and stats', () => {
   });
 
   it('saves rounds for every kind of practice and reports them in stats', async () => {
-    for (const roundMode of ['quiz', 'tones', 'listening-test', 'mock-test', 'speaking', 'basics']) {
+    for (const roundMode of ['quiz', 'tones', 'listening-test', 'mock-test', 'speaking', 'basics', 'sounds']) {
       const round = await call(sessions.POST, '/sessions', { cookie, body: { mode: roundMode, level: 7, total: 10, correct: 6 } });
       expect(round.status).toBe(201);
     }
@@ -107,7 +107,7 @@ describe('progress and stats', () => {
     expect(summary.status).toBe(200);
     expect(summary.body.answers).toEqual({ correct: 2, wrong: 1 });
     expect(summary.body.streak).toBe(1);
-    expect((summary.body.recent as unknown[]).length).toBe(6);
+    expect((summary.body.recent as unknown[]).length).toBe(7);
     expect((summary.body.activity as unknown[]).length).toBe(14);
     const levels = summary.body.levels as { level: number; seen: number }[];
     expect(levels.find((l) => l.level === 4)?.seen).toBe(1);

@@ -71,6 +71,10 @@
       "destination": "/quizlingo/index.html"
     },
     {
+      "source": "/quizlingo/practice/sounds",
+      "destination": "/quizlingo/index.html"
+    },
+    {
       "source": "/quizlingo/practice/tones",
       "destination": "/quizlingo/index.html"
     },
