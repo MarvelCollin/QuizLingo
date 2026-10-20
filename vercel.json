@@ -75,6 +75,10 @@
       "destination": "/quizlingo/index.html"
     },
     {
+      "source": "/quizlingo/pinyin",
+      "destination": "/quizlingo/index.html"
+    },
+    {
       "source": "/quizlingo/grammar",
       "destination": "/quizlingo/index.html"
     },

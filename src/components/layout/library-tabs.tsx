@@ -5,6 +5,7 @@ const TABS = [
   { to: '/words', label: 'Words' },
   { to: '/characters', label: 'Characters' },
   { to: '/grammar', label: 'Grammar' },
+  { to: '/pinyin', label: 'Pinyin' },
 ] as const;
 
 export const LibraryTabs = () => (

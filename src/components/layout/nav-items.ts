@@ -5,7 +5,7 @@ export const NAV_ITEMS = [
   { to: '/basics', label: 'Basics', icon: Route, end: false, match: ['/basics'] },
   { to: '/practice', label: 'Practice', icon: Layers, end: false, match: ['/practice'] },
   { to: '/tests', label: 'Tests', icon: ClipboardCheck, end: false, match: ['/tests'] },
-  { to: '/words', label: 'Library', icon: BookOpen, end: false, match: ['/words', '/characters', '/grammar'] },
+  { to: '/words', label: 'Library', icon: BookOpen, end: false, match: ['/words', '/characters', '/grammar', '/pinyin'] },
 ] as const;
 
 export const isNavActive = (item: (typeof NAV_ITEMS)[number], pathname: string) =>
