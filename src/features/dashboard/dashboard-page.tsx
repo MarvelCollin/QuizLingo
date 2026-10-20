@@ -7,6 +7,7 @@ import { usePageMeta } from '../../lib/use-page-meta';
 import { useSession } from '../auth/use-session';
 import { useStats } from '../progress/use-stats';
 import { useProgress } from '../progress/use-progress';
+import { useBasicsPath } from '../basics/use-basics';
 import { useVocabulary } from '../vocabulary/use-vocabulary';
 import { LEVELS } from '../vocabulary/constants';
 import type { HskLevel } from '../vocabulary/types';
@@ -15,6 +16,8 @@ import { ActivityChart } from './activity-chart';
 import { LevelProgress } from './level-progress';
 import { NextStep } from './next-step';
 import { RecentRounds } from './recent-rounds';
+import { StarterHero } from './starter-hero';
+import { StarterStrip } from './starter-strip';
 import { SummaryStrip } from './summary-strip';
 
 const DashboardSkeleton = () => (
@@ -32,6 +35,8 @@ const DashboardPage = () => {
   const stats = useStats();
   const vocabulary = useVocabulary();
   const progress = useProgress();
+  // The starter path is a bonus here, so the page never waits for it
+  const basics = useBasicsPath();
 
   const totals = useMemo(() => {
     const counts = Object.fromEntries(LEVELS.map((l) => [l, 0])) as Record<HskLevel, number>;
@@ -81,7 +86,14 @@ const DashboardPage = () => {
   return (
     <div className="flex flex-col gap-10">
       <h1 className="text-xl font-semibold text-ink">Hi {session.data?.name}</h1>
-      <NextStep due={due} nextNewLevel={nextNewLevel} isFirstVisit={isFirstVisit} />
+      {isFirstVisit && basics.path?.next ? (
+        <StarterHero next={basics.path.next} isFresh={basics.data?.length === 0} />
+      ) : (
+        <NextStep due={due} nextNewLevel={nextNewLevel} isFirstVisit={isFirstVisit} />
+      )}
+      {!isFirstVisit && basics.path?.next && basics.data && basics.data.length > 0 && (
+        <StarterStrip next={basics.path.next} stagesDone={basics.path.stagesDone} stagesTotal={basics.path.stages.length} />
+      )}
       <SummaryStrip
         mastered={mastered}
         totalWords={vocabulary.data.length}
