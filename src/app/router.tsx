@@ -12,6 +12,14 @@ const PracticePage = lazy(() => import('../features/practice/practice-page'));
 const RoundPage = lazy(() => import('../features/practice/round-page'));
 const WordsPage = lazy(() => import('../features/words/words-page'));
 const WordPage = lazy(() => import('../features/words/word-page'));
+const CharactersPage = lazy(() => import('../features/characters/characters-page'));
+const CharacterPage = lazy(() => import('../features/characters/character-page'));
+const CharacterQuizPage = lazy(() =>
+  import('../features/characters/character-practice-page').then((m) => ({ default: m.CharacterQuizPage })),
+);
+const WritingPracticePage = lazy(() =>
+  import('../features/characters/character-practice-page').then((m) => ({ default: m.WritingPracticePage })),
+);
 const NotFoundPage = lazy(() => import('../pages/not-found-page'));
 
 const page = (element: ReactNode) => <Suspense fallback={<PageFallback />}>{element}</Suspense>;
@@ -32,6 +40,10 @@ export const router = createBrowserRouter([
       { path: 'practice/round', element: page(<RoundPage />) },
       { path: 'words', element: page(<WordsPage />) },
       { path: 'words/:word', element: page(<WordPage />) },
+      { path: 'characters', element: page(<CharactersPage />) },
+      { path: 'characters/:char', element: page(<CharacterPage />) },
+      { path: 'practice/characters', element: page(<CharacterQuizPage />) },
+      { path: 'practice/writing', element: page(<WritingPracticePage />) },
     ],
   },
   { path: '*', element: page(<NotFoundPage />) },

@@ -92,3 +92,18 @@ export type WordOrderProps = {
 };
 
 export type AnswerFooterProps = { isCorrect: boolean; question: SentenceQuestion; onNext: () => void };
+
+export type ToolMissed = { key: string; main: string; detail: string };
+
+export type ToolSummaryProps = {
+  title: string;
+  correct: number;
+  total: number;
+  missed: ToolMissed[];
+  isSaving: boolean;
+  onRestart: () => void;
+  backTo: string;
+  backLabel: string;
+};
+
+export type ToolHeaderProps = { label: string; index: number; total: number; correct: number; answered: number; backTo: string };

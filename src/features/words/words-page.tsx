@@ -1,5 +1,6 @@
 import { SlidersHorizontal } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { LibraryTabs } from '../../components/layout/library-tabs';
 import { Button } from '../../components/ui/button';
 import { InlineMessage } from '../../components/ui/inline-message';
 import { SearchField } from '../../components/ui/search-field';
@@ -61,9 +62,10 @@ const WordsPage = () => {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-bold text-ink">Words</h1>
+        <h1 className="text-2xl font-bold text-ink">Library</h1>
         <p className="mt-1 text-base text-muted">All HSK 3.0 words for levels 1 to 9, with your progress on each.</p>
       </div>
+      <LibraryTabs />
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
         <SearchField

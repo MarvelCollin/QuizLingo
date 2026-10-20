@@ -13,7 +13,7 @@ export type Sentence = {
 
 export type RawHanzi = { c: string; l: number; x: number; y: string; n: string; m: string[]; w: string[] };
 
-export type WriteLevel = 0 | 2 | 3;
+export type WriteLevel = 0 | 2 | 3 | 4 | 5 | 6 | 7;
 
 export type Hanzi = {
   char: string;

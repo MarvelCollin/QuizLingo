@@ -1,16 +1,17 @@
 import { LogOut, UserRound } from 'lucide-react';
-import { NavLink, Outlet, useNavigate } from 'react-router';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router';
 import { useLogout, useSession } from '../../features/auth/use-session';
 import { useRecordings } from '../../features/practice/use-recordings';
 import { cn } from '../../lib/utils';
 import { BrandMark } from './brand-mark';
-import { NAV_ITEMS } from './nav-items';
+import { isNavActive, NAV_ITEMS } from './nav-items';
 
 // Desktop: navigation stays visible in the top bar. Mobile: a bottom tab bar with the same three places.
 export const AppShell = () => {
   const session = useSession();
   const logout = useLogout();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   useRecordings();
 
   const handleSignOut = () => logout.mutate(undefined, { onSuccess: () => navigate('/login', { replace: true }) });
@@ -27,21 +28,19 @@ export const AppShell = () => {
         <div className="mx-auto flex h-16 max-w-5xl items-center gap-6 px-4">
           <BrandMark />
           <nav aria-label="Main" className="hidden h-full items-stretch gap-1 sm:flex">
-            {NAV_ITEMS.map(({ to, label, end }) => (
+            {NAV_ITEMS.map((item) => (
               <NavLink
-                key={to}
-                to={to}
-                end={end}
-                className={({ isActive }) =>
-                  cn(
-                    'flex items-center border-b-2 px-3 text-base transition-colors duration-150',
-                    isActive
-                      ? 'border-strong font-semibold text-ink'
-                      : 'border-transparent font-medium text-muted hover:text-ink',
-                  )
-                }
+                key={item.to}
+                to={item.to}
+                aria-current={isNavActive(item, pathname) ? 'page' : undefined}
+                className={cn(
+                  'flex items-center border-b-2 px-3 text-base transition-colors duration-150',
+                  isNavActive(item, pathname)
+                    ? 'border-strong font-semibold text-ink'
+                    : 'border-transparent font-medium text-muted hover:text-ink',
+                )}
               >
-                {label}
+                {item.label}
               </NavLink>
             ))}
           </nav>
@@ -72,27 +71,25 @@ export const AppShell = () => {
         className="fixed inset-x-0 bottom-0 z-30 border-t border-hairline bg-bg pb-[env(safe-area-inset-bottom)] sm:hidden"
       >
         <ul className="grid grid-cols-3">
-          {NAV_ITEMS.map(({ to, label, icon: Icon, end }) => (
-            <li key={to}>
-              <NavLink
-                to={to}
-                end={end}
-                className={({ isActive }) =>
-                  cn(
+          {NAV_ITEMS.map((item) => {
+            const isActive = isNavActive(item, pathname);
+            const Icon = item.icon;
+            return (
+              <li key={item.to}>
+                <NavLink
+                  to={item.to}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={cn(
                     'flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs',
                     isActive ? 'font-bold text-strong' : 'font-medium text-muted',
-                  )
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    <Icon aria-hidden="true" className="size-5" strokeWidth={isActive ? 2.25 : 1.75} />
-                    {label}
-                  </>
-                )}
-              </NavLink>
-            </li>
-          ))}
+                  )}
+                >
+                  <Icon aria-hidden="true" className="size-5" strokeWidth={isActive ? 2.25 : 1.75} />
+                  {item.label}
+                </NavLink>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </div>

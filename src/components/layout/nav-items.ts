@@ -1,7 +1,10 @@
 import { BookOpen, House, Layers } from 'lucide-react';
 
 export const NAV_ITEMS = [
-  { to: '/', label: 'Home', icon: House, end: true },
-  { to: '/practice', label: 'Practice', icon: Layers, end: false },
-  { to: '/words', label: 'Words', icon: BookOpen, end: false },
+  { to: '/', label: 'Home', icon: House, end: true, match: [] },
+  { to: '/practice', label: 'Practice', icon: Layers, end: false, match: ['/practice'] },
+  { to: '/words', label: 'Library', icon: BookOpen, end: false, match: ['/words', '/characters', '/grammar'] },
 ] as const;
+
+export const isNavActive = (item: (typeof NAV_ITEMS)[number], pathname: string) =>
+  item.end ? pathname === item.to : item.match.some((path) => pathname === path || pathname.startsWith(`${path}/`));

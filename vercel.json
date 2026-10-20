@@ -45,6 +45,42 @@
     {
       "source": "/quizlingo/words/:word",
       "destination": "/quizlingo/index.html"
+    },
+    {
+      "source": "/quizlingo/characters",
+      "destination": "/quizlingo/index.html"
+    },
+    {
+      "source": "/quizlingo/characters/:char",
+      "destination": "/quizlingo/index.html"
+    },
+    {
+      "source": "/quizlingo/practice/characters",
+      "destination": "/quizlingo/index.html"
+    },
+    {
+      "source": "/quizlingo/practice/writing",
+      "destination": "/quizlingo/index.html"
+    },
+    {
+      "source": "/quizlingo/practice/tones",
+      "destination": "/quizlingo/index.html"
+    },
+    {
+      "source": "/quizlingo/grammar",
+      "destination": "/quizlingo/index.html"
+    },
+    {
+      "source": "/quizlingo/grammar/:level",
+      "destination": "/quizlingo/index.html"
+    },
+    {
+      "source": "/quizlingo/tests",
+      "destination": "/quizlingo/index.html"
+    },
+    {
+      "source": "/quizlingo/tests/:path*",
+      "destination": "/quizlingo/index.html"
     }
   ],
   "headers": [
