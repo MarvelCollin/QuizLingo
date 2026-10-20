@@ -1,0 +1,618 @@
+[
+  {
+    "id": "l4-01",
+    "title": "Planning a team trip",
+    "scene": "Two colleagues talk in the office",
+    "lines": [
+      {
+        "speaker": "女",
+        "zh": "经理让我们安排下个月的公司旅游，你有什么想法？",
+        "py": "Jīnglǐ ràng wǒmen ānpái xià ge yuè de gōngsī lǚyóu, nǐ yǒu shénme xiǎngfǎ?",
+        "en": "The manager asked us to plan next month's company trip. Do you have any ideas?"
+      },
+      {
+        "speaker": "男",
+        "zh": "我觉得去海边不错，大家平时工作太忙了，可以去放松一下。",
+        "py": "Wǒ juéde qù hǎibiān búcuò, dàjiā píngshí gōngzuò tài máng le, kěyǐ qù fàngsōng yíxià.",
+        "en": "I think the seaside would be nice. Everyone is too busy at work, so we could go and relax."
+      },
+      {
+        "speaker": "女",
+        "zh": "海边是好，但是下个月已经是十月了，天气有点儿冷，不能游泳。",
+        "py": "Hǎibiān shì hǎo, dànshì xià ge yuè yǐjīng shì shí yuè le, tiānqì yǒudiǎnr lěng, bù néng yóuyǒng.",
+        "en": "The seaside is nice, but next month is already October. It will be a bit cold and we can't swim."
+      },
+      {
+        "speaker": "男",
+        "zh": "那去山里怎么样？听说那里的景色特别美，秋天的时候叶子都是红色的。",
+        "py": "Nà qù shān li zěnmeyàng? Tīngshuō nàli de jǐngsè tèbié měi, qiūtiān de shíhou yèzi dōu shì hóngsè de.",
+        "en": "Then how about the mountains? I hear the scenery there is really beautiful, and in autumn the leaves are all red."
+      },
+      {
+        "speaker": "女",
+        "zh": "这个主意好。不过有些同事身体不太好，爬山会不会太累？",
+        "py": "Zhège zhǔyi hǎo. Búguò yǒuxiē tóngshì shēntǐ bú tài hǎo, pá shān huì bu huì tài lèi?",
+        "en": "That's a good idea. But some colleagues aren't in great health. Will climbing the mountain be too tiring?"
+      },
+      {
+        "speaker": "男",
+        "zh": "不用担心，山上有路可以开车上去，不想走路的人可以坐车。",
+        "py": "Búyòng dānxīn, shān shang yǒu lù kěyǐ kāichē shàngqu, bù xiǎng zǒulù de rén kěyǐ zuò chē.",
+        "en": "Don't worry. There is a road up the mountain, so people who don't want to walk can go by car."
+      },
+      {
+        "speaker": "女",
+        "zh": "那住的地方呢？我们一共有三十位同事。",
+        "py": "Nà zhù de dìfang ne? Wǒmen yígòng yǒu sānshí wèi tóngshì.",
+        "en": "What about a place to stay? There are thirty of us in total."
+      },
+      {
+        "speaker": "男",
+        "zh": "我上网查了一下，山下有一家酒店，房间很大，价格也不贵，每人每晚200块。",
+        "py": "Wǒ shàngwǎng chá le yíxià, shān xià yǒu yì jiā jiǔdiàn, fángjiān hěn dà, jiàgé yě bú guì, měi rén měi wǎn 200 kuài.",
+        "en": "I looked online. There's a hotel at the foot of the mountain with big rooms, and it isn't expensive: 200 yuan per person per night."
+      },
+      {
+        "speaker": "女",
+        "zh": "我们周五出发还是周六出发？",
+        "py": "Wǒmen zhōuwǔ chūfā háishi zhōuliù chūfā?",
+        "en": "Should we leave on Friday or on Saturday?"
+      },
+      {
+        "speaker": "男",
+        "zh": "周五下午出发吧，这样可以玩两天，周日晚上回来，不影响周一上班。",
+        "py": "Zhōuwǔ xiàwǔ chūfā ba, zhèyàng kěyǐ wán liǎng tiān, zhōurì wǎnshang huílai, bù yǐngxiǎng zhōuyī shàngbān.",
+        "en": "Let's leave on Friday afternoon. That way we get two days of fun, come back on Sunday evening, and Monday's work isn't affected."
+      },
+      {
+        "speaker": "女",
+        "zh": "好，那我先去问问经理的意见，他同意了我们就开始报名。",
+        "py": "Hǎo, nà wǒ xiān qù wènwen jīnglǐ de yìjiàn, tā tóngyì le wǒmen jiù kāishǐ bàomíng.",
+        "en": "OK, I'll ask the manager what he thinks first. Once he agrees, we'll start taking sign-ups."
+      },
+      {
+        "speaker": "男",
+        "zh": "别忘了提醒大家带厚一点儿的衣服，山上晚上比较冷。",
+        "py": "Bié wàng le tíxǐng dàjiā dài hòu yìdiǎnr de yīfu, shān shang wǎnshang bǐjiào lěng.",
+        "en": "Don't forget to remind everyone to bring warmer clothes. It gets rather cold on the mountain at night."
+      }
+    ],
+    "questions": [
+      {
+        "prompt": "他们为什么不去海边？",
+        "promptPy": "Tāmen wèi shénme bú qù hǎibiān?",
+        "promptEn": "Why aren't they going to the seaside?",
+        "options": [
+          "太远了",
+          "天气冷，不能游泳",
+          "价格太贵",
+          "经理不让去"
+        ],
+        "answer": 1,
+        "line": 2,
+        "explanation": "In line 2 the woman says next month is October, so it will be cold and nobody can swim."
+      },
+      {
+        "prompt": "女的担心什么？",
+        "promptPy": "Nǚ de dānxīn shénme?",
+        "promptEn": "What is the woman worried about?",
+        "options": [
+          "有些同事爬山会太累",
+          "酒店房间太小",
+          "山上没有路",
+          "大家不想报名"
+        ],
+        "answer": 0,
+        "line": 4,
+        "explanation": "In line 4 she worries that climbing will be too tiring for colleagues who aren't in good health."
+      },
+      {
+        "prompt": "酒店每人每晚多少钱？",
+        "promptPy": "Jiǔdiàn měi rén měi wǎn duōshao qián?",
+        "promptEn": "How much is the hotel per person per night?",
+        "options": [
+          "100块",
+          "150块",
+          "300块",
+          "200块"
+        ],
+        "answer": 3,
+        "line": 7,
+        "explanation": "Line 7 gives the price as 200 yuan per person per night."
+      },
+      {
+        "prompt": "他们打算什么时候回来？",
+        "promptPy": "Tāmen dǎsuàn shénme shíhou huílai?",
+        "promptEn": "When do they plan to come back?",
+        "options": [
+          "周五下午",
+          "周六晚上",
+          "周日晚上",
+          "周一上午"
+        ],
+        "answer": 2,
+        "line": 9,
+        "explanation": "In line 9 the man suggests coming back on Sunday evening so Monday's work isn't affected."
+      },
+      {
+        "prompt": "男的提醒大家带什么？",
+        "promptPy": "Nán de tíxǐng dàjiā dài shénme?",
+        "promptEn": "What does the man want everyone reminded to bring?",
+        "options": [
+          "雨伞",
+          "厚一点儿的衣服",
+          "游泳的衣服",
+          "吃的东西"
+        ],
+        "answer": 1,
+        "line": 11,
+        "explanation": "Line 11 says to bring warmer clothes because the mountain is cold at night."
+      }
+    ]
+  },
+  {
+    "id": "l4-02",
+    "title": "Calling about a flat",
+    "scene": "A young man phones a landlord about a flat for rent",
+    "lines": [
+      {
+        "speaker": "男",
+        "zh": "您好，我在网上看到您的房子要出租，现在还有吗？",
+        "py": "Nín hǎo, wǒ zài wǎngshàng kàndào nín de fángzi yào chūzū, xiànzài hái yǒu ma?",
+        "en": "Hello, I saw online that your flat is for rent. Is it still available?"
+      },
+      {
+        "speaker": "女",
+        "zh": "还有。房子在三楼，有两个房间，一个厨房和一个卫生间。",
+        "py": "Hái yǒu. Fángzi zài sān lóu, yǒu liǎng ge fángjiān, yí ge chúfáng hé yí ge wèishēngjiān.",
+        "en": "It is. It's on the third floor, with two rooms, a kitchen and a bathroom."
+      },
+      {
+        "speaker": "男",
+        "zh": "离地铁站远不远？我每天要坐地铁上班。",
+        "py": "Lí dìtiězhàn yuǎn bu yuǎn? Wǒ měi tiān yào zuò dìtiě shàngbān.",
+        "en": "Is it far from the subway station? I take the subway to work every day."
+      },
+      {
+        "speaker": "女",
+        "zh": "不远，走路大概10分钟，附近还有一个大超市，买东西很方便。",
+        "py": "Bù yuǎn, zǒulù dàgài 10 fēnzhōng, fùjìn hái yǒu yí ge dà chāoshì, mǎi dōngxi hěn fāngbiàn.",
+        "en": "Not far, about ten minutes on foot. There's also a big supermarket nearby, so shopping is easy."
+      },
+      {
+        "speaker": "男",
+        "zh": "房租一个月多少钱？",
+        "py": "Fángzū yí ge yuè duōshao qián?",
+        "en": "How much is the rent per month?"
+      },
+      {
+        "speaker": "女",
+        "zh": "一个月3500块，水电费另外交。",
+        "py": "Yí ge yuè 3500 kuài, shuǐdiànfèi lìngwài jiāo.",
+        "en": "3,500 yuan a month. Water and electricity are paid separately."
+      },
+      {
+        "speaker": "男",
+        "zh": "有点儿贵。我看别的房子差不多3000块。",
+        "py": "Yǒudiǎnr guì. Wǒ kàn bié de fángzi chàbuduō 3000 kuài.",
+        "en": "That's a bit expensive. Other flats I've seen are about 3,000."
+      },
+      {
+        "speaker": "女",
+        "zh": "我的房子去年刚修过，家具、冰箱和空调都是新的，你来看看就知道了。",
+        "py": "Wǒ de fángzi qùnián gāng xiū guo, jiājù, bīngxiāng hé kōngtiáo dōu shì xīn de, nǐ lái kànkan jiù zhīdào le.",
+        "en": "My flat was just done up last year, and the furniture, fridge and air conditioner are all new. Come and see it and you'll understand."
+      },
+      {
+        "speaker": "男",
+        "zh": "我晚上常常工作到很晚，那里安静吗？",
+        "py": "Wǒ wǎnshang chángcháng gōngzuò dào hěn wǎn, nàli ānjìng ma?",
+        "en": "I often work late at night. Is it quiet there?"
+      },
+      {
+        "speaker": "女",
+        "zh": "很安静，房间的窗户对着公园，不对着马路。",
+        "py": "Hěn ānjìng, fángjiān de chuānghu duìzhe gōngyuán, bú duìzhe mǎlù.",
+        "en": "Very quiet. The windows face a park, not the road."
+      },
+      {
+        "speaker": "男",
+        "zh": "太好了。我明天下午三点过去看看，可以吗？",
+        "py": "Tài hǎo le. Wǒ míngtiān xiàwǔ sān diǎn guòqu kànkan, kěyǐ ma?",
+        "en": "Great. Can I come and have a look tomorrow at three in the afternoon?"
+      },
+      {
+        "speaker": "女",
+        "zh": "明天下午我要上班，六点以后可以吗？",
+        "py": "Míngtiān xiàwǔ wǒ yào shàngbān, liù diǎn yǐhòu kěyǐ ma?",
+        "en": "I'm at work tomorrow afternoon. Is after six OK?"
+      },
+      {
+        "speaker": "男",
+        "zh": "可以，那就明天六点半见。",
+        "py": "Kěyǐ, nà jiù míngtiān liù diǎn bàn jiàn.",
+        "en": "Sure, see you tomorrow at half past six then."
+      }
+    ],
+    "questions": [
+      {
+        "prompt": "房子离地铁站多远？",
+        "promptPy": "Fángzi lí dìtiězhàn duō yuǎn?",
+        "promptEn": "How far is the flat from the subway station?",
+        "options": [
+          "走路10分钟",
+          "坐车10分钟",
+          "走路30分钟",
+          "就在地铁站旁边"
+        ],
+        "answer": 0,
+        "line": 3,
+        "explanation": "In line 3 the landlord says it's about ten minutes on foot."
+      },
+      {
+        "prompt": "房租一个月多少钱？",
+        "promptPy": "Fángzū yí ge yuè duōshao qián?",
+        "promptEn": "How much is the monthly rent?",
+        "options": [
+          "3000块",
+          "3500块",
+          "4000块",
+          "2500块"
+        ],
+        "answer": 1,
+        "line": 5,
+        "explanation": "Line 5 gives the rent as 3,500 yuan a month; 3,000 is the price of other flats."
+      },
+      {
+        "prompt": "女的为什么觉得房租不贵？",
+        "promptPy": "Nǚ de wèi shénme juéde fángzū bú guì?",
+        "promptEn": "Why does the woman think the rent is fair?",
+        "options": [
+          "离公司很近",
+          "房间很多",
+          "去年刚修过，家具都是新的",
+          "水电费不用交"
+        ],
+        "answer": 2,
+        "line": 7,
+        "explanation": "In line 7 she points out the flat was redone last year and the furniture is new."
+      },
+      {
+        "prompt": "为什么房间很安静？",
+        "promptPy": "Wèi shénme fángjiān hěn ānjìng?",
+        "promptEn": "Why is the flat quiet?",
+        "options": [
+          "楼里没有人住",
+          "房子在三楼",
+          "附近没有超市",
+          "窗户对着公园"
+        ],
+        "answer": 3,
+        "line": 9,
+        "explanation": "Line 9 says the windows face a park rather than the road."
+      },
+      {
+        "prompt": "他们什么时候去看房子？",
+        "promptPy": "Tāmen shénme shíhou qù kàn fángzi?",
+        "promptEn": "When will they view the flat?",
+        "options": [
+          "明天下午三点",
+          "明天早上",
+          "明天六点半",
+          "今天晚上"
+        ],
+        "answer": 2,
+        "line": 12,
+        "explanation": "Three o'clock doesn't work for the landlord, so in line 12 they agree on half past six tomorrow."
+      }
+    ]
+  },
+  {
+    "id": "l4-03",
+    "title": "A job interview",
+    "scene": "A manager interviews a new graduate",
+    "lines": [
+      {
+        "speaker": "男",
+        "zh": "请坐。先简单介绍一下你自己吧。",
+        "py": "Qǐng zuò. Xiān jiǎndān jièshào yíxià nǐ zìjǐ ba.",
+        "en": "Please have a seat. First, tell me a little about yourself."
+      },
+      {
+        "speaker": "女",
+        "zh": "好的。我今年大学毕业，学的是电脑技术，在学校的时候参加过很多活动。",
+        "py": "Hǎo de. Wǒ jīnnián dàxué bìyè, xué de shì diànnǎo jìshù, zài xuéxiào de shíhou cānjiā guo hěn duō huódòng.",
+        "en": "Sure. I graduate from university this year. I studied computer science, and I took part in many activities at school."
+      },
+      {
+        "speaker": "男",
+        "zh": "你为什么想来我们公司工作？",
+        "py": "Nǐ wèi shénme xiǎng lái wǒmen gōngsī gōngzuò?",
+        "en": "Why do you want to work for our company?"
+      },
+      {
+        "speaker": "女",
+        "zh": "我一直对你们公司的手机很感兴趣，而且听说公司很重视年轻人，给大家很多学习的机会。",
+        "py": "Wǒ yìzhí duì nǐmen gōngsī de shǒujī hěn gǎn xìngqù, érqiě tīngshuō gōngsī hěn zhòngshì niánqīngrén, gěi dàjiā hěn duō xuéxí de jīhuì.",
+        "en": "I've always been interested in your company's phones, and I hear the company values young people and gives them many chances to learn."
+      },
+      {
+        "speaker": "男",
+        "zh": "你有工作经验吗？",
+        "py": "Nǐ yǒu gōngzuò jīngyàn ma?",
+        "en": "Do you have any work experience?"
+      },
+      {
+        "speaker": "女",
+        "zh": "去年暑假我在一家做电脑的公司打工了两个月，主要负责检查电脑的问题。",
+        "py": "Qùnián shǔjià wǒ zài yì jiā zuò diànnǎo de gōngsī dǎgōng le liǎng ge yuè, zhǔyào fùzé jiǎnchá diànnǎo de wèntí.",
+        "en": "Last summer I worked for two months at a computer company, mainly checking computers for problems."
+      },
+      {
+        "speaker": "男",
+        "zh": "这个工作常常需要加班，你能接受吗？",
+        "py": "Zhège gōngzuò chángcháng xūyào jiābān, nǐ néng jiēshòu ma?",
+        "en": "This job often needs overtime. Can you accept that?"
+      },
+      {
+        "speaker": "女",
+        "zh": "可以接受。只要工作有意思，加班我不怕。",
+        "py": "Kěyǐ jiēshòu. Zhǐyào gōngzuò yǒu yìsi, jiābān wǒ bú pà.",
+        "en": "Yes. As long as the work is interesting, I don't mind overtime."
+      },
+      {
+        "speaker": "男",
+        "zh": "我们公司在城市的北边，比较远，你住在哪儿？",
+        "py": "Wǒmen gōngsī zài chéngshì de běibian, bǐjiào yuǎn, nǐ zhù zài nǎr?",
+        "en": "Our company is in the north of the city, rather far out. Where do you live?"
+      },
+      {
+        "speaker": "女",
+        "zh": "我现在住在学校，如果能来工作，我打算在公司附近租房子。",
+        "py": "Wǒ xiànzài zhù zài xuéxiào, rúguǒ néng lái gōngzuò, wǒ dǎsuàn zài gōngsī fùjìn zū fángzi.",
+        "en": "I live at school now. If I get the job, I plan to rent a place near the company."
+      },
+      {
+        "speaker": "男",
+        "zh": "好。你对工资有什么要求？",
+        "py": "Hǎo. Nǐ duì gōngzī yǒu shénme yāoqiú?",
+        "en": "OK. What are your salary expectations?"
+      },
+      {
+        "speaker": "女",
+        "zh": "我刚毕业，经验还不多，我更想要的是能学到东西，工资按照公司的规定就可以。",
+        "py": "Wǒ gāng bìyè, jīngyàn hái bù duō, wǒ gèng xiǎng yào de shì néng xuédào dōngxi, gōngzī ànzhào gōngsī de guīdìng jiù kěyǐ.",
+        "en": "I've just graduated and don't have much experience. Learning matters more to me, so the company's standard pay is fine."
+      },
+      {
+        "speaker": "男",
+        "zh": "好的，今天就到这儿。我们会在下周三以前给你打电话。",
+        "py": "Hǎo de, jīntiān jiù dào zhèr. Wǒmen huì zài xià zhōusān yǐqián gěi nǐ dǎ diànhuà.",
+        "en": "All right, that's all for today. We'll call you before next Wednesday."
+      }
+    ],
+    "questions": [
+      {
+        "prompt": "女的学的是什么专业？",
+        "promptPy": "Nǚ de xué de shì shénme zhuānyè?",
+        "promptEn": "What did the woman study?",
+        "options": [
+          "经济",
+          "法律",
+          "电脑技术",
+          "新闻"
+        ],
+        "answer": 2,
+        "line": 1,
+        "explanation": "In line 1 she says her major was computer science."
+      },
+      {
+        "prompt": "女的去年暑假做了什么？",
+        "promptPy": "Nǚ de qùnián shǔjià zuò le shénme?",
+        "promptEn": "What did the woman do last summer?",
+        "options": [
+          "在一家做电脑的公司打工",
+          "去国外旅游",
+          "在学校学习",
+          "教小学生"
+        ],
+        "answer": 0,
+        "line": 5,
+        "explanation": "Line 5 says she worked for two months at a computer company."
+      },
+      {
+        "prompt": "关于加班，女的是什么态度？",
+        "promptPy": "Guānyú jiābān, nǚ de shì shénme tàidu?",
+        "promptEn": "What is the woman's attitude to overtime?",
+        "options": [
+          "不能接受",
+          "可以接受",
+          "要看工资",
+          "要问父母"
+        ],
+        "answer": 1,
+        "line": 7,
+        "explanation": "In line 7 she says she can accept it as long as the work is interesting."
+      },
+      {
+        "prompt": "如果得到这个工作，女的打算怎么做？",
+        "promptPy": "Rúguǒ dédào zhège gōngzuò, nǚ de dǎsuàn zěnme zuò?",
+        "promptEn": "What does the woman plan to do if she gets the job?",
+        "options": [
+          "继续住在学校",
+          "每天坐地铁",
+          "住在父母家",
+          "在公司附近租房子"
+        ],
+        "answer": 3,
+        "line": 9,
+        "explanation": "Line 9 says she plans to rent a place near the company."
+      },
+      {
+        "prompt": "公司什么时候给女的打电话？",
+        "promptPy": "Gōngsī shénme shíhou gěi nǚ de dǎ diànhuà?",
+        "promptEn": "When will the company call her?",
+        "options": [
+          "今天下午",
+          "下周一",
+          "下周三以前",
+          "一个月以后"
+        ],
+        "answer": 2,
+        "line": 12,
+        "explanation": "In line 12 the manager promises to call before next Wednesday."
+      }
+    ]
+  },
+  {
+    "id": "l4-04",
+    "title": "A delayed flight",
+    "scene": "Two passengers talk at the airport after a delay is announced",
+    "lines": [
+      {
+        "speaker": "男",
+        "zh": "你听到广播了吗？飞往上海的1501次航班，因为天气原因，推迟到晚上8点起飞。",
+        "py": "Nǐ tīngdào guǎngbō le ma? Fēi wǎng Shànghǎi de 1501 cì hángbān, yīnwèi tiānqì yuányīn, tuīchí dào wǎnshang 8 diǎn qǐfēi.",
+        "en": "Did you hear the announcement? Because of the weather, flight 1501 to Shanghai is delayed until 8 p.m."
+      },
+      {
+        "speaker": "女",
+        "zh": "听到了。广播还说让大家在5号门附近休息，注意听通知。",
+        "py": "Tīngdào le. Guǎngbō hái shuō ràng dàjiā zài 5 hào mén fùjìn xiūxi, zhùyì tīng tōngzhī.",
+        "en": "I heard. It also said everyone should wait near gate 5 and listen for updates."
+      },
+      {
+        "speaker": "女",
+        "zh": "真让人着急！本来是下午四点的飞机，现在要等四个小时。",
+        "py": "Zhēn ràng rén zháojí! Běnlái shì xiàwǔ sì diǎn de fēijī, xiànzài yào děng sì ge xiǎoshí.",
+        "en": "How annoying! It was supposed to leave at four, and now we have to wait four hours."
+      },
+      {
+        "speaker": "男",
+        "zh": "是啊，听说上海那边雨下得很大。你也是去上海？",
+        "py": "Shì a, tīngshuō Shànghǎi nàbian yǔ xià de hěn dà. Nǐ yě shì qù Shànghǎi?",
+        "en": "Yes, I hear it's raining hard in Shanghai. Are you going to Shanghai too?"
+      },
+      {
+        "speaker": "女",
+        "zh": "对，我去参加一个会议，明天早上九点开始。",
+        "py": "Duì, wǒ qù cānjiā yí ge huìyì, míngtiān zǎoshang jiǔ diǎn kāishǐ.",
+        "en": "Yes, I'm going to a meeting that starts at nine tomorrow morning."
+      },
+      {
+        "speaker": "男",
+        "zh": "那还来得及。我是去看我女儿，她在上海读大学。",
+        "py": "Nà hái láidejí. Wǒ shì qù kàn wǒ nǚ'ér, tā zài Shànghǎi dú dàxué.",
+        "en": "Then you'll still make it. I'm going to see my daughter. She's at university in Shanghai."
+      },
+      {
+        "speaker": "女",
+        "zh": "你吃饭了吗？离起飞还早，我想去吃一点儿东西。",
+        "py": "Nǐ chīfàn le ma? Lí qǐfēi hái zǎo, wǒ xiǎng qù chī yìdiǎnr dōngxi.",
+        "en": "Have you eaten? There's plenty of time before take-off. I'd like to get something to eat."
+      },
+      {
+        "speaker": "男",
+        "zh": "还没有。我刚才看见二楼有一家饭馆，看起来不错。",
+        "py": "Hái méiyǒu. Wǒ gāngcái kànjiàn èr lóu yǒu yì jiā fànguǎn, kàn qilai búcuò.",
+        "en": "Not yet. I just saw a restaurant on the second floor. It looks good."
+      },
+      {
+        "speaker": "女",
+        "zh": "可是我的行李很重，拿着不方便。",
+        "py": "Kěshì wǒ de xíngli hěn zhòng, ná zhe bù fāngbiàn.",
+        "en": "But my luggage is heavy and awkward to carry around."
+      },
+      {
+        "speaker": "男",
+        "zh": "你可以去前面的服务台问问，那里好像可以免费放行李。",
+        "py": "Nǐ kěyǐ qù qiánmiàn de fúwùtái wènwen, nàli hǎoxiàng kěyǐ miǎnfèi fàng xíngli.",
+        "en": "You could ask at the service desk up ahead. I think you can leave luggage there for free."
+      },
+      {
+        "speaker": "女",
+        "zh": "好主意。我们一起去吧，吃完再回来等。",
+        "py": "Hǎo zhǔyi. Wǒmen yìqǐ qù ba, chīwán zài huílai děng.",
+        "en": "Good idea. Let's go together and come back to wait after we eat."
+      },
+      {
+        "speaker": "男",
+        "zh": "好，别忘了带上你的机票。",
+        "py": "Hǎo, bié wàng le dàishang nǐ de jīpiào.",
+        "en": "OK. Don't forget to take your ticket."
+      }
+    ],
+    "questions": [
+      {
+        "prompt": "航班为什么推迟？",
+        "promptPy": "Hángbān wèi shénme tuīchí?",
+        "promptEn": "Why is the flight delayed?",
+        "options": [
+          "飞机有问题",
+          "天气原因",
+          "乘客太多",
+          "机场太忙"
+        ],
+        "answer": 1,
+        "line": 0,
+        "explanation": "In line 0 the man repeats the announcement: the delay is because of the weather."
+      },
+      {
+        "prompt": "飞机本来几点起飞？",
+        "promptPy": "Fēijī běnlái jǐ diǎn qǐfēi?",
+        "promptEn": "When was the plane originally supposed to leave?",
+        "options": [
+          "下午四点",
+          "晚上八点",
+          "早上九点",
+          "中午十二点"
+        ],
+        "answer": 0,
+        "line": 2,
+        "explanation": "In line 2 the woman says it was a four o'clock flight; eight is the new time."
+      },
+      {
+        "prompt": "女的去上海做什么？",
+        "promptPy": "Nǚ de qù Shànghǎi zuò shénme?",
+        "promptEn": "Why is the woman going to Shanghai?",
+        "options": [
+          "看女儿",
+          "旅游",
+          "参加会议",
+          "读大学"
+        ],
+        "answer": 2,
+        "line": 4,
+        "explanation": "Line 4 says she is going to a meeting tomorrow morning."
+      },
+      {
+        "prompt": "男的女儿在上海做什么？",
+        "promptPy": "Nán de nǚ'ér zài Shànghǎi zuò shénme?",
+        "promptEn": "What does the man's daughter do in Shanghai?",
+        "options": [
+          "工作",
+          "开饭馆",
+          "当医生",
+          "读大学"
+        ],
+        "answer": 3,
+        "line": 5,
+        "explanation": "In line 5 the man says his daughter is at university in Shanghai."
+      },
+      {
+        "prompt": "女的为什么不想拿着行李去吃饭？",
+        "promptPy": "Nǚ de wèi shénme bù xiǎng ná zhe xíngli qù chīfàn?",
+        "promptEn": "Why doesn't the woman want to take her luggage to eat?",
+        "options": [
+          "行李很重",
+          "饭馆很远",
+          "没有时间",
+          "行李丢了"
+        ],
+        "answer": 0,
+        "line": 8,
+        "explanation": "Line 8 says her luggage is heavy and awkward to carry."
+      }
+    ]
+  }
+]

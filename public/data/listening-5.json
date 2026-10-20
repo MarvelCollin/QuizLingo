@@ -1,0 +1,111 @@
+[
+  {
+    "id": "l5-01",
+    "title": "Working from home",
+    "scene": "Two colleagues discuss a new work-from-home plan",
+    "lines": [
+      { "speaker": "男", "zh": "听说公司打算让大家每周在家工作两天，你觉得怎么样？", "py": "Tīngshuō gōngsī dǎsuàn ràng dàjiā měi zhōu zài jiā gōngzuò liǎng tiān, nǐ juéde zěnmeyàng?", "en": "I hear the company plans to let everyone work from home two days a week. What do you think?" },
+      { "speaker": "女", "zh": "我挺支持的。每天上下班路上要花将近两个小时，在家工作能节省不少时间。", "py": "Wǒ tǐng zhīchí de. Měi tiān shàng xià bān lù shang yào huā jiāngjìn liǎng ge xiǎoshí, zài jiā gōngzuò néng jiéshěng bù shǎo shíjiān.", "en": "I'm quite in favour. I spend nearly two hours a day commuting, so working from home would save a lot of time." },
+      { "speaker": "男", "zh": "时间是节省了，可是在家里很难集中注意力。我家孩子小，一会儿就来找我。", "py": "Shíjiān shì jiéshěng le, kěshì zài jiā li hěn nán jízhōng zhùyìlì. Wǒ jiā háizi xiǎo, yíhuìr jiù lái zhǎo wǒ.", "en": "It saves time, sure, but it's hard to concentrate at home. My kid is little and comes looking for me every few minutes." },
+      { "speaker": "女", "zh": "这确实是个问题。不过你可以安排一个单独的房间，跟家里人说好工作时间别打扰你。", "py": "Zhè quèshí shì ge wèntí. Búguò nǐ kěyǐ ānpái yí ge dāndú de fángjiān, gēn jiā li rén shuōhǎo gōngzuò shíjiān bié dǎrǎo nǐ.", "en": "That is a problem. But you could set up a separate room and agree with your family not to disturb you during work hours." },
+      { "speaker": "男", "zh": "我家房子不大，没有空的房间。而且我觉得面对面交流效率更高。", "py": "Wǒ jiā fángzi bú dà, méiyǒu kōng de fángjiān. Érqiě wǒ juéde miàn duì miàn jiāoliú xiàolǜ gèng gāo.", "en": "Our flat is small, with no spare room. Besides, I think talking face to face is more efficient." },
+      { "speaker": "女", "zh": "那要看是什么工作。如果是写报告、做计划，一个人安静地做反而更快。", "py": "Nà yào kàn shì shénme gōngzuò. Rúguǒ shì xiě bàogào, zuò jìhuà, yí ge rén ānjìng de zuò fǎn'ér gèng kuài.", "en": "That depends on the work. Writing reports or making plans is actually faster alone in a quiet place." },
+      { "speaker": "男", "zh": "有道理。但是开会、讨论问题的时候，还是在办公室方便。", "py": "Yǒu dàoli. Dànshì kāihuì, tǎolùn wèntí de shíhou, háishi zài bàngōngshì fāngbiàn.", "en": "Fair point. But for meetings and discussing problems, the office is still more convenient." },
+      { "speaker": "女", "zh": "所以公司才说每周两天在家，三天来办公室，这样两方面都能照顾到。", "py": "Suǒyǐ gōngsī cái shuō měi zhōu liǎng tiān zài jiā, sān tiān lái bàngōngshì, zhèyàng liǎng fāngmiàn dōu néng zhàogù dào.", "en": "That's exactly why the company said two days at home and three in the office, so both needs are covered." },
+      { "speaker": "男", "zh": "我还担心一个问题：在家工作，领导会不会觉得我们不够努力？", "py": "Wǒ hái dānxīn yí ge wèntí: zài jiā gōngzuò, lǐngdǎo huì bu huì juéde wǒmen búgòu nǔlì?", "en": "I'm worried about one more thing: if we work from home, will the bosses think we aren't working hard enough?" },
+      { "speaker": "女", "zh": "我觉得领导更关心的是结果。只要按时完成任务，在哪儿工作都一样。", "py": "Wǒ juéde lǐngdǎo gèng guānxīn de shì jiéguǒ. Zhǐyào ànshí wánchéng rènwu, zài nǎr gōngzuò dōu yíyàng.", "en": "I think the bosses care more about results. As long as tasks are done on time, it doesn't matter where you work." },
+      { "speaker": "男", "zh": "你说得也对。那我先试一个月，要是不习惯，再跟经理商量。", "py": "Nǐ shuō de yě duì. Nà wǒ xiān shì yí ge yuè, yàoshi bù xíguàn, zài gēn jīnglǐ shāngliang.", "en": "You have a point. I'll try it for a month first, and if I can't get used to it, I'll talk to the manager." },
+      { "speaker": "女", "zh": "对，先试试再说。说不定你会发现自己比想象中更适应呢。", "py": "Duì, xiān shìshi zài shuō. Shuōbudìng nǐ huì fāxiàn zìjǐ bǐ xiǎngxiàng zhōng gèng shìyìng ne.", "en": "Right, try it first. You might find you adapt better than you expect." }
+    ],
+    "questions": [
+      { "prompt": "女的为什么支持在家工作？", "promptPy": "Nǚ de wèi shénme zhīchí zài jiā gōngzuò?", "promptEn": "Why does the woman support working from home?", "options": ["可以节省路上的时间", "可以照顾孩子", "工资会提高", "不用开会"], "answer": 0, "line": 1, "explanation": "In line 1 she says she spends nearly two hours commuting, so working from home saves time." },
+      { "prompt": "男的觉得在家工作有什么困难？", "promptPy": "Nán de juéde zài jiā gōngzuò yǒu shénme kùnnan?", "promptEn": "What difficulty does the man see in working from home?", "options": ["家里没有电脑", "孩子常常打扰他", "领导不让", "离公司太远"], "answer": 1, "line": 2, "explanation": "Line 2 says he can't concentrate because his young child keeps coming to find him." },
+      { "prompt": "女的认为哪种工作一个人做更快？", "promptPy": "Nǚ de rènwéi nǎ zhǒng gōngzuò yí ge rén zuò gèng kuài?", "promptEn": "Which kind of work does the woman think is faster done alone?", "options": ["开会", "讨论问题", "写报告", "面对面交流"], "answer": 2, "line": 5, "explanation": "In line 5 she says writing reports and making plans goes faster alone; meetings and discussion are the man's examples for the office." },
+      { "prompt": "公司的计划是什么？", "promptPy": "Gōngsī de jìhuà shì shénme?", "promptEn": "What is the company's plan?", "options": ["每周在家工作三天", "每天都在家工作", "只有经理可以在家工作", "每周两天在家，三天在办公室"], "answer": 3, "line": 7, "explanation": "Line 7 describes the plan as two days at home and three days in the office." },
+      { "prompt": "男的最后决定怎么做？", "promptPy": "Nán de zuìhòu juédìng zěnme zuò?", "promptEn": "What does the man finally decide?", "options": ["马上跟经理商量", "先试一个月", "还是每天去办公室", "换一个工作"], "answer": 1, "line": 10, "explanation": "In line 10 he decides to try it for a month and only talk to the manager if it doesn't work out." }
+    ]
+  },
+  {
+    "id": "l5-02",
+    "title": "A phone for our son",
+    "scene": "A husband and wife discuss whether to buy their son a phone",
+    "lines": [
+      { "speaker": "女", "zh": "儿子说班上很多同学都有手机了，他也想要一个。", "py": "Érzi shuō bān shang hěn duō tóngxué dōu yǒu shǒujī le, tā yě xiǎng yào yí ge.", "en": "Our son says lots of his classmates have phones now, and he wants one too." },
+      { "speaker": "男", "zh": "他才十岁，我觉得太早了。有了手机，他肯定整天玩游戏。", "py": "Tā cái shí suì, wǒ juéde tài zǎo le. Yǒu le shǒujī, tā kěndìng zhěng tiān wán yóuxì.", "en": "He's only ten. I think it's too early. With a phone he'd definitely play games all day." },
+      { "speaker": "女", "zh": "我也担心这一点。可是现在老师常常在网上发通知，没有手机确实不方便。", "py": "Wǒ yě dānxīn zhè yì diǎn. Kěshì xiànzài lǎoshī chángcháng zài wǎngshàng fā tōngzhī, méiyǒu shǒujī quèshí bù fāngbiàn.", "en": "I worry about that too. But teachers often send notices online now, so not having a phone really is inconvenient." },
+      { "speaker": "男", "zh": "用家里的电脑不就行了吗？我们可以在旁边看着他。", "py": "Yòng jiā li de diànnǎo bù jiù xíng le ma? Wǒmen kěyǐ zài pángbiān kànzhe tā.", "en": "Can't he just use the computer at home? We can keep an eye on him." },
+      { "speaker": "女", "zh": "还有一个原因。他每天自己坐公交车上学，有个手机，有什么事能马上联系我们。", "py": "Hái yǒu yí ge yuányīn. Tā měi tiān zìjǐ zuò gōngjiāochē shàngxué, yǒu ge shǒujī, yǒu shénme shì néng mǎshàng liánxì wǒmen.", "en": "There's another reason. He takes the bus to school by himself every day. With a phone he could contact us right away if anything happened." },
+      { "speaker": "男", "zh": "这个理由说服了我。安全确实最重要。", "py": "Zhège lǐyóu shuōfú le wǒ. Ānquán quèshí zuì zhòngyào.", "en": "That reason convinces me. Safety really is the most important thing." },
+      { "speaker": "女", "zh": "那我们可以买一个功能简单的，只能打电话、发短信，不能上网。", "py": "Nà wǒmen kěyǐ mǎi yí ge gōngnéng jiǎndān de, zhǐ néng dǎ diànhuà, fā duǎnxìn, bù néng shàngwǎng.", "en": "Then we could buy a simple one that can only make calls and send texts, with no internet." },
+      { "speaker": "男", "zh": "这个主意不错。不过他看到同学的手机都能玩游戏，会不会不高兴？", "py": "Zhège zhǔyi búcuò. Búguò tā kàndào tóngxué de shǒujī dōu néng wán yóuxì, huì bu huì bù gāoxìng?", "en": "Good idea. But when he sees his classmates' phones can all play games, won't he be upset?" },
+      { "speaker": "女", "zh": "我们可以跟他好好谈谈，告诉他为什么这样做。孩子其实是讲道理的。", "py": "Wǒmen kěyǐ gēn tā hǎohāo tántan, gàosu tā wèi shénme zhèyàng zuò. Háizi qíshí shì jiǎng dàoli de.", "en": "We can have a proper talk with him and explain why. Kids are actually quite reasonable." },
+      { "speaker": "男", "zh": "另外，我们也得给他定几条规定，比如晚上九点以后手机要交给我们。", "py": "Lìngwài, wǒmen yě děi gěi tā dìng jǐ tiáo guīdìng, bǐrú wǎnshang jiǔ diǎn yǐhòu shǒujī yào jiāo gěi wǒmen.", "en": "Also, we need to set a few rules, such as handing the phone to us after nine at night." },
+      { "speaker": "女", "zh": "我同意。我们自己也要先做到，吃饭的时候别老看手机。", "py": "Wǒ tóngyì. Wǒmen zìjǐ yě yào xiān zuòdào, chīfàn de shíhou bié lǎo kàn shǒujī.", "en": "Agreed. We have to do it ourselves first, and stop looking at our phones during meals." },
+      { "speaker": "男", "zh": "哈哈，你说的是我吧。好吧，从今天开始我也改。", "py": "Hāhā, nǐ shuō de shì wǒ ba. Hǎo ba, cóng jīntiān kāishǐ wǒ yě gǎi.", "en": "Ha, you mean me, don't you? All right, I'll change too, starting today." },
+      { "speaker": "女", "zh": "那周末我们带他一起去买吧，让他自己选个颜色。", "py": "Nà zhōumò wǒmen dài tā yìqǐ qù mǎi ba, ràng tā zìjǐ xuǎn ge yánsè.", "en": "Then let's take him to buy it at the weekend and let him pick the colour." }
+    ],
+    "questions": [
+      { "prompt": "男的为什么一开始反对给儿子买手机？", "promptPy": "Nán de wèi shénme yì kāishǐ fǎnduì gěi érzi mǎi shǒujī?", "promptEn": "Why is the man against buying a phone at first?", "options": ["手机太贵", "他担心儿子整天玩游戏", "学校不让带手机", "儿子成绩不好"], "answer": 1, "line": 1, "explanation": "In line 1 he says their son is only ten and would play games all day." },
+      { "prompt": "让男的改变想法的主要原因是什么？", "promptPy": "Ràng nán de gǎibiàn xiǎngfǎ de zhǔyào yuányīn shì shénme?", "promptEn": "What mainly changes the man's mind?", "options": ["老师在网上发通知", "同学都有手机", "儿子一个人坐车上学，需要联系", "手机正在打折"], "answer": 2, "line": 4, "explanation": "Line 4 raises the bus ride and staying in contact, and in line 5 he says this reason convinced him because safety matters most." },
+      { "prompt": "他们打算买哪种手机？", "promptPy": "Tāmen dǎsuàn mǎi nǎ zhǒng shǒujī?", "promptEn": "What kind of phone do they plan to buy?", "options": ["最新的手机", "跟同学一样的手机", "能上网的手机", "只能打电话、发短信的手机"], "answer": 3, "line": 6, "explanation": "In line 6 the woman suggests a simple phone for calls and texts only." },
+      { "prompt": "男的说要给儿子定什么规定？", "promptPy": "Nán de shuō yào gěi érzi dìng shénme guīdìng?", "promptEn": "What rule does the man suggest?", "options": ["晚上九点以后交手机", "每天只能玩一个小时", "周末不能用手机", "不能带手机去学校"], "answer": 0, "line": 9, "explanation": "Line 9 gives the example of handing the phone over after nine at night." },
+      { "prompt": "女的认为父母应该怎么做？", "promptPy": "Nǚ de rènwéi fùmǔ yīnggāi zěnme zuò?", "promptEn": "What does the woman think the parents should do?", "options": ["多给孩子买东西", "自己先做到，吃饭时别老看手机", "每天检查孩子的手机", "不让孩子跟同学玩"], "answer": 1, "line": 10, "explanation": "In line 10 she says the parents must first do it themselves and not keep looking at phones at meals." }
+    ]
+  },
+  {
+    "id": "l5-03",
+    "title": "A small second-hand bookshop",
+    "scene": "A reporter interviews the owner of a bookshop",
+    "lines": [
+      { "speaker": "男", "zh": "今天我们来到了一家很特别的小书店。老板，您能先介绍一下这家书店吗？", "py": "Jīntiān wǒmen láidào le yì jiā hěn tèbié de xiǎo shūdiàn. Lǎobǎn, nín néng xiān jièshào yíxià zhè jiā shūdiàn ma?", "en": "Today we're at a rather special little bookshop. Could you start by telling us about it?" },
+      { "speaker": "女", "zh": "好的。我们书店开了五年了，面积不大，但是有一万多本书，大部分是旧书。", "py": "Hǎo de. Wǒmen shūdiàn kāi le wǔ nián le, miànjī bú dà, dànshì yǒu yí wàn duō běn shū, dà bùfen shì jiù shū.", "en": "Sure. We've been open five years. The shop isn't big, but we have over ten thousand books, most of them second-hand." },
+      { "speaker": "男", "zh": "现在很多人都在网上买书，您为什么还要开一家书店？", "py": "Xiànzài hěn duō rén dōu zài wǎngshàng mǎi shū, nín wèi shénme hái yào kāi yì jiā shūdiàn?", "en": "Many people buy books online now. Why open a bookshop?" },
+      { "speaker": "女", "zh": "我觉得在网上买书很方便，可是少了一种感觉。在书店里，你可能会偶然发现一本自己从来没有想过要读的好书。", "py": "Wǒ juéde zài wǎngshàng mǎi shū hěn fāngbiàn, kěshì shǎo le yì zhǒng gǎnjué. Zài shūdiàn li, nǐ kěnéng huì ǒurán fāxiàn yì běn zìjǐ cónglái méiyǒu xiǎng guo yào dú de hǎo shū.", "en": "Buying online is convenient, but something is missing. In a bookshop you might stumble on a great book you'd never have thought of reading." },
+      { "speaker": "男", "zh": "为什么选择卖旧书呢？", "py": "Wèi shénme xuǎnzé mài jiù shū ne?", "en": "Why did you choose to sell second-hand books?" },
+      { "speaker": "女", "zh": "一是旧书价格便宜，学生也买得起；二是很多旧书现在已经买不到了，很有价值。", "py": "Yī shì jiù shū jiàgé piányi, xuésheng yě mǎi de qǐ; èr shì hěn duō jiù shū xiànzài yǐjīng mǎi bu dào le, hěn yǒu jiàzhí.", "en": "First, they're cheap, so even students can afford them. Second, many old books can't be bought new any more, so they're valuable." },
+      { "speaker": "男", "zh": "书店的收入怎么样？能维持下去吗？", "py": "Shūdiàn de shōurù zěnmeyàng? Néng wéichí xiàqu ma?", "en": "How is the income? Can the shop keep going?" },
+      { "speaker": "女", "zh": "说真的，只靠卖书是不够的。所以我们在店里还卖咖啡，周末也会举办读书活动。", "py": "Shuō zhēn de, zhǐ kào mài shū shì búgòu de. Suǒyǐ wǒmen zài diàn li hái mài kāfēi, zhōumò yě huì jǔbàn dúshū huódòng.", "en": "To be honest, selling books alone isn't enough. So we also sell coffee and hold reading events at weekends." },
+      { "speaker": "男", "zh": "来参加活动的都是什么人？", "py": "Lái cānjiā huódòng de dōu shì shénme rén?", "en": "Who comes to the events?" },
+      { "speaker": "女", "zh": "什么人都有，年轻人最多。大家一起聊一本书，常常能听到很不一样的看法。", "py": "Shénme rén dōu yǒu, niánqīngrén zuì duō. Dàjiā yìqǐ liáo yì běn shū, chángcháng néng tīngdào hěn bù yíyàng de kànfǎ.", "en": "All kinds of people, mostly young. When everyone talks about one book together, you often hear very different views." },
+      { "speaker": "男", "zh": "您觉得开书店最大的收获是什么？", "py": "Nín juéde kāi shūdiàn zuì dà de shōuhuò shì shénme?", "en": "What has been the biggest reward of running the shop?" },
+      { "speaker": "女", "zh": "认识了很多朋友。有一位老先生每周三都来，已经坚持了五年，现在我们像家人一样。", "py": "Rènshi le hěn duō péngyou. Yǒu yí wèi lǎo xiānsheng měi zhōusān dōu lái, yǐjīng jiānchí le wǔ nián, xiànzài wǒmen xiàng jiārén yíyàng.", "en": "Making lots of friends. One elderly gentleman has come every Wednesday for five years. We're like family now." },
+      { "speaker": "男", "zh": "最后，您对想开书店的年轻人有什么建议？", "py": "Zuìhòu, nín duì xiǎng kāi shūdiàn de niánqīngrén yǒu shénme jiànyì?", "en": "Finally, what advice do you have for young people who want to open a bookshop?" },
+      { "speaker": "女", "zh": "一定要真的喜欢书。这个工作挣钱不多，如果只是为了钱，很难坚持下去。", "py": "Yídìng yào zhēn de xǐhuan shū. Zhège gōngzuò zhèng qián bù duō, rúguǒ zhǐ shì wèile qián, hěn nán jiānchí xiàqu.", "en": "You have to truly love books. This work doesn't pay much, and if you're only in it for money, it's hard to keep going." }
+    ],
+    "questions": [
+      { "prompt": "这家书店主要卖什么书？", "promptPy": "Zhè jiā shūdiàn zhǔyào mài shénme shū?", "promptEn": "What books does the shop mainly sell?", "options": ["新书", "旧书", "外国书", "儿童书"], "answer": 1, "line": 1, "explanation": "In line 1 the owner says most of the books are second-hand." },
+      { "prompt": "女的认为在书店买书有什么好处？", "promptPy": "Nǚ de rènwéi zài shūdiàn mǎi shū yǒu shénme hǎochù?", "promptEn": "What does the owner see as the advantage of a bookshop?", "options": ["比网上便宜", "可以送到家里", "可能偶然发现好书", "可以跟老板聊天"], "answer": 2, "line": 3, "explanation": "Line 3 says in a bookshop you may stumble on a good book you never planned to read." },
+      { "prompt": "书店为什么还卖咖啡？", "promptPy": "Shūdiàn wèi shénme hái mài kāfēi?", "promptEn": "Why does the shop also sell coffee?", "options": ["只靠卖书收入不够", "老板喜欢喝咖啡", "客人要求的", "咖啡比书好卖"], "answer": 0, "line": 7, "explanation": "In line 7 she admits selling books alone doesn't bring in enough money." },
+      { "prompt": "关于那位老先生，下面哪一项是对的？", "promptPy": "Guānyú nà wèi lǎo xiānsheng, xiàmiàn nǎ yí xiàng shì duì de?", "promptEn": "Which is true about the elderly gentleman?", "options": ["是书店的老板", "在书店工作", "送了很多书给书店", "每周三都来，已经五年了"], "answer": 3, "line": 11, "explanation": "Line 11 says he has come every Wednesday for five years." },
+      { "prompt": "女的给年轻人什么建议？", "promptPy": "Nǚ de gěi niánqīngrén shénme jiànyì?", "promptEn": "What advice does the owner give young people?", "options": ["多做广告", "找一个好地方", "一定要真的喜欢书", "先在网上卖书"], "answer": 2, "line": 13, "explanation": "In line 13 she says you must truly love books, because the pay is low." }
+    ]
+  },
+  {
+    "id": "l5-04",
+    "title": "Leaving the big city",
+    "scene": "Two friends talk about moving back to a hometown",
+    "lines": [
+      { "speaker": "女", "zh": "我听说你打算离开这儿，回老家工作，是真的吗？", "py": "Wǒ tīngshuō nǐ dǎsuàn líkāi zhèr, huí lǎojiā gōngzuò, shì zhēn de ma?", "en": "I heard you're planning to leave the city and go back to your hometown to work. Is that true?" },
+      { "speaker": "男", "zh": "是真的。我在这儿待了八年，越来越觉得压力太大了。", "py": "Shì zhēn de. Wǒ zài zhèr dāi le bā nián, yuè lái yuè juéde yālì tài dà le.", "en": "It's true. I've been here eight years, and the pressure feels heavier and heavier." },
+      { "speaker": "女", "zh": "可是大城市机会多啊，你的工作也不错，走了不觉得可惜吗？", "py": "Kěshì dà chéngshì jīhuì duō a, nǐ de gōngzuò yě búcuò, zǒu le bù juéde kěxī ma?", "en": "But big cities have more opportunities, and your job is good. Isn't it a shame to leave?" },
+      { "speaker": "男", "zh": "是有点儿可惜。但是你算算，我工资的一半都交了房租，每天还要在地铁上挤一个多小时。", "py": "Shì yǒudiǎnr kěxī. Dànshì nǐ suànsuan, wǒ gōngzī de yíbàn dōu jiāo le fángzū, měi tiān hái yào zài dìtiě shang jǐ yí ge duō xiǎoshí.", "en": "It is a bit of a shame. But do the maths: half my salary goes on rent, and I spend over an hour a day squeezed on the subway." },
+      { "speaker": "女", "zh": "确实是这样。那回老家以后你做什么？", "py": "Quèshí shì zhèyàng. Nà huí lǎojiā yǐhòu nǐ zuò shénme?", "en": "That's true. So what will you do back home?" },
+      { "speaker": "男", "zh": "我们那儿新开了一个科技园，很多公司都在招聘，我已经通过了一家公司的面试。", "py": "Wǒmen nàr xīn kāi le yí ge kējì yuán, hěn duō gōngsī dōu zài zhāopìn, wǒ yǐjīng tōngguò le yì jiā gōngsī de miànshì.", "en": "A new technology park just opened there and lots of companies are hiring. I've already passed an interview with one." },
+      { "speaker": "女", "zh": "工资会比现在低吧？", "py": "Gōngzī huì bǐ xiànzài dī ba?", "en": "The pay will be lower than now, right?" },
+      { "speaker": "男", "zh": "低一些，大概少百分之二十。不过那儿房子的价格只有这儿的五分之一，生活成本低多了。", "py": "Dī yìxiē, dàgài shǎo bǎi fēn zhī èrshí. Búguò nàr fángzi de jiàgé zhǐ yǒu zhèr de wǔ fēn zhī yī, shēnghuó chéngběn dī duō le.", "en": "A bit lower, about twenty percent less. But housing there costs only a fifth of what it costs here, so living costs are much lower." },
+      { "speaker": "女", "zh": "那你父母一定很高兴吧？", "py": "Nà nǐ fùmǔ yídìng hěn gāoxìng ba?", "en": "Your parents must be very happy." },
+      { "speaker": "男", "zh": "特别高兴。他们年纪越来越大，我在身边也能照顾他们。这也是我回去的一个重要原因。", "py": "Tèbié gāoxìng. Tāmen niánjì yuè lái yuè dà, wǒ zài shēnbiān yě néng zhàogù tāmen. Zhè yě shì wǒ huíqu de yí ge zhòngyào yuányīn.", "en": "Very happy. They're getting older, and if I'm nearby I can look after them. That's another important reason I'm going back." },
+      { "speaker": "女", "zh": "我能理解。不过我还是喜欢大城市，这里的博物馆、音乐会多，生活更丰富。", "py": "Wǒ néng lǐjiě. Búguò wǒ háishi xǐhuan dà chéngshì, zhèli de bówùguǎn, yīnyuèhuì duō, shēnghuó gèng fēngfù.", "en": "I understand. But I still prefer big cities. There are more museums and concerts here, and life is richer." },
+      { "speaker": "男", "zh": "每个人的选择不一样。对我来说，时间和家人比这些更重要。", "py": "Měi ge rén de xuǎnzé bù yíyàng. Duì wǒ lái shuō, shíjiān hé jiārén bǐ zhèxiē gèng zhòngyào.", "en": "Everyone chooses differently. For me, time and family matter more than those things." },
+      { "speaker": "女", "zh": "你说得对。那你什么时候走？走之前我们一起吃个饭吧。", "py": "Nǐ shuō de duì. Nà nǐ shénme shíhou zǒu? Zǒu zhīqián wǒmen yìqǐ chī ge fàn ba.", "en": "You're right. So when are you leaving? Let's have a meal together before you go." },
+      { "speaker": "男", "zh": "下个月十号。好啊，就这个周末吧，我请客。", "py": "Xià ge yuè shí hào. Hǎo a, jiù zhège zhōumò ba, wǒ qǐngkè.", "en": "On the tenth of next month. Sure, let's do it this weekend. My treat." }
+    ],
+    "questions": [
+      { "prompt": "男的为什么想离开大城市？", "promptPy": "Nán de wèi shénme xiǎng líkāi dà chéngshì?", "promptEn": "Why does the man want to leave the big city?", "options": ["找不到工作", "压力太大", "不喜欢这儿的天气", "公司让他走"], "answer": 1, "line": 1, "explanation": "In line 1 he says after eight years the pressure feels too heavy." },
+      { "prompt": "男的现在工资的一半花在哪儿？", "promptPy": "Nán de xiànzài gōngzī de yíbàn huā zài nǎr?", "promptEn": "Where does half the man's salary go now?", "options": ["吃饭", "坐地铁", "给父母", "交房租"], "answer": 3, "line": 3, "explanation": "Line 3 says half his salary goes on rent." },
+      { "prompt": "关于新工作，下面哪一项是对的？", "promptPy": "Guānyú xīn gōngzuò, xiàmiàn nǎ yí xiàng shì duì de?", "promptEn": "Which is true about the new job?", "options": ["工资大概少百分之二十", "工资比现在高", "还没有通过面试", "也在这个城市"], "answer": 0, "line": 7, "explanation": "In line 7 he says the pay is about twenty percent lower; line 5 shows he already passed the interview." },
+      { "prompt": "男的回老家的另一个重要原因是什么？", "promptPy": "Nán de huí lǎojiā de lìng yí ge zhòngyào yuányīn shì shénme?", "promptEn": "What is another important reason the man is going home?", "options": ["要结婚", "想开公司", "照顾父母", "继续读书"], "answer": 2, "line": 9, "explanation": "Line 9 says being near his ageing parents so he can look after them is an important reason." },
+      { "prompt": "女的为什么喜欢大城市？", "promptPy": "Nǚ de wèi shénme xǐhuan dà chéngshì?", "promptEn": "Why does the woman prefer big cities?", "options": ["工资高", "文化生活丰富", "交通方便", "朋友多"], "answer": 1, "line": 10, "explanation": "In line 10 she mentions museums and concerts, meaning a richer cultural life." }
+    ]
+  }
+]
