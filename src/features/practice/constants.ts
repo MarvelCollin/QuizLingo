@@ -40,4 +40,6 @@ export const MORE_PRACTICE = [
   { to: '/practice/tones', label: 'Tones', detail: 'Native recordings of syllables and words, pick the tone you hear' },
   { to: '/practice/characters', label: 'Character quiz', detail: 'Recognise each character by its pinyin and meaning' },
   { to: '/practice/writing', label: 'Writing practice', detail: 'Draw the characters you need to write, stroke by stroke' },
+  { to: '/practice/speaking', label: 'Speaking', detail: 'Read sentences aloud and see which characters were heard' },
+  { to: '/tests', label: 'Listening tests and mock tests', detail: 'Follow a script while you listen, or sit a timed HSK 3.0 mock test' },
 ] as const;
