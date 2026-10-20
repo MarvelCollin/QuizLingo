@@ -4,7 +4,7 @@ import type { ListeningTest } from './types';
 
 export const fetchListeningLevel = async (level: HskLevel): Promise<ListeningTest[]> => {
   const response = await fetch(`${import.meta.env.BASE_URL}data/listening-${level}.json`);
-  if (!response.ok) return [];
+  if (!response.ok || !(response.headers.get('content-type') ?? '').includes('json')) return [];
   const tests = (await response.json()) as Omit<ListeningTest, 'level'>[];
   return tests.map((t) => ({ ...t, level }));
 };
