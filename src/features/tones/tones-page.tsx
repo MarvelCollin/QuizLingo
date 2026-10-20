@@ -18,7 +18,7 @@ import type { ToneItem, ToneKind, ToneRoundProps } from './types';
 
 const ROUND = 15;
 
-const ToneRound = ({ kind, level, items, onRestart }: ToneRoundProps) => {
+const ToneRound = ({ kind, level, items, onRestart, onEnd }: ToneRoundProps) => {
   const round = useToolRound(items, 'tones', level);
   const label = `${kind === 'syllable' ? 'Single tones' : 'Tone pairs'}, ${levelLabel(level)}`;
   if (round.isDone || !round.current) {
@@ -38,7 +38,7 @@ const ToneRound = ({ kind, level, items, onRestart }: ToneRoundProps) => {
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-6">
       <h1 className="sr-only">{label}</h1>
-      <ToolHeader label={label} index={round.index} total={round.total} correct={round.correct} answered={round.results.length} backTo="/practice/tones" />
+      <ToolHeader label={label} index={round.index} total={round.total} correct={round.correct} answered={round.results.length} onEnd={onEnd} />
       <ToneQuestion key={round.index} item={round.current} onAnswer={round.answer} onNext={round.next} />
     </div>
   );
@@ -64,7 +64,7 @@ const TonesPage = () => {
   const update = (change: Record<string, string>) =>
     setParams({ kind, level: String(level), ...change }, { replace: true });
 
-  if (round) return <ToneRound key={round.id} kind={kind} level={level} items={round.items} onRestart={() => start(round.id + 1)} />;
+  if (round) return <ToneRound key={round.id} kind={kind} level={level} items={round.items} onRestart={() => start(round.id + 1)} onEnd={() => setRound(null)} />;
 
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-8">

@@ -16,4 +16,4 @@ export type ToneItem = {
 
 export type ToneQuestionProps = { item: ToneItem; onAnswer: (isCorrect: boolean) => void; onNext: () => void };
 
-export type ToneRoundProps = { kind: ToneKind; level: HskLevel; items: ToneItem[]; onRestart: () => void };
+export type ToneRoundProps = { kind: ToneKind; level: HskLevel; items: ToneItem[]; onRestart: () => void; onEnd: () => void };

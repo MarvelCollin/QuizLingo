@@ -22,4 +22,4 @@ export type CharMark = { char: string; isHeard: boolean };
 
 export type SpeakingTaskProps = { sentence: Sentence; onAnswer: (isCorrect: boolean) => void; onNext: () => void };
 
-export type SpeakingRoundProps = { level: HskLevel; items: Sentence[]; onRestart: () => void };
+export type SpeakingRoundProps = { level: HskLevel; items: Sentence[]; onRestart: () => void; onEnd: () => void };

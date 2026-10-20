@@ -29,4 +29,5 @@ export type CharacterRoundViewProps = {
   pool: Hanzi[];
   level: HskLevel;
   onRestart: () => void;
+  onEnd: () => void;
 };

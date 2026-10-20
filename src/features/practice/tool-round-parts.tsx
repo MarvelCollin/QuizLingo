@@ -1,18 +1,18 @@
 import { X } from 'lucide-react';
-import { Link } from 'react-router';
 import { Button, ButtonLink } from '../../components/ui/button';
 import { StackedBar } from '../../components/ui/stacked-bar';
 import type { ToolHeaderProps, ToolSummaryProps } from './types';
 
-export const ToolHeader = ({ label, index, total, correct, answered, backTo }: ToolHeaderProps) => (
+export const ToolHeader = ({ label, index, total, correct, answered, onEnd }: ToolHeaderProps) => (
   <div className="flex items-center gap-4">
-    <Link
-      to={backTo}
-      className="-ml-3 inline-flex min-h-11 items-center gap-1.5 rounded-md px-3 text-sm font-semibold text-strong hover:bg-tint"
+    <button
+      type="button"
+      onClick={onEnd}
+      className="-ml-3 inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-md px-3 text-sm font-semibold text-strong hover:bg-tint"
     >
       <X aria-hidden="true" className="size-4" strokeWidth={2} />
       End round
-    </Link>
+    </button>
     <div className="flex-1">
       <div className="flex justify-between text-sm text-muted">
         <span>{label}</span>

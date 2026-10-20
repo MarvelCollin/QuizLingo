@@ -27,7 +27,7 @@ const buildQuestion = (hanzi: Hanzi, pool: Hanzi[]): CharacterQuestion => {
   };
 };
 
-const RoundView = ({ kind, items, pool, level, onRestart }: CharacterRoundViewProps) => {
+const RoundView = ({ kind, items, pool, level, onRestart, onEnd }: CharacterRoundViewProps) => {
   const round = useToolRound(items, kind === 'quiz' ? 'hanzi' : 'writing', level);
   const current = round.current;
   const question = useMemo(() => (current ? buildQuestion(current, pool) : null), [current, pool]);
@@ -51,7 +51,7 @@ const RoundView = ({ kind, items, pool, level, onRestart }: CharacterRoundViewPr
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-6">
       <h1 className="sr-only">{label}</h1>
-      <ToolHeader label={label} index={round.index} total={round.total} correct={round.correct} answered={round.results.length} backTo="/characters" />
+      <ToolHeader label={label} index={round.index} total={round.total} correct={round.correct} answered={round.results.length} onEnd={onEnd} />
       {kind === 'quiz' ? (
         <CharacterQuiz key={round.index} question={question} onAnswer={round.answer} onNext={round.next} />
       ) : (
@@ -88,6 +88,7 @@ const CharacterPracticePage = ({ kind }: CharacterPracticePageProps) => {
         pool={pool.length >= 8 ? pool : hanzi.data}
         level={level}
         onRestart={() => setRound({ id: round.id + 1, items: shuffle(pool).slice(0, ROUND) })}
+        onEnd={() => setRound(null)}
       />
     );
   }

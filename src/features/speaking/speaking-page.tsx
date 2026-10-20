@@ -18,7 +18,7 @@ import type { SpeakingRoundProps } from './types';
 
 const ROUND = 8;
 
-const SpeakingRound = ({ level, items, onRestart }: SpeakingRoundProps) => {
+const SpeakingRound = ({ level, items, onRestart, onEnd }: SpeakingRoundProps) => {
   const round = useToolRound(items, 'speaking', level);
   const label = `Speaking, ${levelLabel(level)}`;
   if (round.isDone || !round.current) {
@@ -38,7 +38,7 @@ const SpeakingRound = ({ level, items, onRestart }: SpeakingRoundProps) => {
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-6">
       <h1 className="sr-only">{label}</h1>
-      <ToolHeader label={label} index={round.index} total={round.total} correct={round.correct} answered={round.results.length} backTo="/practice/speaking" />
+      <ToolHeader label={label} index={round.index} total={round.total} correct={round.correct} answered={round.results.length} onEnd={onEnd} />
       <SpeakingTask key={round.index} sentence={round.current} onAnswer={round.answer} onNext={round.next} />
     </div>
   );
@@ -65,7 +65,7 @@ const SpeakingPage = () => {
 
   const pool = sentences.data.all.filter((s) => s.level === level && s.text.length <= (level <= 3 ? 12 : 20));
   const start = (id: number) => setRound({ id, items: shuffle(pool).slice(0, ROUND) });
-  if (round) return <SpeakingRound key={round.id} level={level} items={round.items} onRestart={() => start(round.id + 1)} />;
+  if (round) return <SpeakingRound key={round.id} level={level} items={round.items} onRestart={() => start(round.id + 1)} onEnd={() => setRound(null)} />;
 
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-8">

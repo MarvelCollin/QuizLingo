@@ -106,4 +106,4 @@ export type ToolSummaryProps = {
   backLabel: string;
 };
 
-export type ToolHeaderProps = { label: string; index: number; total: number; correct: number; answered: number; backTo: string };
+export type ToolHeaderProps = { label: string; index: number; total: number; correct: number; answered: number; onEnd: () => void };
