@@ -99,6 +99,8 @@ export type LessonHeaderProps = {
 
 export type CardViewProps = { card: LearnCard };
 
+export type StrokeTraceProps = { char: string };
+
 export type QuizViewProps = { questions: QuizQuestion[]; onFinish: (answers: QuizAnswer[]) => void; label?: string };
 
 export type LessonResultProps = {

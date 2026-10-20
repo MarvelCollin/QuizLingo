@@ -1,9 +1,11 @@
 import { Play, Volume2 } from 'lucide-react';
 import { useState } from 'react';
+import { SegmentedControl } from '../../components/ui/segmented-control';
 import { StrokePlayer } from '../characters/stroke-player';
 import { KeyHint } from '../practice/key-hint';
 import { playSyllable, speak } from '../practice/speech';
 import { useKeyboard } from '../practice/use-keyboard';
+import { StrokeTrace } from './stroke-trace';
 import { ToneContour } from './tone-contour';
 import type { CardViewProps } from './types';
 
@@ -12,6 +14,7 @@ const HAS_HANZI = /[一-鿿]/;
 // One thing to look at and listen to. Sound is never played on its own, only when asked for.
 export const CardView = ({ card }: CardViewProps) => {
   const [playKey, setPlayKey] = useState(0);
+  const [strokeMode, setStrokeMode] = useState<'watch' | 'try'>('watch');
   const hasSound = Boolean(card.sound || card.word);
   const isHanzi = HAS_HANZI.test(card.title);
 
@@ -35,7 +38,20 @@ export const CardView = ({ card }: CardViewProps) => {
       </p>
       {card.subtitle && <p className="text-lg font-semibold text-strong">{card.subtitle}</p>}
       {card.tones && <ToneContour tones={card.tones} playKey={playKey} />}
-      {card.strokeChar && <StrokePlayer char={card.strokeChar} size={180} />}
+      {card.strokeChar && (
+        <>
+          <SegmentedControl
+            label="Stroke order"
+            value={strokeMode}
+            onChange={setStrokeMode}
+            options={[
+              { value: 'watch', label: 'Watch it' },
+              { value: 'try', label: 'Try it' },
+            ]}
+          />
+          {strokeMode === 'watch' ? <StrokePlayer char={card.strokeChar} size={200} /> : <StrokeTrace char={card.strokeChar} />}
+        </>
+      )}
       {card.note && <p className="max-w-prose text-base text-ink">{card.note}</p>}
       {hasSound ? (
         <button
