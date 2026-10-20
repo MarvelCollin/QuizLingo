@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Button, ButtonLink } from '../../components/ui/button';
 import { InlineMessage } from '../../components/ui/inline-message';
 import { percent } from '../../lib/format';
@@ -18,6 +19,9 @@ export const LessonResult = ({
   onPracticeMissed,
 }: LessonResultProps) => {
   const { path } = useBasicsPath();
+  const heading = useRef<HTMLHeadingElement>(null);
+  // Move to the result when the quiz is gone, so keyboard and screen reader users land on it
+  useEffect(() => heading.current?.focus(), []);
   const total = answers.length;
   const right = answers.filter((a) => a.question.options[a.chosen].isCorrect).length;
   const score = percent(right, total);
@@ -35,7 +39,7 @@ export const LessonResult = ({
       <div className="flex flex-wrap items-center gap-6">
         {isPassed && <Stamp kind={isMilestone ? 'milestone' : 'lesson'} />}
         <div className="min-w-0 flex-1">
-          <h1 id="result-title" className="text-2xl font-bold text-ink">
+          <h1 id="result-title" ref={heading} tabIndex={-1} className="text-2xl font-bold text-ink outline-none">
             {isPassed ? (isMilestone ? 'Milestone reached' : 'Lesson complete') : 'Not yet'}
           </h1>
           <p className="mt-2 text-3xl font-bold text-strong">

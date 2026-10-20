@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { ReactNode } from 'react';
 import { MemoryRouter } from 'react-router';
@@ -9,6 +9,7 @@ import { LessonResult } from '../../src/features/basics/lesson-result';
 import { LessonRow } from '../../src/features/basics/lesson-row';
 import { buildPath } from '../../src/features/basics/path-state';
 import { QuizView } from '../../src/features/basics/quiz-view';
+import { ResetPath } from '../../src/features/basics/reset-path';
 import { StageSection } from '../../src/features/basics/stage-section';
 import { ToneContour } from '../../src/features/basics/tone-contour';
 import type { LessonProgress, QuizAnswer, QuizQuestion } from '../../src/features/basics/types';
@@ -206,5 +207,32 @@ describe('ChartGrid', () => {
     rerender(<ChartGrid chart={chart} tone={4} found={null} playing={null} onPlay={onPlay} />);
     expect(screen.getByRole('button', { name: 'Play bà' })).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Play pà' })).toBeNull();
+  });
+});
+
+describe('ResetPath', () => {
+  it('asks twice and clears the path through the api', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({ removed: 2 }), { status: 200 }));
+    render(<ResetPath />, { wrapper: wrap(passed('start-1')) });
+    expect(screen.queryByRole('button', { name: 'Clear my path' })).toBeNull();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Start the path over' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Keep my progress' }));
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(screen.getByRole('button', { name: 'Start the path over' })).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Start the path over' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Clear my path' }));
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledOnce());
+    expect(fetchMock.mock.calls[0][1]?.method).toBe('DELETE');
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Start the path over' })).toBeInTheDocument());
+  });
+
+  it('shows the reason when clearing fails', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({ error: 'Please sign in to continue.' }), { status: 401 }));
+    render(<ResetPath />, { wrapper: wrap(passed('start-1')) });
+    await userEvent.click(screen.getByRole('button', { name: 'Start the path over' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Clear my path' }));
+    expect(await screen.findByRole('alert')).toHaveTextContent('Please sign in to continue.');
   });
 });

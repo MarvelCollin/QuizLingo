@@ -23,6 +23,21 @@ export const GET = handle(async (request) => {
   return json({ lessons: result.rows.map((row) => toLesson(row as Record<string, unknown>)) });
 });
 
+// Starts the path over by removing every lesson score of the signed-in user
+export const DELETE = handle(async (request) => {
+  const scope = requireScope(request);
+  const db = await getDb();
+  const [lookup, removed] = await db.batch(
+    [
+      { sql: 'SELECT user_id FROM sessions WHERE id = :sid AND expires_at > :now', args: scope },
+      { sql: `DELETE FROM basics_progress WHERE user_id = ${CURRENT_USER}`, args: scope },
+    ],
+    'write',
+  );
+  if (lookup.rows.length === 0) throw new HttpError(401, 'Please sign in to continue.');
+  return json({ removed: removed.rowsAffected });
+});
+
 type Body = { lesson?: unknown; score?: unknown; passed?: unknown };
 
 // More than the path has lessons, so no real learner reaches it

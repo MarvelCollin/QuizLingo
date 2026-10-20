@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { fetchLessonProgress, saveAttempt } from './api';
+import { fetchLessonProgress, resetPath, saveAttempt } from './api';
 import { buildPath } from './path-state';
 import type { LessonProgress } from './types';
 
@@ -25,4 +25,10 @@ export const useSaveAttempt = () => {
       ]);
     },
   });
+};
+
+// Clears every lesson score on the account, so the path starts again from the first lesson
+export const useResetPath = () => {
+  const client = useQueryClient();
+  return useMutation({ mutationFn: resetPath, onSuccess: () => client.setQueryData<LessonProgress[]>(basicsKey, []) });
 };

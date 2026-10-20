@@ -6,6 +6,7 @@ import { usePageMeta } from '../../lib/use-page-meta';
 import { useSession } from '../auth/use-session';
 import { NextLesson } from './next-lesson';
 import { PathSummary } from './path-summary';
+import { ResetPath } from './reset-path';
 import { StageSection } from './stage-section';
 import { useBasicsPath } from './use-basics';
 import { WeakCard } from './weak-card';
@@ -79,6 +80,7 @@ const BasicsPage = () => {
               );
             })}
           </div>
+          {data.length > 0 && <ResetPath />}
         </>
       )}
     </div>

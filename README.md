@@ -12,7 +12,7 @@ Live at [marvelcollin.com/quizlingo](https://marvelcollin.com/quizlingo/).
 - **Animated tone lines**: every tone is drawn as a pitch line while you listen, and tone pairs and the tone changes of 不, 一 and two third tones are shown the same way
 - **Pinyin chart**: every syllable with a native recording, by initial and final, with a tone picker and a finder
 - **Sound pairs**: train the ear on b and p, j q x, zh and z, an and ang and the rest of the pairs learners mix up
-- **Weak spots**: questions you miss are collected, and two right answers in a row clear each one
+- **Weak spots**: questions you miss are collected, and two right answers in a row clear each one. You can also start the path over from its page
 - **Try the strokes yourself**: draw the eight basic strokes over an outline, with a hint after a miss
 - **Accounts**: sign up with name, email and password. Progress follows you to any device
 - **Eight ways to practice**: flashcards, meaning, listening, pinyin, reading a sentence, sentence listening, fill the gap and word order
@@ -77,7 +77,7 @@ The app lives under the `/quizlingo/` base path, and the API is served at `/quiz
 Tests:
 
 ```bash
-npm test          # 138 tests in three groups
+npm test          # 141 tests in three groups
 ```
 
 | Group | Folder | What it covers |

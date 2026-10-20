@@ -197,6 +197,23 @@ describe('abuse limits', () => {
     expect(again.body.lesson).toMatchObject({ best: 80, attempts: 2 });
   }, 60000);
 
+  it('starts the starter path over for one account without touching another', async () => {
+    const make = async (name: string) =>
+      (await call(register.POST, '/auth/register', { body: { name, email: `${name}-${Date.now()}@example.com`, password: 'password123' } })).cookie;
+    const mine = await make('reset-a');
+    const theirs = await make('reset-b');
+    for (const jar of [mine, theirs]) {
+      await call(basics.POST, '/basics', { cookie: jar, body: { lesson: 'start-1', score: 90, passed: true } });
+      await call(basics.POST, '/basics', { cookie: jar, body: { lesson: 'start-2', score: 50, passed: false } });
+    }
+    const removed = await call(basics.DELETE, '/basics', { cookie: mine, method: 'DELETE' });
+    expect(removed.status).toBe(200);
+    expect(removed.body.removed).toBe(2);
+    expect((await call(basics.GET, '/basics', { cookie: mine })).body.lessons).toEqual([]);
+    expect(((await call(basics.GET, '/basics', { cookie: theirs })).body.lessons as unknown[]).length).toBe(2);
+    expect((await call(basics.DELETE, '/basics', { cookie: 'ql_session=fake', method: 'DELETE' })).status).toBe(401);
+  });
+
   it('upgrades an old password hash when the person signs in', async () => {
     const address = `old-${Date.now()}@example.com`;
     await call(register.POST, '/auth/register', { body: { name: 'Old', email: address, password: 'password123' } });
