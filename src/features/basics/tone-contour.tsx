@@ -6,16 +6,19 @@ import type { ToneContourProps } from './types';
 
 const REDUCED = '(prefers-reduced-motion: reduce)';
 
+// Some environments, such as test browsers, have no matchMedia. There the answer is simply no.
+const query = () => (typeof window.matchMedia === 'function' ? window.matchMedia(REDUCED) : null);
+
 const subscribe = (notify: () => void) => {
-  const query = window.matchMedia(REDUCED);
-  query.addEventListener('change', notify);
-  return () => query.removeEventListener('change', notify);
+  const media = query();
+  media?.addEventListener('change', notify);
+  return () => media?.removeEventListener('change', notify);
 };
 
 const usePrefersReducedMotion = () =>
   useSyncExternalStore(
     subscribe,
-    () => window.matchMedia(REDUCED).matches,
+    () => query()?.matches ?? false,
     () => false,
   );
 
