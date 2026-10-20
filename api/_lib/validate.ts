@@ -15,6 +15,7 @@ export const MODES = [
   'listening-test',
   'mock-test',
   'speaking',
+  'basics',
 ] as const;
 export type Mode = (typeof MODES)[number];
 
@@ -37,3 +38,10 @@ export const count = (value: unknown, max: number): number => {
   if (Number.isInteger(value) && (value as number) >= 0 && (value as number) <= max) return value as number;
   throw new HttpError(400, `Counts must be whole numbers from 0 to ${max}.`);
 };
+
+export const lesson = (value: unknown): string => {
+  if (typeof value === 'string' && /^[a-z0-9-]{1,40}$/.test(value)) return value;
+  throw new HttpError(400, 'A lesson id uses 1 to 40 lowercase letters, digits or dashes.');
+};
+
+export const percent = (value: unknown): number => count(value, 100);

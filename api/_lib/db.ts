@@ -45,6 +45,15 @@ const SCHEMA = [
     created_at INTEGER NOT NULL
   )`,
   `CREATE INDEX IF NOT EXISTS practice_sessions_user ON practice_sessions(user_id, created_at)`,
+  `CREATE TABLE IF NOT EXISTS basics_progress (
+    user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    lesson TEXT NOT NULL,
+    best INTEGER NOT NULL,
+    attempts INTEGER NOT NULL,
+    completed_at INTEGER,
+    updated_at INTEGER NOT NULL,
+    PRIMARY KEY (user_id, lesson)
+  )`,
 ];
 
 export const getDb = async (): Promise<Client> => {

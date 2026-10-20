@@ -1,6 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { getDb } from '../../api/_lib/db';
 import * as login from '../../api/auth/login';
+import * as basics from '../../api/basics';
 import * as logout from '../../api/auth/logout';
 import * as me from '../../api/auth/me';
 import * as register from '../../api/auth/register';
@@ -91,7 +92,7 @@ describe('progress and stats', () => {
   });
 
   it('saves rounds for every kind of practice and reports them in stats', async () => {
-    for (const roundMode of ['quiz', 'tones', 'listening-test', 'mock-test', 'speaking']) {
+    for (const roundMode of ['quiz', 'tones', 'listening-test', 'mock-test', 'speaking', 'basics']) {
       const round = await call(sessions.POST, '/sessions', { cookie, body: { mode: roundMode, level: 7, total: 10, correct: 6 } });
       expect(round.status).toBe(201);
     }
@@ -101,10 +102,38 @@ describe('progress and stats', () => {
     expect(summary.status).toBe(200);
     expect(summary.body.answers).toEqual({ correct: 2, wrong: 1 });
     expect(summary.body.streak).toBe(1);
-    expect((summary.body.recent as unknown[]).length).toBe(5);
+    expect((summary.body.recent as unknown[]).length).toBe(6);
     expect((summary.body.activity as unknown[]).length).toBe(14);
     const levels = summary.body.levels as { level: number; seen: number }[];
     expect(levels.find((l) => l.level === 4)?.seen).toBe(1);
+  });
+
+  it('keeps the best score and the first pass of a starter lesson', async () => {
+    const first = await call(basics.POST, '/basics', { cookie, body: { lesson: 'tones-1', score: 60, passed: false } });
+    expect(first.status).toBe(201);
+    expect(first.body.lesson).toMatchObject({ lesson: 'tones-1', best: 60, attempts: 1, completedAt: null });
+
+    const second = await call(basics.POST, '/basics', { cookie, body: { lesson: 'tones-1', score: 90, passed: true } });
+    const passedAt = (second.body.lesson as { completedAt: number }).completedAt;
+    expect(second.body.lesson).toMatchObject({ best: 90, attempts: 2 });
+    expect(passedAt).toBeGreaterThan(0);
+
+    const third = await call(basics.POST, '/basics', { cookie, body: { lesson: 'tones-1', score: 40, passed: false } });
+    expect(third.body.lesson).toMatchObject({ best: 90, attempts: 3, completedAt: passedAt });
+
+    const list = await call(basics.GET, '/basics', { cookie });
+    expect(list.body.lessons).toEqual([{ lesson: 'tones-1', best: 90, attempts: 3, completedAt: passedAt }]);
+  });
+
+  it('rejects bad starter lesson attempts and anonymous ones', async () => {
+    const bad = [
+      { lesson: 'Tones 1', score: 50, passed: true },
+      { lesson: 'tones-1', score: 101, passed: true },
+      { lesson: 'tones-1', score: 50 },
+    ];
+    for (const body of bad) expect((await call(basics.POST, '/basics', { cookie, body })).status).toBe(400);
+    expect((await call(basics.GET, '/basics', { cookie: 'ql_session=fake' })).status).toBe(401);
+    expect((await call(basics.POST, '/basics', { cookie: 'ql_session=fake', body: { lesson: 'a', score: 1, passed: false } })).status).toBe(401);
   });
 
   it('signs out and ends the session', async () => {
