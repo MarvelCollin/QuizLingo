@@ -75,3 +75,41 @@ export type StageState = {
 };
 
 export type AttemptInput = { lesson: string; score: number; passed: boolean };
+
+export type ToneContourProps = { tones: ToneNumber[]; playKey?: number; className?: string };
+
+export type PlayButtonProps = { sound?: string; word?: string; label?: string; size?: 'md' | 'lg' };
+
+export type LessonRowProps = { state: LessonState; isNext: boolean; delay: number; hint?: string };
+
+export type StageSectionProps = { state: StageState; index: number; isOpen: boolean; nextId: string | null; onToggle: () => void };
+
+export type PathSummaryProps = { stagesDone: number; stagesTotal: number; lessonsDone: number; lessonsTotal: number; percent: number };
+
+export type NextLessonProps = { next: LessonState | null; stagesDone: number; isFresh: boolean };
+
+export type QuizAnswer = { question: QuizQuestion; chosen: number };
+
+export type LessonHeaderProps = {
+  label: string;
+  position: number;
+  total: number;
+  segments: { label: string; value: number; className: string }[];
+};
+
+export type CardViewProps = { card: LearnCard };
+
+export type QuizViewProps = { questions: QuizQuestion[]; onFinish: (answers: QuizAnswer[]) => void };
+
+export type LessonResultProps = {
+  lesson: Lesson;
+  answers: QuizAnswer[];
+  passMark: number;
+  isSaving: boolean;
+  saveError: Error | null;
+  onRetrySave: () => void;
+  onTryAgain: () => void;
+  onReview: (() => void) | null;
+};
+
+export type StampProps = { kind: 'lesson' | 'milestone' };

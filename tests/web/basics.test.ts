@@ -2,6 +2,7 @@
 import { describe, expect, it } from 'vitest';
 import { buildLesson } from '../../src/features/basics/build-lesson';
 import { CHECKPOINT_LENGTH } from '../../src/features/basics/constants';
+import { contourOf } from '../../src/features/basics/contour';
 import { ALL_LESSONS, lessonById, STAGES } from '../../src/features/basics/curriculum';
 import { buildPath } from '../../src/features/basics/path-state';
 import type { LessonProgress } from '../../src/features/basics/types';
@@ -109,5 +110,32 @@ describe('starter path lessons', () => {
     const { questions } = buildLesson(lessonById('tones-3')!, ctx);
     const mark = questions.find((q) => q.id === 'm1')!;
     expect(mark.options.map((o) => o.label).sort()).toEqual(['haǒ', 'hǎo']);
+  });
+});
+
+describe('tone contours', () => {
+  it('draws one segment per syllable and widens the picture for each', () => {
+    expect(contourOf([1]).segments).toHaveLength(1);
+    expect(contourOf([1, 4]).segments).toHaveLength(2);
+    expect(contourOf([1, 4, 2]).width).toBeGreaterThan(contourOf([1, 4]).width);
+  });
+
+  it('keeps tone 1 level, lifts tone 2 and drops tone 4', () => {
+    const [flat] = contourOf([1]).segments;
+    const [rising] = contourOf([2]).segments;
+    const [falling] = contourOf([4]).segments;
+    expect(flat.start[1]).toBe(flat.end[1]);
+    expect(rising.end[1]).toBeLessThan(rising.start[1]);
+    expect(falling.end[1]).toBeGreaterThan(falling.start[1]);
+  });
+
+  it('curves tone 3 down and back up and keeps the neutral tone short', () => {
+    const [dip] = contourOf([3]).segments;
+    expect(dip.d.match(/C/g)).toHaveLength(2);
+    expect(dip.end[1]).toBeLessThan(dip.start[1]);
+    const [neutral] = contourOf([5]).segments;
+    const [flat] = contourOf([1]).segments;
+    expect(neutral.isNeutral).toBe(true);
+    expect(neutral.end[0] - neutral.start[0]).toBeLessThan(flat.end[0] - flat.start[0]);
   });
 });

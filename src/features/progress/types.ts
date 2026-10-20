@@ -26,7 +26,8 @@ export type ApiMode =
   | 'tones'
   | 'listening-test'
   | 'mock-test'
-  | 'speaking';
+  | 'speaking'
+  | 'basics';
 
 export type Answer = { word: string; level: HskLevel; correct: boolean };
 
