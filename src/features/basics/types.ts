@@ -113,3 +113,7 @@ export type LessonResultProps = {
 };
 
 export type StampProps = { kind: 'lesson' | 'milestone' };
+
+export type LessonPhase = 'cards' | 'quiz' | 'result';
+
+export type GlyphProps = { status: LessonStatus; isCheckpoint: boolean; isNext: boolean };

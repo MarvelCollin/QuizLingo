@@ -2,9 +2,7 @@ import { Check, Circle, CircleDot, Flag, Lock } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Link } from 'react-router';
 import { cn } from '../../lib/utils';
-import type { LessonRowProps, LessonState, LessonStatus } from './types';
-
-type GlyphProps = { status: LessonStatus; isCheckpoint: boolean; isNext: boolean };
+import type { GlyphProps, LessonRowProps, LessonState } from './types';
 
 const Glyph = ({ status, isCheckpoint, isNext }: GlyphProps) => {
   let glyph: ReactNode;

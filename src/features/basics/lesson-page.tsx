@@ -18,10 +18,8 @@ import { isCheckpoint, lessonById } from './curriculum';
 import { LessonHeader } from './lesson-header';
 import { LessonResult } from './lesson-result';
 import { QuizView } from './quiz-view';
-import type { AttemptInput, QuizAnswer } from './types';
+import type { AttemptInput, LessonPhase, QuizAnswer } from './types';
 import { useBasicsPath, useSaveAttempt } from './use-basics';
-
-type Phase = 'cards' | 'quiz' | 'result';
 
 const LessonSkeleton = () => (
   <div className="mx-auto flex max-w-2xl flex-col gap-6" aria-busy="true" aria-label="Loading the lesson">
@@ -42,7 +40,7 @@ const LessonPage = () => {
   const needsData = lesson?.source.kind !== 'static';
 
   const [run, setRun] = useState(0);
-  const [phase, setPhase] = useState<Phase | null>(null);
+  const [phase, setPhase] = useState<LessonPhase | null>(null);
   const [cardIndex, setCardIndex] = useState(0);
   const [answers, setAnswers] = useState<QuizAnswer[]>([]);
   const lastAttempt = useRef<AttemptInput | null>(null);
@@ -129,7 +127,7 @@ const LessonPage = () => {
     if (lastAttempt.current) saveAttempt.mutate(lastAttempt.current);
   };
 
-  const restart = (to: Phase) => {
+  const restart = (to: LessonPhase) => {
     setAnswers([]);
     setRun((value) => value + 1);
     setPhase(to);
