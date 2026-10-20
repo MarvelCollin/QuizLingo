@@ -6,6 +6,7 @@ import { KeyHint } from '../practice/key-hint';
 import { playSyllable, speak } from '../practice/speech';
 import { useKeyboard } from '../practice/use-keyboard';
 import { StrokeTrace } from './stroke-trace';
+import { hanziSize } from './hanzi-size';
 import { ToneContour } from './tone-contour';
 import type { CardViewProps } from './types';
 
@@ -33,7 +34,7 @@ export const CardView = ({ card }: CardViewProps) => {
 
   return (
     <section aria-label={card.title} className="flex flex-col items-center gap-5 rounded-xl bg-surface px-6 py-10 text-center">
-      <p lang={isHanzi ? 'zh-CN' : undefined} className={isHanzi ? 'font-hanzi text-6xl text-ink' : 'text-5xl font-bold text-ink'}>
+      <p lang={isHanzi ? 'zh-CN' : undefined} className={isHanzi ? `font-hanzi ${hanziSize(card.title)} text-ink` : 'text-5xl font-bold text-ink'}>
         {card.title}
       </p>
       {card.subtitle && <p className="text-lg font-semibold text-strong">{card.subtitle}</p>}

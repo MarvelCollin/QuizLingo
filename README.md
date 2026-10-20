@@ -8,7 +8,7 @@ Live at [marvelcollin.com/quizlingo](https://marvelcollin.com/quizlingo/).
 
 ## Features
 
-- **Starter path**: a guided start for people with no Chinese. Seven stages (how Chinese works, the four tones, the 23 first sounds, the vowel sounds, tones that change, writing basics, your first 60 words), 35 short lessons and a milestone at the end of each stage. Each lesson has cards with native audio, then a quiz. A milestone opens the next stage, and anyone who already knows a stage can test out of it from the first day
+- **Starter path**: a guided start for people with no Chinese. Eight stages (how Chinese works, the four tones, the 23 first sounds, the vowel sounds, tones that change, writing basics, your first 61 words, your first sentences), 39 short lessons and a milestone at the end of each stage. Each lesson has cards with native audio, then a quiz. A milestone opens the next stage, and anyone who already knows a stage can test out of it from the first day
 - **Animated tone lines**: every tone is drawn as a pitch line while you listen, and tone pairs and the tone changes of 不, 一 and two third tones are shown the same way
 - **Pinyin chart**: every syllable with a native recording, by initial and final, with a tone picker and a finder
 - **Sound pairs**: train the ear on b and p, j q x, zh and z, an and ang and the rest of the pairs learners mix up
@@ -162,6 +162,7 @@ Written for QuizLingo and kept in `src/features/basics/content/`. It plays only 
 | Tones that change | 4 and a milestone | Two third tones, 不, 一 and the half third tone |
 | Writing basics | 3 and a milestone | The basic strokes, stroke order, radicals |
 | Your first words | 7 and a milestone | 61 HSK 1 words, which also join the review schedule |
+| Your first sentences | 4 and a milestone | Greetings, saying who you are, polite phrases and small talk, in sentences that use only HSK 1 characters |
 
 Pass marks are 70% for a lesson and 80% for a milestone. Scores are saved per account in the `basics_progress` table. Weak spots are kept in the browser, one list per account.
 

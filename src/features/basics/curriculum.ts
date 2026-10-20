@@ -1,6 +1,7 @@
 import { FINALS_STAGE } from './content/finals';
 import { INITIALS_STAGE } from './content/initials';
 import { RULES_STAGE } from './content/rules';
+import { SENTENCES_STAGE } from './content/sentences';
 import { START_STAGE } from './content/start';
 import { TONES_STAGE } from './content/tones';
 import { WORDS_STAGE } from './content/words';
@@ -15,6 +16,7 @@ export const STAGES: readonly Stage[] = [
   RULES_STAGE,
   WRITING_STAGE,
   WORDS_STAGE,
+  SENTENCES_STAGE,
 ];
 
 export const ALL_LESSONS: readonly Lesson[] = STAGES.flatMap((stage) => stage.lessons);

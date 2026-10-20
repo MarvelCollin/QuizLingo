@@ -6,6 +6,7 @@ import { KeyHint } from '../practice/key-hint';
 import { playSyllable, preloadRecording, speak } from '../practice/speech';
 import { useKeyboard } from '../practice/use-keyboard';
 import { cn } from '../../lib/utils';
+import { hanziSize } from './hanzi-size';
 import { LessonHeader } from './lesson-header';
 import { ToneContour } from './tone-contour';
 import type { QuizAnswer, QuizQuestion, QuizViewProps } from './types';
@@ -96,7 +97,7 @@ export const QuizView = ({ title, questions, onFinish, label = 'Quiz' }: QuizVie
         <div className="flex flex-col items-center gap-4 rounded-xl bg-surface px-6 py-8 text-center">
           <h2 className="text-lg font-semibold text-ink">{question.prompt}</h2>
           {question.hanzi && (
-            <p lang="zh-CN" className="font-hanzi text-6xl text-ink">
+            <p lang="zh-CN" className={`font-hanzi ${hanziSize(question.hanzi)} text-ink`}>
               {question.hanzi}
             </p>
           )}

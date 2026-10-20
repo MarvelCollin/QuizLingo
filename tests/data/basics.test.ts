@@ -1,5 +1,6 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { pinyin } from 'pinyin-pro';
 import { describe, expect, it } from 'vitest';
 import { ALL_LESSONS, checkpointOf, STAGES } from '../../src/features/basics/curriculum';
 import type { LearnCard, QuestionSeed } from '../../src/features/basics/types';
@@ -83,6 +84,40 @@ describe('starter path data', () => {
       if (lesson.source.kind !== 'words') continue;
       const glosses = lesson.source.words.map((w) => w.gloss);
       expect(new Set(glosses).size, lesson.id).toBe(glosses.length);
+    }
+  });
+});
+
+describe('starter path sentences', () => {
+  const lines = () =>
+    ALL_LESSONS.flatMap((lesson) =>
+      lesson.source.kind === 'static' && lesson.id.startsWith('sentences-')
+        ? lesson.source.cards.map((card) => ({ zh: card.title, pinyin: card.subtitle ?? '' }))
+        : [],
+    );
+
+  it('uses only characters that appear in HSK 1 words', () => {
+    const known = new Set(
+      readData<RawWord[]>('words.min.json')
+        .filter((w) => w.l === 1)
+        .flatMap((w) => [...w.s]),
+    );
+    const outside = lines().flatMap(({ zh }) => [...zh].filter((char) => !/[！？，。]/.test(char) && !known.has(char)));
+    expect(lines().length).toBeGreaterThanOrEqual(20);
+    expect(outside).toEqual([]);
+  });
+
+  it('spells every sentence the way a dictionary does, apart from changing tones and neutral syllables', () => {
+    const letters = (text: string) => text.toLowerCase().replace(/[^a-zāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜü]/g, '');
+    const bare = (char: string) => char.normalize('NFD').replace(/[̀-ͯ]/g, '');
+    // 不 and 一 are written as they are said, and a neutral syllable has no mark where a dictionary gives one
+    const base = (text: string) => letters(text.replace(/yí|yì/g, 'yī').replace(/bú/g, 'bù'));
+    for (const { zh, pinyin: written } of lines()) {
+      const expected = letters(pinyin(zh, { toneType: 'symbol', toneSandhi: false, type: 'string' }));
+      const mine = base(written);
+      expect(mine.length, zh).toBe(expected.length);
+      const differing = [...mine].filter((char, i) => char !== expected[i] && char !== bare(expected[i]));
+      expect(differing, zh).toEqual([]);
     }
   });
 });
