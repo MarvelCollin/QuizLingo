@@ -2,7 +2,7 @@
 
 # QuizLingo
 
-Practice for the HSK 3.0 exam, levels 1 to 9. Every answer is saved to your account and schedules when you see the word again.
+Study app for the HSK 3.0 exam, levels 1 to 9: words, characters, grammar, tones, listening, speaking and timed mock tests. Every answer is saved to your account and schedules when you see the word again.
 
 Live at [marvelcollin.com/quizlingo](https://marvelcollin.com/quizlingo/).
 
@@ -27,7 +27,9 @@ Live at [marvelcollin.com/quizlingo](https://marvelcollin.com/quizlingo/).
 ## Tech Stack
 
 - React 19, TypeScript, Vite, Tailwind CSS 4, React Router, TanStack Query
-- Vercel Functions in `api/` with Turso (libSQL)
+- Vercel Functions in `api/` with Turso (libSQL), run in the Tokyo region next to the database
+- [Hanzi Writer](https://hanziwriter.org) for stroke order and writing practice
+- Browser Web Speech API for the fallback voice and for speech recognition
 - Fonts: Figtree and Noto Serif SC, self hosted
 
 ## Project layout
@@ -36,8 +38,11 @@ Live at [marvelcollin.com/quizlingo](https://marvelcollin.com/quizlingo/).
 api/              Vercel Functions: auth, progress, sessions, stats (api/_lib holds shared code)
 src/app/          router and query client
 src/components/   shared ui and layout components
-src/features/     auth, dashboard, practice, progress, vocabulary, words
-public/data/      HSK 3.0 word lists built by scripts/build-hsk-data.mjs
+src/features/     auth, dashboard, practice, progress, vocabulary, words, characters,
+                  tones, tests (listening and mock), grammar, speaking, study (shared data)
+public/data/      words, sentences, characters, strokes, listening tests and grammar notes
+public/audio/     native word and syllable recordings
+scripts/          data builders, the content checker and the bundle secret check
 ```
 
 ## Security
@@ -122,3 +127,22 @@ node scripts/build-study-data.mjs \
 ```
 
 The `tatoeba` folder holds `cmn_sentences.tsv`, `cmn-eng_links.tsv` and `eng_sentences.tsv` from https://downloads.tatoeba.org/exports/per_language/.
+
+## 📝 Listening tests and grammar notes
+
+| Data | Files | Notes |
+|------|-------|-------|
+| 40 listening tests, 6 per level for HSK 1 to 3 and 4 per level for HSK 4 to 7-9, each with a script, pinyin, English and questions | `public/data/listening-{level}.json` | Written for QuizLingo |
+| All 593 grammar points of the 2025 syllabus, each with an explanation, a pattern and two examples | `public/data/grammar-{level}.json` | Point list from the syllabus via [krmanik/HSK-3.0](https://github.com/krmanik/HSK-3.0), notes written for QuizLingo |
+
+Every Chinese line in these files is checked against the word list so it only uses words up to its own level:
+
+```bash
+node scripts/check-content.mjs public/data/listening-3.json 3
+```
+
+A few grammar examples stay above their level on purpose, where the grammar point itself is built on that word (for example 说不定 or 也罢).
+
+## 🧪 Mock tests
+
+Mock tests follow the HSK 3.0 section layout for each level (questions and minutes per part, set in `src/features/tests/mock-format.ts`). The questions are built from QuizLingo content, not from official past papers. The official HSK 3.0 scoring for levels 4 to 9 is not published yet, so those levels use 100 points per part and a 60 percent pass mark. Essays, translation and the speaking part of the real exam are not marked automatically, so they are left out.
