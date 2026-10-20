@@ -15,7 +15,7 @@ const playQuestion = (question: QuizQuestion) => {
   else if (question.word) speak(question.word);
 };
 
-export const QuizView = ({ questions, onFinish, label = 'Quiz' }: QuizViewProps) => {
+export const QuizView = ({ title, questions, onFinish, label = 'Quiz' }: QuizViewProps) => {
   const [index, setIndex] = useState(0);
   const [chosen, setChosen] = useState<number | null>(null);
   const [answers, setAnswers] = useState<QuizAnswer[]>([]);
@@ -82,6 +82,7 @@ export const QuizView = ({ questions, onFinish, label = 'Quiz' }: QuizViewProps)
 
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-6">
+      <h1 className="sr-only">{`${title}, ${label.toLowerCase()}`}</h1>
       <LessonHeader
         label={label}
         position={index + 1}

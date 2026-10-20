@@ -120,6 +120,12 @@ describe('tone contours', () => {
     expect(contourOf([1, 4, 2]).width).toBeGreaterThan(contourOf([1, 4]).width);
   });
 
+  it('puts the lowest pitch guide below the highest one', () => {
+    const { guides } = contourOf([1]);
+    expect(guides).toHaveLength(5);
+    expect(guides[0]).toBeGreaterThan(guides[4]);
+  });
+
   it('keeps tone 1 level, lifts tone 2 and drops tone 4', () => {
     const [flat] = contourOf([1]).segments;
     const [rising] = contourOf([2]).segments;

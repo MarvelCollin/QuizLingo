@@ -143,14 +143,14 @@ const LessonPage = () => {
   };
 
   if (current === 'quiz') {
-    return <QuizView key={run} questions={content.questions} onFinish={submit} />;
+    return <QuizView key={run} title={lesson.title} questions={content.questions} onFinish={submit} />;
   }
 
   if (current === 'missed') {
     const again = answers
       .filter((a) => !a.question.options[a.chosen].isCorrect)
       .map(({ question }) => ({ ...question, options: shuffle(question.options) }));
-    return <QuizView key={`missed-${run}`} label="Missed questions" questions={again} onFinish={() => setPhase('result')} />;
+    return <QuizView key={`missed-${run}`} title={lesson.title} label="Missed questions" questions={again} onFinish={() => setPhase('result')} />;
   }
 
   if (current === 'result') {

@@ -49,10 +49,10 @@ export const ToneContour = ({ tones, playKey = 0, className }: ToneContourProps)
           opacity={0.6}
         />
       ))}
-      <text x={0} y={contour.guides[4] + 3} className="fill-muted" fontSize={9}>
+      <text x={0} y={contour.guides[0] + 3} className="fill-muted" fontSize={9}>
         low
       </text>
-      <text x={0} y={contour.guides[0] + 3} className="fill-muted" fontSize={9}>
+      <text x={0} y={contour.guides[4] + 3} className="fill-muted" fontSize={9}>
         high
       </text>
       {contour.segments.map((segment, index) => {

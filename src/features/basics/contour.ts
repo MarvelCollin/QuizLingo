@@ -10,6 +10,7 @@ const NEUTRAL_WIDTH = 34;
 
 export type ContourSegment = { d: string; isNeutral: boolean; start: [number, number]; end: [number, number] };
 
+// guides run from pitch 1 at the bottom of the picture to pitch 5 at the top
 export type Contour = { width: number; height: number; guides: number[]; segments: ContourSegment[] };
 
 // Pitch 5 sits at the top and pitch 1 at the bottom
