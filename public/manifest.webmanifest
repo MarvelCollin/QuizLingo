@@ -2,13 +2,15 @@
   "name": "QuizLingo",
   "short_name": "QuizLingo",
   "description": "HSK 3.0 vocabulary practice for levels 1 to 3.",
-  "start_url": "/",
+  "id": "/quizlingo/",
+  "start_url": "/quizlingo/",
+  "scope": "/quizlingo/",
   "display": "standalone",
   "background_color": "#f5fbfa",
   "theme_color": "#1d5e69",
   "icons": [
-    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
-    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+    { "src": "/quizlingo/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/quizlingo/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/quizlingo/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
   ]
 }

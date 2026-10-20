@@ -33,4 +33,4 @@ export const router = createBrowserRouter([
     ],
   },
   { path: '*', element: page(<NotFoundPage />) },
-]);
+], { basename: import.meta.env.BASE_URL.replace(/\/$/, '') });

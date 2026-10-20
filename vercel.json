@@ -1,26 +1,43 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
+  "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/quizlingo/",
+      "permanent": false
+    },
+    {
+      "source": "/quizlingo",
+      "destination": "/quizlingo/",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
-      "source": "/login",
-      "destination": "/index.html"
+      "source": "/quizlingo/api/:path*",
+      "destination": "/api/:path*"
     },
     {
-      "source": "/register",
-      "destination": "/index.html"
+      "source": "/quizlingo/login",
+      "destination": "/quizlingo/index.html"
     },
     {
-      "source": "/practice",
-      "destination": "/index.html"
+      "source": "/quizlingo/register",
+      "destination": "/quizlingo/index.html"
     },
     {
-      "source": "/practice/round",
-      "destination": "/index.html"
+      "source": "/quizlingo/practice",
+      "destination": "/quizlingo/index.html"
     },
     {
-      "source": "/words",
-      "destination": "/index.html"
+      "source": "/quizlingo/practice/round",
+      "destination": "/quizlingo/index.html"
+    },
+    {
+      "source": "/quizlingo/words",
+      "destination": "/quizlingo/index.html"
     }
   ],
   "headers": [
@@ -50,7 +67,7 @@
       ]
     },
     {
-      "source": "/assets/(.*)",
+      "source": "/quizlingo/assets/(.*)",
       "headers": [
         {
           "key": "Cache-Control",

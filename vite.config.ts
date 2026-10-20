@@ -5,6 +5,8 @@ import { existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 import type { IncomingMessage, ServerResponse } from 'node:http'
 
+const BASE = '/quizlingo/'
+
 // Serves the Vercel functions in api/ during `npm run dev`, so the app and API run from one command.
 // On Vercel the platform routes /api itself and this plugin is not used.
 const vercelApi = (): Plugin => ({
@@ -12,8 +14,9 @@ const vercelApi = (): Plugin => ({
   configureServer(server: ViteDevServer) {
     server.middlewares.use(async (req: IncomingMessage, res: ServerResponse, next: () => void) => {
       const url = new URL(req.url ?? '/', 'http://localhost')
-      if (!url.pathname.startsWith('/api/')) return next()
-      const name = url.pathname.slice('/api/'.length)
+      const prefix = `${BASE}api/`
+      if (!url.pathname.startsWith(prefix)) return next()
+      const name = url.pathname.slice(prefix.length)
       const file = resolve(__dirname, 'api', `${name}.ts`)
       if (name.startsWith('_') || name.includes('..') || !existsSync(file)) {
         res.statusCode = 404
@@ -53,6 +56,11 @@ export default defineConfig(({ mode }) => {
   // Make TURSO_* from .env.local visible to the API during development
   Object.assign(process.env, loadEnv(mode, process.cwd(), 'TURSO_'))
   return {
+    base: BASE,
     plugins: [react(), tailwindcss(), vercelApi()],
+    build: {
+      outDir: `dist${BASE}`,
+      emptyOutDir: true,
+    },
   }
 })

@@ -12,7 +12,7 @@ type Options = { method?: 'GET' | 'POST'; body?: unknown; signal?: AbortSignal }
 export const apiFetch = async <T>(path: string, { method = 'GET', body, signal }: Options = {}): Promise<T> => {
   let response: Response;
   try {
-    response = await fetch(`/api${path}`, {
+    response = await fetch(`${import.meta.env.BASE_URL}api${path}`, {
       method,
       signal,
       credentials: 'same-origin',

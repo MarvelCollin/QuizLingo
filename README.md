@@ -4,6 +4,8 @@
 
 Practice for the HSK 3.0 exam, levels 1 to 3. Every answer is saved to your account and schedules when you see the word again.
 
+Live at [marvelcollin.com/quizlingo](https://marvelcollin.com/quizlingo/).
+
 ## Features
 
 - **Accounts**: sign up with name, email and password. Progress follows you to any device
@@ -45,14 +47,17 @@ Local development:
 ```bash
 cp .env.example .env.local   # TURSO_DATABASE_URL=file:local.db works offline
 npm install
-npm run dev                  # serves the app and the /api functions
+npm run dev                  # open http://localhost:5173/quizlingo/
 ```
+
+The app lives under the `/quizlingo/` base path, and the API is served at `/quizlingo/api/`.
 
 Deploying on Vercel:
 
 1. Import this repository at vercel.com/new (framework preset: Vite).
 2. Add two environment variables, marked Sensitive: `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN`.
 3. Deploy. Tables are created on the first API request.
+4. marvelcollin.com proxies `/quizlingo/*` to this project with a rewrite in its own `vercel.json`.
 
 ## 📚 Vocabulary data
 

@@ -41,7 +41,7 @@ export const verifyPassword = async (password: string, stored: string): Promise<
 const hashToken = (token: string) => createHash('sha256').update(token).digest('hex');
 
 const cookie = (value: string, maxAge: number) =>
-  `${COOKIE}=${value}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${maxAge}`;
+  `${COOKIE}=${value}; Path=/quizlingo; HttpOnly; Secure; SameSite=Lax; Max-Age=${maxAge}`;
 
 export const createSession = async (userId: string): Promise<string> => {
   const db = await getDb();
