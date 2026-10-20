@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { hashPassword, normalizeEmail, validatePassword, verifyPassword } from '../../api/_lib/auth';
+import { hashPassword, needsRehash, normalizeEmail, validatePassword, verifyPassword } from '../../api/_lib/auth';
+import { clientIp } from '../../api/_lib/rate-limit';
 import { HttpError, parseCookies, readJson } from '../../api/_lib/http';
 import { INTERVALS, MAX_BOX, review } from '../../api/_lib/srs';
 import { count, level, MODES, mode, word } from '../../api/_lib/validate';
@@ -73,5 +74,21 @@ describe('http helpers', () => {
     await expect(readJson(form)).rejects.toMatchObject({ status: 415 });
     const broken = new Request('http://x', { method: 'POST', body: '{', headers: { 'content-type': 'application/json' } });
     await expect(readJson(broken)).rejects.toMatchObject({ status: 400 });
+  });
+});
+
+describe('password upgrade and client address', () => {
+  it('flags hashes made with weaker settings and accepts the current ones', async () => {
+    expect(needsRehash(await hashPassword('correct horse'))).toBe(false);
+    expect(needsRehash('scrypt$16384$8$1$c2FsdA==$aGFzaA==')).toBe(true);
+    expect(needsRehash('scrypt$65536$8$1$c2FsdA==$aGFzaA==')).toBe(true);
+    expect(needsRehash('bcrypt$whatever')).toBe(true);
+  });
+
+  it('reads the address the platform reports and nothing else', () => {
+    const request = (headers: Record<string, string>) => new Request('http://localhost/', { headers });
+    expect(clientIp(request({ 'x-real-ip': '203.0.113.9' }))).toBe('203.0.113.9');
+    expect(clientIp(request({ 'x-forwarded-for': '203.0.113.7, 10.0.0.1' }))).toBe('203.0.113.7');
+    expect(clientIp(request({}))).toBeNull();
   });
 });

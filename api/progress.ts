@@ -32,6 +32,8 @@ type Body = { results?: unknown };
 type Result = { word: string; level: number; correct: boolean };
 
 const MAX_RESULTS = 100;
+// The word list has 10,896 entries, so this leaves room and no more
+const MAX_WORDS = 12000;
 
 // Records answers and schedules each word's next review
 export const POST = handle(async (request) => {
@@ -47,14 +49,18 @@ export const POST = handle(async (request) => {
   const words = [...new Set(results.map((r) => r.word))];
   const {
     user,
-    results: [existing],
+    results: [existing, total],
   } = await queryAsUser(request, (scope) => [
     {
       sql: `SELECT word, level, box, correct, wrong, due_at, last_seen_at FROM word_progress
             WHERE user_id = ${CURRENT_USER} AND word IN (${words.map((_, i) => `:w${i}`).join(',')})`,
       args: { ...scope, ...Object.fromEntries(words.map((w, i) => [`w${i}`, w])) },
     },
+    { sql: `SELECT COUNT(*) AS n FROM word_progress WHERE user_id = ${CURRENT_USER}`, args: scope },
   ]);
+  if (Number(total.rows[0]?.n ?? 0) + words.length - existing.rows.length > MAX_WORDS) {
+    throw new HttpError(400, 'This account has saved the most words it can.');
+  }
 
   const state = new Map(
     existing.rows.map((row) => {

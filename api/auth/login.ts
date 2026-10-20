@@ -3,6 +3,7 @@ import {
   clearLoginFailures,
   hashPassword,
   loginAttempts,
+  needsRehash,
   newSession,
   normalizeEmail,
   recordLoginFailure,
@@ -36,7 +37,17 @@ export const POST = handle(async (request) => {
   }
 
   const session = newSession(String(row.id));
-  await db.batch([clearLoginFailures(email), session.statement], 'write');
+  const statements = [
+    clearLoginFailures(email),
+    session.statement,
+    // Expired sessions are of no use, so they are removed as people sign in
+    { sql: 'DELETE FROM sessions WHERE expires_at < ?', args: [Date.now()] },
+  ];
+  // A hash made with weaker settings is replaced now that the password is known
+  if (needsRehash(String(row.password_hash))) {
+    statements.push({ sql: 'UPDATE users SET password_hash = ? WHERE id = ?', args: [await hashPassword(password), String(row.id)] });
+  }
+  await db.batch(statements, 'write');
   const user = { id: String(row.id), email: String(row.email), name: String(row.name) };
   return json({ user }, { headers: { 'Set-Cookie': session.cookie } });
 });

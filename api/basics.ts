@@ -1,4 +1,4 @@
-import { CURRENT_USER, queryAsUser, requireScope } from './_lib/auth.js';
+import { CURRENT_USER, getUser, queryAsUser, requireScope } from './_lib/auth.js';
 import { getDb } from './_lib/db.js';
 import { handle, HttpError, json, readJson } from './_lib/http.js';
 import * as validate from './_lib/validate.js';
@@ -25,6 +25,9 @@ export const GET = handle(async (request) => {
 
 type Body = { lesson?: unknown; score?: unknown; passed?: unknown };
 
+// More than the path has lessons, so no real learner reaches it
+const MAX_LESSONS = 200;
+
 // Records one attempt at a lesson. The best score only goes up and a pass is never taken back.
 export const POST = handle(async (request) => {
   const scope = requireScope(request);
@@ -42,12 +45,14 @@ export const POST = handle(async (request) => {
       {
         sql: `INSERT INTO basics_progress (user_id, lesson, best, attempts, completed_at, updated_at)
               SELECT user_id, :lesson, :score, 1, :completedAt, :now FROM sessions WHERE id = :sid AND expires_at > :now
+                AND ((SELECT COUNT(*) FROM basics_progress WHERE user_id = sessions.user_id) < :cap
+                  OR EXISTS (SELECT 1 FROM basics_progress WHERE user_id = sessions.user_id AND lesson = :lesson))
               ON CONFLICT (user_id, lesson) DO UPDATE SET
                 best = MAX(best, excluded.best),
                 attempts = attempts + 1,
                 completed_at = COALESCE(completed_at, excluded.completed_at),
                 updated_at = excluded.updated_at`,
-        args: { ...scope, ...attempt },
+        args: { ...scope, ...attempt, cap: MAX_LESSONS },
       },
       {
         sql: `SELECT lesson, best, attempts, completed_at FROM basics_progress
@@ -57,6 +62,9 @@ export const POST = handle(async (request) => {
     ],
     'write',
   );
-  if (saved.rowsAffected === 0) throw new HttpError(401, 'Please sign in to continue.');
+  if (saved.rowsAffected === 0) {
+    if (!(await getUser(request))) throw new HttpError(401, 'Please sign in to continue.');
+    throw new HttpError(400, 'This account has saved the most lessons it can.');
+  }
   return json({ lesson: toLesson(row.rows[0] as Record<string, unknown>) }, { status: 201 });
 });

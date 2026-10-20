@@ -1,3 +1,4 @@
+import { randomBytes, scryptSync } from 'node:crypto';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { getDb } from '../../api/_lib/db';
 import * as login from '../../api/auth/login';
@@ -11,8 +12,12 @@ import * as stats from '../../api/stats';
 
 const BASE = 'http://localhost/quizlingo/api';
 
-const call = async (handler: (request: Request) => Promise<Response>, path: string, options: { body?: unknown; cookie?: string; method?: string } = {}) => {
-  const headers: Record<string, string> = {};
+const call = async (
+  handler: (request: Request) => Promise<Response>,
+  path: string,
+  options: { body?: unknown; cookie?: string; method?: string; headers?: Record<string, string> } = {},
+) => {
+  const headers: Record<string, string> = { ...options.headers };
   if (options.body !== undefined) headers['content-type'] = 'application/json';
   if (options.cookie) headers.cookie = options.cookie;
   const response = await handler(
@@ -151,5 +156,60 @@ describe('login throttling', () => {
       expect((await call(login.POST, '/auth/login', { body: { email: target, password: 'wrong-pass' } })).status).toBe(401);
     }
     expect((await call(login.POST, '/auth/login', { body: { email: target, password: 'password123' } })).status).toBe(429);
+  }, 60000);
+});
+
+describe('abuse limits', () => {
+  it('limits sign ups from one address', async () => {
+    const headers = { 'x-forwarded-for': '198.51.100.23' };
+    for (let i = 0; i < 10; i++) {
+      const created = await call(register.POST, '/auth/register', {
+        headers,
+        body: { name: 'Bulk', email: `bulk-${Date.now()}-${i}@example.com`, password: 'password123' },
+      });
+      expect(created.status).toBe(201);
+    }
+    const blocked = await call(register.POST, '/auth/register', {
+      headers,
+      body: { name: 'Bulk', email: `bulk-${Date.now()}-x@example.com`, password: 'password123' },
+    });
+    expect(blocked.status).toBe(429);
+    const elsewhere = await call(register.POST, '/auth/register', {
+      headers: { 'x-forwarded-for': '198.51.100.24' },
+      body: { name: 'Fine', email: `fine-${Date.now()}@example.com`, password: 'password123' },
+    });
+    expect(elsewhere.status).toBe(201);
+  }, 60000);
+
+  it('stops one account from saving more lessons than exist', async () => {
+    const owner = await call(register.POST, '/auth/register', {
+      body: { name: 'Cap', email: `cap-${Date.now()}@example.com`, password: 'password123' },
+    });
+    const jar = owner.cookie;
+    for (let i = 0; i < 200; i++) {
+      const saved = await call(basics.POST, '/basics', { cookie: jar, body: { lesson: `lesson-${i}`, score: 50, passed: false } });
+      expect(saved.status).toBe(201);
+    }
+    const extra = await call(basics.POST, '/basics', { cookie: jar, body: { lesson: 'one-more', score: 50, passed: false } });
+    expect(extra.status).toBe(400);
+    const again = await call(basics.POST, '/basics', { cookie: jar, body: { lesson: 'lesson-7', score: 80, passed: true } });
+    expect(again.status).toBe(201);
+    expect(again.body.lesson).toMatchObject({ best: 80, attempts: 2 });
+  }, 60000);
+
+  it('upgrades an old password hash when the person signs in', async () => {
+    const address = `old-${Date.now()}@example.com`;
+    await call(register.POST, '/auth/register', { body: { name: 'Old', email: address, password: 'password123' } });
+    const salt = randomBytes(16);
+    const weak = scryptSync('password123', salt, 64, { N: 16384, r: 8, p: 1 });
+    const stored = `scrypt$16384$8$1$${salt.toString('base64')}$${weak.toString('base64')}`;
+    const db = await getDb();
+    await db.execute({ sql: 'UPDATE users SET password_hash = ? WHERE email = ?', args: [stored, address] });
+
+    const signedIn = await call(login.POST, '/auth/login', { body: { email: address, password: 'password123' } });
+    expect(signedIn.status).toBe(200);
+    const row = (await db.execute({ sql: 'SELECT password_hash FROM users WHERE email = ?', args: [address] })).rows[0];
+    expect(String(row.password_hash).startsWith('scrypt$65536$8$2$')).toBe(true);
+    expect((await call(login.POST, '/auth/login', { body: { email: address, password: 'password123' } })).status).toBe(200);
   }, 60000);
 });

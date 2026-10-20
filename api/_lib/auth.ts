@@ -13,7 +13,8 @@ const scryptAsync = promisify(scrypt) as (
 
 const COOKIE = 'ql_session';
 const SESSION_DAYS = 30;
-const SCRYPT = { N: 16384, r: 8, p: 1, maxmem: 64 * 1024 * 1024 };
+// OWASP's minimum for scrypt is N=2^16, r=8, p=2. Older hashes keep their own parameters and are upgraded at sign in.
+const SCRYPT = { N: 65536, r: 8, p: 2, maxmem: 160 * 1024 * 1024 };
 
 export type User = { id: string; email: string; name: string };
 
@@ -36,6 +37,11 @@ export const verifyPassword = async (password: string, stored: string): Promise<
     maxmem: SCRYPT.maxmem,
   });
   return actual.length === expected.length && timingSafeEqual(actual, expected);
+};
+
+export const needsRehash = (stored: string): boolean => {
+  const [scheme, n, r, p] = stored.split('$');
+  return scheme !== 'scrypt' || Number(n) < SCRYPT.N || Number(r) < SCRYPT.r || Number(p) < SCRYPT.p;
 };
 
 // Only a hash of the session token is stored, so a database leak does not leak live sessions

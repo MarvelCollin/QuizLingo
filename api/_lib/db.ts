@@ -45,6 +45,12 @@ const SCHEMA = [
     created_at INTEGER NOT NULL
   )`,
   `CREATE INDEX IF NOT EXISTS practice_sessions_user ON practice_sessions(user_id, created_at)`,
+  `CREATE TABLE IF NOT EXISTS rate_events (
+    kind TEXT NOT NULL,
+    key TEXT NOT NULL,
+    at INTEGER NOT NULL
+  )`,
+  `CREATE INDEX IF NOT EXISTS rate_events_key ON rate_events(kind, key, at)`,
   `CREATE TABLE IF NOT EXISTS basics_progress (
     user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     lesson TEXT NOT NULL,
