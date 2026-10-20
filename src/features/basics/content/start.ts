@@ -1,0 +1,161 @@
+import type { Stage } from '../types';
+
+export const START_STAGE: Stage = {
+  id: 'start',
+  title: 'Meet Chinese',
+  blurb: 'How the writing, the spelling and the sounds fit together. No memorizing yet.',
+  lessons: [
+    {
+      id: 'start-1',
+      title: 'Characters and pinyin',
+      summary: 'What you will actually be learning',
+      minutes: 4,
+      source: {
+        kind: 'static',
+        cards: [
+          {
+            id: 'hanzi',
+            title: '汉字',
+            subtitle: 'hànzì, the characters',
+            note: 'Chinese is written in characters. Each one is a single syllable and usually carries an idea of its own.',
+            word: '汉字',
+          },
+          {
+            id: 'pinyin',
+            title: 'pīnyīn',
+            subtitle: 'the spelling of the sounds',
+            note: 'Pinyin writes Chinese in the Latin alphabet. It is a tool for learning to read and say the sounds, and it is how you type Chinese on a phone.',
+          },
+          {
+            id: 'hsk',
+            title: 'HSK',
+            subtitle: 'the official Chinese exam',
+            note: 'HSK 3.0 has nine levels. Level 1 asks for 300 words. This path takes you from zero to the first day of HSK 1.',
+          },
+          {
+            id: 'no-alphabet',
+            title: '你好',
+            subtitle: 'nǐ hǎo, hello',
+            note: 'Two characters, two syllables. You cannot guess how a character sounds from its shape, so each one is learned with its pinyin.',
+            word: '你好',
+          },
+        ],
+        questions: [
+          {
+            id: 'q-pinyin',
+            prompt: 'What is pinyin for?',
+            answer: 'Writing the sounds of Chinese in the Latin alphabet',
+            wrong: ['Writing Chinese faster by hand', 'Replacing characters in books', 'Marking the HSK level of a word'],
+            explain: 'Pinyin spells the sound. Characters carry the meaning.',
+          },
+          {
+            id: 'q-syllable',
+            prompt: 'How many syllables does one Chinese character stand for?',
+            answer: 'One',
+            wrong: ['Two', 'It depends on the word', 'None, characters have no sound'],
+            explain: 'Every character is one syllable, so 你好 is two syllables.',
+          },
+          {
+            id: 'q-level',
+            prompt: 'How many words does HSK 1 ask for?',
+            answer: '300',
+            wrong: ['50', '1,000', '3,000'],
+            explain: 'HSK 1 covers 300 words. HSK 1 to 3 together cover 1,000.',
+          },
+          {
+            id: 'q-guess',
+            prompt: 'Can you work out how a new character sounds by looking at it?',
+            answer: 'Not reliably, so learn each one with its pinyin',
+            wrong: ['Yes, the strokes spell the sound', 'Yes, the longest stroke gives the tone', 'Only for numbers'],
+            explain: 'Some characters hint at their sound, but not enough to rely on at the start.',
+          },
+        ],
+      },
+    },
+    {
+      id: 'start-2',
+      title: 'Inside one syllable',
+      summary: 'Initial, final and tone',
+      minutes: 4,
+      source: {
+        kind: 'static',
+        cards: [
+          {
+            id: 'parts',
+            title: 'mā',
+            subtitle: 'm + a + tone 1',
+            note: 'Every syllable has up to three parts: a first sound called the initial, a vowel part called the final, and a tone.',
+            sound: 'ma1',
+            tones: [1],
+          },
+          {
+            id: 'hao',
+            title: 'hǎo',
+            subtitle: 'h + ao + tone 3',
+            note: 'The final can be more than one letter. In hǎo the initial is h and the final is ao.',
+            sound: 'hao3',
+            tones: [3],
+          },
+          {
+            id: 'no-initial',
+            title: 'ài',
+            subtitle: 'no initial + ai + tone 4',
+            note: 'Some syllables have no initial at all. They start straight on the vowel.',
+            sound: 'ai4',
+            tones: [4],
+          },
+          {
+            id: 'tone-changes',
+            title: 'mā má mǎ mà',
+            subtitle: 'same letters, four tones',
+            note: 'Change the tone and you change the word. Next you will hear all four.',
+          },
+        ],
+        questions: [
+          {
+            id: 'q-initial',
+            prompt: 'In the syllable hǎo, which part is the initial?',
+            answer: 'h',
+            wrong: ['ao', 'hǎ', 'The tone mark'],
+            explain: 'The initial is the first sound. Here it is h.',
+          },
+          {
+            id: 'q-final',
+            prompt: 'In the syllable hǎo, which part is the final?',
+            answer: 'ao',
+            wrong: ['h', 'o', 'ǎ'],
+            explain: 'The final is everything after the initial, here ao.',
+          },
+          {
+            id: 'q-tone',
+            prompt: 'In the syllable mā, which tone is it?',
+            answer: 'Tone 1',
+            wrong: ['Tone 2', 'Tone 3', 'Tone 4'],
+            explain: 'A flat line over the vowel is tone 1.',
+          },
+          {
+            id: 'q-bare',
+            prompt: 'What is the initial of the syllable ài?',
+            answer: 'There is none',
+            wrong: ['a', 'i', 'ài'],
+            explain: 'The syllable starts on the vowel, so it has no initial.',
+          },
+          {
+            id: 'q-meaning',
+            prompt: 'Does changing only the tone change the word?',
+            answer: 'Yes, mā and mǎ are different words',
+            wrong: ['No, the tone is only for style', 'Only in questions', 'Only in writing'],
+            explain: 'mā means mom and mǎ means horse.',
+          },
+        ],
+      },
+    },
+    {
+      id: 'start-check',
+      title: 'Milestone: Meet Chinese',
+      summary: 'Ten questions on both lessons',
+      minutes: 3,
+      source: { kind: 'checkpoint', from: ['start-1', 'start-2'] },
+    },
+  ],
+};
