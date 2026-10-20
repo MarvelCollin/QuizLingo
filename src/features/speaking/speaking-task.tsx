@@ -7,14 +7,8 @@ import { KeyHint } from '../practice/key-hint';
 import { ListenButton } from '../practice/listen-button';
 import { stopSpeaking } from '../practice/speech';
 import { useKeyboard } from '../practice/use-keyboard';
-import { compareSpeech, createRecognizer, PASS_SCORE } from './recognition';
+import { compareSpeech, createRecognizer, PASS_SCORE, RECOGNITION_ERRORS } from './recognition';
 import type { Recognizer, SpeakingTaskProps } from './types';
-
-const ERRORS: Record<string, string> = {
-  'not-allowed': 'The microphone is blocked. Allow it in the browser address bar, then try again.',
-  'no-speech': 'Nothing was heard. Try again a little closer to the microphone.',
-  network: 'The speech service could not be reached. Check your connection.',
-};
 
 export const SpeakingTask = ({ sentence, onAnswer, onNext }: SpeakingTaskProps) => {
   const [isListening, setIsListening] = useState(false);
@@ -59,7 +53,7 @@ export const SpeakingTask = ({ sentence, onAnswer, onNext }: SpeakingTaskProps) 
         .join('');
       setHeard(latest);
     };
-    created.onerror = (event) => setError(ERRORS[event.error] ?? 'Speech recognition stopped. Try again.');
+    created.onerror = (event) => setError(RECOGNITION_ERRORS[event.error] ?? 'Speech recognition stopped. Try again.');
     created.onend = () => {
       setIsListening(false);
       if (latest) finish(latest);

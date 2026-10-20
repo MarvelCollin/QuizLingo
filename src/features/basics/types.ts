@@ -103,6 +103,8 @@ export type CardViewProps = { card: LearnCard };
 
 export type StrokeTraceProps = { char: string };
 
+export type SayItProps = { text: string };
+
 export type QuizViewProps = {
   title: string;
   questions: QuizQuestion[];

@@ -5,6 +5,7 @@ import { StrokePlayer } from '../characters/stroke-player';
 import { KeyHint } from '../practice/key-hint';
 import { playSyllable, speak } from '../practice/speech';
 import { useKeyboard } from '../practice/use-keyboard';
+import { SayIt } from './say-it';
 import { StrokeTrace } from './stroke-trace';
 import { hanziSize } from './hanzi-size';
 import { ToneContour } from './tone-contour';
@@ -54,6 +55,7 @@ export const CardView = ({ card }: CardViewProps) => {
         </>
       )}
       {card.note && <p className="max-w-prose text-base text-ink">{card.note}</p>}
+      {isHanzi && card.word && <SayIt text={card.word} />}
       {hasSound ? (
         <button
           type="button"

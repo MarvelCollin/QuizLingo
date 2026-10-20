@@ -23,6 +23,12 @@ const onlyHanzi = (text: string) => [...text].filter((c) => /[一-鿿]/.test(c))
 
 export const PASS_SCORE = 80;
 
+export const RECOGNITION_ERRORS: Record<string, string> = {
+  'not-allowed': 'The microphone is blocked. Allow it in the browser address bar, then try again.',
+  'no-speech': 'Nothing was heard. Try again a little closer to the microphone.',
+  network: 'The speech service could not be reached. Check your connection.',
+};
+
 export const compareSpeech = (target: string, heard: string): { score: number; marks: CharMark[] } => {
   const want = onlyHanzi(target);
   const got = onlyHanzi(heard);
