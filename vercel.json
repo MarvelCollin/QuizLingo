@@ -41,6 +41,10 @@
     {
       "source": "/quizlingo/words",
       "destination": "/quizlingo/index.html"
+    },
+    {
+      "source": "/quizlingo/words/:word",
+      "destination": "/quizlingo/index.html"
     }
   ],
   "headers": [

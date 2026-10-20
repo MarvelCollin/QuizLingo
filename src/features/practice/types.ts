@@ -17,7 +17,7 @@ export type Question = { word: Word; options: ChoiceOption[] };
 
 export type AnswerRecord = { word: Word; isCorrect: boolean };
 
-export type WordRevealProps = { word: Word };
+export type WordRevealProps = { word: Word; isExampleShown?: boolean };
 
 export type RoundProps = {
   words: Word[];

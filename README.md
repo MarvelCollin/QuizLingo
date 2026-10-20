@@ -85,3 +85,26 @@ node scripts/build-hsk-data.mjs \
   --cedict "HSK-3.0/Scripts and data/all_cedict.json" \
   --out public/data
 ```
+
+## 🎧 Study data
+
+Built by `scripts/build-study-data.mjs` from the word list above and these open sources:
+
+| Data | File | Source | License |
+|------|------|--------|---------|
+| Example sentences that use only HSK 1 to 3 words, with pinyin and English | `public/data/sentences.min.json` | [Tatoeba](https://tatoeba.org) Mandarin and English exports, pinyin from [pinyin-pro](https://github.com/zh-lx/pinyin-pro) | CC BY 2.0 FR, each sentence links to its Tatoeba page |
+| The 655 characters of HSK 1 to 3, with the 250 to write | `public/data/hanzi.min.json` | [krmanik/HSK-3.0](https://github.com/krmanik/HSK-3.0) `New HSK (2025)`, meanings from CC-CEDICT | CC BY-SA 4.0 |
+| Stroke order for those characters | `public/data/strokes/` | [Make Me a Hanzi](https://github.com/skishore/makemeahanzi) via [hanzi-writer-data](https://github.com/chanind/hanzi-writer-data) | Arphic Public License, see `ARPHICPL.TXT` |
+| Native recordings of 899 words and 1,123 syllables | `public/audio/` | [audio-cmn](https://github.com/hugolpz/audio-cmn), voices by Yue Tan and Chen Wang | CC BY-SA |
+
+Words without a recording are read by the browser's own Chinese voice.
+
+```bash
+node scripts/build-study-data.mjs \
+  --tatoeba tatoeba \
+  --hanzi "HSK-3.0/New HSK (2025)" \
+  --cedict "HSK-3.0/Scripts and data/all_cedict.json" \
+  --audio audio-cmn/24k-abr
+```
+
+The `tatoeba` folder holds `cmn_sentences.tsv`, `cmn-eng_links.tsv` and `eng_sentences.tsv` from https://downloads.tatoeba.org/exports/per_language/.

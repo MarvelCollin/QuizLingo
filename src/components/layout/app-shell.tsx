@@ -1,6 +1,7 @@
 import { LogOut, UserRound } from 'lucide-react';
 import { NavLink, Outlet, useNavigate } from 'react-router';
 import { useLogout, useSession } from '../../features/auth/use-session';
+import { useRecordings } from '../../features/practice/use-recordings';
 import { cn } from '../../lib/utils';
 import { BrandMark } from './brand-mark';
 import { NAV_ITEMS } from './nav-items';
@@ -10,6 +11,7 @@ export const AppShell = () => {
   const session = useSession();
   const logout = useLogout();
   const navigate = useNavigate();
+  useRecordings();
 
   const handleSignOut = () => logout.mutate(undefined, { onSuccess: () => navigate('/login', { replace: true }) });
 

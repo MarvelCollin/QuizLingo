@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import { StatusLabel } from '../progress/status-label';
 import { ListenButton } from '../practice/listen-button';
 import { LevelFilter, MeaningFilter, PinyinFilter, StatusFilter, WordFilter } from './column-filters';
@@ -39,9 +40,13 @@ export const WordTable = ({ rows, filters, resetKey, onChange }: WordTableProps)
             <tr key={row.hanzi} className="border-t border-hairline hover:bg-surface/60 [&>td]:px-3 [&>td]:py-2.5">
               <th scope="row" className="sticky left-0 bg-bg px-3 py-2.5 font-normal">
                 <span className="flex items-center gap-1">
-                  <span lang="zh-CN" className="font-hanzi text-2xl text-ink">
+                  <Link
+                    to={`/words/${encodeURIComponent(row.hanzi)}`}
+                    lang="zh-CN"
+                    className="rounded-sm font-hanzi text-2xl text-ink underline-offset-4 hover:underline"
+                  >
                     {row.hanzi}
-                  </span>
+                  </Link>
                   <ListenButton text={row.hanzi} label="" className="px-2" />
                 </span>
               </th>

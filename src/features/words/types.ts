@@ -48,3 +48,5 @@ export type ActiveFiltersProps = {
   onChange: (change: Partial<WordFilters>) => void;
   onClearAll: () => void;
 };
+
+export type WordPageContentProps = { word: Word };
