@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local database and env
+.env
+.env.local
+*.db
+*.db-journal
+.vercel
