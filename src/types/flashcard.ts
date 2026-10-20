@@ -18,6 +18,7 @@ export interface IWord {
   r: string;
   q: number;
   p: string[];
+  l?: number;
   f: IForm[];
 }
 
@@ -42,4 +43,4 @@ export interface IAnswer {
 }
 
 export type Mode = 'flashcard' | 'quiz';
-export type HSKLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7;
+export type HSKLevel = 1 | 2 | 3;

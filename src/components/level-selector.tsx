@@ -6,14 +6,14 @@ interface LevelSelectorProps {
 }
 
 export const LevelSelector = ({ onSelectLevel, selectedLevel }: LevelSelectorProps) => {
-  const levels: HSKLevel[] = [1, 2, 3, 4, 5, 6, 7];
+  const levels: HSKLevel[] = [1, 2, 3];
 
   return (
     <div className="w-full max-w-4xl mx-auto p-4 md:p-6">
       <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-navy mb-6 md:mb-8 text-center">
         Select HSK Level
       </h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 md:gap-4">
+      <div className="grid grid-cols-3 gap-3 md:gap-4 max-w-2xl mx-auto">
         {levels.map((level) => (
           <button
             key={level}

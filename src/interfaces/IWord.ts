@@ -5,5 +5,6 @@ export interface IWord {
   r: string;
   q: number;
   p: string[];
+  l?: number;
   f: IForm[];
 }
