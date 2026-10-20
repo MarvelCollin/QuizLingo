@@ -8,6 +8,12 @@ Live at [marvelcollin.com/quizlingo](https://marvelcollin.com/quizlingo/).
 
 ## Features
 
+- **Starter path**: a guided start for people with no Chinese. Seven stages (how Chinese works, the four tones, the 23 first sounds, the vowel sounds, tones that change, writing basics, your first 60 words), 35 short lessons and a milestone at the end of each stage. Each lesson has cards with native audio, then a quiz. A milestone opens the next stage, and anyone who already knows a stage can test out of it from the first day
+- **Animated tone lines**: every tone is drawn as a pitch line while you listen, and tone pairs and the tone changes of 不, 一 and two third tones are shown the same way
+- **Pinyin chart**: every syllable with a native recording, by initial and final, with a tone picker and a finder
+- **Sound pairs**: train the ear on b and p, j q x, zh and z, an and ang and the rest of the pairs learners mix up
+- **Weak spots**: questions you miss are collected, and two right answers in a row clear each one
+- **Try the strokes yourself**: draw the eight basic strokes over an outline, with a hint after a miss
 - **Accounts**: sign up with name, email and password. Progress follows you to any device
 - **Eight ways to practice**: flashcards, meaning, listening, pinyin, reading a sentence, sentence listening, fill the gap and word order
 - **Native audio**: real recordings for 6,941 words, the browser voice for the rest
@@ -50,7 +56,10 @@ scripts/          data builders, the content checker and the bundle secret check
 - The Turso URL and token are read only by the functions in `api/`. They never reach the browser
 - `npm run build` ends with `scripts/check-bundle.mjs`, which fails the build if a secret shows up in `dist/`
 - Passwords are hashed with scrypt, sessions are random tokens stored as SHA-256 hashes in an httpOnly cookie
-- Failed sign ins are limited to 10 per email in 15 minutes
+- Failed sign ins are limited to 10 per email in 15 minutes, and sign ups to 10 per address per hour
+- Passwords use scrypt at N=2^16, r=8, p=2 (the OWASP minimum). Older hashes are upgraded the next time that person signs in
+- Saved rows per account are capped, and session, lesson and word ids are validated on the server
+- Expired sessions are removed as people sign in
 - `vercel.json` sets a Content Security Policy and other security headers
 
 ## 🚀 Setup
@@ -68,14 +77,14 @@ The app lives under the `/quizlingo/` base path, and the API is served at `/quiz
 Tests:
 
 ```bash
-npm test          # 71 tests in three groups, about 15 seconds
+npm test          # 120 tests in three groups
 ```
 
 | Group | Folder | What it covers |
 |-------|--------|----------------|
-| web | `tests/web/` | pinyin and tone helpers, question builders, round setup, character filters, tone items, speech matching, mock test papers and scoring, and components (End round, word order, answer options, level picker keys, listening questions with Locate, the script view, the mock answer grid, the round hook that saves results) |
-| api | `tests/api/` | review schedule, input checks, password hashing, and full flows against a temporary SQLite file: sign up, duplicate email, sign in, fake sessions, saving answers, rounds of every mode, stats, sign out and the 10 attempt sign in limit |
-| data | `tests/data/` | word counts per level, sentences rebuild from their words and stay within their level, 3,088 characters with stroke data, every listed recording exists, listening test and grammar note structure |
+| web | `tests/web/` | pinyin and tone helpers, question builders, round setup, character filters, tone items, speech matching, mock test papers and scoring, and components (End round, word order, answer options, level picker keys, listening questions with Locate, the script view, the mock answer grid, the round hook that saves results), the starter path (unlocking, test out, lesson and milestone questions, tone line geometry, weak spots), the pinyin chart and sound pairs |
+| api | `tests/api/` | review schedule, input checks, password hashing, and full flows against a temporary SQLite file: sign up, duplicate email, sign in, fake sessions, saving answers, rounds of every mode, starter path scores, stats, sign out, the 10 attempt sign in limit, the sign up limit, the row caps and the password hash upgrade |
+| data | `tests/data/` | word counts per level, sentences rebuild from their words and stay within their level, 3,088 characters with stroke data, every listed recording exists, listening test and grammar note structure, and the starter path (every sound it plays has a recording, every animated character has stroke data, every word is HSK 1, no semicolons or em dashes in its text) |
 
 Deploying on Vercel:
 
@@ -139,6 +148,22 @@ node scripts/build-study-data.mjs \
 ```
 
 The `tatoeba` folder holds `cmn_sentences.tsv`, `cmn-eng_links.tsv` and `eng_sentences.tsv` from https://downloads.tatoeba.org/exports/per_language/.
+
+## 🧭 Starter path
+
+Written for QuizLingo and kept in `src/features/basics/content/`. It plays only recordings from the audio set above and animates only characters with stroke data, and `tests/data/basics.test.ts` fails if a lesson points at something missing.
+
+| Stage | Lessons | What it teaches |
+|-------|--------:|-----------------|
+| Meet Chinese | 2 and a milestone | Characters, pinyin, initial, final and tone |
+| The four tones | 4 and a milestone | Each tone with its pitch line, the neutral tone, tone marks, tone pairs in real words |
+| First sounds | 7 and a milestone | b p m f, d t n l, g k h, j q x, zh ch sh r, z c s, y w |
+| Vowel sounds | 8 and a milestone | Simple vowels, gliding vowels, n and ng endings, the i, u and ü families |
+| Tones that change | 4 and a milestone | Two third tones, 不, 一 and the half third tone |
+| Writing basics | 3 and a milestone | The basic strokes, stroke order, radicals |
+| Your first words | 7 and a milestone | 61 HSK 1 words, which also join the review schedule |
+
+Pass marks are 70% for a lesson and 80% for a milestone. Scores are saved per account in the `basics_progress` table. Weak spots are kept in the browser, one list per account.
 
 ## 📝 Listening tests and grammar notes
 
