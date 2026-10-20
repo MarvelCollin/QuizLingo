@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv, type Plugin, type ViteDevServer } from 'vite'
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 import { existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 import type { IncomingMessage, ServerResponse } from 'node:http'
@@ -52,6 +53,6 @@ export default defineConfig(({ mode }) => {
   // Make TURSO_* from .env.local visible to the API during development
   Object.assign(process.env, loadEnv(mode, process.cwd(), 'TURSO_'))
   return {
-    plugins: [react(), vercelApi()],
+    plugins: [react(), tailwindcss(), vercelApi()],
   }
 })

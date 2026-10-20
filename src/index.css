@@ -1,15 +1,162 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@import 'tailwindcss';
+
+/*
+  Palette: one teal hue family (the product's existing mint and teal), an apricot accent,
+  and neutrals tinted with the same hue. Built in OKLCH so lightness steps look even.
+*/
+:root {
+  --bg: oklch(0.985 0.008 190);
+  --surface: oklch(0.962 0.016 190);
+  --tint: oklch(0.925 0.035 190);
+  --soft: oklch(0.85 0.06 190);
+  --line: oklch(0.6 0.05 200);
+  --hairline: oklch(0.9 0.015 200);
+  --strong: oklch(0.45 0.08 205);
+  --ink: oklch(0.26 0.04 230);
+  --muted: oklch(0.47 0.03 220);
+  --on-strong: oklch(0.99 0.005 190);
+
+  --accent-tint: oklch(0.94 0.035 60);
+  --accent-soft: oklch(0.87 0.07 60);
+  --accent-strong: oklch(0.5 0.11 50);
+
+  --ok-tint: oklch(0.94 0.04 155);
+  --ok-strong: oklch(0.45 0.1 155);
+  --bad-tint: oklch(0.94 0.035 25);
+  --bad-strong: oklch(0.5 0.15 25);
+
+  --shadow-raise: 0 1px 2px oklch(0.26 0.04 230 / 0.06), 0 2px 8px oklch(0.26 0.04 230 / 0.05);
+  --shadow-overlay: 0 8px 24px oklch(0.26 0.04 230 / 0.14), 0 2px 6px oklch(0.26 0.04 230 / 0.08);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: oklch(0.2 0.015 205);
+    --surface: oklch(0.235 0.018 205);
+    --tint: oklch(0.29 0.03 200);
+    --soft: oklch(0.37 0.05 195);
+    --line: oklch(0.6 0.05 195);
+    --hairline: oklch(0.31 0.02 205);
+    --strong: oklch(0.8 0.08 190);
+    --ink: oklch(0.94 0.01 190);
+    --muted: oklch(0.74 0.02 200);
+    --on-strong: oklch(0.2 0.02 205);
+
+    --accent-tint: oklch(0.3 0.04 55);
+    --accent-soft: oklch(0.4 0.07 55);
+    --accent-strong: oklch(0.82 0.09 60);
+
+    --ok-tint: oklch(0.3 0.045 155);
+    --ok-strong: oklch(0.8 0.1 155);
+    --bad-tint: oklch(0.3 0.05 25);
+    --bad-strong: oklch(0.8 0.1 25);
+
+    --shadow-raise: 0 1px 2px oklch(0 0 0 / 0.3);
+    --shadow-overlay: 0 8px 24px oklch(0 0 0 / 0.45);
+
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-tint: var(--tint);
+  --color-soft: var(--soft);
+  --color-line: var(--line);
+  --color-hairline: var(--hairline);
+  --color-strong: var(--strong);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-on-strong: var(--on-strong);
+  --color-accent-tint: var(--accent-tint);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-strong: var(--accent-strong);
+  --color-ok-tint: var(--ok-tint);
+  --color-ok-strong: var(--ok-strong);
+  --color-bad-tint: var(--bad-tint);
+  --color-bad-strong: var(--bad-strong);
+
+  --shadow-raise: var(--shadow-raise);
+  --shadow-overlay: var(--shadow-overlay);
+}
+
+@theme {
+  --font-sans: 'Figtree Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-hanzi: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+
+  /* Radius grows with the size of the element */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+
+  /* Type scale, ratio 1.25 */
+  --text-xs: 0.8rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5625rem;
+  --text-2xl: 1.953rem;
+  --text-3xl: 2.441rem;
+
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+html {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100dvh;
   line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  min-height: 100vh;
-  background-color: #DDF4E7;
-  color: #124170;
+}
+
+:focus-visible {
+  outline: 2px solid var(--strong);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--soft);
+  color: var(--ink);
+}
+
+/* The product's own scrollbars instead of the browser default */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 999px;
+  border: 3px solid var(--bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes skeleton-pulse {
+  50% {
+    opacity: 0.55;
+  }
 }
