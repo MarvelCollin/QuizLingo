@@ -2,7 +2,7 @@
 
 /*
   Palette: Color Hunt f1f6f9 14274e 394867 9ba4b4 (https://colorhunt.co/palette/f1f6f914274e3948679ba4b4).
-  The four hex values are used as they are. Text, border and hover shades are derived from their hues.
+  The four hex values are used as they are. Text, border, hover and the bright button blue are derived from their hues.
 */
 :root {
   --bg: #f1f6f9;
@@ -16,9 +16,9 @@
   --muted: oklch(0.48 0.03 260);
   --on-strong: #f1f6f9;
 
-  --primary: #14274e;
-  --primary-hover: #394867;
-  --on-primary: #f1f6f9;
+  --primary: oklch(0.52 0.17 258);
+  --primary-hover: oklch(0.47 0.17 260);
+  --on-primary: #ffffff;
 
   --accent-tint: oklch(0.93 0.04 70);
   --accent-soft: oklch(0.85 0.07 70);
@@ -48,8 +48,8 @@
     --muted: oklch(0.78 0.03 250);
     --on-strong: #14274e;
 
-    --primary: #9ba4b4;
-    --primary-hover: oklch(0.8 0.025 255);
+    --primary: oklch(0.74 0.13 250);
+    --primary-hover: oklch(0.8 0.11 248);
     --on-primary: #14274e;
 
     --accent-tint: oklch(0.34 0.05 60);
