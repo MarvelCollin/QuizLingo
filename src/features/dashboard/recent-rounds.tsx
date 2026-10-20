@@ -3,9 +3,15 @@ import { levelLabel } from '../vocabulary/constants';
 import { PRACTICE_MODES } from '../practice/constants';
 import type { RecentRoundsProps } from './types';
 
-const MODE_NAMES: Record<string, string> = Object.fromEntries(
-  PRACTICE_MODES.map((m) => [m.apiMode, m.label]),
-);
+const MODE_NAMES: Record<string, string> = {
+  ...Object.fromEntries(PRACTICE_MODES.map((m) => [m.apiMode, m.label])),
+  hanzi: 'Character quiz',
+  writing: 'Writing',
+  tones: 'Tones',
+  'listening-test': 'Listening test',
+  'mock-test': 'Mock test',
+  speaking: 'Speaking',
+};
 
 export const RecentRounds = ({ rounds }: RecentRoundsProps) => (
   <section aria-labelledby="recent-title">

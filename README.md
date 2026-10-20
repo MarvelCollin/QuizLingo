@@ -15,6 +15,12 @@ Live at [marvelcollin.com/quizlingo](https://marvelcollin.com/quizlingo/).
 - **Dashboard**: words due today, words mastered per level, accuracy, streak, the last 14 days and recent rounds
 - **Word list**: all 10,896 words with search, a filter on every column, sorting, and filters saved in the URL
 - **Word pages**: readings, the characters in the word, and example sentences with pinyin and English
+- **Characters**: all 3,088 characters of HSK 1 to 9 with animated stroke order, a character quiz, and writing practice for the 1,200 characters you need to write
+- **Tones**: native recordings of single syllables and two character words, pick the tones you hear
+- **Listening tests**: a script you can follow while it plays, tap any line to jump there, three speeds, and a Locate button on each answer that plays the line with the answer
+- **Mock tests**: timed parts in the HSK 3.0 layout for every level, an answer grid, a hand in step per part, and results per part against the pass line
+- **Grammar**: every grammar point of the 2025 syllabus with a short explanation and two examples
+- **Speaking**: read sentences aloud, the browser's speech recogniser marks which characters it heard
 - **Keyboard shortcuts** in practice: 1 to 4 to answer, Space to flip or replay, Enter for next
 - **Light and dark mode**, mobile tab bar, WCAG AA contrast checked with axe
 
