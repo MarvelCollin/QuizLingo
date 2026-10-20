@@ -17,7 +17,7 @@ export const useQuiz = (level: HSKLevel) => {
     const loadWords = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`/HSKFlashCard/data/${level}.min.json`);
+        const response = await fetch(`${import.meta.env.BASE_URL}data/${level}.min.json`);
         const data: IWord[] = await response.json();
         const shuffled = [...data].sort(() => Math.random() - 0.5);
         setWords(shuffled);

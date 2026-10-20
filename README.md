@@ -2,9 +2,9 @@
 
 A modern, interactive flashcard and quiz application for preparing for the HSK 3.0 exam (Levels 1 to 3).
 
-## 🌐 Live Demo
+## 🌐 Hosting
 
-**Visit the app**: [https://marvelcollin.github.io/HSKFlashCard/](https://marvelcollin.github.io/HSKFlashCard/)
+The app and its API run on Vercel. Progress is stored in a Turso (libSQL) database.
 
 ## 🎯 Features
 
@@ -19,7 +19,23 @@ A modern, interactive flashcard and quiz application for preparing for the HSK 3
 - React 19 with TypeScript
 - Vite
 - Tailwind CSS
-- GitHub Pages
+- Vercel Functions (`api/`) with Turso (libSQL)
+
+## 🚀 Setup
+
+Local development:
+
+```bash
+cp .env.example .env.local   # TURSO_DATABASE_URL=file:local.db works offline
+npm install
+npm run dev                  # serves the app and the /api functions
+```
+
+Deploying on Vercel:
+
+1. Import this repository at vercel.com/new (framework preset: Vite).
+2. Add two environment variables, marked Sensitive: `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN`.
+3. Deploy. Tables are created on the first API request.
 
 ## 📚 Vocabulary data
 

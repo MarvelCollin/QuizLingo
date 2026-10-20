@@ -53,6 +53,5 @@ export default defineConfig(({ mode }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd(), 'TURSO_'))
   return {
     plugins: [react(), vercelApi()],
-    base: '/HSKFlashCard/',
   }
 })
