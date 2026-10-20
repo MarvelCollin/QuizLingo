@@ -1,0 +1,1332 @@
+[
+  {
+    "id": "g4-001",
+    "category": "词类",
+    "group": "动词",
+    "detail": "能愿动词",
+    "point": "敢",
+    "title": "Daring to: 敢",
+    "explanation": "敢 means to dare or to have the nerve to do something. It goes right before the verb, and the negative is 不敢. Don't use 没敢 for general fear; 不敢 is the normal form for 'too scared to'.",
+    "pattern": "Subject + (不) 敢 + Verb",
+    "examples": [
+      { "zh": "我晚上不敢出去。", "py": "Wǒ wǎnshang bù gǎn chūqu.", "en": "I'm too scared to go out at night." },
+      { "zh": "你敢跟他说吗？", "py": "Nǐ gǎn gēn tā shuō ma?", "en": "Do you dare tell him?" }
+    ]
+  },
+  {
+    "id": "g4-002",
+    "category": "词类",
+    "group": "代词",
+    "detail": "指示代词",
+    "point": "各、各位、各种、任何、此",
+    "title": "Each, every kind, any: 各, 各种, 任何, 此",
+    "explanation": "各 means each and goes before a noun or measure word, so 各位 is a polite 'everyone' and 各种 is 'all kinds of'. 任何 means any at all and is often followed by 都 or 也. 此 is a formal word for 这, seen in set phrases like 从此 and 因此.",
+    "pattern": "各 + (measure word) + Noun, 任何 + Noun + 都/也",
+    "examples": [
+      { "zh": "各位同学，请安静一下。", "py": "Gèwèi tóngxué, qǐng ānjìng yíxià.", "en": "Everyone, please be quiet for a moment." },
+      { "zh": "有任何问题，都可以问我。", "py": "Yǒu rènhé wèntí, dōu kěyǐ wèn wǒ.", "en": "If you have any questions at all, you can ask me." }
+    ]
+  },
+  {
+    "id": "g4-003",
+    "category": "词类",
+    "group": "量词",
+    "detail": "名量词",
+    "point": "（1）专用名量词：打、袋、棵、台、幅",
+    "title": "Measure words: 打, 袋, 棵, 台, 幅",
+    "explanation": "These measure words belong to certain nouns: 打 for a dozen, 袋 for bags of something, 棵 for trees and plants, 台 for machines like computers and TVs, and 幅 for paintings and pictures. Put them between the number and the noun.",
+    "pattern": "Number + 打/袋/棵/台/幅 + Noun",
+    "examples": [
+      { "zh": "我家门口有两棵大树。", "py": "Wǒ jiā ménkǒu yǒu liǎng kē dà shù.", "en": "There are two big trees in front of my house." },
+      { "zh": "他刚买了一台新电脑。", "py": "Tā gāng mǎi le yì tái xīn diànnǎo.", "en": "He just bought a new computer." }
+    ]
+  },
+  {
+    "id": "g4-004",
+    "category": "词类",
+    "group": "量词",
+    "detail": "名量词",
+    "point": "（2）借用名量词：脸、手、盒、屋子、桌子",
+    "title": "Borrowed measure words: 一桌子, 一屋子",
+    "explanation": "Some nouns can work as measure words to mean 'a whole ... full of': 一桌子菜 is a table covered with dishes, 一屋子人 is a room full of people. The number is usually 一, and it stresses how much there is.",
+    "pattern": "一 + 脸/手/盒/屋子/桌子 + (的) + Noun",
+    "examples": [
+      { "zh": "妈妈做了一桌子菜。", "py": "Māma zuò le yì zhuōzi cài.", "en": "Mom made a whole table of dishes." },
+      { "zh": "一屋子的人都笑了。", "py": "Yì wūzi de rén dōu xiào le.", "en": "The whole room full of people laughed." }
+    ]
+  },
+  {
+    "id": "g4-005",
+    "category": "词类",
+    "group": "量词",
+    "detail": "动量词",
+    "point": "场、顿、趟",
+    "title": "Counting actions: 场, 顿, 趟",
+    "explanation": "These count how many times something happens. 趟 counts trips there and back, 顿 counts meals and also scoldings or beatings, and 场 counts events like rain, films, games and illnesses. They come after the verb: 去了一趟.",
+    "pattern": "Verb + (了) + Number + 场/顿/趟 (+ Object)",
+    "examples": [
+      { "zh": "我昨天去了一趟医院。", "py": "Wǒ zuótiān qù le yí tàng yīyuàn.", "en": "I made a trip to the hospital yesterday." },
+      { "zh": "他被老师批评了一顿。", "py": "Tā bèi lǎoshī pīpíng le yí dùn.", "en": "He got a good telling-off from the teacher." }
+    ]
+  },
+  {
+    "id": "g4-006",
+    "category": "词类",
+    "group": "副词",
+    "detail": "程度副词",
+    "point": "十分、更加、稍、稍微、尤其、多么",
+    "title": "Degree: 十分, 更加, 稍微, 尤其, 多么",
+    "explanation": "十分 means very, a bit stronger than 很. 更加 means even more, 稍 and 稍微 mean slightly and often take 一下 or 一点儿, and 尤其 means especially. 多么 is used in exclamations: 多么漂亮啊!",
+    "pattern": "十分/更加/尤其 + Adjective, 稍微 + Verb/Adjective + 一下/一点儿",
+    "examples": [
+      { "zh": "这里的冬天十分冷，尤其是晚上。", "py": "Zhèlǐ de dōngtiān shífēn lěng, yóuqí shì wǎnshang.", "en": "Winter here is very cold, especially at night." },
+      { "zh": "请你稍微等一下。", "py": "Qǐng nǐ shāowēi děng yíxià.", "en": "Please wait a moment." }
+    ]
+  },
+  {
+    "id": "g4-007",
+    "category": "词类",
+    "group": "副词",
+    "detail": "范围副词",
+    "point": "共、全、光、仅、仅仅、至少",
+    "title": "Scope: 共, 全, 光, 仅仅, 至少",
+    "explanation": "共 means in total, 全 means all or the whole, 光 and 仅仅 mean only or just, and 至少 means at least. They all go before the verb or the number phrase. 光 is spoken, while 仅 and 仅仅 sound more formal.",
+    "pattern": "共/全/光/仅仅/至少 + Verb Phrase",
+    "examples": [
+      { "zh": "我们共花了五百块钱。", "py": "Wǒmen gòng huā le wǔbǎi kuài qián.", "en": "We spent five hundred yuan in total." },
+      { "zh": "从这儿到机场至少要一个小时。", "py": "Cóng zhèr dào jīchǎng zhìshǎo yào yí gè xiǎoshí.", "en": "It takes at least an hour to get from here to the airport." }
+    ]
+  },
+  {
+    "id": "g4-008",
+    "category": "词类",
+    "group": "副词",
+    "detail": "时间副词",
+    "point": "按时、从来、赶紧、赶快、已、忽然、将、将要、从、本来",
+    "title": "Time adverbs: 从来, 赶紧, 忽然, 将要, 本来",
+    "explanation": "从来 means ever or always and usually goes with 不 or 没: 从来没去过 is 'have never been'. 赶紧 and 赶快 mean hurry up and do it, 忽然 means suddenly, 将 and 将要 mean will or about to, and 本来 means originally. 按时 means on time, and 已 is a short formal 已经.",
+    "pattern": "Subject + 从来/赶紧/忽然/将要/本来 + Verb",
+    "examples": [
+      { "zh": "我从来没有去过那个地方。", "py": "Wǒ cónglái méiyǒu qù guo nàge dìfang.", "en": "I've never been to that place." },
+      { "zh": "快下雨了，我们赶紧回家吧。", "py": "Kuài xià yǔ le, wǒmen gǎnjǐn huí jiā ba.", "en": "It's about to rain, let's hurry home." }
+    ]
+  },
+  {
+    "id": "g4-009",
+    "category": "词类",
+    "group": "副词",
+    "detail": "频率副词",
+    "point": "重新、往往、偶尔、再次、老",
+    "title": "How often: 往往, 偶尔, 重新, 再次, 老",
+    "explanation": "往往 means usually, as a pattern seen over time, 偶尔 means once in a while, and 老 means always, often with a complaining tone. 重新 means to do it again from the start, and 再次 means once more. All go before the verb.",
+    "pattern": "Subject + 往往/偶尔/老/重新/再次 + Verb",
+    "examples": [
+      { "zh": "这篇文章写得不好，我要重新写。", "py": "Zhè piān wénzhāng xiě de bù hǎo, wǒ yào chóngxīn xiě.", "en": "This essay isn't well written, I'm going to rewrite it." },
+      { "zh": "他周末往往在家看书，偶尔出去跑步。", "py": "Tā zhōumò wǎngwǎng zài jiā kàn shū, ǒu'ěr chūqu pǎobù.", "en": "He usually reads at home on weekends and once in a while goes out for a run." }
+    ]
+  },
+  {
+    "id": "g4-010",
+    "category": "词类",
+    "group": "副词",
+    "detail": "方式副词",
+    "point": "故意、互相、相互",
+    "title": "On purpose and each other: 故意, 互相",
+    "explanation": "故意 means on purpose, and 不是故意的 is the usual way to say 'I didn't mean to'. 互相 and 相互 mean each other, and they go before the verb, not after it as in English. 相互 sounds a bit more formal.",
+    "pattern": "Subject + 故意/互相 + Verb",
+    "examples": [
+      { "zh": "对不起，我不是故意的。", "py": "Duìbuqǐ, wǒ bú shì gùyì de.", "en": "Sorry, I didn't do it on purpose." },
+      { "zh": "同学之间应该互相帮助。", "py": "Tóngxué zhījiān yīnggāi hùxiāng bāngzhù.", "en": "Classmates should help each other." }
+    ]
+  },
+  {
+    "id": "g4-011",
+    "category": "词类",
+    "group": "副词",
+    "detail": "关联副词",
+    "point": "却",
+    "title": "But, yet: 却",
+    "explanation": "却 marks something unexpected or opposite to the first part. It's an adverb, so it goes after the subject and before the verb, never at the start of the sentence like 但是. You can use both: 但是他却没来.",
+    "pattern": "Clause 1, Subject + 却 + Verb Phrase",
+    "examples": [
+      { "zh": "他很想去，却没有时间。", "py": "Tā hěn xiǎng qù, què méiyǒu shíjiān.", "en": "He really wants to go, but he has no time." },
+      { "zh": "大家都很累，他却一点儿也不累。", "py": "Dàjiā dōu hěn lèi, tā què yìdiǎnr yě bú lèi.", "en": "Everyone is tired, yet he isn't tired at all." }
+    ]
+  },
+  {
+    "id": "g4-012",
+    "category": "词类",
+    "group": "副词",
+    "detail": "情态副词",
+    "point": "也许、恐怕",
+    "title": "Maybe and I'm afraid: 也许, 恐怕",
+    "explanation": "也许 means maybe or perhaps. 恐怕 also guesses, but it adds worry, like 'I'm afraid that'. Both can go before or after the subject.",
+    "pattern": "(Subject) + 也许/恐怕 + Verb Phrase",
+    "examples": [
+      { "zh": "他也许已经走了。", "py": "Tā yěxǔ yǐjīng zǒu le.", "en": "Maybe he's already left." },
+      { "zh": "今天恐怕会下雨，你带上伞吧。", "py": "Jīntiān kǒngpà huì xià yǔ, nǐ dài shang sǎn ba.", "en": "I'm afraid it'll rain today, take an umbrella." }
+    ]
+  },
+  {
+    "id": "g4-013",
+    "category": "词类",
+    "group": "副词",
+    "detail": "语气副词",
+    "point": "才4、就5、并1、还4、竟然、究竟、正好、到底、难道、千万、确实、只好、差（一）点儿",
+    "title": "Mood adverbs: 到底, 竟然, 千万, 差点儿 and more",
+    "explanation": "These adverbs add the speaker's feeling. 到底 and 究竟 push a question ('so what exactly?'), 竟然 shows surprise, 千万 is a strong 'be sure to' or 'whatever you do, don't', and 只好 means had no choice but to. 并 before 不 or 没 denies what someone assumed, and 差点儿 means almost, something nearly happened.",
+    "pattern": "Subject + 到底/竟然/千万/只好/差点儿 + Verb Phrase",
+    "examples": [
+      { "zh": "你到底去不去？", "py": "Nǐ dàodǐ qù bu qù?", "en": "So are you going or not?" },
+      { "zh": "我差点儿忘了今天是他的生日。", "py": "Wǒ chàdiǎnr wàng le jīntiān shì tā de shēngrì.", "en": "I almost forgot today is his birthday." }
+    ]
+  },
+  {
+    "id": "g4-014",
+    "category": "词类",
+    "group": "介词",
+    "detail": "引出时间、处所",
+    "point": "自、当、由1、随着、等1",
+    "title": "Time and place: 当, 随着, 自, 由, 等",
+    "explanation": "当……的时候 means when, at the time that. 随着 means along with or as something changes. 自 and 由 mean from, mostly in formal language, and 等 means wait until: 等他来了再说.",
+    "pattern": "当 + Clause + 的时候, 随着 + Noun Phrase, Clause",
+    "examples": [
+      { "zh": "当我到家的时候，他已经睡了。", "py": "Dāng wǒ dào jiā de shíhou, tā yǐjīng shuì le.", "en": "When I got home, he was already asleep." },
+      { "zh": "随着天气变冷，来公园的人越来越少了。", "py": "Suízhe tiānqì biàn lěng, lái gōngyuán de rén yuè lái yuè shǎo le.", "en": "As the weather gets colder, fewer and fewer people come to the park." }
+    ]
+  },
+  {
+    "id": "g4-015",
+    "category": "词类",
+    "group": "介词",
+    "detail": "引出施事、受事",
+    "point": "将、由2、叫、让",
+    "title": "Doer and receiver: 将, 由, 叫, 让",
+    "explanation": "将 works like 把 in formal speech and writing. 由 names who is responsible: 由我来做 means I'll be the one to do it. 叫 and 让 can work like 被 in spoken passive sentences.",
+    "pattern": "将 + Object + Verb, 由 + Person + (来) + Verb",
+    "examples": [
+      { "zh": "这件事由我来负责。", "py": "Zhè jiàn shì yóu wǒ lái fùzé.", "en": "I'll be in charge of this." },
+      { "zh": "请将门关好。", "py": "Qǐng jiāng mén guān hǎo.", "en": "Please close the door properly." }
+    ]
+  },
+  {
+    "id": "g4-016",
+    "category": "词类",
+    "group": "介词",
+    "detail": "引出原因",
+    "point": "由于1",
+    "title": "Because of: 由于 + noun",
+    "explanation": "As a preposition, 由于 means because of or due to and is followed by a noun phrase. It sounds more formal than 因为 and usually starts the sentence.",
+    "pattern": "由于 + Noun Phrase, Clause",
+    "examples": [
+      { "zh": "由于工作的关系，他经常出差。", "py": "Yóuyú gōngzuò de guānxi, tā jīngcháng chūchāi.", "en": "Because of his job, he often travels on business." },
+      { "zh": "由于天气原因，今天的比赛取消了。", "py": "Yóuyú tiānqì yuányīn, jīntiān de bǐsài qǔxiāo le.", "en": "Due to the weather, today's game was cancelled." }
+    ]
+  },
+  {
+    "id": "g4-017",
+    "category": "词类",
+    "group": "介词",
+    "detail": "引出对象",
+    "point": "对于、与1",
+    "title": "Regarding and with: 对于, 与",
+    "explanation": "对于 means as for or regarding and sets the topic, often at the start of a sentence. 与 means with, like 跟 or 和, but sounds more formal.",
+    "pattern": "对于 + Noun, Clause, 与 + Person + Verb",
+    "examples": [
+      { "zh": "对于这个问题，大家的看法不一样。", "py": "Duìyú zhège wèntí, dàjiā de kànfǎ bù yíyàng.", "en": "People have different views on this question." },
+      { "zh": "我想与你谈谈这件事。", "py": "Wǒ xiǎng yǔ nǐ tántan zhè jiàn shì.", "en": "I'd like to talk with you about this." }
+    ]
+  },
+  {
+    "id": "g4-018",
+    "category": "词类",
+    "group": "介词",
+    "detail": "引出凭借、依据",
+    "point": "作为、按、按照",
+    "title": "As and according to: 作为, 按照",
+    "explanation": "作为 means as, in the role of: 作为学生 is 'as a student'. 按 and 按照 mean according to or following a rule or plan. 按照 needs a phrase of two or more syllables after it, while 按 can take a single word.",
+    "pattern": "作为 + Role, Clause, 按照 + Rule/Plan + Verb",
+    "examples": [
+      { "zh": "作为学生，你应该按时完成作业。", "py": "Zuòwéi xuésheng, nǐ yīnggāi ànshí wánchéng zuòyè.", "en": "As a student, you should finish your homework on time." },
+      { "zh": "请按照老师说的去做。", "py": "Qǐng ànzhào lǎoshī shuō de qù zuò.", "en": "Please do it the way the teacher said." }
+    ]
+  },
+  {
+    "id": "g4-019",
+    "category": "词类",
+    "group": "连词",
+    "detail": "连接词或词组",
+    "point": "并2、而1、与2",
+    "title": "Joining words: 并, 而, 与",
+    "explanation": "与 joins nouns, like 和 in formal style. 并 joins two verbs or verb phrases that happen together, and 而 joins adjectives, adding 'and also' or 'but'. Don't use 和 to join two full clauses; 并 or 而 fits better there.",
+    "pattern": "Noun + 与 + Noun, Verb + 并 + Verb, Adjective + 而 + Adjective",
+    "examples": [
+      { "zh": "会议讨论并通过了这个计划。", "py": "Huìyì tǎolùn bìng tōngguò le zhège jìhuà.", "en": "The meeting discussed and passed the plan." },
+      { "zh": "这本书介绍了中国的历史与文化。", "py": "Zhè běn shū jièshào le Zhōngguó de lìshǐ yǔ wénhuà.", "en": "This book introduces Chinese history and culture." }
+    ]
+  },
+  {
+    "id": "g4-020",
+    "category": "词类",
+    "group": "连词",
+    "detail": "连接分句或句子",
+    "point": "此外、而2、既然、甚至、不过、并且",
+    "title": "Linking clauses: 此外, 而, 既然, 甚至, 不过, 并且",
+    "explanation": "These words join clauses. 此外 means besides, 而 shows a contrast between two clauses, 既然 means since, 甚至 means even, 不过 means but, and 并且 means and also. Most of them start the second clause.",
+    "pattern": "Clause 1, 此外/而/甚至/不过/并且 + Clause 2",
+    "examples": [
+      { "zh": "这个房子离地铁站很近，此外，附近还有一个大超市。", "py": "Zhège fángzi lí dìtiězhàn hěn jìn, cǐwài, fùjìn hái yǒu yí gè dà chāoshì.", "en": "This house is close to the subway station, and besides, there's a big supermarket nearby." },
+      { "zh": "他喜欢安静，而他妹妹喜欢热闹。", "py": "Tā xǐhuan ānjìng, ér tā mèimei xǐhuan rènao.", "en": "He likes quiet, while his younger sister likes a lively crowd." }
+    ]
+  },
+  {
+    "id": "g4-021",
+    "category": "词类",
+    "group": "连词",
+    "detail": "连接分句或句子",
+    "point": "不光、不仅、另外、要是、因此、由于2、加",
+    "title": "Linking clauses: 不仅, 另外, 要是, 因此, 由于",
+    "explanation": "不仅 and 不光 mean not only, 另外 means in addition, 要是 means if, 因此 means so or therefore, and 由于 as a conjunction means because. 加 or 加上 adds one more reason: 'on top of that'.",
+    "pattern": "Clause 1, 另外/因此 + Clause 2, 由于/要是 + Clause 1, Clause 2",
+    "examples": [
+      { "zh": "我买了面包，另外还买了一些水果。", "py": "Wǒ mǎi le miànbāo, lìngwài hái mǎi le yìxiē shuǐguǒ.", "en": "I bought bread, and some fruit as well." },
+      { "zh": "他每天都练习，因此说得越来越好。", "py": "Tā měi tiān dōu liànxí, yīncǐ shuō de yuè lái yuè hǎo.", "en": "He practises every day, so he speaks better and better." }
+    ]
+  },
+  {
+    "id": "g4-022",
+    "category": "词类",
+    "group": "助词",
+    "detail": "其他助词",
+    "point": "等2、者、之、就是",
+    "title": "Particles: 等, 者, 之, 就是",
+    "explanation": "等 after a list means 'and so on'. 者 makes a person noun, like 作者 'writer', and 之 is a formal 的, used in fractions like 三分之一. 就是 at the end of a sentence means 'that's all, no problem'.",
+    "pattern": "A、B + 等 + Noun, Number + 分之 + Number",
+    "examples": [
+      { "zh": "我去超市买了苹果、香蕉等水果。", "py": "Wǒ qù chāoshì mǎi le píngguǒ, xiāngjiāo děng shuǐguǒ.", "en": "I went to the supermarket and bought apples, bananas and other fruit." },
+      { "zh": "这本书的作者是我的老师。", "py": "Zhè běn shū de zuòzhě shì wǒ de lǎoshī.", "en": "The author of this book is my teacher." }
+    ]
+  },
+  {
+    "id": "g4-023",
+    "category": "词类",
+    "group": "叹词",
+    "detail": "",
+    "point": "啊、嗯",
+    "title": "Interjections: 啊 and 嗯",
+    "explanation": "啊 at the start of a sentence shows surprise or asks someone to repeat, and its tone changes with the feeling: á? means 'what?'. 嗯 means 'mm, yes' to agree, or with a rising tone 'hm?' to ask.",
+    "pattern": "啊/嗯, + Sentence",
+    "examples": [
+      { "zh": "啊？你说什么？", "py": "Á? Nǐ shuō shénme?", "en": "Huh? What did you say?" },
+      { "zh": "嗯，我知道了。", "py": "Ǹg, wǒ zhīdào le.", "en": "Mm, got it." }
+    ]
+  },
+  {
+    "id": "g4-024",
+    "category": "短语",
+    "group": "结构类型",
+    "detail": "",
+    "point": "数词+形容词+量词",
+    "title": "Number + 大/小 + measure word",
+    "explanation": "大 or 小 can go between a number and a measure word to stress size: 一大碗 is a big bowl, 一小块 is a small piece. Only a few adjectives work here, mainly 大, 小 and 满.",
+    "pattern": "Number + 大/小 + Measure Word + Noun",
+    "examples": [
+      { "zh": "他吃了一大碗面。", "py": "Tā chī le yí dà wǎn miàn.", "en": "He ate a big bowl of noodles." },
+      { "zh": "给我一小块蛋糕就行。", "py": "Gěi wǒ yì xiǎo kuài dàngāo jiù xíng.", "en": "Just give me a small piece of cake." }
+    ]
+  },
+  {
+    "id": "g4-025",
+    "category": "短语",
+    "group": "固定短语",
+    "detail": "四字格",
+    "point": "一A一B",
+    "title": "Four-character set: 一A一B",
+    "explanation": "一A一B puts 一 before two related words. With opposites like 前 and 后 it shows two things paired up, as in 一前一后 'one in front, one behind'. With two verbs like 问 and 答 it shows actions taking turns.",
+    "pattern": "一 + A + 一 + B",
+    "examples": [
+      { "zh": "他们一前一后走进了教室。", "py": "Tāmen yì qián yí hòu zǒu jìn le jiàoshì.", "en": "They walked into the classroom one behind the other." },
+      { "zh": "老师和学生一问一答，课上得很热闹。", "py": "Lǎoshī hé xuésheng yí wèn yì dá, kè shàng de hěn rènao.", "en": "The teacher asked and the students answered, and the class was lively." }
+    ]
+  },
+  {
+    "id": "g4-026",
+    "category": "短语",
+    "group": "固定短语",
+    "detail": "四字格",
+    "point": "无A无B",
+    "title": "Four-character set: 无A无B",
+    "explanation": "无A无B means without A and without B, and stresses that something is completely missing. A and B are close in meaning, as in 无法无天 'lawless, out of control' or 无忧无虑 'carefree'. 无时无刻 'not a single moment' is followed by 不 and means 'all the time'.",
+    "pattern": "无 + A + 无 + B",
+    "examples": [
+      { "zh": "我无时无刻不在想家。", "py": "Wǒ wúshí-wúkè bú zài xiǎng jiā.", "en": "I miss home every single moment." },
+      { "zh": "没有人管，这些孩子都无法无天了。", "py": "Méiyǒu rén guǎn, zhèxiē háizi dōu wúfǎ-wútiān le.", "en": "With no one keeping an eye on them, these kids have run wild." }
+    ]
+  },
+  {
+    "id": "g4-027",
+    "category": "短语",
+    "group": "固定短语",
+    "detail": "四字格",
+    "point": "有A有B",
+    "title": "Four-character set: 有A有B",
+    "explanation": "有A有B means there is both A and B, and it paints a full, lively picture. A and B are related words, as in 有说有笑 'chatting and laughing' or 有山有水 'hills and water'.",
+    "pattern": "有 + A + 有 + B",
+    "examples": [
+      { "zh": "大家在路上有说有笑。", "py": "Dàjiā zài lù shang yǒu shuō yǒu xiào.", "en": "Everyone chatted and laughed along the way." },
+      { "zh": "这个地方有山有水，风景很美。", "py": "Zhège dìfang yǒu shān yǒu shuǐ, fēngjǐng hěn měi.", "en": "This place has hills and water, and the scenery is beautiful." }
+    ]
+  },
+  {
+    "id": "g4-028",
+    "category": "短语",
+    "group": "固定短语",
+    "detail": "其他",
+    "point": "来得及/来不及",
+    "title": "Enough time or not: 来得及, 来不及",
+    "explanation": "来得及 means there's still time to do something, and 来不及 means it's too late or there's no time. Both can be followed by a verb phrase: 来不及吃饭.",
+    "pattern": "来得及/来不及 + (Verb Phrase)",
+    "examples": [
+      { "zh": "现在出发还来得及。", "py": "Xiànzài chūfā hái láidejí.", "en": "If we leave now there's still time." },
+      { "zh": "我来不及吃早饭就去上班了。", "py": "Wǒ láibují chī zǎofàn jiù qù shàngbān le.", "en": "I didn't have time for breakfast and went straight to work." }
+    ]
+  },
+  {
+    "id": "g4-029",
+    "category": "短语",
+    "group": "固定短语",
+    "detail": "其他",
+    "point": "有的是",
+    "title": "Plenty of: 有的是",
+    "explanation": "有的是 means there's plenty of something, more than enough. It can go before the noun or at the end, after the topic.",
+    "pattern": "Subject + 有的是 + Noun, Noun + Place + 有的是",
+    "examples": [
+      { "zh": "别着急，我们有的是时间。", "py": "Bié zháojí, wǒmen yǒudeshì shíjiān.", "en": "Don't worry, we've got plenty of time." },
+      { "zh": "这种书图书馆里有的是。", "py": "Zhè zhǒng shū túshūguǎn li yǒudeshì.", "en": "The library has loads of books like this." }
+    ]
+  },
+  {
+    "id": "g4-030",
+    "category": "短语",
+    "group": "固定短语",
+    "detail": "其他",
+    "point": "说不定",
+    "title": "Maybe, who knows: 说不定",
+    "explanation": "说不定 means maybe or it's possible, and it's very common in speech. It can go before the subject or right before the verb.",
+    "pattern": "(Subject) + 说不定 + Verb Phrase",
+    "examples": [
+      { "zh": "他说不定已经到了。", "py": "Tā shuōbudìng yǐjīng dào le.", "en": "He may well be there already." },
+      { "zh": "别走，说不定一会儿雨就停了。", "py": "Bié zǒu, shuōbudìng yíhuìr yǔ jiù tíng le.", "en": "Don't go, the rain might stop in a bit." }
+    ]
+  },
+  {
+    "id": "g4-031",
+    "category": "短语",
+    "group": "固定短语",
+    "detail": "其他",
+    "point": "不怎么",
+    "title": "Not very: 不怎么",
+    "explanation": "不怎么 before a verb or adjective means not very or not much. It softens the negative, so it sounds more polite than a plain 不.",
+    "pattern": "不怎么 + Verb/Adjective",
+    "examples": [
+      { "zh": "我不怎么喜欢吃辣的东西。", "py": "Wǒ bù zěnme xǐhuan chī là de dōngxi.", "en": "I don't really like spicy food." },
+      { "zh": "这家饭馆的菜不怎么好吃。", "py": "Zhè jiā fànguǎn de cài bù zěnme hǎochī.", "en": "The food at this restaurant isn't very good." }
+    ]
+  },
+  {
+    "id": "g4-032",
+    "category": "短语",
+    "group": "固定短语",
+    "detail": "其他",
+    "point": "就是说/这就是说",
+    "title": "That is to say: 就是说",
+    "explanation": "就是说 or 这就是说 explains what the earlier statement means or leads to, like 'in other words' or 'that means'. It starts the second part of the sentence.",
+    "pattern": "Statement, (这)就是说 + Explanation",
+    "examples": [
+      { "zh": "他明天要出差，就是说会议得换个时间了。", "py": "Tā míngtiān yào chūchāi, jiù shì shuō huìyì děi huàn ge shíjiān le.", "en": "He's away on business tomorrow, which means the meeting has to move." },
+      { "zh": "票已经卖完了，这就是说我们今天看不了了。", "py": "Piào yǐjīng mài wán le, zhè jiù shì shuō wǒmen jīntiān kàn bu liǎo le.", "en": "The tickets are sold out, so that means we can't see it today." }
+    ]
+  },
+  {
+    "id": "g4-033",
+    "category": "固定格式",
+    "group": "",
+    "detail": "",
+    "point": "一+量词+比+一+量词",
+    "title": "Better and better: 一天比一天",
+    "explanation": "一 + measure word + 比 + 一 + measure word shows steady change over time, like 一天比一天冷 'colder by the day'. With people or things, 一个比一个 means each one is more so than the last.",
+    "pattern": "一 + Measure Word + 比 + 一 + Measure Word + Adjective",
+    "examples": [
+      { "zh": "天气一天比一天冷了。", "py": "Tiānqì yì tiān bǐ yì tiān lěng le.", "en": "The weather is getting colder by the day." },
+      { "zh": "这些孩子一个比一个聪明。", "py": "Zhèxiē háizi yí gè bǐ yí gè cōngming.", "en": "These kids are each smarter than the last." }
+    ]
+  },
+  {
+    "id": "g4-034",
+    "category": "固定格式",
+    "group": "",
+    "detail": "",
+    "point": "在……方面",
+    "title": "In terms of: 在……方面",
+    "explanation": "在……方面 means in the area of or when it comes to. Put the topic in the middle, and use the whole phrase at the start of the sentence or before the verb.",
+    "pattern": "在 + Topic + 方面, Clause",
+    "examples": [
+      { "zh": "在学习方面，他从来不用父母担心。", "py": "Zài xuéxí fāngmiàn, tā cónglái búyòng fùmǔ dānxīn.", "en": "When it comes to studying, his parents never have to worry about him." },
+      { "zh": "我们在这方面还没有什么经验。", "py": "Wǒmen zài zhè fāngmiàn hái méiyǒu shénme jīngyàn.", "en": "We don't have much experience in this area yet." }
+    ]
+  },
+  {
+    "id": "g4-035",
+    "category": "固定格式",
+    "group": "",
+    "detail": "",
+    "point": "够……的",
+    "title": "Really quite: 够……的",
+    "explanation": "够 + adjective + 的 means really quite so, often with a feeling of 'enough already'. It's spoken and often comes with 真: 真够热的.",
+    "pattern": "(真) + 够 + Adjective + 的",
+    "examples": [
+      { "zh": "今天真够热的！", "py": "Jīntiān zhēn gòu rè de!", "en": "It's really hot today!" },
+      { "zh": "你自己照顾三个孩子，真够累的。", "py": "Nǐ zìjǐ zhàogù sān gè háizi, zhēn gòu lèi de.", "en": "Looking after three kids on your own must be really tiring." }
+    ]
+  },
+  {
+    "id": "g4-036",
+    "category": "固定格式",
+    "group": "",
+    "detail": "",
+    "point": "拿……来说",
+    "title": "Take ... for example: 拿……来说",
+    "explanation": "拿……来说 introduces an example, like 'take ... for instance'. The general claim usually comes first, then 拿 + example + 来说, then the details.",
+    "pattern": "Claim, 拿 + Example + 来说, Details",
+    "examples": [
+      { "zh": "这里的东西都很贵，拿水果来说，比别的地方贵一倍。", "py": "Zhèlǐ de dōngxi dōu hěn guì, ná shuǐguǒ lái shuō, bǐ bié de dìfang guì yí bèi.", "en": "Everything here is expensive. Take fruit, it costs twice as much as elsewhere." },
+      { "zh": "很多人不吃早饭，拿我来说，我常常一起床就去上班。", "py": "Hěn duō rén bù chī zǎofàn, ná wǒ lái shuō, wǒ chángcháng yì qǐchuáng jiù qù shàngbān.", "en": "Lots of people skip breakfast. Take me, I often go to work as soon as I get up." }
+    ]
+  },
+  {
+    "id": "g4-037",
+    "category": "固定格式",
+    "group": "",
+    "detail": "",
+    "point": "再也不/没……",
+    "title": "Never again: 再也不/没",
+    "explanation": "再也不 means will never again, a promise or decision about the future. 再也没 means never again since then, about the past. Keep the order 再也, not 也再.",
+    "pattern": "Subject + 再也不 + Verb (+ 了), Subject + 再也没 + Verb (+ 过)",
+    "examples": [
+      { "zh": "我再也不喝酒了。", "py": "Wǒ zài yě bù hē jiǔ le.", "en": "I'm never drinking again." },
+      { "zh": "他走了以后，再也没有回来过。", "py": "Tā zǒu le yǐhòu, zài yě méiyǒu huílai guo.", "en": "After he left, he never came back." }
+    ]
+  },
+  {
+    "id": "g4-038",
+    "category": "固定格式",
+    "group": "",
+    "detail": "",
+    "point": "怎么都/也+不/没……",
+    "title": "No matter how: 怎么也不/没",
+    "explanation": "怎么都 or 怎么也 before a negative means no matter how hard you try, it doesn't work. It often goes with a potential complement like 做不出来 or 想不起来.",
+    "pattern": "Subject + 怎么都/也 + 不/没 + Verb",
+    "examples": [
+      { "zh": "这道题我怎么也做不出来。", "py": "Zhè dào tí wǒ zěnme yě zuò bu chūlái.", "en": "I just can't solve this problem no matter what." },
+      { "zh": "我怎么都想不起来他的名字了。", "py": "Wǒ zěnme dōu xiǎng bu qǐlái tā de míngzi le.", "en": "I can't remember his name for the life of me." }
+    ]
+  },
+  {
+    "id": "g4-039",
+    "category": "固定格式",
+    "group": "",
+    "detail": "",
+    "point": "为了……而……",
+    "title": "In order to: 为了……而……",
+    "explanation": "为了 + goal + 而 + action means doing the action for that goal. 而 links the goal to the verb and makes it sound more formal than 为了 alone.",
+    "pattern": "Subject + 为了 + Goal + 而 + Verb",
+    "examples": [
+      { "zh": "他为了找工作而来到这个城市。", "py": "Tā wèile zhǎo gōngzuò ér lái dào zhège chéngshì.", "en": "He came to this city to look for work." },
+      { "zh": "我们不能为了钱而放弃理想。", "py": "Wǒmen bù néng wèile qián ér fàngqì lǐxiǎng.", "en": "We can't give up our dreams for money." }
+    ]
+  },
+  {
+    "id": "g4-040",
+    "category": "固定格式",
+    "group": "",
+    "detail": "",
+    "point": "动词+一X是一X",
+    "title": "Every bit counts: Verb + 一X是一X",
+    "explanation": "Verb + 一X是一X means you take things one at a time and every one counts. 走一步是一步 means take it one step at a time, often when there's no better plan.",
+    "pattern": "Verb + 一 + Measure Word + 是 + 一 + Measure Word",
+    "examples": [
+      { "zh": "现在没有别的办法，只能走一步是一步了。", "py": "Xiànzài méiyǒu bié de bànfǎ, zhǐ néng zǒu yí bù shì yí bù le.", "en": "There's no other way now, we'll just take it one step at a time." },
+      { "zh": "时间不多了，能做一点儿是一点儿。", "py": "Shíjiān bù duō le, néng zuò yìdiǎnr shì yìdiǎnr.", "en": "Time's running out, every bit you can do counts." }
+    ]
+  },
+  {
+    "id": "g4-041",
+    "category": "固定格式",
+    "group": "",
+    "detail": "",
+    "point": "（没）有什么（好）X的",
+    "title": "Nothing to X about: 有什么好X的",
+    "explanation": "有什么好 + verb + 的 is a rhetorical question meaning there's no reason to do it. 没什么好 + verb + 的 says the same thing as a statement: 'nothing to worry about'.",
+    "pattern": "(没)有什么(好) + Verb + 的",
+    "examples": [
+      { "zh": "这有什么好怕的？", "py": "Zhè yǒu shénme hǎo pà de?", "en": "What's there to be afraid of?" },
+      { "zh": "一个小问题，没有什么好担心的。", "py": "Yí gè xiǎo wèntí, méiyǒu shénme hǎo dānxīn de.", "en": "It's a small problem, nothing to worry about." }
+    ]
+  },
+  {
+    "id": "g4-042",
+    "category": "固定格式",
+    "group": "",
+    "detail": "",
+    "point": "X是X，Y是Y",
+    "title": "Keep them apart: X是X，Y是Y",
+    "explanation": "X是X，Y是Y says two things are separate and shouldn't be mixed up. 你是你，我是我 means 'you're you and I'm me'.",
+    "pattern": "X + 是 + X, Y + 是 + Y",
+    "examples": [
+      { "zh": "你是你，我是我，我们不一样。", "py": "Nǐ shì nǐ, wǒ shì wǒ, wǒmen bù yíyàng.", "en": "You're you and I'm me, we're different." },
+      { "zh": "工作是工作，生活是生活，别放在一起。", "py": "Gōngzuò shì gōngzuò, shēnghuó shì shēnghuó, bié fàng zài yìqǐ.", "en": "Work is work and life is life, don't mix them." }
+    ]
+  },
+  {
+    "id": "g4-043",
+    "category": "固定格式",
+    "group": "",
+    "detail": "",
+    "point": "X也得X，不X也得X",
+    "title": "Like it or not: X也得X，不X也得X",
+    "explanation": "This pattern means you have to do it whether you want to or not. Repeat the same verb in each part: 去也得去，不去也得去.",
+    "pattern": "Verb + 也得 + Verb, 不 + Verb + 也得 + Verb",
+    "examples": [
+      { "zh": "这药你吃也得吃，不吃也得吃。", "py": "Zhè yào nǐ chī yě děi chī, bù chī yě děi chī.", "en": "You have to take this medicine, like it or not." },
+      { "zh": "明天的会很重要，你去也得去，不去也得去。", "py": "Míngtiān de huì hěn zhòngyào, nǐ qù yě děi qù, bú qù yě děi qù.", "en": "Tomorrow's meeting is important, you're going whether you want to or not." }
+    ]
+  },
+  {
+    "id": "g4-044",
+    "category": "固定格式",
+    "group": "",
+    "detail": "",
+    "point": "X就是了",
+    "title": "Just do it: X就是了",
+    "explanation": "就是了 at the end of a sentence means 'just do that, it's simple' or 'no problem, I will'. It reassures the listener or brushes off a worry.",
+    "pattern": "Verb Phrase + 就是了",
+    "examples": [
+      { "zh": "你放心，我明天还你就是了。", "py": "Nǐ fàngxīn, wǒ míngtiān huán nǐ jiù shì le.", "en": "Don't worry, I'll pay you back tomorrow, that's all." },
+      { "zh": "不会的地方问老师就是了。", "py": "Bú huì de dìfang wèn lǎoshī jiù shì le.", "en": "If there's something you can't do, just ask the teacher." }
+    ]
+  },
+  {
+    "id": "g4-045",
+    "category": "固定格式",
+    "group": "",
+    "detail": "",
+    "point": "还X呢",
+    "title": "Some X you are: 还X呢",
+    "explanation": "还 + noun + 呢 mocks someone for not living up to a role, like 'and you call yourself a ...'. The next part says what they failed to do.",
+    "pattern": "还 + Noun + 呢, Clause",
+    "examples": [
+      { "zh": "还大学生呢，连这个字都不认识。", "py": "Hái dàxuéshēng ne, lián zhège zì dōu bú rènshi.", "en": "Some university student you are, you don't even know this character." },
+      { "zh": "还朋友呢，你出了事都不告诉我。", "py": "Hái péngyou ne, nǐ chū le shì dōu bú gàosu wǒ.", "en": "Some friend you are, something happened and you didn't even tell me." }
+    ]
+  },
+  {
+    "id": "g4-046",
+    "category": "固定格式",
+    "group": "",
+    "detail": "",
+    "point": "你X你的吧",
+    "title": "Go on with yours: 你X你的吧",
+    "explanation": "你 + verb + 你的吧 tells someone to carry on with what they're doing and not mind you. It's friendly and casual.",
+    "pattern": "你 + Verb + 你的吧",
+    "examples": [
+      { "zh": "你忙你的吧，我自己去就行。", "py": "Nǐ máng nǐ de ba, wǒ zìjǐ qù jiù xíng.", "en": "You get on with your work, I can go on my own." },
+      { "zh": "别管我，你看你的吧。", "py": "Bié guǎn wǒ, nǐ kàn nǐ de ba.", "en": "Don't mind me, go on with your reading." }
+    ]
+  },
+  {
+    "id": "g4-047",
+    "category": "固定格式",
+    "group": "",
+    "detail": "",
+    "point": "让/叫你X你就X",
+    "title": "Just do as you're told: 让你X你就X",
+    "explanation": "让你 + verb + 你就 + verb means just do what you're told without arguing. The same verb appears twice.",
+    "pattern": "让/叫你 + Verb + 你就 + Verb",
+    "examples": [
+      { "zh": "让你走你就走，别问那么多。", "py": "Ràng nǐ zǒu nǐ jiù zǒu, bié wèn nàme duō.", "en": "If you're told to go, just go, don't ask so many questions." },
+      { "zh": "医生叫你休息你就休息，别再工作了。", "py": "Yīshēng jiào nǐ xiūxi nǐ jiù xiūxi, bié zài gōngzuò le.", "en": "The doctor told you to rest, so rest, stop working." }
+    ]
+  },
+  {
+    "id": "g4-048",
+    "category": "固定格式",
+    "group": "",
+    "detail": "",
+    "point": "说什么/怎么（着）也得X",
+    "title": "No matter what: 说什么也得X",
+    "explanation": "说什么也得 or 怎么着也得 + verb means you must do it no matter what. It shows strong determination.",
+    "pattern": "说什么/怎么(着) + 也得 + Verb",
+    "examples": [
+      { "zh": "今天是妈妈的生日，说什么也得回家。", "py": "Jīntiān shì māma de shēngrì, shuō shénme yě děi huí jiā.", "en": "Today is Mom's birthday, I have to go home no matter what." },
+      { "zh": "这次比赛很重要，怎么着也得去看看。", "py": "Zhè cì bǐsài hěn zhòngyào, zěnmezhe yě děi qù kànkan.", "en": "This match is important, we have to go and see it whatever happens." }
+    ]
+  },
+  {
+    "id": "g4-049",
+    "category": "固定格式",
+    "group": "",
+    "detail": "",
+    "point": "X就X（点儿）吧",
+    "title": "So be it: X就X吧",
+    "explanation": "Adjective + 就 + adjective + 吧 accepts a drawback: 'so it's a bit X, never mind'. Adding 一点儿 after the second adjective softens it.",
+    "pattern": "Adjective + 就 + Adjective + (一点儿) + 吧",
+    "examples": [
+      { "zh": "贵就贵一点儿吧，质量好就行。", "py": "Guì jiù guì yìdiǎnr ba, zhìliàng hǎo jiù xíng.", "en": "So it's a bit pricey, as long as the quality is good." },
+      { "zh": "远就远吧，环境好最重要。", "py": "Yuǎn jiù yuǎn ba, huánjìng hǎo zuì zhòngyào.", "en": "So it's far, a nice setting matters most." }
+    ]
+  },
+  {
+    "id": "g4-050",
+    "category": "固定格式",
+    "group": "",
+    "detail": "",
+    "point": "X是X",
+    "title": "It is, but: X是X",
+    "explanation": "Repeating a word around 是 grants a point before a 'but': 漂亮是漂亮 means 'it's pretty, sure'. The next clause, often with 可是 or 但是, gives the real problem.",
+    "pattern": "X + 是 + X, 可是/但是 + Clause",
+    "examples": [
+      { "zh": "这件衣服漂亮是漂亮，可是太贵了。", "py": "Zhè jiàn yīfu piàoliang shì piàoliang, kěshì tài guì le.", "en": "This dress is pretty, sure, but it's too expensive." },
+      { "zh": "书我看是看了，但是没有看懂。", "py": "Shū wǒ kàn shì kàn le, dànshì méiyǒu kàn dǒng.", "en": "I did read the book, but I didn't understand it." }
+    ]
+  },
+  {
+    "id": "g4-051",
+    "category": "句子成分",
+    "group": "",
+    "detail": "程度补语2",
+    "point": "形容词/心理动词+死了/厉害",
+    "title": "Extremely: Adjective + 死了 / 得厉害",
+    "explanation": "死了 after an adjective or feeling verb means extremely, like 'to death': 累死了. 厉害 also means very much and usually comes after 得: 疼得厉害. Both are spoken and strong.",
+    "pattern": "Adjective/Feeling Verb + 死了, Adjective/Feeling Verb + 得 + 厉害",
+    "examples": [
+      { "zh": "今天热死了！", "py": "Jīntiān rè sǐ le!", "en": "It's boiling today!" },
+      { "zh": "他的头疼得厉害。", "py": "Tā de tóu téng de lìhai.", "en": "He has a really bad headache." }
+    ]
+  },
+  {
+    "id": "g4-052",
+    "category": "句子成分",
+    "group": "",
+    "detail": "可能补语2",
+    "point": "动词+得/不+了",
+    "title": "Can or can't manage: Verb + 得了 / 不了",
+    "explanation": "Verb + 得了 means able to do it, and verb + 不了 means unable to, often because of amount or circumstance. Here 了 is read liǎo. 吃不了 can mean 'can't finish eating it all'.",
+    "pattern": "Verb + 得/不 + 了 (liǎo)",
+    "examples": [
+      { "zh": "这么多菜，我吃不了。", "py": "Zhème duō cài, wǒ chī bu liǎo.", "en": "That's too much food, I can't finish it." },
+      { "zh": "他感冒了，明天来不了。", "py": "Tā gǎnmào le, míngtiān lái bu liǎo.", "en": "He has a cold and can't come tomorrow." }
+    ]
+  },
+  {
+    "id": "g4-053",
+    "category": "句子的类型",
+    "group": "句类",
+    "detail": "反问句2",
+    "point": "难道……吗？",
+    "title": "Rhetorical question: 难道……吗？",
+    "explanation": "难道……吗 asks a question the speaker already knows the answer to, to show surprise or disbelief. 难道你不知道吗 really means 'surely you know'.",
+    "pattern": "难道 + Statement + 吗？",
+    "examples": [
+      { "zh": "难道你不知道这件事吗？", "py": "Nándào nǐ bù zhīdào zhè jiàn shì ma?", "en": "Don't tell me you don't know about this?" },
+      { "zh": "这么简单的题，难道你还不会做吗？", "py": "Zhème jiǎndān de tí, nándào nǐ hái bú huì zuò ma?", "en": "Such an easy question, surely you can do it?" }
+    ]
+  },
+  {
+    "id": "g4-054",
+    "category": "句子的类型",
+    "group": "句类",
+    "detail": "反问句2",
+    "point": "由疑问代词构成的反问句",
+    "title": "Rhetorical questions with 谁, 怎么, 哪儿",
+    "explanation": "Question words like 谁, 怎么, 哪儿 and 什么 can make rhetorical questions that mean the opposite. 我怎么知道 means 'how should I know', and 谁不知道 means 'everyone knows'.",
+    "pattern": "Question Word + Verb Phrase + ？ (meaning the opposite)",
+    "examples": [
+      { "zh": "我怎么知道他去哪儿了？", "py": "Wǒ zěnme zhīdào tā qù nǎr le?", "en": "How would I know where he went?" },
+      { "zh": "这件事谁不知道？", "py": "Zhè jiàn shì shéi bù zhīdào?", "en": "Who doesn't know about this?" }
+    ]
+  },
+  {
+    "id": "g4-055",
+    "category": "句子的类型",
+    "group": "特殊句型",
+    "detail": "“把”字句2",
+    "point": "（1）主语+把+宾语+动词（+一/了）+动词",
+    "title": "把 with a doubled verb",
+    "explanation": "In a 把 sentence the verb can be doubled to show a quick or casual action: 把房间收拾收拾. Put 一 between the two verbs for a light future action, or 了 for a quick action already done.",
+    "pattern": "Subject + 把 + Object + Verb (+ 一/了) + Verb",
+    "examples": [
+      { "zh": "你把房间收拾收拾吧。", "py": "Nǐ bǎ fángjiān shōushi shōushi ba.", "en": "Tidy up your room a bit." },
+      { "zh": "他把衣服洗了洗，就出去了。", "py": "Tā bǎ yīfu xǐ le xǐ, jiù chūqu le.", "en": "He gave his clothes a quick wash and went out." }
+    ]
+  },
+  {
+    "id": "g4-056",
+    "category": "句子的类型",
+    "group": "特殊句型",
+    "detail": "“把”字句2",
+    "point": "（2）主语+把+宾语+动词+了",
+    "title": "把 + verb + 了",
+    "explanation": "A 把 sentence can end with just the verb and 了 when the verb itself shows the result, such as 喝, 吃, 卖 or 忘. The object is used up, gone or finished.",
+    "pattern": "Subject + 把 + Object + Verb + 了",
+    "examples": [
+      { "zh": "我把药吃了。", "py": "Wǒ bǎ yào chī le.", "en": "I took the medicine." },
+      { "zh": "他把旧电脑卖了。", "py": "Tā bǎ jiù diànnǎo mài le.", "en": "He sold his old computer." }
+    ]
+  },
+  {
+    "id": "g4-057",
+    "category": "句子的类型",
+    "group": "特殊句型",
+    "detail": "“把”字句2",
+    "point": "（3）主语+把+宾语+动词+动量补语/时量补语",
+    "title": "把 + verb + how many times / how long",
+    "explanation": "After the verb in a 把 sentence you can add how many times (两遍) or how long (一个下午). The 把 object comes before the verb, so don't put it after the count.",
+    "pattern": "Subject + 把 + Object + Verb + 了 + Number + 遍/次/Time",
+    "examples": [
+      { "zh": "老师把这个问题讲了两遍。", "py": "Lǎoshī bǎ zhège wèntí jiǎng le liǎng biàn.", "en": "The teacher explained the question twice." },
+      { "zh": "她把房间打扫了一个下午。", "py": "Tā bǎ fángjiān dǎsǎo le yí gè xiàwǔ.", "en": "She spent the whole afternoon cleaning the room." }
+    ]
+  },
+  {
+    "id": "g4-058",
+    "category": "句子的类型",
+    "group": "特殊句型",
+    "detail": "“把”字句2",
+    "point": "（4）主语+把+宾语+状语+动词",
+    "title": "把 + object + manner + verb",
+    "explanation": "A word describing how the action is done, like 轻轻地 or 一个一个地, can go after the 把 object and before the verb. It tells the manner of handling the object.",
+    "pattern": "Subject + 把 + Object + Adverbial + Verb (+ other parts)",
+    "examples": [
+      { "zh": "她把门轻轻地关上了。", "py": "Tā bǎ mén qīngqīng de guān shang le.", "en": "She closed the door gently." },
+      { "zh": "请把这些词一个一个地写下来。", "py": "Qǐng bǎ zhèxiē cí yí gè yí gè de xiě xiàlai.", "en": "Please write these words down one by one." }
+    ]
+  },
+  {
+    "id": "g4-059",
+    "category": "句子的类型",
+    "group": "特殊句型",
+    "detail": "被动句2",
+    "point": "主语+叫/让+宾语+动词+其他成分",
+    "title": "Passive with 叫 and 让",
+    "explanation": "In speech, 叫 and 让 can replace 被 to mark who did the action. Unlike 被, the doer after 叫 or 让 can't be left out, and the verb needs something after it like 了 or a result.",
+    "pattern": "Subject + 叫/让 + Doer + Verb + 了/Result",
+    "examples": [
+      { "zh": "我的蛋糕叫弟弟吃了。", "py": "Wǒ de dàngāo jiào dìdi chī le.", "en": "My cake got eaten by my little brother." },
+      { "zh": "我的自行车让人骑走了。", "py": "Wǒ de zìxíngchē ràng rén qí zǒu le.", "en": "Someone rode off with my bike." }
+    ]
+  },
+  {
+    "id": "g4-060",
+    "category": "句子的类型",
+    "group": "特殊句型",
+    "detail": "兼语句2",
+    "point": "（1）表爱憎义：主语+表扬/批评+宾语1+动词+宾语2",
+    "title": "Praising or blaming someone for doing something",
+    "explanation": "After 表扬 or 批评, the person is the object, and the verb phrase that follows says what they did. The person does double duty: object of 表扬 and subject of the next verb.",
+    "pattern": "Subject + 表扬/批评 + Person + Verb Phrase",
+    "examples": [
+      { "zh": "老师表扬他认真完成了作业。", "py": "Lǎoshī biǎoyáng tā rènzhēn wánchéng le zuòyè.", "en": "The teacher praised him for doing his homework carefully." },
+      { "zh": "经理批评他上班迟到。", "py": "Jīnglǐ pīpíng tā shàngbān chídào.", "en": "The manager criticized him for being late to work." }
+    ]
+  },
+  {
+    "id": "g4-061",
+    "category": "句子的类型",
+    "group": "特殊句型",
+    "detail": "兼语句2",
+    "point": "（2）表称谓或认定义：主语+收/选+宾语1+做/当/为+宾语2",
+    "title": "Choosing someone as: 选他当……",
+    "explanation": "收 or 选 + person + 做/当/为 + role means to take or choose someone as something. The person becomes the role: 选他当班长 'choose him as class leader'.",
+    "pattern": "Subject + 收/选 + Person + 做/当/为 + Role",
+    "examples": [
+      { "zh": "大家选他当班长。", "py": "Dàjiā xuǎn tā dāng bānzhǎng.", "en": "Everyone chose him as class monitor." },
+      { "zh": "那位画家收他做学生。", "py": "Nà wèi huàjiā shōu tā zuò xuésheng.", "en": "That painter took him on as a student." }
+    ]
+  },
+  {
+    "id": "g4-062",
+    "category": "句子的类型",
+    "group": "特殊句型",
+    "detail": "兼语句2",
+    "point": "（3）表致使：主语+使/让+人称代词+动词短语",
+    "title": "Making someone feel or do: 使/让 + person",
+    "explanation": "使 or 让 + person + verb phrase means something causes that person to feel or do something. 使 is more formal, and the subject is often a thing or event, not a person.",
+    "pattern": "Subject + 使/让 + Person + Verb Phrase",
+    "examples": [
+      { "zh": "这次旅行使我认识了很多新朋友。", "py": "Zhè cì lǚxíng shǐ wǒ rènshi le hěn duō xīn péngyou.", "en": "This trip let me meet lots of new friends." },
+      { "zh": "他的话让我很感动。", "py": "Tā de huà ràng wǒ hěn gǎndòng.", "en": "What he said really moved me." }
+    ]
+  },
+  {
+    "id": "g4-063",
+    "category": "句子的类型",
+    "group": "",
+    "detail": "比较句3",
+    "point": "（1）A不如B（+形容词）",
+    "title": "Not as good as: A不如B",
+    "explanation": "A不如B means A is not as good as B, and an adjective can follow to say in what way. It's the opposite of A比B, and the adjective is usually a positive one like 好, 快 or 便宜.",
+    "pattern": "A + 不如 + B (+ Adjective)",
+    "examples": [
+      { "zh": "我的汉语不如他好。", "py": "Wǒ de Hànyǔ bùrú tā hǎo.", "en": "My Chinese isn't as good as his." },
+      { "zh": "坐出租车不如坐地铁快。", "py": "Zuò chūzūchē bùrú zuò dìtiě kuài.", "en": "Taking a taxi isn't as fast as taking the subway." }
+    ]
+  },
+  {
+    "id": "g4-064",
+    "category": "句子的类型",
+    "group": "",
+    "detail": "比较句3",
+    "point": "（2）跟……相比",
+    "title": "Compared with: 跟……相比",
+    "explanation": "跟……相比 means compared with and sets up a comparison, usually at the start of the sentence. The second part says how the two differ.",
+    "pattern": "跟 + B + 相比, A + Comparison",
+    "examples": [
+      { "zh": "跟去年相比，今年的收入增加了不少。", "py": "Gēn qùnián xiāngbǐ, jīnnián de shōurù zēngjiā le bù shǎo.", "en": "Compared with last year, income has gone up quite a bit this year." },
+      { "zh": "跟大城市相比，这里的生活慢多了。", "py": "Gēn dà chéngshì xiāngbǐ, zhèlǐ de shēnghuó màn duō le.", "en": "Compared with big cities, life here is much slower." }
+    ]
+  },
+  {
+    "id": "g4-065",
+    "category": "句子的类型",
+    "group": "",
+    "detail": "双重否定句",
+    "point": "用双重否定表示强调",
+    "title": "Double negatives for emphasis",
+    "explanation": "Two negatives make a strong positive: 不能不去 means 'must go', and 没有人不喜欢 means 'everyone likes it'. It sounds stronger than the plain positive.",
+    "pattern": "不能不 + Verb, 没有 + Noun + 不 + Verb",
+    "examples": [
+      { "zh": "这个电影没有人不喜欢。", "py": "Zhège diànyǐng méiyǒu rén bù xǐhuan.", "en": "There's nobody who doesn't like this film." },
+      { "zh": "明天的考试很重要，我不能不去。", "py": "Míngtiān de kǎoshì hěn zhòngyào, wǒ bù néng bú qù.", "en": "Tomorrow's exam is important, I have to go." }
+    ]
+  },
+  {
+    "id": "g4-066",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "并列复句",
+    "point": "不是……，而是……",
+    "title": "Not A but B: 不是……，而是……",
+    "explanation": "不是A，而是B denies A and gives the real case, B. It's used to correct a wrong idea.",
+    "pattern": "不是 + A, 而是 + B",
+    "examples": [
+      { "zh": "他不是不想来，而是没有时间。", "py": "Tā bú shì bù xiǎng lái, ér shì méiyǒu shíjiān.", "en": "It's not that he doesn't want to come, it's that he has no time." },
+      { "zh": "这不是你的问题，而是大家的问题。", "py": "Zhè bú shì nǐ de wèntí, ér shì dàjiā de wèntí.", "en": "This isn't your problem, it's everyone's problem." }
+    ]
+  },
+  {
+    "id": "g4-067",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "并列复句",
+    "point": "既……，又/也……",
+    "title": "Both ... and: 既……又/也……",
+    "explanation": "既A又B means both A and B are true at once. 既 and 又 go before verbs or adjectives, and 也 is used when the two parts are longer phrases.",
+    "pattern": "Subject + 既 + A + 又/也 + B",
+    "examples": [
+      { "zh": "这家饭馆的菜既便宜又好吃。", "py": "Zhè jiā fànguǎn de cài jì piányi yòu hǎochī.", "en": "The food at this restaurant is both cheap and tasty." },
+      { "zh": "他既是我的老师，也是我的朋友。", "py": "Tā jì shì wǒ de lǎoshī, yě shì wǒ de péngyou.", "en": "He's both my teacher and my friend." }
+    ]
+  },
+  {
+    "id": "g4-068",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "并列复句",
+    "point": "一方面……，另一方面……",
+    "title": "On one hand, on the other: 一方面……另一方面……",
+    "explanation": "一方面A，另一方面B gives two sides or two reasons. Unlike in English, the two sides don't have to contrast; they're often two reasons pointing the same way.",
+    "pattern": "一方面 + A, 另一方面 + B",
+    "examples": [
+      { "zh": "我来中国，一方面是为了学汉语，另一方面是想了解中国文化。", "py": "Wǒ lái Zhōngguó, yì fāngmiàn shì wèile xué Hànyǔ, lìng yì fāngmiàn shì xiǎng liǎojiě Zhōngguó wénhuà.", "en": "I came to China partly to learn Chinese and partly to get to know Chinese culture." },
+      { "zh": "跑步一方面对身体好，另一方面还能让心情愉快。", "py": "Pǎobù yì fāngmiàn duì shēntǐ hǎo, lìng yì fāngmiàn hái néng ràng xīnqíng yúkuài.", "en": "Running is good for your body, and it also puts you in a good mood." }
+    ]
+  },
+  {
+    "id": "g4-069",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "承接复句",
+    "point": "首先……，其次……",
+    "title": "First, second: 首先……其次……",
+    "explanation": "首先 means first and 其次 means second or next. They list points in order of importance, often in speeches or writing.",
+    "pattern": "首先 + Point 1, 其次 + Point 2",
+    "examples": [
+      { "zh": "找工作首先要了解自己，其次要了解公司。", "py": "Zhǎo gōngzuò shǒuxiān yào liǎojiě zìjǐ, qícì yào liǎojiě gōngsī.", "en": "When job hunting, first know yourself, and second know the company." },
+      { "zh": "首先，我要感谢大家的帮助；其次，我想说说下一步的计划。", "py": "Shǒuxiān, wǒ yào gǎnxiè dàjiā de bāngzhù; qícì, wǒ xiǎng shuōshuo xià yí bù de jìhuà.", "en": "First, I want to thank everyone for their help. Second, I'd like to talk about the next steps." }
+    ]
+  },
+  {
+    "id": "g4-070",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "承接复句",
+    "point": "首先……，然后……",
+    "title": "First, then: 首先……然后……",
+    "explanation": "首先A，然后B gives steps in time order: first do A, then do B. 然后 is about sequence, while 其次 is about rank.",
+    "pattern": "首先 + Step 1, 然后 + Step 2",
+    "examples": [
+      { "zh": "我们首先去吃饭，然后去看电影。", "py": "Wǒmen shǒuxiān qù chī fàn, ránhòu qù kàn diànyǐng.", "en": "First we'll go eat, then we'll see a film." },
+      { "zh": "请首先写上你的名字，然后回答下面的问题。", "py": "Qǐng shǒuxiān xiě shang nǐ de míngzi, ránhòu huídá xiàmiàn de wèntí.", "en": "Please write your name first, then answer the questions below." }
+    ]
+  },
+  {
+    "id": "g4-071",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "承接复句",
+    "point": "……，于是……",
+    "title": "So then: ……，于是……",
+    "explanation": "于是 means so or and then, linking an event to what happened because of it. It talks about the past, so don't use it for advice or plans; use 所以 for those.",
+    "pattern": "Event, 于是 + Result",
+    "examples": [
+      { "zh": "外面下起了大雨，于是我们决定在家看电影。", "py": "Wàimiàn xià qǐ le dà yǔ, yúshì wǒmen juédìng zài jiā kàn diànyǐng.", "en": "It started pouring outside, so we decided to watch a film at home." },
+      { "zh": "他听说那家店的东西很便宜，于是马上去看了看。", "py": "Tā tīngshuō nà jiā diàn de dōngxi hěn piányi, yúshì mǎshàng qù kàn le kàn.", "en": "He heard that shop was cheap, so he went right away to take a look." }
+    ]
+  },
+  {
+    "id": "g4-072",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "递进复句",
+    "point": "……,甚至……",
+    "title": "Even: ……，甚至……",
+    "explanation": "甚至 introduces an extreme example that goes a step further, like 'even'. It often goes with 都 or 也 later in the clause.",
+    "pattern": "Clause 1, 甚至 + Clause 2",
+    "examples": [
+      { "zh": "他太忙了，甚至忘了吃饭。", "py": "Tā tài máng le, shènzhì wàng le chī fàn.", "en": "He's so busy that he even forgot to eat." },
+      { "zh": "这个问题很简单，甚至小孩子都知道。", "py": "Zhège wèntí hěn jiǎndān, shènzhì xiǎo háizi dōu zhīdào.", "en": "This question is easy, even little kids know the answer." }
+    ]
+  },
+  {
+    "id": "g4-073",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "递进复句",
+    "point": "不仅/不光……，还/而且……",
+    "title": "Not only ... but also: 不仅……而且……",
+    "explanation": "不仅 or 不光 starts the first point, and 还 or 而且 adds a further point. If both clauses share the subject, put it before 不仅; 还 goes after the subject in the second clause.",
+    "pattern": "Subject + 不仅/不光 + A, 而且/还 + B",
+    "examples": [
+      { "zh": "他不仅会做饭，而且做得很好吃。", "py": "Tā bùjǐn huì zuò fàn, érqiě zuò de hěn hǎochī.", "en": "Not only can he cook, he cooks really well." },
+      { "zh": "这个公园不光很大，还很安静。", "py": "Zhège gōngyuán bùguāng hěn dà, hái hěn ānjìng.", "en": "This park isn't just big, it's quiet too." }
+    ]
+  },
+  {
+    "id": "g4-074",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "递进复句",
+    "point": "……，并且……",
+    "title": "And also: ……，并且……",
+    "explanation": "并且 adds a second action or fact that goes further than the first. It joins clauses or verb phrases and sounds a bit more formal than 而且.",
+    "pattern": "Clause 1, 并且 + Clause 2",
+    "examples": [
+      { "zh": "他通过了考试，并且拿到了很好的成绩。", "py": "Tā tōngguò le kǎoshì, bìngqiě ná dào le hěn hǎo de chéngjì.", "en": "He passed the exam, and got a very good score too." },
+      { "zh": "这个计划很好，并且很容易做到。", "py": "Zhège jìhuà hěn hǎo, bìngqiě hěn róngyì zuò dào.", "en": "This plan is good, and easy to carry out as well." }
+    ]
+  },
+  {
+    "id": "g4-075",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "递进复句",
+    "point": "连……也/都……，……更……",
+    "title": "Even A, let alone B: 连……都……，更……",
+    "explanation": "连A都 shows an extreme case, and 更 in the next clause says B is even more so. 连老师都不会，我就更不会了 means 'even the teacher can't, so I certainly can't'.",
+    "pattern": "连 + A + 也/都 + Verb, B + (就) + 更 + Verb/Adjective",
+    "examples": [
+      { "zh": "这道题连老师都不会做，我就更不会了。", "py": "Zhè dào tí lián lǎoshī dōu bú huì zuò, wǒ jiù gèng bú huì le.", "en": "Even the teacher can't do this question, so I certainly can't." },
+      { "zh": "他连周末都要工作，平时就更忙了。", "py": "Tā lián zhōumò dōu yào gōngzuò, píngshí jiù gèng máng le.", "en": "He has to work even on weekends, so weekdays are even busier." }
+    ]
+  },
+  {
+    "id": "g4-076",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "选择复句",
+    "point": "不是……，就是……",
+    "title": "Either ... or: 不是……就是……",
+    "explanation": "不是A，就是B means it's always one or the other. It often sounds a little like a complaint, as in 'it's either windy or raining'.",
+    "pattern": "不是 + A, 就是 + B",
+    "examples": [
+      { "zh": "他周末不是在家睡觉，就是出去玩。", "py": "Tā zhōumò bú shì zài jiā shuìjiào, jiù shì chūqu wán.", "en": "On weekends he's either sleeping at home or out having fun." },
+      { "zh": "这几天不是刮风就是下雨。", "py": "Zhè jǐ tiān bú shì guā fēng jiù shì xià yǔ.", "en": "These past few days it's been either windy or rainy." }
+    ]
+  },
+  {
+    "id": "g4-077",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "转折复句",
+    "point": "尽管……，但是/可是……",
+    "title": "Even though: 尽管……但是……",
+    "explanation": "尽管 means even though and admits a fact, then 但是 or 可是 gives the contrast. 还是 or 也 often appears in the second part.",
+    "pattern": "尽管 + Fact, 但是/可是 + Contrast",
+    "examples": [
+      { "zh": "尽管外面很冷，但是他还是去跑步了。", "py": "Jǐnguǎn wàimiàn hěn lěng, dànshì tā háishi qù pǎobù le.", "en": "Even though it was cold out, he still went for a run." },
+      { "zh": "尽管我们认识很多年了，可是我对他还不太了解。", "py": "Jǐnguǎn wǒmen rènshi hěn duō nián le, kěshì wǒ duì tā hái bú tài liǎojiě.", "en": "Even though we've known each other for years, I still don't know him well." }
+    ]
+  },
+  {
+    "id": "g4-078",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "转折复句",
+    "point": "……，然而……",
+    "title": "However: ……，然而……",
+    "explanation": "然而 means however and starts the second clause. It's more formal than 但是 and often shows a result that goes against what was expected.",
+    "pattern": "Clause 1, 然而 + Clause 2",
+    "examples": [
+      { "zh": "我们都以为他会赢，然而他输了。", "py": "Wǒmen dōu yǐwéi tā huì yíng, rán'ér tā shū le.", "en": "We all thought he'd win, but he lost." },
+      { "zh": "他准备了很长时间，然而考试还是没有通过。", "py": "Tā zhǔnbèi le hěn cháng shíjiān, rán'ér kǎoshì háishi méiyǒu tōngguò.", "en": "He prepared for a long time, yet he still failed the exam." }
+    ]
+  },
+  {
+    "id": "g4-079",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "转折复句",
+    "point": "……，不过……",
+    "title": "But: ……，不过……",
+    "explanation": "不过 means but, and it's softer than 但是. It often adds a small catch or a condition rather than a strong contrast.",
+    "pattern": "Clause 1, 不过 + Clause 2",
+    "examples": [
+      { "zh": "这个地方很漂亮，不过人太多了。", "py": "Zhège dìfang hěn piàoliang, búguò rén tài duō le.", "en": "This place is beautiful, but there are too many people." },
+      { "zh": "我可以帮你，不过你得先告诉我发生了什么。", "py": "Wǒ kěyǐ bāng nǐ, búguò nǐ děi xiān gàosu wǒ fāshēng le shénme.", "en": "I can help you, but first you have to tell me what happened." }
+    ]
+  },
+  {
+    "id": "g4-080",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "转折复句",
+    "point": "……X是X，就是/不过……",
+    "title": "It's X all right, it's just: X是X，就是……",
+    "explanation": "X是X grants a good point, then 就是 or 不过 brings in the one problem. 就是 here means 'it's just that'.",
+    "pattern": "Subject + X + 是 + X, 就是/不过 + Problem",
+    "examples": [
+      { "zh": "这个房子大是大，就是离公司太远了。", "py": "Zhège fángzi dà shì dà, jiù shì lí gōngsī tài yuǎn le.", "en": "This house is big all right, it's just too far from the office." },
+      { "zh": "他聪明是聪明，不过不太努力。", "py": "Tā cōngming shì cōngming, búguò bú tài nǔlì.", "en": "He's smart, sure, but he doesn't work very hard." }
+    ]
+  },
+  {
+    "id": "g4-081",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "假设复句",
+    "point": "……，否则……",
+    "title": "Otherwise: ……，否则……",
+    "explanation": "否则 means otherwise or or else. The first clause says what should happen, and 否则 gives the bad result if it doesn't.",
+    "pattern": "Advice/Condition, 否则 + Bad Result",
+    "examples": [
+      { "zh": "快一点儿走吧，否则就要迟到了。", "py": "Kuài yìdiǎnr zǒu ba, fǒuzé jiù yào chídào le.", "en": "Let's walk faster, or we'll be late." },
+      { "zh": "你得多穿一点儿衣服，否则会感冒的。", "py": "Nǐ děi duō chuān yìdiǎnr yīfu, fǒuzé huì gǎnmào de.", "en": "You need to wear more clothes, or you'll catch a cold." }
+    ]
+  },
+  {
+    "id": "g4-082",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "假设复句",
+    "point": "要是……，就……",
+    "title": "If ... then: 要是……就……",
+    "explanation": "要是 means if and is common in speech, like 如果. 就 goes after the subject in the second clause, not before it.",
+    "pattern": "要是 + Condition, (Subject) + 就 + Result",
+    "examples": [
+      { "zh": "要是明天下雨，我们就不去了。", "py": "Yàoshi míngtiān xià yǔ, wǒmen jiù bú qù le.", "en": "If it rains tomorrow, we won't go." },
+      { "zh": "要是你有时间，就来我家吃饭吧。", "py": "Yàoshi nǐ yǒu shíjiān, jiù lái wǒ jiā chī fàn ba.", "en": "If you have time, come over to my place for dinner." }
+    ]
+  },
+  {
+    "id": "g4-083",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "假设复句",
+    "point": "要是……，（就）……，否则……",
+    "title": "If so, then, otherwise: 要是……就……否则……",
+    "explanation": "This three-part pattern gives a condition, what happens if it's met, and what happens if not. 否则 introduces the other outcome.",
+    "pattern": "要是 + Condition, (就) + Result, 否则 + Other Result",
+    "examples": [
+      { "zh": "要是你想去，我们就一起去，否则我自己去。", "py": "Yàoshi nǐ xiǎng qù, wǒmen jiù yìqǐ qù, fǒuzé wǒ zìjǐ qù.", "en": "If you want to go, we'll go together, otherwise I'll go by myself." },
+      { "zh": "要是今天能做完，明天就可以休息，否则周末还得加班。", "py": "Yàoshi jīntiān néng zuò wán, míngtiān jiù kěyǐ xiūxi, fǒuzé zhōumò hái děi jiābān.", "en": "If we can finish today, we can rest tomorrow, otherwise we'll have to work the weekend." }
+    ]
+  },
+  {
+    "id": "g4-084",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "条件复句",
+    "point": "不管……，都/也……",
+    "title": "No matter: 不管……都……",
+    "explanation": "不管 means no matter, and the result follows with 都 or 也. The 不管 part must have a question word or a choice like 去不去; a plain statement after 不管 is a common mistake.",
+    "pattern": "不管 + Question Word/Choice, Subject + 都/也 + Verb",
+    "examples": [
+      { "zh": "不管多忙，他每天都给妈妈打电话。", "py": "Bùguǎn duō máng, tā měi tiān dōu gěi māma dǎ diànhuà.", "en": "No matter how busy he is, he calls his mom every day." },
+      { "zh": "不管你去不去，我都要去。", "py": "Bùguǎn nǐ qù bu qù, wǒ dōu yào qù.", "en": "Whether you go or not, I'm going." }
+    ]
+  },
+  {
+    "id": "g4-085",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "条件复句",
+    "point": "无论……，都/也……",
+    "title": "No matter: 无论……都……",
+    "explanation": "无论 means the same as 不管 but sounds more formal. Like 不管, it needs a question word or a choice after it, and 都 or 也 in the second clause.",
+    "pattern": "无论 + Question Word/Choice, Subject + 都/也 + Verb",
+    "examples": [
+      { "zh": "无论遇到什么困难，我们都不能放弃。", "py": "Wúlùn yù dào shénme kùnnan, wǒmen dōu bù néng fàngqì.", "en": "Whatever difficulties we face, we can't give up." },
+      { "zh": "无论别人怎么说，他也不改变自己的想法。", "py": "Wúlùn biérén zěnme shuō, tā yě bù gǎibiàn zìjǐ de xiǎngfǎ.", "en": "No matter what others say, he won't change his mind." }
+    ]
+  },
+  {
+    "id": "g4-086",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "因果复句",
+    "point": "既然……，就……",
+    "title": "Since: 既然……就……",
+    "explanation": "既然 means since or now that, for a fact both people already know. The second clause, with 就, draws a conclusion or gives advice.",
+    "pattern": "既然 + Known Fact, (Subject) + 就 + Conclusion",
+    "examples": [
+      { "zh": "既然你不舒服，就早一点儿回家休息吧。", "py": "Jìrán nǐ bù shūfu, jiù zǎo yìdiǎnr huí jiā xiūxi ba.", "en": "Since you're not feeling well, go home early and rest." },
+      { "zh": "既然已经买了，就别后悔了。", "py": "Jìrán yǐjīng mǎi le, jiù bié hòuhuǐ le.", "en": "Since you've already bought it, don't regret it." }
+    ]
+  },
+  {
+    "id": "g4-087",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "因果复句",
+    "point": "（由于）……，因此……",
+    "title": "Because, therefore: 由于……因此……",
+    "explanation": "因此 means therefore and starts the result clause, and 由于 can open the reason clause. Pair 由于 with 因此 or 所以, but don't pair 因为 with 因此.",
+    "pattern": "(由于) + Reason, 因此 + Result",
+    "examples": [
+      { "zh": "由于他平时很努力，因此这次考得很好。", "py": "Yóuyú tā píngshí hěn nǔlì, yīncǐ zhè cì kǎo de hěn hǎo.", "en": "Because he works hard all the time, he did well on this exam." },
+      { "zh": "这里交通很方便，因此很多人都选择住在这儿。", "py": "Zhèlǐ jiāotōng hěn fāngbiàn, yīncǐ hěn duō rén dōu xuǎnzé zhù zài zhèr.", "en": "Transport here is very convenient, so lots of people choose to live here." }
+    ]
+  },
+  {
+    "id": "g4-088",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "目的复句",
+    "point": "……，好……",
+    "title": "So that: ……，好……",
+    "explanation": "好 at the start of the second clause, right before the verb, means so that it's easier to do something. It comes after the subject of that clause, if there is one.",
+    "pattern": "Action, (Subject) + 好 + Verb",
+    "examples": [
+      { "zh": "你把电话号码给我，我好跟你联系。", "py": "Nǐ bǎ diànhuà hàomǎ gěi wǒ, wǒ hǎo gēn nǐ liánxì.", "en": "Give me your phone number so I can get in touch with you." },
+      { "zh": "今天早一点儿睡吧，明天好早一点儿起床。", "py": "Jīntiān zǎo yìdiǎnr shuì ba, míngtiān hǎo zǎo yìdiǎnr qǐchuáng.", "en": "Go to bed early tonight so you can get up early tomorrow." }
+    ]
+  },
+  {
+    "id": "g4-089",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "让步复句",
+    "point": "即使……，也……",
+    "title": "Even if: 即使……也……",
+    "explanation": "即使 means even if, for a situation that may or may not happen. The result stays the same, and 也 goes after the subject in the second clause.",
+    "pattern": "即使 + Condition, Subject + 也 + Verb",
+    "examples": [
+      { "zh": "即使明天下雨，我们也要去。", "py": "Jíshǐ míngtiān xià yǔ, wǒmen yě yào qù.", "en": "Even if it rains tomorrow, we're still going." },
+      { "zh": "即使你不说，我也知道。", "py": "Jíshǐ nǐ bù shuō, wǒ yě zhīdào.", "en": "Even if you don't say it, I know." }
+    ]
+  },
+  {
+    "id": "g4-090",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "让步复句",
+    "point": "就是……，也……",
+    "title": "Even if: 就是……也……",
+    "explanation": "就是……也 means the same as 即使……也 but is more spoken. It often comes with 再: 就是再忙 'however busy'.",
+    "pattern": "就是 + Condition, Subject + 也 + Verb",
+    "examples": [
+      { "zh": "就是再忙，你也得吃饭啊。", "py": "Jiù shì zài máng, nǐ yě děi chī fàn a.", "en": "However busy you are, you still have to eat." },
+      { "zh": "这件事就是你不告诉我，我也会知道的。", "py": "Zhè jiàn shì jiù shì nǐ bú gàosu wǒ, wǒ yě huì zhīdào de.", "en": "Even if you don't tell me, I'll find out anyway." }
+    ]
+  },
+  {
+    "id": "g4-091",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "紧缩复句",
+    "point": "无标记",
+    "title": "Compressed sentences without linking words",
+    "explanation": "In speech, two short clauses are often squeezed together with no linking word and no pause. The meaning, like if or then, comes from context: 你不去我去 means 'if you won't go, I will'.",
+    "pattern": "Clause 1 + Clause 2 (no comma, no linking word)",
+    "examples": [
+      { "zh": "你不去我去。", "py": "Nǐ bú qù wǒ qù.", "en": "If you won't go, I will." },
+      { "zh": "有问题给我打电话。", "py": "Yǒu wèntí gěi wǒ dǎ diànhuà.", "en": "Call me if there's a problem." }
+    ]
+  },
+  {
+    "id": "g4-092",
+    "category": "句子的类型",
+    "group": "复句",
+    "detail": "紧缩复句",
+    "point": "不……也……",
+    "title": "Even without: 不……也……",
+    "explanation": "不A也B is a compressed 'even if not A, still B'. There's no comma between the two parts, and it's short and spoken.",
+    "pattern": "(Subject) + 不 + Verb + (Subject) + 也 + Verb",
+    "examples": [
+      { "zh": "你不说我也知道。", "py": "Nǐ bù shuō wǒ yě zhīdào.", "en": "I know even if you don't say it." },
+      { "zh": "你不帮我我也能做完。", "py": "Nǐ bù bāng wǒ wǒ yě néng zuò wán.", "en": "I can finish it even without your help." }
+    ]
+  },
+  {
+    "id": "g4-093",
+    "category": "特殊表达法",
+    "group": "数的表示法",
+    "detail": "",
+    "point": "概数表示法3：数词+来+量词",
+    "title": "About, or so: number + 来 + measure word",
+    "explanation": "来 after a round number like 十, 二十 or 一百 means about or a bit over. It goes before the measure word: 二十来个人 'twenty-odd people'.",
+    "pattern": "Round Number + 来 + Measure Word + Noun",
+    "examples": [
+      { "zh": "教室里有二十来个学生。", "py": "Jiàoshì li yǒu èrshí lái gè xuésheng.", "en": "There are twenty or so students in the classroom." },
+      { "zh": "他看上去三十来岁。", "py": "Tā kàn shàngqu sānshí lái suì.", "en": "He looks about thirty." }
+    ]
+  },
+  {
+    "id": "g4-094",
+    "category": "特殊表达法",
+    "group": "数的表示法",
+    "detail": "",
+    "point": "用“大约、左右、前后”表示概数",
+    "title": "Approximately: 大约, 左右, 前后",
+    "explanation": "大约 goes before the number, while 左右 goes after it. 前后 also goes after, but only after a point in time, like a date or a holiday. Don't use 大约 and 左右 together too often; one is enough.",
+    "pattern": "大约 + Number, Number + 左右, Time Point + 前后",
+    "examples": [
+      { "zh": "从这儿到机场大约要两个小时。", "py": "Cóng zhèr dào jīchǎng dàyuē yào liǎng gè xiǎoshí.", "en": "It takes about two hours to get from here to the airport." },
+      { "zh": "他晚上八点左右到。", "py": "Tā wǎnshang bā diǎn zuǒyòu dào.", "en": "He'll arrive around eight in the evening." }
+    ]
+  },
+  {
+    "id": "g4-095",
+    "category": "特殊表达法",
+    "group": "数的表示法",
+    "detail": "",
+    "point": "小数、分数、百分数、倍数的表示法",
+    "title": "Decimals, fractions, percents and times",
+    "explanation": "Decimals use 点: 3.5 is 三点五. Fractions say the bottom number first: 1/3 is 三分之一, and 20% is 百分之二十. 倍 means times: 是……的两倍 is 'twice as much as'.",
+    "pattern": "A 点 B, B 分之 A, 百分之 + Number, 是 + B + 的 + Number + 倍",
+    "examples": [
+      { "zh": "今年的价格比去年高了百分之二十。", "py": "Jīnnián de jiàgé bǐ qùnián gāo le bǎi fēn zhī èrshí.", "en": "Prices this year are twenty percent higher than last year." },
+      { "zh": "他的工资是我的两倍。", "py": "Tā de gōngzī shì wǒ de liǎng bèi.", "en": "His salary is twice mine." }
+    ]
+  }
+]
