@@ -1,25 +1,42 @@
-# HSK Flashcard
+<img src="public/favicon.svg" alt="QuizLingo seal logo" width="64" height="64" />
 
-A modern, interactive flashcard and quiz application for preparing for the HSK 3.0 exam (Levels 1 to 3).
+# QuizLingo
 
-## 🌐 Hosting
+Practice for the HSK 3.0 exam, levels 1 to 3. Every answer is saved to your account and schedules when you see the word again.
 
-The app and its API run on Vercel. Progress is stored in a Turso (libSQL) database.
+## Features
 
-## 🎯 Features
+- **Accounts**: sign up with name, email and password. Progress follows you to any device
+- **Four ways to practice**: flashcards you grade yourself, meaning quiz, listening quiz (browser speech) and pinyin quiz
+- **Review schedule**: right answers push a word further out (1, 3, 7, 14, 30 days), wrong answers bring it back in 10 minutes
+- **Dashboard**: words due today, words mastered per level, accuracy, streak, the last 14 days and recent rounds
+- **Word list**: all 988 words with search, a filter on every column, sorting, and filters saved in the URL
+- **Keyboard shortcuts** in practice: 1 to 4 to answer, Space to flip or replay, Enter for next
+- **Light and dark mode**, mobile tab bar, WCAG AA contrast checked with axe
 
-- **Dual Learning Modes**: Flashcard and Quiz modes
-- **HSK 3.0 Levels 1 to 3**: Vocabulary from the November 2025 HSK exam syllabus (300, 500 and 1,000 words, cumulative)
-- **Randomized Questions**: Different order every session
-- **Reveal Answer**: Option to see answers without submitting
-- **Fully Responsive**: Works on mobile, tablet, and desktop
+## Tech Stack
 
-## 🛠️ Tech Stack
+- React 19, TypeScript, Vite, Tailwind CSS 4, React Router, TanStack Query
+- Vercel Functions in `api/` with Turso (libSQL)
+- Fonts: Figtree and Noto Serif SC, self hosted
 
-- React 19 with TypeScript
-- Vite
-- Tailwind CSS
-- Vercel Functions (`api/`) with Turso (libSQL)
+## Project layout
+
+```
+api/              Vercel Functions: auth, progress, sessions, stats (api/_lib holds shared code)
+src/app/          router and query client
+src/components/   shared ui and layout components
+src/features/     auth, dashboard, practice, progress, vocabulary, words
+public/data/      HSK 3.0 word lists built by scripts/build-hsk-data.mjs
+```
+
+## Security
+
+- The Turso URL and token are read only by the functions in `api/`. They never reach the browser
+- `npm run build` ends with `scripts/check-bundle.mjs`, which fails the build if a secret shows up in `dist/`
+- Passwords are hashed with scrypt, sessions are random tokens stored as SHA-256 hashes in an httpOnly cookie
+- Failed sign ins are limited to 10 per email in 15 minutes
+- `vercel.json` sets a Content Security Policy and other security headers
 
 ## 🚀 Setup
 
