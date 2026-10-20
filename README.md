@@ -77,7 +77,7 @@ The app lives under the `/quizlingo/` base path, and the API is served at `/quiz
 Tests:
 
 ```bash
-npm test          # 120 tests in three groups
+npm test          # 138 tests in three groups
 ```
 
 | Group | Folder | What it covers |
