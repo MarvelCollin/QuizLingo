@@ -9,7 +9,7 @@ export const Pagination = ({ page, pageSize, total, onPage }: PaginationProps) =
   return (
     <nav aria-label="Pages" className="flex items-center justify-between gap-4">
       <p className="text-sm text-muted">
-        {from.toLocaleString()} to {to.toLocaleString()} of {total.toLocaleString()}
+        {from.toLocaleString('en-US')} to {to.toLocaleString('en-US')} of {total.toLocaleString('en-US')}
       </p>
       <div className="flex gap-2">
         <Button variant="secondary" disabled={page <= 1} onClick={() => onPage(page - 1)}>

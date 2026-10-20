@@ -1,7 +1,7 @@
 export const percent = (part: number, whole: number) => (whole === 0 ? 0 : Math.round((part / whole) * 100));
 
 export const plural = (count: number, one: string, many = `${one}s`) =>
-  `${count.toLocaleString()} ${count === 1 ? one : many}`;
+  `${count.toLocaleString('en-US')} ${count === 1 ? one : many}`;
 
 const relative = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
 

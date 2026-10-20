@@ -74,7 +74,7 @@ const SoundsPage = () => {
       />
       <div className="flex flex-col gap-3 border-t border-hairline pt-6 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-base text-ink">
-          {Math.min(ROUND, pool.length)} questions from {pool.length.toLocaleString()} recordings.
+          {Math.min(ROUND, pool.length)} questions from {pool.length.toLocaleString('en-US')} recordings.
         </p>
         <Button size="lg" disabled={pool.length === 0} onClick={() => start(0)}>
           Start round

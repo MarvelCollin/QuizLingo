@@ -13,10 +13,10 @@ export const SummaryStrip = ({ mastered, totalWords, accuracy, streak }: Summary
           aria-label={`${mastered} words mastered, show them`}
           className="text-3xl font-bold text-ink hover:text-strong"
         >
-          {mastered.toLocaleString()}
+          {mastered.toLocaleString('en-US')}
         </Link>
         <span className="ml-2 text-base text-muted">
-          of {totalWords.toLocaleString()} ({percent(mastered, totalWords)}%)
+          of {totalWords.toLocaleString('en-US')} ({percent(mastered, totalWords)}%)
         </span>
       </dd>
     </div>

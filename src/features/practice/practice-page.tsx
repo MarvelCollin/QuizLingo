@@ -100,7 +100,7 @@ const PracticePage = () => {
             options={(['new', 'due', 'all'] as WordSetId[]).map((value) => ({
               value,
               label: WORD_SET_LABELS[value],
-              detail: `${counts.sets[value].toLocaleString()} available`,
+              detail: `${counts.sets[value].toLocaleString('en-US')} available`,
             }))}
           />
           <SegmentedControl

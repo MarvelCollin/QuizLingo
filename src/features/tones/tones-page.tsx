@@ -94,7 +94,7 @@ const TonesPage = () => {
         <p className="text-base text-ink">
           {pool.length === 0
             ? 'No recordings for this choice yet. Pick another level.'
-            : `${Math.min(ROUND, pool.length)} of ${pool.length.toLocaleString()} recordings from ${levelLabel(level)}.`}
+            : `${Math.min(ROUND, pool.length)} of ${pool.length.toLocaleString('en-US')} recordings from ${levelLabel(level)}.`}
         </p>
         <Button size="lg" disabled={pool.length === 0} onClick={() => start(0)}>
           Start round

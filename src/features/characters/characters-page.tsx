@@ -102,7 +102,7 @@ const CharactersPage = () => {
       ) : (
         <>
           <p className="text-sm text-muted" aria-live="polite">
-            {filtered.length.toLocaleString()} of {hanzi.data.length.toLocaleString()} characters
+            {filtered.length.toLocaleString('en-US')} of {hanzi.data.length.toLocaleString('en-US')} characters
           </p>
           {filtered.length === 0 ? (
             <div className="flex flex-col items-start gap-3 border-y border-hairline py-10">

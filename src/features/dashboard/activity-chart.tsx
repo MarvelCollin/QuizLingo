@@ -14,7 +14,7 @@ export const ActivityChart = ({ activity }: ActivityChartProps) => {
         Last 14 days
       </h2>
       <p className="text-sm text-muted">
-        {total === 0 ? 'No practice yet. Each bar will show the answers you give that day.' : `${total.toLocaleString()} answers`}
+        {total === 0 ? 'No practice yet. Each bar will show the answers you give that day.' : `${total.toLocaleString('en-US')} answers`}
       </p>
       <ol className="mt-4 flex h-32 items-end gap-1.5" aria-label="Answers per day">
         {activity.map((day) => {

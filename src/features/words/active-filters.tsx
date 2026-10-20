@@ -23,7 +23,7 @@ export const ActiveFilters = ({ filters, shown, total, onChange, onClearAll }: A
   return (
     <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm" aria-live="polite">
       <span className="text-muted">
-        Showing <span className="font-semibold text-ink">{shown.toLocaleString()}</span> of {total.toLocaleString()}
+        Showing <span className="font-semibold text-ink">{shown.toLocaleString('en-US')}</span> of {total.toLocaleString('en-US')}
         {active.length > 0 && ', filtered by'}
       </span>
       {active.map((filter) => (

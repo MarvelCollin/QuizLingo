@@ -17,7 +17,7 @@ export const LevelProgress = ({ totals, stats }: LevelProgressProps) => (
           <li key={level} className="grid gap-x-6 gap-y-2 py-4 sm:grid-cols-[7rem_1fr_auto] sm:items-center">
             <div>
               <p className="font-semibold text-ink">{levelLabel(level)}</p>
-              <p className="text-sm text-muted">{total.toLocaleString()} new words</p>
+              <p className="text-sm text-muted">{total.toLocaleString('en-US')} new words</p>
             </div>
             <div>
               <StackedBar
@@ -30,7 +30,7 @@ export const LevelProgress = ({ totals, stats }: LevelProgressProps) => (
               />
               <p className="mt-1.5 text-sm text-muted">
                 <span className="font-semibold text-ink">{s.mastered} mastered</span>, {learning} learning,{' '}
-                {Math.max(total - s.seen, 0).toLocaleString()} not started
+                {Math.max(total - s.seen, 0).toLocaleString('en-US')} not started
               </p>
             </div>
             <Link
