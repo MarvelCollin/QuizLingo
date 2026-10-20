@@ -3,7 +3,6 @@ import { EMPTY_FILTERS } from './constants';
 import { filtersFromParams, filtersToParams } from './filter-words';
 import type { WordFilters } from './types';
 
-// Table filters live in the URL: shareable, and they survive reload and Back
 export const useWordFilters = () => {
   const [params, setParams] = useSearchParams();
   const filters = filtersFromParams(params);

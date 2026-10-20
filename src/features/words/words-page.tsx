@@ -35,7 +35,6 @@ const WordsPage = () => {
   const vocabulary = useVocabulary();
   const progress = useProgress();
   const { filters, update, clearAll } = useWordFilters();
-  // Bumped when filters are cleared from outside a text field, so the field shows the cleared value
   const [resetKey, setResetKey] = useState(0);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [now] = useState(() => Date.now());

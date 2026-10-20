@@ -3,7 +3,6 @@ import { STATUS_LABELS } from './status';
 import type { WordStatus } from './types';
 import type { StatusLabelProps } from './types';
 
-// One shape per state plus the word, so status never depends on color alone
 const SHAPES: Record<WordStatus, string> = {
   new: 'h-0.5 w-2.5 bg-muted',
   learning: 'size-2.5 rounded-full border-2 border-strong',

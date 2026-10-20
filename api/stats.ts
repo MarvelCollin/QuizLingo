@@ -4,7 +4,6 @@ import { MASTERED_BOX } from './_lib/srs.js';
 
 const DAY = 24 * 60 * 60 * 1000;
 
-// Day number in the viewer's time zone. tz is Date.getTimezoneOffset() from the browser.
 const dayOf = (time: number, tz: number) => Math.floor((time - tz * 60 * 1000) / DAY);
 
 export const GET = handle(async (request) => {
@@ -37,7 +36,6 @@ export const GET = handle(async (request) => {
   ]);
   const now = Date.now();
 
-  // Answers per day for the last 14 days, and the run of consecutive practice days up to today
   const today = dayOf(now, tz);
   const perDay = new Map<number, number>();
   for (const row of days.rows) {

@@ -1,12 +1,9 @@
 import { getDb } from './db.js';
 import { HttpError } from './http.js';
 
-// The caller's address as the platform reports it. Vercel sets these headers itself, so a client cannot choose them.
-// Without one (local development) there is nothing to key on, so the limit does not apply.
 export const clientIp = (request: Request): string | null =>
   request.headers.get('x-real-ip') ?? request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? null;
 
-// Allows at most `max` events of one kind per key in the window, and counts this one
 export const limitRate = async (request: Request, kind: string, max: number, windowMs: number, message: string) => {
   const key = clientIp(request);
   if (!key) return;

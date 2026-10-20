@@ -1,4 +1,3 @@
-// Fisher-Yates shuffle that returns a new array
 export const shuffle = <T>(items: readonly T[]): T[] => {
   const copy = [...items];
   for (let i = copy.length - 1; i > 0; i--) {

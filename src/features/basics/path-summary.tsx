@@ -1,7 +1,6 @@
 import { StackedBar } from '../../components/ui/stacked-bar';
 import type { PathSummaryProps } from './types';
 
-// Two numbers and one bar. The bar fills in when the page opens.
 export const PathSummary = ({ stagesDone, stagesTotal, lessonsDone, lessonsTotal, percent }: PathSummaryProps) => (
   <section aria-label="Your progress on the starter path" className="flex flex-col gap-3">
     <div className="flex flex-wrap items-end gap-x-10 gap-y-2">

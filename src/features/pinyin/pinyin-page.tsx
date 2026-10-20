@@ -18,7 +18,6 @@ const TONES = [
   { value: '4', label: 'Tone 4', detail: 'Falling' },
 ] as const;
 
-// Turns what someone types, such as "Lü3" or "nǚ", into the spelling the recordings use
 const toSpelling = (text: string) =>
   text
     .toLowerCase()

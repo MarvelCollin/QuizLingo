@@ -1,7 +1,6 @@
 import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react';
 import type { SortHeaderProps } from './types';
 
-// A column header: the sort button on top, the column's filter underneath
 export const SortHeader = ({ label, sortKey, filters, onSort, filter, className }: SortHeaderProps) => {
   const isSorted = sortKey !== undefined && filters.sort === sortKey;
   const Icon = !isSorted ? ArrowUpDown : filters.dir === 'asc' ? ArrowUp : ArrowDown;

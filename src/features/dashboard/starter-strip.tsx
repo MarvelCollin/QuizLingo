@@ -1,7 +1,6 @@
 import { ButtonLink } from '../../components/ui/button';
 import type { StarterStripProps } from './types';
 
-// A slim reminder that the starter path is still going, shown under the main next step
 export const StarterStrip = ({ next, stagesDone, stagesTotal }: StarterStripProps) => (
   <section
     aria-labelledby="starter-title"

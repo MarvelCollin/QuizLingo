@@ -14,7 +14,6 @@ const toProgress = (row: Record<string, unknown>) => ({
   lastSeenAt: Number(row.last_seen_at),
 });
 
-// Every word the signed-in user has practised
 export const GET = handle(async (request) => {
   const {
     results: [result],
@@ -32,10 +31,8 @@ type Body = { results?: unknown };
 type Result = { word: string; level: number; correct: boolean };
 
 const MAX_RESULTS = 100;
-// The word list has 10,896 entries, so this leaves room and no more
 const MAX_WORDS = 12000;
 
-// Records answers and schedules each word's next review
 export const POST = handle(async (request) => {
   const body = await readJson<Body>(request);
   if (!Array.isArray(body.results) || body.results.length === 0 || body.results.length > MAX_RESULTS) {

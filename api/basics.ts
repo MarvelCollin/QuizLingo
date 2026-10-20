@@ -10,7 +10,6 @@ const toLesson = (row: Record<string, unknown>) => ({
   completedAt: row.completed_at === null ? null : Number(row.completed_at),
 });
 
-// Every starter path lesson the signed-in user has tried
 export const GET = handle(async (request) => {
   const {
     results: [result],
@@ -23,7 +22,6 @@ export const GET = handle(async (request) => {
   return json({ lessons: result.rows.map((row) => toLesson(row as Record<string, unknown>)) });
 });
 
-// Starts the path over by removing every lesson score of the signed-in user
 export const DELETE = handle(async (request) => {
   const scope = requireScope(request);
   const db = await getDb();
@@ -40,10 +38,8 @@ export const DELETE = handle(async (request) => {
 
 type Body = { lesson?: unknown; score?: unknown; passed?: unknown };
 
-// More than the path has lessons, so no real learner reaches it
 const MAX_LESSONS = 200;
 
-// Records one attempt at a lesson. The best score only goes up and a pass is never taken back.
 export const POST = handle(async (request) => {
   const scope = requireScope(request);
   const body = await readJson<Body>(request);

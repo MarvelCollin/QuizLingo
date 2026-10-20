@@ -13,6 +13,7 @@ import { useSentences } from '../study/use-study-data';
 import { LEVELS, levelLabel } from '../vocabulary/constants';
 import type { HskLevel } from '../vocabulary/types';
 import { isRecognitionSupported } from './recognition';
+import { useBrave } from './use-brave';
 import { SpeakingTask } from './speaking-task';
 import type { SpeakingRoundProps } from './types';
 
@@ -51,7 +52,18 @@ const SpeakingPage = () => {
   const level = LEVELS.includes(requested) ? requested : 1;
   const sentences = useSentences(level);
   const [round, setRound] = useState<{ id: number; items: Sentence[] } | null>(null);
+  const isBrave = useBrave();
 
+  if (isBrave) {
+    return (
+      <div className="mx-auto flex max-w-2xl flex-col gap-4">
+        <h1 className="text-2xl font-bold text-ink">Speaking</h1>
+        <InlineMessage tone="error">
+          Brave blocks the speech service this practice needs. Open QuizLingo in Chrome or Edge to practice speaking. In the starter path you can still record yourself and compare with the native voice.
+        </InlineMessage>
+      </div>
+    );
+  }
   if (!isRecognitionSupported()) {
     return (
       <div className="mx-auto flex max-w-2xl flex-col gap-4">

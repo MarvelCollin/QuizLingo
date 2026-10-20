@@ -32,7 +32,6 @@ const wordCards = (specs: WordSpec[], vocabulary: Map<string, Word>): LearnCard[
     };
   });
 
-// One question per word, rotating through three ways of asking so a round does not feel repetitive
 const wordSeeds = (specs: WordSpec[], vocabulary: Map<string, Word>): QuestionSeed[] => {
   const pool = allSpecs();
   return shuffle(specs).map((spec, index) => {
@@ -56,7 +55,6 @@ const wordSeeds = (specs: WordSpec[], vocabulary: Map<string, Word>): QuestionSe
   });
 };
 
-// Tone pair questions come from real HSK 1 words that have a recording
 const pairSeeds = ({ vocabulary, audioWords }: BuildContext): QuestionSeed[] => {
   const tones = [1, 2, 3, 4];
   const seeds = vocabulary
@@ -90,11 +88,9 @@ const rawSeedsOf = (lesson: Lesson, ctx: BuildContext, vocabulary: Map<string, W
   return [];
 };
 
-// Each question remembers its lesson, so a miss can be filed under it
 const seedsOf = (lesson: Lesson, ctx: BuildContext, vocabulary: Map<string, Word>): QuestionSeed[] =>
   rawSeedsOf(lesson, ctx, vocabulary).map((seed) => ({ ...seed, lesson: lesson.id }));
 
-// Takes questions from each lesson in turn, so a milestone covers everything and no lesson dominates
 const mixed = (from: string[], ctx: BuildContext, vocabulary: Map<string, Word>): QuestionSeed[] => {
   const lanes = from.flatMap((id) => {
     const lesson = lessonById(id);
@@ -125,7 +121,6 @@ export const buildLesson = (lesson: Lesson, ctx: BuildContext): LessonContent =>
   return { cards: [], questions: mixed(source.from, ctx, vocabulary).map(toQuestion) };
 };
 
-// A quiz made of the questions someone keeps missing, the ones missed most first
 export const buildWeakQuiz = (keys: string[], ctx: BuildContext): QuizQuestion[] => {
   const vocabulary = new Map(ctx.vocabulary.map((word) => [word.hanzi, word]));
   const lessons = new Map<string, QuestionSeed[]>();

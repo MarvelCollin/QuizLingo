@@ -110,7 +110,6 @@ describe('starter path sentences', () => {
   it('spells every sentence the way a dictionary does, apart from changing tones and neutral syllables', () => {
     const letters = (text: string) => text.toLowerCase().replace(/[^a-zāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜü]/g, '');
     const bare = (char: string) => char.normalize('NFD').replace(/[̀-ͯ]/g, '');
-    // 不 and 一 are written as they are said, and a neutral syllable has no mark where a dictionary gives one
     const base = (text: string) => letters(text.replace(/yí|yì/g, 'yī').replace(/bú/g, 'bù'));
     for (const { zh, pinyin: written } of lines()) {
       const expected = letters(pinyin(zh, { toneType: 'symbol', toneSandhi: false, type: 'string' }));

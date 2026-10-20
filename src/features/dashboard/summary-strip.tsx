@@ -2,7 +2,6 @@ import { Link } from 'react-router';
 import { percent, plural } from '../../lib/format';
 import type { SummaryStripProps } from './types';
 
-// Key numbers in one strip: label above value, the most important one largest, each with context
 export const SummaryStrip = ({ mastered, totalWords, accuracy, streak }: SummaryStripProps) => (
   <dl className="grid grid-cols-2 gap-x-8 gap-y-6 border-y border-hairline py-6 sm:grid-cols-[2fr_1fr_1fr]">
     <div className="col-span-2 sm:col-span-1">

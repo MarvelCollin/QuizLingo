@@ -23,6 +23,21 @@ const onlyHanzi = (text: string) => [...text].filter((c) => /[一-鿿]/.test(c))
 
 export const PASS_SCORE = 80;
 
+type BraveNavigator = Navigator & { brave?: { isBrave?: () => Promise<boolean> } };
+
+export const detectBrave = async (): Promise<boolean> => {
+  try {
+    return Boolean(await (navigator as BraveNavigator).brave?.isBrave?.());
+  } catch {
+    return false;
+  }
+};
+
+export const isRecorderSupported = () =>
+  typeof navigator !== 'undefined' && Boolean(navigator.mediaDevices?.getUserMedia) && typeof MediaRecorder !== 'undefined';
+
+export const PERMANENT_ERRORS = new Set(['network', 'service-not-allowed', 'language-not-supported']);
+
 export const RECOGNITION_ERRORS: Record<string, string> = {
   'not-allowed': 'The microphone is blocked. Allow it in the browser address bar, then try again.',
   'no-speech': 'Nothing was heard. Try again a little closer to the microphone.',
@@ -30,7 +45,7 @@ export const RECOGNITION_ERRORS: Record<string, string> = {
   'service-not-allowed': 'This browser does not allow speech recognition. Try Chrome or Edge.',
   'language-not-supported': 'This browser cannot recognise Chinese speech. Try Chrome or Edge.',
   network:
-    'The browser could not reach its speech service. Chrome and Edge send your voice to an online service, so a VPN, a firewall, an ad blocker or no internet blocks it. Everything else here works without the microphone.',
+    'The browser could not reach its speech service. Chrome and Edge send your voice to an online service, so a VPN, a firewall or no internet blocks it. Brave blocks it on purpose.',
 };
 
 export const compareSpeech = (target: string, heard: string): { score: number; marks: CharMark[] } => {

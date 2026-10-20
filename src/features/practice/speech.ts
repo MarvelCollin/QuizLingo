@@ -22,7 +22,6 @@ const chineseVoice = () =>
 const audioUrl = (folder: string, name: string) =>
   `${import.meta.env.BASE_URL}audio/${folder}/${encodeURIComponent(name)}.mp3`;
 
-// Fetches a recording ahead of time so it plays at once when asked for
 export const preloadRecording = ({ sound, word }: { sound?: string; word?: string }) => {
   const url = sound ? audioUrl('syllables', sound) : word && recordedWords.has(word) ? audioUrl('words', word) : null;
   if (!url || typeof Audio === 'undefined') return;

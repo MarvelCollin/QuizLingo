@@ -7,8 +7,6 @@ import type { IncomingMessage, ServerResponse } from 'node:http'
 
 const BASE = '/quizlingo/'
 
-// Serves the Vercel functions in api/ during `npm run dev`, so the app and API run from one command.
-// On Vercel the platform routes /api itself and this plugin is not used.
 const vercelApi = (): Plugin => ({
   name: 'vercel-api-dev',
   configureServer(server: ViteDevServer) {
@@ -51,9 +49,7 @@ const vercelApi = (): Plugin => ({
   },
 })
 
-// https://vite.dev/config/
 export default defineConfig(({ mode }) => {
-  // Make TURSO_* from .env.local visible to the API during development
   Object.assign(process.env, loadEnv(mode, process.cwd(), 'TURSO_'))
   return {
     base: BASE,

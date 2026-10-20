@@ -3,7 +3,6 @@ import type { ActivityChartProps } from './types';
 const dayFormat = new Intl.DateTimeFormat('en', { weekday: 'short', day: 'numeric', month: 'short' });
 const shortDay = new Intl.DateTimeFormat('en', { weekday: 'narrow' });
 
-// Answers per day for the last two weeks. Each bar has its own label, and the totals are in the accessible name.
 export const ActivityChart = ({ activity }: ActivityChartProps) => {
   const max = Math.max(...activity.map((d) => d.answers), 1);
   const total = activity.reduce((sum, d) => sum + d.answers, 0);

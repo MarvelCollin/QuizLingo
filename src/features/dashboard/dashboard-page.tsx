@@ -35,7 +35,6 @@ const DashboardPage = () => {
   const stats = useStats();
   const vocabulary = useVocabulary();
   const progress = useProgress();
-  // The starter path is a bonus here, so the page never waits for it
   const basics = useBasicsPath();
 
   const totals = useMemo(() => {
@@ -44,7 +43,6 @@ const DashboardPage = () => {
     return counts;
   }, [vocabulary.data]);
 
-  // The first level that still has words the user has never seen
   const nextNewLevel = useMemo((): LevelFilter | null => {
     for (const level of LEVELS) {
       if (vocabulary.data?.some((w) => w.level === level && !progress.byWord.has(w.hanzi))) {

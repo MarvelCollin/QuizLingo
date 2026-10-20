@@ -6,11 +6,9 @@ import type { HskLevel, Word } from '../vocabulary/types';
 import { PRACTICE_MODES } from './constants';
 import type { AnswerRecord, LevelFilter, PracticeModeId } from './types';
 
-// Runs one round: records each answer, saves it straight away, and saves the summary at the end
 export const useRound = (words: Word[], mode: PracticeModeId, level: LevelFilter) => {
   const [index, setIndex] = useState(0);
   const [records, setRecords] = useState<AnswerRecord[]>([]);
-  // Mirrors records so next() sees an answer given in the same click (flashcards grade and advance at once)
   const recordsRef = useRef<AnswerRecord[]>([]);
   const [unsaved, setUnsaved] = useState<Answer[]>([]);
   const saveAnswer = useSaveAnswer();

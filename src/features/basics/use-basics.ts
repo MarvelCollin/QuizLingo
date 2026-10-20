@@ -6,7 +6,6 @@ import type { LessonProgress } from './types';
 
 export const basicsKey = ['basics'] as const;
 
-// Every lesson the learner has tried, and the path state worked out from it
 export const useBasicsPath = () => {
   const query = useQuery({ queryKey: basicsKey, queryFn: fetchLessonProgress });
   const path = useMemo(() => (query.data ? buildPath(query.data) : null), [query.data]);
@@ -27,7 +26,6 @@ export const useSaveAttempt = () => {
   });
 };
 
-// Clears every lesson score on the account, so the path starts again from the first lesson
 export const useResetPath = () => {
   const client = useQueryClient();
   return useMutation({ mutationFn: resetPath, onSuccess: () => client.setQueryData<LessonProgress[]>(basicsKey, []) });

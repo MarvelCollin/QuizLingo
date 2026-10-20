@@ -2,7 +2,6 @@ import { BrandMark } from '../../components/layout/brand-mark';
 import type { AuthLayoutProps } from './types';
 import { useWarmApp } from './use-warm-app';
 
-// Sign in and sign up share one quiet, centered layout with the study promise beside the form on wide screens
 export const AuthLayout = ({ title, intro, children, footer }: AuthLayoutProps) => {
   useWarmApp();
   return (

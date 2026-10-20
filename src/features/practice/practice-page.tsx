@@ -38,7 +38,6 @@ const PracticePage = () => {
   const sentences = useSentences(usesSentences ? 7 : 1);
   const [now] = useState(() => Date.now());
 
-  // The options are kept in the URL, so Back and links from the dashboard restore them
   const update = (change: Partial<RoundConfig>) =>
     setParams(new URLSearchParams({ ...config, ...change }), { replace: true });
 

@@ -5,7 +5,6 @@ import type { LevelFilter, RoundConfig, RoundSize, WordSetId } from './types';
 const pick = <T extends string>(value: string | null, allowed: readonly T[], fallback: T): T =>
   allowed.includes(value as T) ? (value as T) : fallback;
 
-// The round lives in the URL, so a link can open a ready-made round and Back works
 export const configFromParams = (params: URLSearchParams): RoundConfig => ({
   mode: pick(params.get('mode'), PRACTICE_MODES.map((m) => m.id), DEFAULT_CONFIG.mode),
   set: pick<WordSetId>(params.get('set'), ['due', 'new', 'all'], DEFAULT_CONFIG.set),

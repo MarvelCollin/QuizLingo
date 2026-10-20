@@ -2,7 +2,6 @@ import type { Credentials, FieldErrors, Registration } from './types';
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// Same limits as the API, checked first so mistakes show up next to the field
 export const validateCredentials = ({ email, password }: Credentials): FieldErrors<Credentials> => ({
   ...(!EMAIL.test(email.trim()) && { email: 'Enter an email address like name@example.com.' }),
   ...(password.length === 0 && { password: 'Enter your password.' }),

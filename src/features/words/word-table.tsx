@@ -7,7 +7,6 @@ import { SortHeader } from './sort-header';
 import type { SortKey } from './types';
 import type { WordTableProps } from './types';
 
-// Wide screens: a table with a sort and a filter in every column header
 export const WordTable = ({ rows, filters, resetKey, onChange }: WordTableProps) => {
   const handleSort = (sort: SortKey) =>
     onChange({ sort, dir: filters.sort === sort && filters.dir === 'asc' ? 'desc' : 'asc', page: filters.page });

@@ -11,7 +11,6 @@ const isTakenEmail = (error: unknown) =>
 const HOUR = 60 * 60 * 1000;
 
 export const POST = handle(async (request) => {
-  // Checked first, since hashing a password is the costly part and an account costs a row
   await limitRate(request, 'register', 10, HOUR, 'Too many accounts were created from this network. Try again in an hour.');
   const body = await readJson<Body>(request);
   const name = typeof body.name === 'string' ? body.name.trim() : '';

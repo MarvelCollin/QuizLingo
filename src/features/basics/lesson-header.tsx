@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 import { StackedBar } from '../../components/ui/stacked-bar';
 import type { LessonHeaderProps } from './types';
 
-// Always shows the way out, what you are doing, and how far along you are
 export const LessonHeader = ({ label, position, total, segments }: LessonHeaderProps) => (
   <div className="flex items-center gap-4">
     <Link

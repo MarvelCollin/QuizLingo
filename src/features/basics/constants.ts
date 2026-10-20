@@ -14,7 +14,6 @@ export const TONE_NAMES: Record<ToneNumber, string> = {
   5: 'Neutral tone, light and short',
 };
 
-// Pitch on a 1 to 5 scale, the way Chinese textbooks draw the tones
 export const TONE_PITCH: Record<ToneNumber, [number, number, ...number[]]> = {
   1: [5, 5],
   2: [3, 5],

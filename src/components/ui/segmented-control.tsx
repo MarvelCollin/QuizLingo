@@ -2,8 +2,6 @@ import { useId, useRef, type KeyboardEvent } from 'react';
 import { cn } from '../../lib/utils';
 import type { SegmentedControlProps } from './ui.types';
 
-
-// A radio group that looks like connected buttons. Arrow keys move the choice, as in the APG radio pattern.
 export const SegmentedControl = <T extends string>({
   label,
   options,

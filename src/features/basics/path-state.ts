@@ -10,8 +10,6 @@ export type PathState = {
   percent: number;
 };
 
-// A stage opens when the one before it is passed. Inside a stage lessons open in order,
-// and the milestone is open from the start so someone who already knows the material can test out.
 export const buildPath = (progress: LessonProgress[]): PathState => {
   const byLesson = new Map(progress.map((p) => [p.lesson, p]));
   const isPassed = (id: string) => byLesson.get(id)?.completedAt != null;
@@ -43,12 +41,10 @@ export const buildPath = (progress: LessonProgress[]): PathState => {
     };
   });
 
-  // The next step is the first unfinished lesson of the first stage that is not passed yet
   const current = stages.find((s) => !s.isDone);
   const next = current?.lessons.find((l) => l.status !== 'done' && l.status !== 'locked') ?? null;
 
   const lessonsTotal = stages.reduce((sum, s) => sum + s.lessons.length, 0);
-  // Passing a milestone counts every lesson of that stage, since the learner showed they know it
   const lessonsDone = stages.reduce((sum, s) => sum + (s.isDone ? s.lessons.length : s.doneCount), 0);
   return {
     stages,

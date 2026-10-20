@@ -2,7 +2,6 @@ import { ButtonLink } from '../../components/ui/button';
 import { configToSearch } from '../practice/round-config';
 import type { StarterHeroProps } from './types';
 
-// For someone with no word practice yet, the starter path is the first step and HSK 1 words are the shortcut
 export const StarterHero = ({ next, isFresh }: StarterHeroProps) => (
   <section aria-labelledby="next-title" className="rounded-xl bg-surface px-6 py-8 sm:px-8">
     <h2 id="next-title" className="text-2xl font-bold text-ink">

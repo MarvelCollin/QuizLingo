@@ -24,7 +24,6 @@ const splitInitial = (base: string) => {
   return 'bpmfdtnlgkhjqxrzcsyw'.includes(base[0]) && base.length > 1 ? base[0] : '';
 };
 
-// Pinyin spells some finals differently after some initials. This puts a syllable back under its true final.
 export const finalOf = (base: string): { initial: string; final: string } => {
   const initial = splitInitial(base);
   let rest = base.slice(initial.length).replace(/v/g, 'ü');
@@ -34,7 +33,6 @@ export const finalOf = (base: string): { initial: string; final: string } => {
   return { initial, final: rest };
 };
 
-// Reads the list of recorded syllables, such as 'ba1', into a chart of initials by finals
 export const buildChart = (recorded: Iterable<string>): PinyinChart => {
   const tones = new Map<string, Set<number>>();
   for (const name of recorded) {

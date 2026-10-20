@@ -20,7 +20,6 @@ export const ChoiceQuestion = ({ question, mode, onAnswer, onNext }: ChoiceQuest
   const isAnswered = chosen !== null;
   const isListening = mode === 'listening';
 
-  // Listening questions play the word as soon as they appear
   useEffect(() => {
     if (isListening) speak(question.word.hanzi);
   }, [isListening, question.word.hanzi]);

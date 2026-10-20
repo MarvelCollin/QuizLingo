@@ -15,8 +15,6 @@ export const json = (body: unknown, init: ResponseInit = {}): Response => {
 
 const MAX_BODY_BYTES = 64 * 1024;
 
-// Only JSON bodies are accepted. Browsers cannot send this content type
-// cross-site without a preflight, which keeps form-based CSRF out.
 export const readJson = async <T>(request: Request): Promise<T> => {
   const type = request.headers.get('content-type') ?? '';
   if (!type.includes('application/json')) throw new HttpError(415, 'Expected a JSON body');
@@ -40,7 +38,6 @@ export const parseCookies = (request: Request): Record<string, string> => {
   return cookies;
 };
 
-// Wraps a handler so thrown HttpErrors become JSON responses and anything else is a 500
 export const handle =
   (handler: (request: Request) => Promise<Response>) =>
   async (request: Request): Promise<Response> => {

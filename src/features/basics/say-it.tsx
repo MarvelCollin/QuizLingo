@@ -2,20 +2,31 @@ import { Mic, Square } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '../../components/ui/button';
 import { cn } from '../../lib/utils';
-import { compareSpeech, createRecognizer, isRecognitionSupported, PASS_SCORE, RECOGNITION_ERRORS } from '../speaking/recognition';
+import {
+  compareSpeech,
+  createRecognizer,
+  isRecognitionSupported,
+  isRecorderSupported,
+  PASS_SCORE,
+  PERMANENT_ERRORS,
+  RECOGNITION_ERRORS,
+} from '../speaking/recognition';
+import { useBrave } from '../speaking/use-brave';
 import type { Recognizer } from '../speaking/types';
 import { stopSpeaking } from '../practice/speech';
+import { SelfRecord } from './self-record';
 import type { SayItProps } from './types';
 
-// Say the word or sentence on a card and see which characters the browser heard. Hidden where speech recognition is missing.
 export const SayIt = ({ text }: SayItProps) => {
   const [isListening, setIsListening] = useState(false);
   const [result, setResult] = useState<ReturnType<typeof compareSpeech> | null>(null);
   const [error, setError] = useState('');
+  const [isBlocked, setIsBlocked] = useState(false);
+  const isBrave = useBrave();
   const recognizer = useRef<Recognizer | null>(null);
 
   useEffect(() => () => recognizer.current?.abort(), []);
-  if (!isRecognitionSupported()) return null;
+  if (!isRecognitionSupported() || isBrave || isBlocked) return isRecorderSupported() ? <SelfRecord text={text} /> : null;
 
   const start = () => {
     stopSpeaking();
@@ -30,7 +41,10 @@ export const SayIt = ({ text }: SayItProps) => {
         .map((r) => r[0].transcript)
         .join('');
     };
-    created.onerror = (event) => setError(RECOGNITION_ERRORS[event.error] ?? 'Speech recognition stopped. Try again.');
+    created.onerror = (event) => {
+      if (PERMANENT_ERRORS.has(event.error)) setIsBlocked(true);
+      else setError(RECOGNITION_ERRORS[event.error] ?? 'Speech recognition stopped. Try again.');
+    };
     created.onend = () => {
       setIsListening(false);
       if (latest) setResult(compareSpeech(text, latest));

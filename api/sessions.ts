@@ -5,7 +5,6 @@ import * as validate from './_lib/validate.js';
 
 type Body = { mode?: unknown; level?: unknown; total?: unknown; correct?: unknown };
 
-// Saves the summary of one finished practice round
 export const POST = handle(async (request) => {
   const scope = requireScope(request);
   const body = await readJson<Body>(request);

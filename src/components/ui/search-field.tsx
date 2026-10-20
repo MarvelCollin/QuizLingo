@@ -4,7 +4,6 @@ import { useDebouncedCallback } from '../../lib/use-debounced-callback';
 import { cn } from '../../lib/utils';
 import type { SearchFieldProps } from './ui.types';
 
-// Updates its owner about 250ms after typing stops. Remount it (change its key) to reset it from outside.
 export const SearchField = ({ label, value, onChange, placeholder, isLabelVisible = false, className }: SearchFieldProps) => {
   const id = useId();
   const [text, setText] = useState(value);

@@ -3,7 +3,6 @@ import { cn } from '../../lib/utils';
 import { playSyllable, speak } from '../practice/speech';
 import type { PlayButtonProps } from './types';
 
-// Plays a native syllable recording, or a word with its recording or the browser voice
 export const PlayButton = ({ sound, word, label = 'Listen', size = 'md' }: PlayButtonProps) => {
   if (!sound && !word) return null;
   return (

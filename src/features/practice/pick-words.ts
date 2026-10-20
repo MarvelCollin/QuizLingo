@@ -19,7 +19,6 @@ export const wordsInSet = (words: Word[], set: WordSetId, progress: Map<string, 
   return shuffle(words);
 };
 
-// Most overdue words first, new words in syllabus order, then the round is shuffled
 export const pickRoundWords = (
   words: Word[],
   config: RoundConfig,

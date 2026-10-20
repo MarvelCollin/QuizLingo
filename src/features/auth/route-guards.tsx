@@ -13,7 +13,6 @@ const SessionSkeleton = () => (
   </div>
 );
 
-// Screens behind sign in. Visitors without a session go to /login and come back afterwards.
 export const RequireSignIn = ({ children }: GuardProps) => {
   const session = useSession();
   const location = useLocation();
@@ -42,7 +41,6 @@ export const RequireSignIn = ({ children }: GuardProps) => {
   return children;
 };
 
-// Sign in and sign up pages send people who are already signed in to their dashboard
 export const RedirectIfSignedIn = ({ children }: GuardProps) => {
   const session = useSession();
   if (session.data) return <Navigate to="/" replace />;

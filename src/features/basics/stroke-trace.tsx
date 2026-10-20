@@ -6,7 +6,6 @@ import type { StrokeTraceProps } from './types';
 
 const SIZE = 200;
 
-// Draw the character over its faint outline. A wrong stroke is flagged, and a hint shows after a second miss.
 export const StrokeTrace = ({ char }: StrokeTraceProps) => {
   const target = useRef<HTMLDivElement>(null);
   const [mistakes, setMistakes] = useState<number | null>(null);

@@ -1,5 +1,3 @@
-// Leitner boxes. A right answer moves a word up one box, a wrong answer sends it back to box 0.
-// A word in box 4 or 5 counts as mastered.
 const MINUTE = 60 * 1000;
 const DAY = 24 * 60 * MINUTE;
 

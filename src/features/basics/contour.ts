@@ -10,10 +10,8 @@ const NEUTRAL_WIDTH = 34;
 
 export type ContourSegment = { d: string; isNeutral: boolean; start: [number, number]; end: [number, number] };
 
-// guides run from pitch 1 at the bottom of the picture to pitch 5 at the top
 export type Contour = { width: number; height: number; guides: number[]; segments: ContourSegment[] };
 
-// Pitch 5 sits at the top and pitch 1 at the bottom
 const yOf = (pitch: number) => PAD_Y + ((5 - pitch) / 4) * (HEIGHT - 2 * PAD_Y);
 
 const round = (value: number) => Math.round(value * 10) / 10;
@@ -22,7 +20,6 @@ const pathOf = (x: number, width: number, pitches: number[]): string => {
   const points = pitches.map((pitch, i) => [x + (width * i) / (pitches.length - 1), yOf(pitch)] as const);
   const [a, b, c] = points;
   if (!c) return `M ${round(a[0])} ${round(a[1])} L ${round(b[0])} ${round(b[1])}`;
-  // A dip: curve down to the lowest point, then up to the end
   const reach = width * 0.22;
   return [
     `M ${round(a[0])} ${round(a[1])}`,
@@ -31,7 +28,6 @@ const pathOf = (x: number, width: number, pitches: number[]): string => {
   ].join(' ');
 };
 
-// The pitch line for one or more syllables, drawn left to right the way textbooks show it
 export const contourOf = (tones: ToneNumber[]): Contour => {
   let x = PAD_X;
   const segments = tones.map((tone): ContourSegment => {

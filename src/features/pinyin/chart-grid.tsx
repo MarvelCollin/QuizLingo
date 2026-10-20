@@ -5,12 +5,10 @@ import type { ChartGridProps } from './types';
 
 const cornerClass = 'sticky top-0 left-0 z-30 border-r border-b border-hairline bg-bg px-3 py-2 text-left text-sm font-semibold text-muted';
 
-// Every pinyin syllable that has a native recording, by first sound down and vowel part across
 export const ChartGrid = ({ chart, tone, found, playing, onPlay }: ChartGridProps) => {
   const foundRef = useRef<HTMLButtonElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
 
-  // Centre the found syllable inside the chart only, so the rest of the page stays where it is
   useEffect(() => {
     const box = boxRef.current?.getBoundingClientRect();
     const cell = foundRef.current?.getBoundingClientRect();

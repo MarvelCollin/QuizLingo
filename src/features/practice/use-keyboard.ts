@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 
-// Global shortcuts for a practice screen. Ignored while typing in a field or holding a modifier key.
 export const useKeyboard = (onKey: (key: string) => boolean | void) => {
   const handler = useRef(onKey);
   useEffect(() => {

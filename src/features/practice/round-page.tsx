@@ -20,9 +20,7 @@ const RoundSkeleton = () => (
   </div>
 );
 
-// Picks the words once when the round starts, so answering does not reshuffle the round
 const RoundRunner = ({ vocabulary, progress, sentences, config }: RoundRunnerProps) => {
-  // Stable, so wrong options are not reshuffled when saved progress refreshes mid question
   const pool = useMemo(() => {
     const inLevel = wordsInLevel(vocabulary, config.level);
     return inLevel.length >= 8 ? inLevel : vocabulary;

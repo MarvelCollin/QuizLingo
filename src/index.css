@@ -1,9 +1,5 @@
 @import 'tailwindcss';
 
-/*
-  Palette: Color Hunt f1f6f9 14274e 394867 9ba4b4 (https://colorhunt.co/palette/f1f6f914274e3948679ba4b4).
-  The four hex values are used as they are. Text, border, hover and the bright button blue are derived from their hues.
-*/
 :root {
   --bg: #f1f6f9;
   --surface: oklch(0.945 0.012 245);
@@ -98,13 +94,11 @@
   --font-sans: 'Figtree Variable', ui-sans-serif, system-ui, sans-serif;
   --font-hanzi: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
 
-  /* Radius grows with the size of the element */
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 10px;
   --radius-xl: 14px;
 
-  /* Type scale, ratio 1.25 */
   --text-xs: 0.8rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
@@ -139,7 +133,6 @@ body {
   color: var(--ink);
 }
 
-/* The product's own scrollbars instead of the browser default */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--line) transparent;
@@ -173,7 +166,6 @@ body {
   }
 }
 
-/* Starter path motion. Only transform and opacity move, and reduced motion shortens all of it above. */
 @keyframes rise-in {
   from {
     opacity: 0;

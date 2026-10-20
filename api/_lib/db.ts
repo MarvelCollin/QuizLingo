@@ -68,7 +68,6 @@ export const getDb = async (): Promise<Client> => {
     if (!url) throw new Error('TURSO_DATABASE_URL is not set');
     client = createClient({ url, authToken: process.env.TURSO_AUTH_TOKEN });
   }
-  // Tables are created on the first request of each cold start, so a new database needs no setup step
   schemaReady ??= client
     .batch(SCHEMA, 'write')
     .then(() => undefined)

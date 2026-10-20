@@ -1,4 +1,3 @@
-// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { buildChart, FINALS, finalOf, INITIALS } from '../../src/features/pinyin/chart';
 import type { RawAudioIndex } from '../../src/features/study/types';

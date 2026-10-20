@@ -1,7 +1,6 @@
 import type { HskLevel, RawWord, Word } from './types';
 
 export const toWord = (raw: RawWord): Word => {
-    // Dictionary glosses join senses with semicolons. Commas read better in the UI.
   const readings = raw.f.map((form) => ({
     pinyin: form.i.y ?? '',
     numeric: (form.i.n ?? '').toLowerCase(),

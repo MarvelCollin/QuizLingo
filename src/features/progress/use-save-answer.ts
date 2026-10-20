@@ -4,7 +4,6 @@ import { progressKey } from './use-progress';
 import { statsKey } from './use-stats';
 import type { Answer, WordProgress } from './types';
 
-// Saves one answer and merges the server's new schedule for that word into the cache
 export const useSaveAnswer = () => {
   const client = useQueryClient();
   return useMutation({

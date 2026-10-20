@@ -3,7 +3,6 @@ import { plural } from '../../lib/format';
 import { configToSearch } from '../practice/round-config';
 import type { NextStepProps } from './types';
 
-// The one thing to do now: review what is due, otherwise learn new words
 export const NextStep = ({ due, nextNewLevel, isFirstVisit }: NextStepProps) => {
   if (due > 0) {
     return (

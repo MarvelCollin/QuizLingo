@@ -23,7 +23,6 @@ export const filtersFromParams = (params: URLSearchParams): WordFilters => ({
   page: Math.max(1, Number(params.get('page')) || 1),
 });
 
-// Only non-default values go in the URL, so links stay short
 export const filtersToParams = (filters: WordFilters) => {
   const params = new URLSearchParams();
   if (filters.q) params.set('q', filters.q);
@@ -73,7 +72,6 @@ const matches = (row: WordRow, f: WordFilters) => {
   return true;
 };
 
-// The word list is a fixed file shipped with the app, so filtering it here is instant
 export const applyFilters = (rows: WordRow[], filters: WordFilters, direction: SortDirection = filters.dir) => {
   const filtered = rows.filter((row) => matches(row, filters));
   const sign = direction === 'asc' ? 1 : -1;

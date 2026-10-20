@@ -3,7 +3,6 @@ import type { StampProps } from './types';
 const PIECES = 14;
 const TONES = ['bg-bad-strong', 'bg-accent-strong', 'bg-primary', 'bg-ok-strong'];
 
-// Small pieces fly out from the stamp for a moment. They are decoration, so they are hidden from screen readers.
 const Burst = () => (
   <span aria-hidden="true" className="pointer-events-none absolute inset-0">
     {Array.from({ length: PIECES }, (_, i) => {
@@ -20,7 +19,6 @@ const Burst = () => (
   </span>
 );
 
-// A red seal style stamp that presses onto the page when a lesson or milestone is passed
 export const Stamp = ({ kind }: StampProps) => {
   const isMilestone = kind === 'milestone';
   return (

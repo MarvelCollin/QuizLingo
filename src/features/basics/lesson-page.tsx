@@ -1,29 +1,15 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router';
-import { Button, ButtonLink } from '../../components/ui/button';
+import { ButtonLink } from '../../components/ui/button';
 import { InlineMessage } from '../../components/ui/inline-message';
 import { Skeleton } from '../../components/ui/skeleton';
-import { percent } from '../../lib/format';
-import { shuffle } from '../../lib/random';
 import { usePageMeta } from '../../lib/use-page-meta';
-import { preloadRecording } from '../practice/speech';
-import { useSession } from '../auth/use-session';
-import { useKeyboard } from '../practice/use-keyboard';
-import type { Answer } from '../progress/types';
-import { useSaveAnswers } from '../progress/use-save-answers';
-import { useSaveRound } from '../progress/use-save-round';
 import { useAudioIndex } from '../study/use-study-data';
 import { useVocabulary } from '../vocabulary/use-vocabulary';
-import { buildLesson } from './build-lesson';
-import { CardView } from './card-view';
-import { CHECKPOINT_PASS, LESSON_PASS } from './constants';
-import { isCheckpoint, lessonById } from './curriculum';
-import { LessonHeader } from './lesson-header';
-import { LessonResult } from './lesson-result';
-import { QuizView } from './quiz-view';
-import type { AttemptInput, LessonPhase, QuizAnswer } from './types';
-import { useBasicsPath, useSaveAttempt } from './use-basics';
-import { recordAnswers } from './weak-spots';
+import { lessonById } from './curriculum';
+import { LessonRun } from './lesson-run';
+import type { LessonPhase } from './types';
+import { useBasicsPath } from './use-basics';
 
 const LessonSkeleton = () => (
   <div className="mx-auto flex max-w-2xl flex-col gap-6" aria-busy="true" aria-label="Loading the lesson">
@@ -42,47 +28,7 @@ const LessonPage = () => {
   const vocabulary = useVocabulary();
   const audio = useAudioIndex();
   const needsData = lesson?.source.kind !== 'static';
-
-  const [run, setRun] = useState(0);
-  const [phase, setPhase] = useState<LessonPhase | null>(null);
-  const [cardIndex, setCardIndex] = useState(0);
-  const [answers, setAnswers] = useState<QuizAnswer[]>([]);
-  const lastAttempt = useRef<AttemptInput | null>(null);
-  const lastWords = useRef<Answer[]>([]);
-
-  const userId = useSession().data?.id ?? 'guest';
-  const saveAttempt = useSaveAttempt();
-  const saveRound = useSaveRound();
-  const saveWords = useSaveAnswers();
-
-  const content = useMemo(() => {
-    if (!lesson || (needsData && (!vocabulary.data || !audio.data))) return null;
-    return buildLesson(lesson, { vocabulary: vocabulary.data ?? [], audioWords: audio.data?.words ?? new Set() });
-    // run rebuilds the questions with a fresh shuffle
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lesson, needsData, vocabulary.data, audio.data, run]);
-
-  // The next card is fetched while this one is on screen, so Listen answers at once
-  useEffect(() => {
-    const upcoming = content?.cards[cardIndex + 1];
-    if (upcoming) preloadRecording(upcoming);
-  }, [content, cardIndex]);
-
-  const hasCards = (content?.cards.length ?? 0) > 0;
-  const current = phase ?? (hasCards ? 'cards' : 'quiz');
-
-  useKeyboard((key) => {
-    if (current !== 'cards' || !content) return;
-    const last = content.cards.length - 1;
-    if ((key === 'Enter' || key === 'ArrowRight') && cardIndex < last) {
-      setCardIndex(cardIndex + 1);
-      return true;
-    }
-    if (key === 'ArrowLeft' && cardIndex > 0) {
-      setCardIndex(cardIndex - 1);
-      return true;
-    }
-  });
+  const [run, setRun] = useState({ id: 0, phase: null as LessonPhase | null });
 
   if (!lesson) {
     return (
@@ -114,91 +60,15 @@ const LessonPage = () => {
       </div>
     );
   }
-  if (!content) return <LessonSkeleton />;
 
-  const passMark = isCheckpoint(lesson) ? CHECKPOINT_PASS : LESSON_PASS;
-
-  const submit = (finished: QuizAnswer[]) => {
-    const right = finished.filter((a) => a.question.options[a.chosen].isCorrect).length;
-    const score = percent(right, finished.length);
-    lastAttempt.current = { lesson: lesson.id, score, passed: score >= passMark };
-    lastWords.current = finished.flatMap((a) =>
-      a.question.srsWord
-        ? [{ word: a.question.srsWord, level: 1 as const, correct: a.question.options[a.chosen].isCorrect }]
-        : [],
-    );
-    recordAnswers(userId, finished);
-    saveAttempt.mutate(lastAttempt.current);
-    saveRound.mutate({ mode: 'basics', level: 1, total: finished.length, correct: right });
-    if (lastWords.current.length > 0) saveWords.mutate(lastWords.current);
-    setAnswers(finished);
-    setPhase('result');
-  };
-
-  const retrySave = () => {
-    if (lastAttempt.current) saveAttempt.mutate(lastAttempt.current);
-  };
-
-  const restart = (to: LessonPhase) => {
-    setAnswers([]);
-    setRun((value) => value + 1);
-    setPhase(to);
-    setCardIndex(0);
-  };
-
-  if (current === 'quiz') {
-    return <QuizView key={run} title={lesson.title} questions={content.questions} onFinish={submit} />;
-  }
-
-  if (current === 'missed') {
-    const again = answers
-      .filter((a) => !a.question.options[a.chosen].isCorrect)
-      .map(({ question }) => ({ ...question, options: shuffle(question.options) }));
-    return <QuizView key={`missed-${run}`} title={lesson.title} label="Missed questions" questions={again} onFinish={(done) => {
-      recordAnswers(userId, done);
-      setPhase('result');
-    }} />;
-  }
-
-  if (current === 'result') {
-    return (
-      <LessonResult
-        lesson={lesson}
-        answers={answers}
-        passMark={passMark}
-        isSaving={saveAttempt.isPending}
-        saveError={saveAttempt.error}
-        onRetrySave={retrySave}
-        onTryAgain={() => restart('quiz')}
-        onReview={hasCards ? () => restart('cards') : null}
-        onPracticeMissed={() => setPhase('missed')}
-      />
-    );
-  }
-
-  const card = content.cards[cardIndex];
-  const isLastCard = cardIndex === content.cards.length - 1;
   return (
-    <div className="mx-auto flex max-w-2xl flex-col gap-6">
-      <h1 className="sr-only">{lesson.title}</h1>
-      <LessonHeader
-        label={lesson.title}
-        position={cardIndex + 1}
-        total={content.cards.length}
-        segments={[{ label: 'seen', value: cardIndex + 1, className: 'bg-strong' }]}
-      />
-      <CardView key={`${run}-${card.id}`} card={card} />
-      <div className="flex gap-3">
-        {cardIndex > 0 && (
-          <Button size="lg" variant="secondary" onClick={() => setCardIndex(cardIndex - 1)}>
-            Back
-          </Button>
-        )}
-        <Button size="lg" className="flex-1" onClick={() => (isLastCard ? setPhase('quiz') : setCardIndex(cardIndex + 1))}>
-          {isLastCard ? 'Start the quiz' : 'Next'}
-        </Button>
-      </div>
-    </div>
+    <LessonRun
+      key={run.id}
+      lesson={lesson}
+      context={{ vocabulary: vocabulary.data ?? [], audioWords: audio.data?.words ?? new Set() }}
+      initialPhase={run.phase}
+      onRestart={(phase) => setRun({ id: run.id + 1, phase })}
+    />
   );
 };
 

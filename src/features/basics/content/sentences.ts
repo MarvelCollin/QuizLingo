@@ -5,7 +5,6 @@ type Reply = { prompt: string; answer: string; wrong: string[] };
 
 const line = (zh: string, pinyin: string, en: string): Line => ({ zh, pinyin, en });
 
-// A lesson of short sentences. Each one is heard and read, and a few exchanges ask which reply fits.
 const sentenceLesson = (id: string, title: string, summary: string, lines: Line[], replies: Reply[]): Lesson => {
   const cards = lines.map((item, index) => ({
     id: `s${index}`,
@@ -19,7 +18,6 @@ const sentenceLesson = (id: string, title: string, summary: string, lines: Line[
     ...lines.flatMap((item, index): QuestionSeed[] => {
       const wrong = meanings.filter((meaning) => meaning !== item.en);
       const explain = `${item.zh} ${item.pinyin}, ${item.en}`;
-      // One question per sentence, alternating between hearing it and reading it
       return index % 2 === 0
         ? [{ id: `hear-${index}`, prompt: 'What does this sentence mean?', word: item.zh, answer: item.en, wrong, explain }]
         : [{ id: `read-${index}`, prompt: 'What does this sentence mean?', hanzi: item.zh, answer: item.en, wrong, explain }];

@@ -4,7 +4,6 @@ import { AppShell } from '../components/layout/app-shell';
 import { PageFallback } from '../components/layout/page-fallback';
 import { RedirectIfSignedIn, RequireSignIn } from '../features/auth/route-guards';
 
-// Each screen is its own chunk, so the first load ships only what it shows
 const LoginPage = lazy(() => import('../features/auth/login-page'));
 const RegisterPage = lazy(() => import('../features/auth/register-page'));
 const DashboardPage = lazy(() => import('../features/dashboard/dashboard-page'));

@@ -6,7 +6,6 @@ import type { ToneContourProps } from './types';
 
 const REDUCED = '(prefers-reduced-motion: reduce)';
 
-// Some environments, such as test browsers, have no matchMedia. There the answer is simply no.
 const query = () => (typeof window.matchMedia === 'function' ? window.matchMedia(REDUCED) : null);
 
 const subscribe = (notify: () => void) => {
@@ -24,7 +23,6 @@ const usePrefersReducedMotion = () =>
 
 const DRAW_SECONDS = 0.9;
 
-// The pitch line of a tone, drawn as you hear it. Changing playKey draws it again.
 export const ToneContour = ({ tones, playKey = 0, className }: ToneContourProps) => {
   const contour = contourOf(tones);
   const isReduced = usePrefersReducedMotion();

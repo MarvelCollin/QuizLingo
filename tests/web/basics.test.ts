@@ -1,4 +1,3 @@
-// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { buildLesson } from '../../src/features/basics/build-lesson';
 import { CHECKPOINT_LENGTH } from '../../src/features/basics/constants';

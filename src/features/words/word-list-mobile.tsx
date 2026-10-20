@@ -4,7 +4,6 @@ import { levelLabel } from '../vocabulary/constants';
 import { ListenButton } from '../practice/listen-button';
 import type { WordListMobileProps } from './types';
 
-// Narrow screens: each word becomes a stacked row with the same information as the table
 export const WordListMobile = ({ rows }: WordListMobileProps) => (
   <ul className="divide-y divide-hairline border-y border-hairline">
     {rows.map((row) => (

@@ -4,7 +4,6 @@ import { STAGES } from './curriculum';
 import { Stamp } from './stamp';
 import type { NextLessonProps } from './types';
 
-// The one thing to do now, the same idea as the review card on the home page
 export const NextLesson = ({ next, stagesDone, isFresh }: NextLessonProps) => {
   if (!next) {
     return (

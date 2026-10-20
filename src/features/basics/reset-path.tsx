@@ -3,7 +3,6 @@ import { Button } from '../../components/ui/button';
 import { InlineMessage } from '../../components/ui/inline-message';
 import { useResetPath } from './use-basics';
 
-// A quiet link at the bottom of the path. Asking twice keeps a stray click from wiping a month of lessons.
 export const ResetPath = () => {
   const [isAsking, setIsAsking] = useState(false);
   const reset = useResetPath();

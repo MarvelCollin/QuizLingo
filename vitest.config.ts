@@ -5,6 +5,13 @@ import { defineConfig } from 'vitest/config';
 
 const database = `file:${join(tmpdir(), `quizlingo-test-${process.pid}.db`).replace(/\\/g, '/')}`;
 
+const logicTests = [
+  'tests/web/basics.test.ts',
+  'tests/web/pinyin.test.ts',
+  'tests/web/sounds.test.ts',
+  'tests/web/weak-spots.test.ts',
+];
+
 export default defineConfig({
   base: '/quizlingo/',
   plugins: [react()],
@@ -16,7 +23,16 @@ export default defineConfig({
           name: 'web',
           environment: 'jsdom',
           include: ['tests/web/**/*.test.{ts,tsx}'],
+          exclude: logicTests,
           setupFiles: ['tests/setup-web.ts'],
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'logic',
+          environment: 'node',
+          include: logicTests,
         },
       },
       {

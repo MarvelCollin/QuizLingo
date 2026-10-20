@@ -2,7 +2,6 @@ import { ButtonLink } from '../../components/ui/button';
 import { plural } from '../../lib/format';
 import type { WeakCardProps } from './types';
 
-// Shown only while there are questions to go back to
 export const WeakCard = ({ count }: WeakCardProps) => (
   <section
     aria-labelledby="weak-title"

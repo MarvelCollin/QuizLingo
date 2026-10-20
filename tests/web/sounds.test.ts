@@ -1,4 +1,3 @@
-// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { pickRound, soundItemsFor } from '../../src/features/sounds/build-sound-items';
 import { SOUND_GROUPS } from '../../src/features/sounds/pairs';

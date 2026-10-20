@@ -4,7 +4,6 @@ import { cn } from '../../lib/utils';
 import { Checkbox } from './checkbox';
 import type { ChecklistPopoverProps } from './ui.types';
 
-// A multi-select filter: a button that opens a short checklist. Escape and clicks outside close it.
 export const ChecklistPopover = <T extends string | number>({
   label,
   options,

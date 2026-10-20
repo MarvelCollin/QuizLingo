@@ -1,7 +1,6 @@
 import { cn } from '../../lib/utils';
 import type { SkeletonProps } from './ui.types';
 
-// A placeholder shaped like the content it stands in for
 export const Skeleton = ({ className }: SkeletonProps) => (
   <span
     aria-hidden="true"

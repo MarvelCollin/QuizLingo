@@ -1,8 +1,6 @@
 import { cn } from '../../lib/utils';
 import type { StackedBarProps } from './ui.types';
 
-
-// A horizontal bar split into parts. The text summary is the accessible name, so color is never the only cue.
 export const StackedBar = ({ segments, total, label, className }: StackedBarProps) => {
   const summary = segments.map((s) => `${s.value} ${s.label}`).join(', ');
   return (

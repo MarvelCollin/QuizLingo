@@ -26,7 +26,6 @@ export const POST = handle(async (request) => {
   );
   assertLoginAllowed(attempts);
   const row = result.rows[0];
-  // Hash anyway when the account does not exist, so response time does not reveal which emails are registered
   const valid = row
     ? await verifyPassword(password, String(row.password_hash))
     : (await hashPassword(password), false);
@@ -40,10 +39,8 @@ export const POST = handle(async (request) => {
   const statements = [
     clearLoginFailures(email),
     session.statement,
-    // Expired sessions are of no use, so they are removed as people sign in
     { sql: 'DELETE FROM sessions WHERE expires_at < ?', args: [Date.now()] },
   ];
-  // A hash made with weaker settings is replaced now that the password is known
   if (needsRehash(String(row.password_hash))) {
     statements.push({ sql: 'UPDATE users SET password_hash = ? WHERE id = ?', args: [await hashPassword(password), String(row.id)] });
   }

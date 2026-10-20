@@ -1,6 +1,5 @@
 import type { WordProgress, WordStatus } from './types';
 
-// Matches MASTERED_BOX in api/_lib/srs.ts
 export const MASTERED_BOX = 4;
 
 export const wordStatus = (progress: WordProgress | undefined, now: number): WordStatus => {

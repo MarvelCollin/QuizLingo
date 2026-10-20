@@ -5,7 +5,6 @@ import type { WordProgress } from './types';
 
 export const progressKey = ['progress'] as const;
 
-// Progress for every word the user has practiced, as a lookup by word
 export const useProgress = () => {
   const query = useQuery({ queryKey: progressKey, queryFn: fetchProgress });
   const byWord = useMemo(

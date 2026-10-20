@@ -8,7 +8,6 @@ export class ApiError extends Error {
 
 type Options = { method?: 'GET' | 'POST' | 'DELETE'; body?: unknown; signal?: AbortSignal };
 
-// The one place that talks to /api. The session cookie is httpOnly, so it travels automatically.
 export const apiFetch = async <T>(path: string, { method = 'GET', body, signal }: Options = {}): Promise<T> => {
   let response: Response;
   try {

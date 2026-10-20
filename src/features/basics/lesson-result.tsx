@@ -20,7 +20,6 @@ export const LessonResult = ({
 }: LessonResultProps) => {
   const { path } = useBasicsPath();
   const heading = useRef<HTMLHeadingElement>(null);
-  // Move to the result when the quiz is gone, so keyboard and screen reader users land on it
   useEffect(() => heading.current?.focus(), []);
   const total = answers.length;
   const right = answers.filter((a) => a.question.options[a.chosen].isCorrect).length;

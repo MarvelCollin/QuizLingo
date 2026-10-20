@@ -3,13 +3,14 @@ import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { ReactNode } from 'react';
 import { MemoryRouter } from 'react-router';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { CardView } from '../../src/features/basics/card-view';
 import { LessonResult } from '../../src/features/basics/lesson-result';
 import { LessonRow } from '../../src/features/basics/lesson-row';
 import { buildPath } from '../../src/features/basics/path-state';
 import { QuizView } from '../../src/features/basics/quiz-view';
 import { ResetPath } from '../../src/features/basics/reset-path';
+import { SelfRecord } from '../../src/features/basics/self-record';
 import { StageSection } from '../../src/features/basics/stage-section';
 import { ToneContour } from '../../src/features/basics/tone-contour';
 import type { LessonProgress, QuizAnswer, QuizQuestion } from '../../src/features/basics/types';
@@ -18,6 +19,10 @@ import { WeakCard } from '../../src/features/basics/weak-card';
 import { ChartGrid } from '../../src/features/pinyin/chart-grid';
 import { buildChart } from '../../src/features/pinyin/chart';
 import { lessonById } from '../../src/features/basics/curriculum';
+
+afterEach(() => {
+  vi.unstubAllGlobals();
+});
 
 const speech = vi.hoisted(() => ({ playSyllable: vi.fn(), speak: vi.fn(), preloadRecording: vi.fn(), stopSpeaking: vi.fn() }));
 vi.mock('../../src/features/practice/speech', () => speech);
@@ -234,5 +239,119 @@ describe('ResetPath', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Start the path over' }));
     await userEvent.click(screen.getByRole('button', { name: 'Clear my path' }));
     expect(await screen.findByRole('alert')).toHaveTextContent('Please sign in to continue.');
+  });
+});
+
+const installRecorder = () => {
+  const stopTrack = vi.fn();
+  class FakeRecorder {
+    mimeType = 'audio/webm';
+    state = 'inactive';
+    ondataavailable: ((event: { data: Blob }) => void) | null = null;
+    onstop: (() => void) | null = null;
+    start() {
+      this.state = 'recording';
+    }
+    stop() {
+      this.state = 'inactive';
+      this.ondataavailable?.({ data: new Blob(['voice']) });
+      this.onstop?.();
+    }
+  }
+  vi.stubGlobal('MediaRecorder', FakeRecorder);
+  const getUserMedia = vi.fn().mockResolvedValue({ getTracks: () => [{ stop: stopTrack }] });
+  Object.defineProperty(navigator, 'mediaDevices', { value: { getUserMedia }, configurable: true });
+  URL.createObjectURL = vi.fn(() => 'blob:voice');
+  URL.revokeObjectURL = vi.fn();
+  return { getUserMedia, stopTrack };
+};
+
+describe('SelfRecord', () => {
+  it('records, lets you hear yourself and plays the native voice before you', async () => {
+    const { getUserMedia, stopTrack } = installRecorder();
+    const play = vi.fn().mockResolvedValue(undefined);
+    vi.stubGlobal('Audio', class { play = play; });
+    speech.speak.mockClear();
+    render(<SelfRecord text="你好" />);
+
+    await userEvent.click(screen.getByRole('button', { name: 'Record yourself' }));
+    expect(getUserMedia).toHaveBeenCalledWith({ audio: true });
+    expect(await screen.findByText(/Recording, up to 8 seconds/)).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Stop recording' }));
+    expect(stopTrack).toHaveBeenCalled();
+    await userEvent.click(await screen.findByRole('button', { name: 'Hear yourself' }));
+    expect(play).toHaveBeenCalledOnce();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Native, then you' }));
+    expect(speech.speak).toHaveBeenCalledWith('你好', expect.objectContaining({ onEnd: expect.any(Function) }));
+    speech.speak.mock.calls[0][1].onEnd();
+    expect(play).toHaveBeenCalledTimes(2);
+    expect(screen.getByRole('button', { name: 'Record again' })).toBeInTheDocument();
+  });
+
+  it('says what to do when the microphone is blocked', async () => {
+    const { getUserMedia } = installRecorder();
+    getUserMedia.mockRejectedValue(Object.assign(new Error('denied'), { name: 'NotAllowedError' }));
+    render(<SelfRecord text="你好" />);
+    await userEvent.click(screen.getByRole('button', { name: 'Record yourself' }));
+    expect(await screen.findByText(/The microphone is blocked/)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Record yourself' })).toBeInTheDocument();
+  });
+});
+
+describe('SayIt', () => {
+  const card = { id: 'w', title: '你好', word: '你好' };
+
+  it('falls back to recording yourself in Brave, where the speech service is blocked', async () => {
+    installRecorder();
+    vi.stubGlobal('webkitSpeechRecognition', class {});
+    Object.defineProperty(navigator, 'brave', { value: { isBrave: () => Promise.resolve(true) }, configurable: true });
+    render(<CardView card={card} />, { wrapper: wrap() });
+    expect(await screen.findByRole('button', { name: 'Record yourself' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Say it yourself' })).toBeNull();
+    Reflect.deleteProperty(navigator, 'brave');
+  });
+
+  it('switches to recording yourself when the browser cannot reach its speech service', async () => {
+    installRecorder();
+    vi.stubGlobal(
+      'webkitSpeechRecognition',
+      class {
+        onerror: ((event: { error: string }) => void) | null = null;
+        onend: (() => void) | null = null;
+        start() {
+          this.onerror?.({ error: 'network' });
+          this.onend?.();
+        }
+        abort() {}
+        stop() {}
+      },
+    );
+    render(<CardView card={card} />, { wrapper: wrap() });
+    await userEvent.click(screen.getByRole('button', { name: 'Say it yourself' }));
+    expect(await screen.findByRole('button', { name: 'Record yourself' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Say it yourself' })).toBeNull();
+  });
+
+  it('keeps asking for the microphone when the error is only that nothing was heard', async () => {
+    installRecorder();
+    vi.stubGlobal(
+      'webkitSpeechRecognition',
+      class {
+        onerror: ((event: { error: string }) => void) | null = null;
+        onend: (() => void) | null = null;
+        start() {
+          this.onerror?.({ error: 'no-speech' });
+          this.onend?.();
+        }
+        abort() {}
+        stop() {}
+      },
+    );
+    render(<CardView card={card} />, { wrapper: wrap() });
+    await userEvent.click(screen.getByRole('button', { name: 'Say it yourself' }));
+    expect(await screen.findByText(/Nothing was heard/)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Say it yourself' })).toBeInTheDocument();
   });
 });

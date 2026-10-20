@@ -1,13 +1,3 @@
-// Builds public/data/words.min.json from the HSK 3.0 exam syllabus (2025-11), levels 1 to 9.
-//
-// Inputs (clone these repos first, see README "Vocabulary data"):
-//   --syllabus  hsk-3.0-vocabulary-dataset/data/by-level   (word list, levels, pinyin)
-//   --dict      complete-hsk-vocabulary/complete.min.json  (English meanings, MIT)
-//   --cedict    HSK-3.0/Scripts and data/all_cedict.json   (CC-CEDICT fallback, CC BY-SA 4.0)
-//   --out       public/data
-//
-// One entry per written form, with `l`, the level a word first appears. Band 7-9 is stored as level 7.
-
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -30,13 +20,10 @@ for (const key of ['syllabus', 'dict', 'cedict', 'out']) {
 const readJson = (path) => JSON.parse(readFileSync(path, 'utf8'));
 const MANUAL = readJson(new URL('./manual-meanings.json', import.meta.url));
 
-// Pinyin helpers
-
 const TONE_MARKS = {
   a: 'āáǎà', e: 'ēéěè', i: 'īíǐì', o: 'ōóǒò', u: 'ūúǔù', ü: 'ǖǘǚǜ',
 };
 
-// "lu:4" -> "lǜ", "hao3" -> "hǎo", "ma5" -> "ma"
 const markSyllable = (syllable) => {
   const match = syllable.match(/^([a-zü:]+)([1-5])$/i);
   if (!match) return syllable;
@@ -65,8 +52,6 @@ const normalize = (pinyin) =>
 const toneless = (pinyin) =>
   normalize(pinyin).normalize('NFD').replace(/[̀-ͯ]/g, '');
 
-// Sources
-
 const dictionary = new Map();
 for (const word of readJson(args.dict)) {
   if (!dictionary.has(word.s)) dictionary.set(word.s, word);
@@ -81,9 +66,6 @@ for (const level of LEVELS) {
   }
 }
 
-// Meaning lookup for one reading of one word
-
-// Dictionary notes that are not a meaning a learner should be quizzed on
 const isNote = (meaning) =>
   /^(surname |also pr\.|variant of |old variant of |see |abbr\. for |abbr\. of )/i.test(meaning);
 const cleanMeanings = (meanings) =>
@@ -91,8 +73,6 @@ const cleanMeanings = (meanings) =>
     .map((m) => m.trim().replace(/^\(bound form\)\s*/, ''))
     .filter((m) => m && !isNote(m));
 
-// Proper nouns are written with a capital in dictionary pinyin (Yuè = a place name).
-// Keep them only when the word has no ordinary reading.
 const isProper = (pinyin) => /^\p{Lu}/u.test(pinyin.normalize('NFC'));
 const preferCommon = (items, pinyinOf) => {
   const common = items.filter((item) => !isProper(pinyinOf(item)));
@@ -101,7 +81,6 @@ const preferCommon = (items, pinyinOf) => {
 
 const fromDictionary = (hanzi, pinyin, compare) => {
   const word = dictionary.get(hanzi);
-  // A reading can be split over several forms (for example a surname entry), so merge them
   const forms = preferCommon(
     (word?.f ?? []).filter((f) => f.i?.y && compare(f.i.y) === compare(pinyin)),
     (f) => f.i.y,
@@ -133,11 +112,7 @@ const fromCedict = (hanzi, pinyin, compare) => {
 
 const warnings = [];
 
-// The syllabus marks tone sandhi (一 yí, 不 bú) and some neutral tones that
-// dictionaries write differently, so a toneless match is expected and fine.
-// The official syllabus pinyin is always the one kept.
 const buildForm = (hanzi, pinyin) => {
-  // Alternative readings such as "shéi/shuí" are tried one by one
   for (const variant of pinyin.split('/')) {
     const form =
       fromDictionary(hanzi, variant, normalize) ??
@@ -151,8 +126,6 @@ const buildForm = (hanzi, pinyin) => {
   warnings.push(`${hanzi} ${pinyin}: no meaning found`);
   return null;
 };
-
-// Group syllabus entries by written form, keeping syllabus order
 
 const groups = new Map();
 for (const entry of syllabus) {

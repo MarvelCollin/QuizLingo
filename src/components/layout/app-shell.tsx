@@ -6,7 +6,6 @@ import { cn } from '../../lib/utils';
 import { BrandMark } from './brand-mark';
 import { isNavActive, NAV_ITEMS } from './nav-items';
 
-// Desktop: navigation stays visible in the top bar. Mobile: a bottom tab bar with the same places.
 export const AppShell = () => {
   const session = useSession();
   const logout = useLogout();

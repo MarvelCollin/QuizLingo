@@ -1,7 +1,3 @@
-// Fails the build when a secret ends up in the files served to browsers.
-// Runs after `vite build`. On Vercel the real TURSO_* values are present at build time,
-// so this compares the bundle against the actual secrets, not just patterns.
-
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 

@@ -13,7 +13,6 @@ import type { CardViewProps } from './types';
 
 const HAS_HANZI = /[一-鿿]/;
 
-// One thing to look at and listen to. Sound is never played on its own, only when asked for.
 export const CardView = ({ card }: CardViewProps) => {
   const [playKey, setPlayKey] = useState(0);
   const [strokeMode, setStrokeMode] = useState<'watch' | 'try'>('watch');

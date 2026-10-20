@@ -2,7 +2,6 @@ import type { Word } from '../vocabulary/types';
 
 export type ToneNumber = 1 | 2 | 3 | 4 | 5;
 
-// One thing to look at and listen to before the quiz
 export type LearnCard = {
   id: string;
   title: string;
@@ -14,7 +13,6 @@ export type LearnCard = {
   strokeChar?: string;
 };
 
-// A question before its options are shuffled
 export type QuestionSeed = {
   id: string;
   prompt: string;
@@ -24,7 +22,6 @@ export type QuestionSeed = {
   tones?: ToneNumber[];
   isHanzi?: boolean;
   srsWord?: string;
-  // The lesson this question comes from, set when the question is built
   lesson?: string;
   answer: string;
   wrong: string[];
@@ -105,6 +102,8 @@ export type StrokeTraceProps = { char: string };
 
 export type SayItProps = { text: string };
 
+export type SelfRecordProps = { text: string };
+
 export type QuizViewProps = {
   title: string;
   questions: QuizQuestion[];
@@ -127,6 +126,15 @@ export type LessonResultProps = {
 export type StampProps = { kind: 'lesson' | 'milestone' };
 
 export type LessonPhase = 'cards' | 'quiz' | 'result' | 'missed';
+
+export type LessonRunProps = {
+  lesson: Lesson;
+  context: BuildContext;
+  initialPhase: LessonPhase | null;
+  onRestart: (phase: LessonPhase) => void;
+};
+
+export type WeakRunProps = { userId: string; context: BuildContext; onAgain: () => void };
 
 export type GlyphProps = { status: LessonStatus; isCheckpoint: boolean; isNext: boolean };
 

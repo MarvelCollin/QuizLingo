@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Button, ButtonLink } from '../../components/ui/button';
 import { InlineMessage } from '../../components/ui/inline-message';
 import { Skeleton } from '../../components/ui/skeleton';
@@ -8,31 +8,14 @@ import { useAudioIndex } from '../study/use-study-data';
 import { useVocabulary } from '../vocabulary/use-vocabulary';
 import { buildWeakQuiz } from './build-lesson';
 import { QuizView } from './quiz-view';
-import type { QuizAnswer } from './types';
+import type { QuizAnswer, WeakRunProps } from './types';
 import { readWeakSpots, recordAnswers, weakKeys } from './weak-spots';
 
 const ROUND = 10;
 
-const WeakPage = () => {
-  usePageMeta('Weak spots', 'Practice the starter path questions you have missed until each one sticks.');
-  const userId = useSession().data?.id ?? 'guest';
-  const vocabulary = useVocabulary();
-  const audio = useAudioIndex();
-  const [run, setRun] = useState(0);
+const WeakRun = ({ userId, context, onAgain }: WeakRunProps) => {
+  const [questions] = useState(() => buildWeakQuiz(weakKeys(readWeakSpots(userId)).slice(0, ROUND), context));
   const [done, setDone] = useState<{ answers: QuizAnswer[]; before: number; after: number } | null>(null);
-
-  const questions = useMemo(() => {
-    if (!vocabulary.data || !audio.data) return null;
-    const keys = weakKeys(readWeakSpots(userId)).slice(0, ROUND);
-    return buildWeakQuiz(keys, { vocabulary: vocabulary.data, audioWords: audio.data.words });
-    // run starts a fresh round from what is still weak
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [vocabulary.data, audio.data, userId, run]);
-
-  if (vocabulary.isError || audio.isError) {
-    return <InlineMessage tone="error">{(vocabulary.error ?? audio.error)?.message}</InlineMessage>;
-  }
-  if (!questions) return <Skeleton className="mx-auto h-72 w-full max-w-2xl" />;
 
   if (questions.length === 0 && !done) {
     return (
@@ -63,13 +46,7 @@ const WeakPage = () => {
         </p>
         <div className="flex flex-col gap-3 sm:flex-row">
           {done.after > 0 && (
-            <Button
-              size="lg"
-              onClick={() => {
-                setDone(null);
-                setRun((value) => value + 1);
-              }}
-            >
+            <Button size="lg" onClick={onAgain}>
               Practice the rest
             </Button>
           )}
@@ -83,7 +60,6 @@ const WeakPage = () => {
 
   return (
     <QuizView
-      key={run}
       title="Weak spots"
       label="Weak spots"
       questions={questions}
@@ -92,6 +68,28 @@ const WeakPage = () => {
         const after = Object.keys(recordAnswers(userId, answers)).length;
         setDone({ answers, before, after });
       }}
+    />
+  );
+};
+
+const WeakPage = () => {
+  usePageMeta('Weak spots', 'Practice the starter path questions you have missed until each one sticks.');
+  const userId = useSession().data?.id ?? 'guest';
+  const vocabulary = useVocabulary();
+  const audio = useAudioIndex();
+  const [run, setRun] = useState(0);
+
+  if (vocabulary.isError || audio.isError) {
+    return <InlineMessage tone="error">{(vocabulary.error ?? audio.error)?.message}</InlineMessage>;
+  }
+  if (!vocabulary.data || !audio.data) return <Skeleton className="mx-auto h-72 w-full max-w-2xl" />;
+
+  return (
+    <WeakRun
+      key={run}
+      userId={userId}
+      context={{ vocabulary: vocabulary.data, audioWords: audio.data.words }}
+      onAgain={() => setRun(run + 1)}
     />
   );
 };

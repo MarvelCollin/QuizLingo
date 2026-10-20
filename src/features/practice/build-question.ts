@@ -10,7 +10,6 @@ const optionFor = (word: Word, mode: PracticeModeId, isCorrect: boolean): Choice
   return { label: word.hanzi, isHanzi: true, isCorrect };
 };
 
-// A wrong option must not also be a right answer: no shared meaning, and no shared sound for listening
 const isFairDistractor = (candidate: Word, word: Word, mode: PracticeModeId) => {
   if (candidate.hanzi === word.hanzi) return false;
   if (mode === 'meaning') return candidate.meaning !== word.meaning;
@@ -18,7 +17,6 @@ const isFairDistractor = (candidate: Word, word: Word, mode: PracticeModeId) => 
   return plainPinyin(candidate.pinyin) !== plainPinyin(word.pinyin);
 };
 
-// Prefer distractors that look alike: the same number of characters, then the same level
 export const buildQuestion = (word: Word, mode: PracticeModeId, pool: Word[]): Question => {
   if (mode === 'flashcard') return { word, options: [] };
   const fair = pool.filter((candidate) => isFairDistractor(candidate, word, mode));

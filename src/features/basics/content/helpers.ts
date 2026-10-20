@@ -8,7 +8,6 @@ export const toneName = (tone: ToneNumber) => TONE_NAMES[tone];
 
 type InitialSpec = { initial: string; samples: [string, string]; hint: string };
 
-// A sound lesson: one card per sound, and two listening questions per sound
 export const soundLesson = (specs: InitialSpec[], kind: 'initial' | 'final', everyLabel: string[]) => {
   const cards: LearnCard[] = specs.map((spec) => ({
     id: `card-${spec.initial}`,

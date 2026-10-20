@@ -2,7 +2,6 @@ import { Check, X } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import type { ChoiceOptionProps } from './types';
 
-// After answering, the right option and a wrong pick are marked with an icon and a word, not color alone
 export const ChoiceOption = ({ option, index, isAnswered, isChosen, onChoose }: ChoiceOptionProps) => {
   const showCorrect = isAnswered && option.isCorrect;
   const showWrong = isAnswered && isChosen && !option.isCorrect;

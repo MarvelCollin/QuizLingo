@@ -1,4 +1,3 @@
-// @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { buildWeakQuiz } from '../../src/features/basics/build-lesson';
 import type { QuizAnswer, QuizQuestion } from '../../src/features/basics/types';
