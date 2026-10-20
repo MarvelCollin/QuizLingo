@@ -26,7 +26,11 @@ export const PASS_SCORE = 80;
 export const RECOGNITION_ERRORS: Record<string, string> = {
   'not-allowed': 'The microphone is blocked. Allow it in the browser address bar, then try again.',
   'no-speech': 'Nothing was heard. Try again a little closer to the microphone.',
-  network: 'The speech service could not be reached. Check your connection.',
+  'audio-capture': 'No microphone was found. Plug one in or check your system sound settings.',
+  'service-not-allowed': 'This browser does not allow speech recognition. Try Chrome or Edge.',
+  'language-not-supported': 'This browser cannot recognise Chinese speech. Try Chrome or Edge.',
+  network:
+    'The browser could not reach its speech service. Chrome and Edge send your voice to an online service, so a VPN, a firewall, an ad blocker or no internet blocks it. Everything else here works without the microphone.',
 };
 
 export const compareSpeech = (target: string, heard: string): { score: number; marks: CharMark[] } => {
