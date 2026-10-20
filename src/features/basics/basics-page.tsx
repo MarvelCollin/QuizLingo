@@ -3,10 +3,13 @@ import { Button } from '../../components/ui/button';
 import { InlineMessage } from '../../components/ui/inline-message';
 import { Skeleton } from '../../components/ui/skeleton';
 import { usePageMeta } from '../../lib/use-page-meta';
+import { useSession } from '../auth/use-session';
 import { NextLesson } from './next-lesson';
 import { PathSummary } from './path-summary';
 import { StageSection } from './stage-section';
 import { useBasicsPath } from './use-basics';
+import { WeakCard } from './weak-card';
+import { readWeakSpots } from './weak-spots';
 
 const PathSkeleton = () => (
   <div className="flex flex-col gap-8" aria-busy="true" aria-label="Loading the starter path">
@@ -22,6 +25,8 @@ const BasicsPage = () => {
   usePageMeta('Starter path', 'A step by step start for new learners: the four tones, the sounds of pinyin, basic strokes and your first words.');
   const { path, data, isPending, isError, error, refetch } = useBasicsPath();
   const [toggled, setToggled] = useState<Record<string, boolean>>({});
+  const userId = useSession().data?.id ?? 'guest';
+  const [weakCount] = useState(() => Object.keys(readWeakSpots(userId)).length);
 
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-8">
@@ -49,6 +54,7 @@ const BasicsPage = () => {
       {path && data && (
         <>
           <NextLesson next={path.next} stagesDone={path.stagesDone} isFresh={data.length === 0} />
+          {weakCount > 0 && <WeakCard count={weakCount} />}
           <PathSummary
             stagesDone={path.stagesDone}
             stagesTotal={path.stages.length}

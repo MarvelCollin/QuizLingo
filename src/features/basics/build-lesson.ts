@@ -82,13 +82,17 @@ const pairSeeds = ({ vocabulary, audioWords }: BuildContext): QuestionSeed[] => 
   return shuffle(seeds);
 };
 
-const seedsOf = (lesson: Lesson, ctx: BuildContext, vocabulary: Map<string, Word>): QuestionSeed[] => {
+const rawSeedsOf = (lesson: Lesson, ctx: BuildContext, vocabulary: Map<string, Word>): QuestionSeed[] => {
   const { source } = lesson;
   if (source.kind === 'static') return shuffle(source.questions);
   if (source.kind === 'words') return wordSeeds(source.words, vocabulary);
   if (source.kind === 'pairs') return pairSeeds(ctx);
   return [];
 };
+
+// Each question remembers its lesson, so a miss can be filed under it
+const seedsOf = (lesson: Lesson, ctx: BuildContext, vocabulary: Map<string, Word>): QuestionSeed[] =>
+  rawSeedsOf(lesson, ctx, vocabulary).map((seed) => ({ ...seed, lesson: lesson.id }));
 
 // Takes questions from each lesson in turn, so a milestone covers everything and no lesson dominates
 const mixed = (from: string[], ctx: BuildContext, vocabulary: Map<string, Word>): QuestionSeed[] => {
@@ -109,14 +113,31 @@ export const buildLesson = (lesson: Lesson, ctx: BuildContext): LessonContent =>
   const vocabulary = new Map(ctx.vocabulary.map((word) => [word.hanzi, word]));
   const { source } = lesson;
   if (source.kind === 'static') {
-    return { cards: source.cards, questions: shuffle(source.questions).map(toQuestion) };
+    return { cards: source.cards, questions: seedsOf(lesson, ctx, vocabulary).map(toQuestion) };
   }
   if (source.kind === 'words') {
-    const seeds = wordSeeds(source.words, vocabulary).slice(0, WORD_QUIZ_LENGTH);
+    const seeds = seedsOf(lesson, ctx, vocabulary).slice(0, WORD_QUIZ_LENGTH);
     return { cards: wordCards(source.words, vocabulary), questions: seeds.map(toQuestion) };
   }
   if (source.kind === 'pairs') {
-    return { cards: source.cards, questions: pairSeeds(ctx).slice(0, PAIR_QUIZ_LENGTH).map(toQuestion) };
+    return { cards: source.cards, questions: seedsOf(lesson, ctx, vocabulary).slice(0, PAIR_QUIZ_LENGTH).map(toQuestion) };
   }
   return { cards: [], questions: mixed(source.from, ctx, vocabulary).map(toQuestion) };
+};
+
+// A quiz made of the questions someone keeps missing, the ones missed most first
+export const buildWeakQuiz = (keys: string[], ctx: BuildContext): QuizQuestion[] => {
+  const vocabulary = new Map(ctx.vocabulary.map((word) => [word.hanzi, word]));
+  const lessons = new Map<string, QuestionSeed[]>();
+  const questions: QuizQuestion[] = [];
+  for (const key of keys) {
+    const [lessonId, ...rest] = key.split('/');
+    const id = rest.join('/');
+    const lesson = lessonById(lessonId);
+    if (!lesson) continue;
+    if (!lessons.has(lessonId)) lessons.set(lessonId, seedsOf(lesson, ctx, vocabulary));
+    const seed = lessons.get(lessonId)!.find((s) => s.id === id);
+    if (seed) questions.push(toQuestion(seed));
+  }
+  return questions;
 };

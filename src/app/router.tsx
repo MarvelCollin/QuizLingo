@@ -18,6 +18,7 @@ const TestsPage = lazy(() => import('../features/tests/tests-page'));
 const ListeningTestPage = lazy(() => import('../features/tests/listening-test-page'));
 const MockTestPage = lazy(() => import('../features/tests/mock-test-page'));
 const BasicsPage = lazy(() => import('../features/basics/basics-page'));
+const WeakPage = lazy(() => import('../features/basics/weak-page'));
 const LessonPage = lazy(() => import('../features/basics/lesson-page'));
 const PinyinPage = lazy(() => import('../features/pinyin/pinyin-page'));
 const SoundsPage = lazy(() => import('../features/sounds/sounds-page'));
@@ -47,6 +48,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: page(<DashboardPage />) },
       { path: 'basics', element: page(<BasicsPage />) },
+      { path: 'basics/weak', element: page(<WeakPage />) },
       { path: 'basics/:lessonId', element: page(<LessonPage />) },
       { path: 'practice', element: page(<PracticePage />) },
       { path: 'practice/round', element: page(<RoundPage />) },

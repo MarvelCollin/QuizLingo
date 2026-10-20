@@ -7,6 +7,7 @@ import { percent } from '../../lib/format';
 import { shuffle } from '../../lib/random';
 import { usePageMeta } from '../../lib/use-page-meta';
 import { preloadRecording } from '../practice/speech';
+import { useSession } from '../auth/use-session';
 import { useKeyboard } from '../practice/use-keyboard';
 import type { Answer } from '../progress/types';
 import { useSaveAnswers } from '../progress/use-save-answers';
@@ -22,6 +23,7 @@ import { LessonResult } from './lesson-result';
 import { QuizView } from './quiz-view';
 import type { AttemptInput, LessonPhase, QuizAnswer } from './types';
 import { useBasicsPath, useSaveAttempt } from './use-basics';
+import { recordAnswers } from './weak-spots';
 
 const LessonSkeleton = () => (
   <div className="mx-auto flex max-w-2xl flex-col gap-6" aria-busy="true" aria-label="Loading the lesson">
@@ -48,6 +50,7 @@ const LessonPage = () => {
   const lastAttempt = useRef<AttemptInput | null>(null);
   const lastWords = useRef<Answer[]>([]);
 
+  const userId = useSession().data?.id ?? 'guest';
   const saveAttempt = useSaveAttempt();
   const saveRound = useSaveRound();
   const saveWords = useSaveAnswers();
@@ -124,6 +127,7 @@ const LessonPage = () => {
         ? [{ word: a.question.srsWord, level: 1 as const, correct: a.question.options[a.chosen].isCorrect }]
         : [],
     );
+    recordAnswers(userId, finished);
     saveAttempt.mutate(lastAttempt.current);
     saveRound.mutate({ mode: 'basics', level: 1, total: finished.length, correct: right });
     if (lastWords.current.length > 0) saveWords.mutate(lastWords.current);
@@ -150,7 +154,10 @@ const LessonPage = () => {
     const again = answers
       .filter((a) => !a.question.options[a.chosen].isCorrect)
       .map(({ question }) => ({ ...question, options: shuffle(question.options) }));
-    return <QuizView key={`missed-${run}`} title={lesson.title} label="Missed questions" questions={again} onFinish={() => setPhase('result')} />;
+    return <QuizView key={`missed-${run}`} title={lesson.title} label="Missed questions" questions={again} onFinish={(done) => {
+      recordAnswers(userId, done);
+      setPhase('result');
+    }} />;
   }
 
   if (current === 'result') {

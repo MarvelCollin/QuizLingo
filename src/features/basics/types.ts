@@ -24,6 +24,8 @@ export type QuestionSeed = {
   tones?: ToneNumber[];
   isHanzi?: boolean;
   srsWord?: string;
+  // The lesson this question comes from, set when the question is built
+  lesson?: string;
   answer: string;
   wrong: string[];
   explain?: string;
@@ -125,3 +127,9 @@ export type StampProps = { kind: 'lesson' | 'milestone' };
 export type LessonPhase = 'cards' | 'quiz' | 'result' | 'missed';
 
 export type GlyphProps = { status: LessonStatus; isCheckpoint: boolean; isNext: boolean };
+
+export type WeakEntry = { misses: number; streak: number; at: number };
+
+export type WeakSpots = Record<string, WeakEntry>;
+
+export type WeakCardProps = { count: number };
