@@ -41,7 +41,7 @@ const check = (text) => {
 const strings = [];
 const walk = (value, path) => {
   if (typeof value === 'string') {
-    if (/[一-鿿]/.test(value) && !/(^|\.)(py|pinyin|en|english|title|explanation|promptEn|point|speaker|category|group|detail|scene|id)$/.test(path)) strings.push([path, value]);
+    if (/[一-鿿]/.test(value) && !/(^|\.)(py|pinyin|en|english|title|explanation|promptEn|point|pattern|speaker|category|group|detail|scene|id)$/.test(path)) strings.push([path, value]);
   } else if (Array.isArray(value)) value.forEach((v, i) => walk(v, `${path}[${i}]`));
   else if (value && typeof value === 'object') for (const [k, v] of Object.entries(value)) walk(v, path ? `${path}.${k}` : k);
 };
