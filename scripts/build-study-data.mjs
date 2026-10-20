@@ -21,7 +21,9 @@ const STROKES = 'node_modules/hanzi-writer-data';
 const readJson = (path) => JSON.parse(readFileSync(path, 'utf8'));
 const readLines = (path) => readFileSync(path, 'utf8').split(/\r?\n/);
 
-const words = readJson(join(OUT, '3.min.json'));
+const words = readJson(join(OUT, 'words.min.json'));
+const LEVELS = [1, 2, 3, 4, 5, 6, 7];
+const levelFile = (level) => (level === 7 ? '7-9' : String(level));
 const levelOf = new Map(words.map((w) => [w.s, w.l]));
 const longest = Math.max(...words.map((w) => w.s.length));
 
@@ -75,7 +77,7 @@ const seenText = new Set();
 for (const line of readLines(join(args.tatoeba, 'cmn_sentences.tsv'))) {
   const [id, , text] = line.split('\t');
   if (!text || seenText.has(text) || !translations.has(id)) continue;
-  if (text.length < 4 || text.length > 22 || /[A-Za-z]/.test(text)) continue;
+  if (text.length < 4 || text.length > 30 || /[A-Za-z]/.test(text)) continue;
   const tokens = segment(text);
   if (!tokens) continue;
   const content = tokens.filter((t) => levelOf.has(t));
@@ -84,15 +86,15 @@ for (const line of readLines(join(args.tatoeba, 'cmn_sentences.tsv'))) {
   candidates.push({ id: Number(id), text, tokens, content, level: Math.max(...content.map((t) => levelOf.get(t))) });
 }
 
-const PER_WORD = 4;
+const perWord = (level) => (level <= 3 ? 4 : level <= 6 ? 3 : 2);
 const uses = new Map();
 const chosen = new Map();
 candidates.sort((a, b) => a.text.length - b.text.length || a.id - b.id);
 for (const sentence of candidates) {
-  const needs = sentence.content.some((t) => (uses.get(t) ?? 0) < PER_WORD);
-  if (!needs) continue;
+  const served = [...new Set(sentence.content)].filter((t) => levelOf.get(t) >= sentence.level);
+  if (!served.some((t) => (uses.get(t) ?? 0) < perWord(levelOf.get(t)))) continue;
   chosen.set(sentence.id, sentence);
-  for (const t of new Set(sentence.content)) uses.set(t, (uses.get(t) ?? 0) + 1);
+  for (const t of served) uses.set(t, (uses.get(t) ?? 0) + 1);
 }
 
 const sentences = [...chosen.values()]
@@ -111,7 +113,10 @@ const sentences = [...chosen.values()]
     });
     return { i: s.id, z: s.text, w: s.tokens, p: tokenPinyin, e: translations.get(String(s.id)), l: s.level };
   });
-writeFileSync(join(OUT, 'sentences.min.json'), JSON.stringify(sentences));
+rmSync(join(OUT, 'sentences.min.json'), { force: true });
+for (const level of LEVELS) {
+  writeFileSync(join(OUT, `sentences-${level}.min.json`), JSON.stringify(sentences.filter((x) => x.l === level)));
+}
 const covered = words.filter((w) => uses.has(w.s)).length;
 console.log(`Sentences: ${sentences.length}, words with an example: ${covered} of ${words.length}`);
 
@@ -137,9 +142,13 @@ const listFile = (folder, name) =>
     .map((l) => l.trim())
     .filter(Boolean);
 
-const recognise = [1, 2, 3].map((level) => listFile('HSK Hanzi', `HSK_Level_${level}_hanzi.txt`));
-const write = [listFile('HSK Handwritten', 'HSK_Level_1-2_handwritten.txt'), listFile('HSK Handwritten', 'HSK_Level_3_handwritten.txt')];
-const writeLevel = new Map([...write[0].map((c) => [c, 2]), ...write[1].map((c) => [c, 3])]);
+const recognise = LEVELS.map((level) => listFile('HSK Hanzi', `HSK_Level_${levelFile(level)}_hanzi.txt`));
+const writeLevel = new Map();
+for (const [file, level] of [['1-2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7-9', 7]]) {
+  for (const char of listFile('HSK Handwritten', `HSK_Level_${file}_handwritten.txt`)) {
+    if (!writeLevel.has(char)) writeLevel.set(char, level);
+  }
+}
 
 const readingsOf = new Map();
 for (const word of words) {
@@ -172,8 +181,11 @@ const meaningsFor = (char, syllable) => {
 
 const hanzi = [];
 const missing = [];
+const listed = new Set();
 recognise.forEach((list, i) => {
   for (const char of list) {
+    if (listed.has(char)) continue;
+    listed.add(char);
     const readings = (readingsOf.get(char) ?? []).sort((a, b) => a.level - b.level);
     const counts = new Map();
     for (const r of readings.filter((r) => r.level === readings[0].level)) counts.set(r.syllable, (counts.get(r.syllable) ?? 0) + 1);
@@ -181,7 +193,10 @@ recognise.forEach((list, i) => {
       [...counts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] ??
       cedict[char]?.pinyin.map((p) => p.toLowerCase())[0] ??
       '';
-    const meanings = meaningsFor(char, syllable);
+    const host = words.find((w) => w.s.length > 1 && w.s.includes(char));
+    const exact = meaningsFor(char, syllable);
+    const own = exact.length > 0 ? exact : meaningsFor(char, '');
+    const meanings = own.length > 0 || !host ? own : [`as in ${host.s}, ${host.f[0].m[0]}`];
     if (!syllable || meanings.length === 0) missing.push(char);
     hanzi.push({
       c: char,

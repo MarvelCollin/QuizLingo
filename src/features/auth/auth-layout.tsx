@@ -15,7 +15,7 @@ export const AuthLayout = ({ title, intro, children, footer }: AuthLayoutProps) 
           </p>
           <p className="mt-2 text-lg text-muted">xuéxí, to study</p>
           <p className="mt-8 text-xl leading-snug font-semibold text-ink">
-            All 1,000 words of HSK 3.0 levels 1 to 3, with a review schedule that brings back each word right before you
+            All 11,000 words of HSK 3.0 levels 1 to 9, with a review schedule that brings back each word right before you
             forget it.
           </p>
         </div>

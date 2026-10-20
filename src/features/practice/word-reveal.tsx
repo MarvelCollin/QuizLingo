@@ -3,7 +3,7 @@ import { useSentences } from '../study/use-study-data';
 import type { WordRevealProps } from './types';
 
 export const WordReveal = ({ word, isExampleShown = true }: WordRevealProps) => {
-  const sentences = useSentences();
+  const sentences = useSentences(word.level);
   const example = isExampleShown ? sentences.data?.byWord.get(word.hanzi)?.[0] : undefined;
   return (
     <dl className="flex flex-col gap-3">

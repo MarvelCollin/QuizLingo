@@ -7,7 +7,7 @@ export type WordModeId = 'flashcard' | 'meaning' | 'listening' | 'pinyin';
 export type SentenceModeId = 'reading' | 'sentence-listening' | 'gap' | 'order';
 export type PracticeModeId = WordModeId | SentenceModeId;
 export type WordSetId = 'due' | 'new' | 'all';
-export type LevelFilter = 'all' | '1' | '2' | '3';
+export type LevelFilter = 'all' | '1' | '2' | '3' | '4' | '5' | '6' | '7';
 export type RoundSize = '10' | '20' | '30';
 
 export type PracticeMode = {

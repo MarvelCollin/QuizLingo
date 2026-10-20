@@ -1,5 +1,6 @@
 import type { WordProgress } from '../progress/types';
 import { wordStatus } from '../progress/status';
+import { LEVELS } from '../vocabulary/constants';
 import { plainPinyin } from '../vocabulary/pinyin';
 import type { HskLevel, Word } from '../vocabulary/types';
 import { EMPTY_FILTERS, STATUS_ORDER } from './constants';
@@ -13,7 +14,7 @@ export const filtersFromParams = (params: URLSearchParams): WordFilters => ({
   word: params.get('word') ?? '',
   pinyin: params.get('pinyin') ?? '',
   meaning: params.get('meaning') ?? '',
-  levels: list<HskLevel>(params.get('level'), [1, 2, 3]),
+  levels: list<HskLevel>(params.get('level'), LEVELS),
   statuses: list(params.get('status'), STATUS_ORDER),
   sort: (['pinyin', 'level', 'status', 'accuracy'] as SortKey[]).includes(params.get('sort') as SortKey)
     ? (params.get('sort') as SortKey)
@@ -72,7 +73,7 @@ const matches = (row: WordRow, f: WordFilters) => {
   return true;
 };
 
-// The word list is a fixed 1,000 entry file shipped with the app, so filtering it here is instant
+// The word list is a fixed file shipped with the app, so filtering it here is instant
 export const applyFilters = (rows: WordRow[], filters: WordFilters, direction: SortDirection = filters.dir) => {
   const filtered = rows.filter((row) => matches(row, filters));
   const sign = direction === 'asc' ? 1 : -1;

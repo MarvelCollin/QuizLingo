@@ -19,8 +19,8 @@ export const MODES = [
 export type Mode = (typeof MODES)[number];
 
 export const level = (value: unknown): number => {
-  if (value === 1 || value === 2 || value === 3) return value;
-  throw new HttpError(400, 'Level must be 1, 2 or 3.');
+  if (Number.isInteger(value) && (value as number) >= 1 && (value as number) <= 7) return value as number;
+  throw new HttpError(400, 'Level must be a whole number from 1 to 7, where 7 is HSK 7-9.');
 };
 
 export const mode = (value: unknown): Mode => {

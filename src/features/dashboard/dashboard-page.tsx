@@ -8,6 +8,7 @@ import { useSession } from '../auth/use-session';
 import { useStats } from '../progress/use-stats';
 import { useProgress } from '../progress/use-progress';
 import { useVocabulary } from '../vocabulary/use-vocabulary';
+import { LEVELS } from '../vocabulary/constants';
 import type { HskLevel } from '../vocabulary/types';
 import type { LevelFilter } from '../practice/types';
 import { ActivityChart } from './activity-chart';
@@ -33,14 +34,14 @@ const DashboardPage = () => {
   const progress = useProgress();
 
   const totals = useMemo(() => {
-    const counts: Record<HskLevel, number> = { 1: 0, 2: 0, 3: 0 };
+    const counts = Object.fromEntries(LEVELS.map((l) => [l, 0])) as Record<HskLevel, number>;
     for (const word of vocabulary.data ?? []) counts[word.level]++;
     return counts;
   }, [vocabulary.data]);
 
   // The first level that still has words the user has never seen
   const nextNewLevel = useMemo((): LevelFilter | null => {
-    for (const level of [1, 2, 3] as HskLevel[]) {
+    for (const level of LEVELS) {
       if (vocabulary.data?.some((w) => w.level === level && !progress.byWord.has(w.hanzi))) {
         return String(level) as LevelFilter;
       }

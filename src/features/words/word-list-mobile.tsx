@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import { StatusLabel } from '../progress/status-label';
+import { levelLabel } from '../vocabulary/constants';
 import { ListenButton } from '../practice/listen-button';
 import type { WordListMobileProps } from './types';
 
@@ -19,7 +20,7 @@ export const WordListMobile = ({ rows }: WordListMobileProps) => (
           <p className="font-semibold text-strong">{row.pinyin}</p>
           <p className="text-base text-ink">{row.readings.flatMap((r) => r.meanings).slice(0, 2).join(', ')}</p>
           <p className="mt-1 flex flex-wrap items-center gap-x-3 text-sm text-muted">
-            <span>HSK {row.level}</span>
+            <span>{levelLabel(row.level)}</span>
             <StatusLabel status={row.status} />
             {row.accuracy !== null && <span>{row.accuracy}% right</span>}
           </p>

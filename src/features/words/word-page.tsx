@@ -9,12 +9,14 @@ import { WordReveal } from '../practice/word-reveal';
 import { configToSearch } from '../practice/round-config';
 import { SentenceView, SourceNote } from '../study/sentence-view';
 import { useHanzi, useSentences } from '../study/use-study-data';
+import type { LevelFilter } from '../practice/types';
+import { levelLabel } from '../vocabulary/constants';
 import { useVocabulary } from '../vocabulary/use-vocabulary';
 import type { WordPageContentProps } from './types';
 
 const WordPageContent = ({ word }: WordPageContentProps) => {
   usePageMeta(`${word.hanzi} ${word.pinyin}`, `${word.hanzi} (${word.pinyin}): ${word.meaning}. HSK ${word.level} word with examples.`);
-  const sentences = useSentences();
+  const sentences = useSentences(word.level);
   const hanzi = useHanzi();
   const examples = sentences.data?.byWord.get(word.hanzi) ?? [];
   const characters = [...new Set(word.hanzi)].map((char) => ({
@@ -39,7 +41,7 @@ const WordPageContent = ({ word }: WordPageContentProps) => {
           </h1>
           <ListenButton text={word.hanzi} />
         </div>
-        <p className="text-sm text-muted">HSK {word.level}</p>
+        <p className="text-sm text-muted">{levelLabel(word.level)}</p>
       </header>
 
       <WordReveal word={word} isExampleShown={false} />
@@ -58,10 +60,10 @@ const WordPageContent = ({ word }: WordPageContentProps) => {
                 <span className="min-w-0 flex-1">
                   <span className="block font-semibold text-strong">{info?.pinyin ?? ''}</span>
                   <span className="block text-base text-ink">
-                    {info ? info.meanings.slice(0, 3).join(', ') : 'Not in the HSK 1 to 3 character list'}
+                    {info ? info.meanings.slice(0, 3).join(', ') : 'Not in the HSK character list'}
                   </span>
                 </span>
-                {info && <span className="text-sm text-muted">HSK {info.level}</span>}
+                {info && <span className="text-sm text-muted">{levelLabel(info.level)}</span>}
               </Link>
             </li>
           ))}
@@ -75,7 +77,7 @@ const WordPageContent = ({ word }: WordPageContentProps) => {
         {sentences.isPending ? (
           <Skeleton className="h-24 w-full" />
         ) : examples.length === 0 ? (
-          <p className="text-base text-muted">No example sentence that uses only HSK 1 to 3 words yet.</p>
+          <p className="text-base text-muted">No example sentence at this level yet.</p>
         ) : (
           <ul className="flex flex-col gap-5">
             {examples.map((sentence) => (
@@ -89,8 +91,8 @@ const WordPageContent = ({ word }: WordPageContentProps) => {
       </section>
 
       <div className="flex flex-wrap gap-3 border-t border-hairline pt-6">
-        <ButtonLink to={`/practice/round${configToSearch({ mode: 'flashcard', set: 'all', level: String(word.level) as '1' | '2' | '3', size: '10' })}`}>
-          Practice HSK {word.level}
+        <ButtonLink to={`/practice/round${configToSearch({ mode: 'flashcard', set: 'all', level: String(word.level) as LevelFilter, size: '10' })}`}>
+          Practice {levelLabel(word.level)}
         </ButtonLink>
       </div>
     </div>
@@ -113,7 +115,7 @@ const WordPage = () => {
   if (!word) {
     return (
       <div className="mx-auto flex max-w-xl flex-col items-start gap-4">
-        <h1 className="text-2xl font-bold text-ink">This word is not in HSK 1 to 3</h1>
+        <h1 className="text-2xl font-bold text-ink">This word is not in the HSK 3.0 list</h1>
         <ButtonLink to="/words">Back to all words</ButtonLink>
       </div>
     );

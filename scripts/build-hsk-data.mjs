@@ -1,4 +1,4 @@
-// Builds public/data/{1,2,3}.min.json from the HSK 3.0 exam syllabus (2025-11).
+// Builds public/data/words.min.json from the HSK 3.0 exam syllabus (2025-11), levels 1 to 9.
 //
 // Inputs (clone these repos first, see README "Vocabulary data"):
 //   --syllabus  hsk-3.0-vocabulary-dataset/data/by-level   (word list, levels, pinyin)
@@ -6,13 +6,13 @@
 //   --cedict    HSK-3.0/Scripts and data/all_cedict.json   (CC-CEDICT fallback, CC BY-SA 4.0)
 //   --out       public/data
 //
-// Each output file is cumulative: level N holds every word from level 1 to N,
-// in the same shape the app already reads (IWord), plus `l`, the level a word first appears.
+// One entry per written form, with `l`, the level a word first appears. Band 7-9 is stored as level 7.
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 
-const LEVELS = [1, 2, 3];
+const LEVELS = ['1', '2', '3', '4', '5', '6', '7-9'];
+const levelNumber = (level) => (String(level) === '7-9' ? 7 : Number(level));
 
 const args = Object.fromEntries(
   process.argv.slice(2).reduce((pairs, arg, i, all) => {
@@ -28,6 +28,7 @@ for (const key of ['syllabus', 'dict', 'cedict', 'out']) {
 }
 
 const readJson = (path) => JSON.parse(readFileSync(path, 'utf8'));
+const MANUAL = readJson(new URL('./manual-meanings.json', import.meta.url));
 
 // Pinyin helpers
 
@@ -76,7 +77,7 @@ const cedict = readJson(args.cedict);
 const syllabus = [];
 for (const level of LEVELS) {
   for (const entry of readJson(join(args.syllabus, `hsk-${level}.json`))) {
-    syllabus.push({ ...entry, level: Number(entry.level) });
+    syllabus.push({ ...entry, level: levelNumber(entry.level) });
   }
 }
 
@@ -145,6 +146,8 @@ const buildForm = (hanzi, pinyin) => {
       fromCedict(hanzi, variant, toneless);
     if (form) return { ...form, i: { ...form.i, y: pinyin } };
   }
+  const manual = MANUAL[`${hanzi} ${pinyin}`];
+  if (manual) return { t: manual.t, i: { y: pinyin, n: manual.n }, m: manual.m, c: [] };
   warnings.push(`${hanzi} ${pinyin}: no meaning found`);
   return null;
 };
@@ -159,36 +162,25 @@ for (const entry of syllabus) {
 
 mkdirSync(args.out, { recursive: true });
 
-for (const maxLevel of LEVELS) {
-  const words = [];
-  for (const [hanzi, entries] of groups) {
-    const readings = entries.filter((e) => e.level <= maxLevel);
-    if (readings.length === 0) continue;
-
-    const forms = [];
-    const seen = new Set();
-    for (const reading of readings) {
-      const key = normalize(reading.pinyin);
-      if (seen.has(key)) continue;
-      seen.add(key);
-      const form = buildForm(hanzi, reading.pinyin);
-      if (form) forms.push(form);
-    }
-    if (forms.length === 0) continue;
-
-    const known = dictionary.get(hanzi);
-    words.push({
-      s: hanzi,
-      r: known?.r ?? '',
-      q: known?.q ?? 0,
-      p: known?.p ?? [],
-      l: Math.min(...readings.map((r) => r.level)),
-      f: forms,
-    });
+const words = [];
+for (const [hanzi, entries] of groups) {
+  const forms = [];
+  const seen = new Set();
+  for (const reading of entries) {
+    const key = normalize(reading.pinyin);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const form = buildForm(hanzi, reading.pinyin);
+    if (form) forms.push({ t: form.t, i: { y: form.i.y, n: form.i.n ?? '' }, m: form.m.slice(0, 6) });
   }
-  writeFileSync(join(args.out, `${maxLevel}.min.json`), JSON.stringify(words));
-  console.log(`HSK ${maxLevel}: ${words.length} words`);
+  if (forms.length === 0) continue;
+  words.push({ s: hanzi, l: Math.min(...entries.map((r) => r.level)), f: forms });
 }
+writeFileSync(join(args.out, 'words.min.json'), JSON.stringify(words));
+for (const level of [1, 2, 3, 4, 5, 6, 7]) {
+  console.log(`HSK ${level === 7 ? '7-9' : level}: ${words.filter((w) => w.l === level).length} words`);
+}
+console.log(`Total: ${words.length} words`);
 
 const unique = [...new Set(warnings)];
 if (unique.length > 0) {

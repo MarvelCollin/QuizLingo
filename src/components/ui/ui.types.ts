@@ -31,6 +31,7 @@ export type SegmentedControlProps<T extends string> = {
   value: T;
   onChange: (value: T) => void;
   isStacked?: boolean;
+  isWrapped?: boolean;
 };
 
 export type SearchFieldProps = {

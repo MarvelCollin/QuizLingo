@@ -3,7 +3,7 @@ import { STATUS_LABELS } from '../progress/status';
 import type { WordFilters } from './types';
 import type { ActiveFiltersProps } from './types';
 
-// "Showing 12 of 988, filtered by ..." with a way to remove each filter and all of them
+// "Showing 12 of 10,896, filtered by ..." with a way to remove each filter and all of them
 export const ActiveFilters = ({ filters, shown, total, onChange, onClearAll }: ActiveFiltersProps) => {
   const active = [
     filters.q && { label: `Search: ${filters.q}`, clear: { q: '' } },

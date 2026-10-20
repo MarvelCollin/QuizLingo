@@ -34,7 +34,7 @@ export const NextStep = ({ due, nextNewLevel, isFirstVisit }: NextStepProps) => 
       <section className="rounded-xl bg-surface px-6 py-8 sm:px-8">
         <h2 className="text-2xl font-bold text-ink">Nothing due right now</h2>
         <p className="mt-2 text-base text-muted">
-          You have started every word in HSK 1 to 3. Come back when reviews are due, or run a mixed round.
+          You have started every word in HSK 1 to 9. Come back when reviews are due, or run a mixed round.
         </p>
         <ButtonLink className="mt-6" size="lg" to="/practice?set=all&level=all">
           Practice a mixed round

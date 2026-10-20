@@ -30,7 +30,7 @@ const countColumnFilters = (f: WordFilters) =>
   [f.word, f.pinyin, f.meaning].filter(Boolean).length + (f.levels.length > 0 ? 1 : 0) + (f.statuses.length > 0 ? 1 : 0);
 
 const WordsPage = () => {
-  usePageMeta('Words', 'Every HSK 3.0 word for levels 1 to 3 with pinyin, meaning and your progress on each.');
+  usePageMeta('Words', 'Every HSK 3.0 word for levels 1 to 9 with pinyin, meaning and your progress on each.');
   const vocabulary = useVocabulary();
   const progress = useProgress();
   const { filters, update, clearAll } = useWordFilters();
@@ -62,7 +62,7 @@ const WordsPage = () => {
     <div className="flex flex-col gap-6">
       <div>
         <h1 className="text-2xl font-bold text-ink">Words</h1>
-        <p className="mt-1 text-base text-muted">All HSK 3.0 words for levels 1 to 3, with your progress on each.</p>
+        <p className="mt-1 text-base text-muted">All HSK 3.0 words for levels 1 to 9, with your progress on each.</p>
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end">

@@ -2,7 +2,7 @@
 export type RawReading = { t: string; i: { y?: string; n?: string }; m: string[]; c: string[] };
 export type RawWord = { s: string; r: string; q: number; p: string[]; l: number; f: RawReading[] };
 
-export type HskLevel = 1 | 2 | 3;
+export type HskLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 export type Reading = { pinyin: string; meanings: string[] };
 

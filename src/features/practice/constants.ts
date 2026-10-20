@@ -17,11 +17,17 @@ export const WORD_SET_LABELS: Record<WordSetId, string> = {
   all: 'Mixed',
 };
 
+export const LEVEL_FILTERS: readonly LevelFilter[] = ['1', '2', '3', '4', '5', '6', '7', 'all'];
+
 export const LEVEL_LABELS: Record<LevelFilter, string> = {
   all: 'All levels',
   '1': 'HSK 1',
   '2': 'HSK 2',
   '3': 'HSK 3',
+  '4': 'HSK 4',
+  '5': 'HSK 5',
+  '6': 'HSK 6',
+  '7': 'HSK 7-9',
 };
 
 export const ROUND_SIZES: readonly RoundSize[] = ['10', '20', '30'];

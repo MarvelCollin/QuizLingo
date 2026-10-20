@@ -10,6 +10,7 @@ export const SegmentedControl = <T extends string>({
   value,
   onChange,
   isStacked = false,
+  isWrapped = false,
 }: SegmentedControlProps<T>) => {
   const labelId = useId();
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -33,7 +34,7 @@ export const SegmentedControl = <T extends string>({
         aria-labelledby={labelId}
         className={cn(
           'grid gap-1 rounded-lg bg-surface p-1',
-          isStacked ? 'grid-cols-1 sm:grid-cols-2' : 'auto-cols-fr grid-flow-col',
+          isStacked ? 'grid-cols-1 sm:grid-cols-2' : isWrapped ? 'grid-cols-4' : 'auto-cols-fr grid-flow-col',
         )}
       >
         {options.map((option, index) => {

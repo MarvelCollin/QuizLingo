@@ -9,7 +9,7 @@ import { usePageMeta } from '../../lib/use-page-meta';
 import { useProgress } from '../progress/use-progress';
 import { useSentences } from '../study/use-study-data';
 import { useVocabulary } from '../vocabulary/use-vocabulary';
-import { LEVEL_LABELS, PRACTICE_MODES, ROUND_SIZES, WORD_SET_LABELS } from './constants';
+import { LEVEL_FILTERS, LEVEL_LABELS, PRACTICE_MODES, ROUND_SIZES, WORD_SET_LABELS } from './constants';
 import { wordsForMode, wordsInLevel, wordsInSet } from './pick-words';
 import { configFromParams, configToSearch } from './round-config';
 import { isSpeechSupported } from './speech';
@@ -33,7 +33,8 @@ const PracticePage = () => {
   const config = configFromParams(params);
   const vocabulary = useVocabulary();
   const progress = useProgress();
-  const sentences = useSentences();
+  const usesSentences = PRACTICE_MODES.find((m) => m.id === config.mode)!.usesSentences;
+  const sentences = useSentences(usesSentences ? 7 : 1);
   const [now] = useState(() => Date.now());
 
   // The options are kept in the URL, so Back and links from the dashboard restore them
@@ -47,7 +48,7 @@ const PracticePage = () => {
     const count = (set: WordSetId) => wordsInSet(level, set, progress.byWord, now).length;
     return {
       levels: Object.fromEntries(
-        (['all', '1', '2', '3'] as LevelFilter[]).map((l) => [l, wordsInLevel(usable, l).length]),
+        LEVEL_FILTERS.map((l) => [l, wordsInLevel(usable, l).length]),
       ) as Record<LevelFilter, number>,
       sets: { due: count('due'), new: count('new'), all: level.length } as Record<WordSetId, number>,
     };
@@ -70,7 +71,7 @@ const PracticePage = () => {
         <InlineMessage tone="error">{(vocabulary.error ?? progress.error)?.message}</InlineMessage>
       )}
 
-      {!counts || progress.isPending ? (
+      {!counts || progress.isPending || (usesSentences && sentences.isPending) ? (
         <SetupSkeleton />
       ) : (
         <form
@@ -84,7 +85,8 @@ const PracticePage = () => {
             label="Level"
             value={config.level}
             onChange={(level) => update({ level })}
-            options={(['1', '2', '3', 'all'] as LevelFilter[]).map((value) => ({
+            isWrapped
+            options={LEVEL_FILTERS.map((value) => ({
               value,
               label: LEVEL_LABELS[value],
               detail: plural(counts.levels[value], 'word'),

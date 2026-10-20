@@ -11,9 +11,8 @@ const PUNCTUATION = /^[，。？！、：；“”‘’（）《》…—,.?!:;
 
 export const isWordToken = (token: string) => !PUNCTUATION.test(token);
 
-export const fetchSentences = async (): Promise<SentenceIndex> => {
-  const raw = await fetchData<RawSentence[]>('sentences.min.json');
-  const all: Sentence[] = raw.map((s) => ({
+export const fetchSentenceLevel = async (level: HskLevel): Promise<Sentence[]> =>
+  (await fetchData<RawSentence[]>(`sentences-${level}.min.json`)).map((s) => ({
     id: s.i,
     text: s.z,
     tokens: s.w,
@@ -21,6 +20,8 @@ export const fetchSentences = async (): Promise<SentenceIndex> => {
     english: s.e,
     level: s.l as HskLevel,
   }));
+
+export const buildSentenceIndex = (all: Sentence[]): SentenceIndex => {
   const byWord = new Map<string, Sentence[]>();
   for (const sentence of all) {
     for (const token of new Set(sentence.tokens.filter(isWordToken))) {

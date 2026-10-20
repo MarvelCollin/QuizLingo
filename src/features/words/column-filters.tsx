@@ -1,6 +1,7 @@
 import { ChecklistPopover } from '../../components/ui/checklist-popover';
 import { SearchField } from '../../components/ui/search-field';
 import { STATUS_LABELS } from '../progress/status';
+import { LEVELS, levelLabel } from '../vocabulary/constants';
 import { STATUS_ORDER } from './constants';
 import type { FilterProps } from './types';
 
@@ -40,7 +41,7 @@ export const MeaningFilter = ({ filters, onChange, resetKey, isLabelVisible = fa
 export const LevelFilter = ({ filters, onChange }: Omit<FilterProps, 'resetKey'>) => (
   <ChecklistPopover
     label="level"
-    options={[1, 2, 3].map((level) => ({ value: level as 1 | 2 | 3, label: `HSK ${level}` }))}
+    options={LEVELS.map((level) => ({ value: level, label: levelLabel(level) }))}
     selected={filters.levels}
     onChange={(levels) => onChange({ levels })}
   />

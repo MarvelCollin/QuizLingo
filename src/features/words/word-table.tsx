@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import { StatusLabel } from '../progress/status-label';
+import { levelLabel } from '../vocabulary/constants';
 import { ListenButton } from '../practice/listen-button';
 import { LevelFilter, MeaningFilter, PinyinFilter, StatusFilter, WordFilter } from './column-filters';
 import { SortHeader } from './sort-header';
@@ -52,7 +53,7 @@ export const WordTable = ({ rows, filters, resetKey, onChange }: WordTableProps)
               </th>
               <td className="font-semibold whitespace-nowrap text-strong">{row.pinyin}</td>
               <td className="max-w-xs text-ink">{row.readings.flatMap((r) => r.meanings).slice(0, 3).join(', ')}</td>
-              <td className="whitespace-nowrap text-ink">HSK {row.level}</td>
+              <td className="whitespace-nowrap text-ink">{levelLabel(row.level)}</td>
               <td>
                 <StatusLabel status={row.status} />
               </td>

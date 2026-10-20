@@ -2,17 +2,19 @@
 
 # QuizLingo
 
-Practice for the HSK 3.0 exam, levels 1 to 3. Every answer is saved to your account and schedules when you see the word again.
+Practice for the HSK 3.0 exam, levels 1 to 9. Every answer is saved to your account and schedules when you see the word again.
 
 Live at [marvelcollin.com/quizlingo](https://marvelcollin.com/quizlingo/).
 
 ## Features
 
 - **Accounts**: sign up with name, email and password. Progress follows you to any device
-- **Four ways to practice**: flashcards you grade yourself, meaning quiz, listening quiz (browser speech) and pinyin quiz
+- **Eight ways to practice**: flashcards, meaning, listening, pinyin, reading a sentence, sentence listening, fill the gap and word order
+- **Native audio**: real recordings for 6,941 words, the browser voice for the rest
 - **Review schedule**: right answers push a word further out (1, 3, 7, 14, 30 days), wrong answers bring it back in 10 minutes
 - **Dashboard**: words due today, words mastered per level, accuracy, streak, the last 14 days and recent rounds
-- **Word list**: all 988 words with search, a filter on every column, sorting, and filters saved in the URL
+- **Word list**: all 10,896 words with search, a filter on every column, sorting, and filters saved in the URL
+- **Word pages**: readings, the characters in the word, and example sentences with pinyin and English
 - **Keyboard shortcuts** in practice: 1 to 4 to answer, Space to flip or replay, Enter for next
 - **Light and dark mode**, mobile tab bar, WCAG AA contrast checked with axe
 
@@ -61,13 +63,19 @@ Deploying on Vercel:
 
 ## 📚 Vocabulary data
 
-`public/data/{1,2,3}.min.json` follow the **HSK exam syllabus** (《HSK 考试大纲》, published 2025-11 by the Center for Language Education and Cooperation, in force from 2026-07). Each file is cumulative: level 3 holds every word from levels 1 to 3. The field `l` is the level a word first appears.
+`public/data/words.min.json` follows the **HSK exam syllabus** (《HSK 考试大纲》, published 2025-11 by the Center for Language Education and Cooperation, in force from 2026-07). The field `l` is the level a word first appears, and band 7-9 is stored as level 7.
 
 | Level | New words | Total |
 |-------|----------:|------:|
 | HSK 1 | 300 | 300 |
 | HSK 2 | 200 | 500 |
 | HSK 3 | 500 | 1,000 |
+| HSK 4 | 1,000 | 2,000 |
+| HSK 5 | 1,600 | 3,600 |
+| HSK 6 | 1,800 | 5,400 |
+| HSK 7-9 | 5,600 | 11,000 |
+
+The syllabus lists some words twice with different readings (还 hái and huán), so the app has 10,896 word cards. 18 words that neither dictionary covers have hand-written glosses in `scripts/manual-meanings.json`.
 
 Sources:
 
@@ -92,10 +100,10 @@ Built by `scripts/build-study-data.mjs` from the word list above and these open 
 
 | Data | File | Source | License |
 |------|------|--------|---------|
-| Example sentences that use only HSK 1 to 3 words, with pinyin and English | `public/data/sentences.min.json` | [Tatoeba](https://tatoeba.org) Mandarin and English exports, pinyin from [pinyin-pro](https://github.com/zh-lx/pinyin-pro) | CC BY 2.0 FR, each sentence links to its Tatoeba page |
-| The 655 characters of HSK 1 to 3, with the 250 to write | `public/data/hanzi.min.json` | [krmanik/HSK-3.0](https://github.com/krmanik/HSK-3.0) `New HSK (2025)`, meanings from CC-CEDICT | CC BY-SA 4.0 |
+| 11,538 example sentences, each filed under the highest level it uses, with pinyin and English | `public/data/sentences-{level}.min.json` | [Tatoeba](https://tatoeba.org) Mandarin and English exports, pinyin from [pinyin-pro](https://github.com/zh-lx/pinyin-pro) | CC BY 2.0 FR, each sentence links to its Tatoeba page |
+| The 3,088 characters of HSK 1 to 9, with the 1,200 to write | `public/data/hanzi.min.json` | [krmanik/HSK-3.0](https://github.com/krmanik/HSK-3.0) `New HSK (2025)`, meanings from CC-CEDICT | CC BY-SA 4.0 |
 | Stroke order for those characters | `public/data/strokes/` | [Make Me a Hanzi](https://github.com/skishore/makemeahanzi) via [hanzi-writer-data](https://github.com/chanind/hanzi-writer-data) | Arphic Public License, see `ARPHICPL.TXT` |
-| Native recordings of 899 words and 1,123 syllables | `public/audio/` | [audio-cmn](https://github.com/hugolpz/audio-cmn), voices by Yue Tan and Chen Wang | CC BY-SA |
+| Native recordings of 6,941 words and 1,591 syllables | `public/audio/` | [audio-cmn](https://github.com/hugolpz/audio-cmn), voices by Yue Tan and Chen Wang | CC BY-SA |
 
 Words without a recording are read by the browser's own Chinese voice.
 

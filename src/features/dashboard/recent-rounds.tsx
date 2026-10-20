@@ -1,4 +1,5 @@
 import { timeAgo } from '../../lib/format';
+import { levelLabel } from '../vocabulary/constants';
 import { PRACTICE_MODES } from '../practice/constants';
 import type { RecentRoundsProps } from './types';
 
@@ -18,7 +19,7 @@ export const RecentRounds = ({ rounds }: RecentRoundsProps) => (
         {rounds.slice(0, 5).map((round) => (
           <li key={round.id} className="flex items-baseline justify-between gap-4 py-3 text-base">
             <span className="text-ink">
-              {MODE_NAMES[round.mode] ?? round.mode}, HSK {round.level}
+              {MODE_NAMES[round.mode] ?? round.mode}, {levelLabel(round.level)}
             </span>
             <span className="text-right text-muted">
               <span className="font-semibold text-ink">

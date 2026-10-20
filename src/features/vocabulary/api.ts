@@ -16,9 +16,8 @@ const toWord = (raw: RawWord): Word => {
   };
 };
 
-// 3.min.json is cumulative, so it holds every word from HSK 1 to 3
 export const fetchVocabulary = async (): Promise<Word[]> => {
-  const response = await fetch(`${import.meta.env.BASE_URL}data/3.min.json`);
+  const response = await fetch(`${import.meta.env.BASE_URL}data/words.min.json`);
   if (!response.ok) throw new Error('The word list could not be loaded. Reload the page to try again.');
   const raw = (await response.json()) as RawWord[];
   return raw.map(toWord);

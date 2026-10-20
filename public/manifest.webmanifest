@@ -1,7 +1,7 @@
 {
   "name": "QuizLingo",
   "short_name": "QuizLingo",
-  "description": "HSK 3.0 vocabulary practice for levels 1 to 3.",
+  "description": "HSK 3.0 practice for levels 1 to 9.",
   "id": "/quizlingo/",
   "start_url": "/quizlingo/",
   "scope": "/quizlingo/",

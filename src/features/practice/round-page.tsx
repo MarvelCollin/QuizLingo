@@ -9,7 +9,7 @@ import { useSentences } from '../study/use-study-data';
 import { useVocabulary } from '../vocabulary/use-vocabulary';
 import { pickRoundWords, wordsForMode, wordsInLevel } from './pick-words';
 import { Round } from './round';
-import { configFromParams } from './round-config';
+import { configFromParams, highestLevel } from './round-config';
 import type { RoundRunnerProps } from './types';
 
 const RoundSkeleton = () => (
@@ -65,7 +65,7 @@ const RoundPage = () => {
   const config = configFromParams(params);
   const vocabulary = useVocabulary();
   const progress = useProgress();
-  const sentences = useSentences();
+  const sentences = useSentences(highestLevel(config.level));
 
   if (vocabulary.isPending || progress.isPending || sentences.isPending) return <RoundSkeleton />;
   if (vocabulary.isError || progress.isError || sentences.isError) {
@@ -89,6 +89,7 @@ const RoundPage = () => {
       </InlineMessage>
     );
   }
+  if (!sentences.data) return <RoundSkeleton />;
   return (
     <RoundRunner
       key={params.toString()}
