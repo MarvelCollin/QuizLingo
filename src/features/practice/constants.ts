@@ -1,10 +1,14 @@
 import type { LevelFilter, PracticeMode, RoundConfig, RoundSize, WordSetId } from './types';
 
 export const PRACTICE_MODES: readonly PracticeMode[] = [
-  { id: 'flashcard', label: 'Flashcards', detail: 'See the word, then say if you knew it', apiMode: 'flashcard' },
-  { id: 'meaning', label: 'Meaning', detail: 'Pick the English meaning', apiMode: 'quiz' },
-  { id: 'listening', label: 'Listening', detail: 'Hear the word, pick the characters', apiMode: 'listening' },
-  { id: 'pinyin', label: 'Pinyin', detail: 'Pick the right pinyin and tones', apiMode: 'pinyin' },
+  { id: 'flashcard', label: 'Flashcards', detail: 'See the word, then say if you knew it', apiMode: 'flashcard', usesSentences: false, needsVoice: false },
+  { id: 'meaning', label: 'Meaning', detail: 'Pick the English meaning', apiMode: 'quiz', usesSentences: false, needsVoice: false },
+  { id: 'listening', label: 'Listening', detail: 'Hear the word, pick the characters', apiMode: 'listening', usesSentences: false, needsVoice: true },
+  { id: 'pinyin', label: 'Pinyin', detail: 'Pick the right pinyin and tones', apiMode: 'pinyin', usesSentences: false, needsVoice: false },
+  { id: 'reading', label: 'Reading', detail: 'Read a sentence with the word, pick what it means', apiMode: 'reading', usesSentences: true, needsVoice: false },
+  { id: 'sentence-listening', label: 'Sentence listening', detail: 'Hear a sentence, pick what it means', apiMode: 'sentence-listening', usesSentences: true, needsVoice: true },
+  { id: 'gap', label: 'Fill the gap', detail: 'Pick the word that completes the sentence', apiMode: 'gap', usesSentences: true, needsVoice: false },
+  { id: 'order', label: 'Word order', detail: 'Put the words in the right order', apiMode: 'order', usesSentences: true, needsVoice: false },
 ];
 
 export const WORD_SET_LABELS: Record<WordSetId, string> = {

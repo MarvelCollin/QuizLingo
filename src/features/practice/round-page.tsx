@@ -5,8 +5,9 @@ import { InlineMessage } from '../../components/ui/inline-message';
 import { Skeleton } from '../../components/ui/skeleton';
 import { usePageMeta } from '../../lib/use-page-meta';
 import { useProgress } from '../progress/use-progress';
+import { useSentences } from '../study/use-study-data';
 import { useVocabulary } from '../vocabulary/use-vocabulary';
-import { pickRoundWords, wordsInLevel } from './pick-words';
+import { pickRoundWords, wordsForMode, wordsInLevel } from './pick-words';
 import { Round } from './round';
 import { configFromParams } from './round-config';
 import type { RoundRunnerProps } from './types';
@@ -20,13 +21,14 @@ const RoundSkeleton = () => (
 );
 
 // Picks the words once when the round starts, so answering does not reshuffle the round
-const RoundRunner = ({ vocabulary, progress, config }: RoundRunnerProps) => {
+const RoundRunner = ({ vocabulary, progress, sentences, config }: RoundRunnerProps) => {
   // Stable, so wrong options are not reshuffled when saved progress refreshes mid question
   const pool = useMemo(() => {
     const inLevel = wordsInLevel(vocabulary, config.level);
     return inLevel.length >= 8 ? inLevel : vocabulary;
   }, [vocabulary, config.level]);
-  const [round, setRound] = useState(() => ({ id: 0, words: pickRoundWords(vocabulary, config, progress, Date.now()) }));
+  const usable = useMemo(() => wordsForMode(vocabulary, config.mode, sentences), [vocabulary, config.mode, sentences]);
+  const [round, setRound] = useState(() => ({ id: 0, words: pickRoundWords(usable, config, progress, Date.now()) }));
 
   if (round.words.length === 0) {
     return (
@@ -47,10 +49,11 @@ const RoundRunner = ({ vocabulary, progress, config }: RoundRunnerProps) => {
       key={round.id}
       words={round.words}
       pool={pool}
+      sentences={sentences}
       config={config}
       onPracticeWords={(words) => setRound({ id: round.id + 1, words })}
       onNewRound={() =>
-        setRound({ id: round.id + 1, words: pickRoundWords(vocabulary, config, progress, Date.now()) })
+        setRound({ id: round.id + 1, words: pickRoundWords(usable, config, progress, Date.now()) })
       }
     />
   );
@@ -62,9 +65,10 @@ const RoundPage = () => {
   const config = configFromParams(params);
   const vocabulary = useVocabulary();
   const progress = useProgress();
+  const sentences = useSentences();
 
-  if (vocabulary.isPending || progress.isPending) return <RoundSkeleton />;
-  if (vocabulary.isError || progress.isError) {
+  if (vocabulary.isPending || progress.isPending || sentences.isPending) return <RoundSkeleton />;
+  if (vocabulary.isError || progress.isError || sentences.isError) {
     return (
       <InlineMessage
         tone="error"
@@ -74,17 +78,26 @@ const RoundPage = () => {
             onClick={() => {
               void vocabulary.refetch();
               void progress.refetch();
+              void sentences.refetch();
             }}
           >
             Try again
           </Button>
         }
       >
-        {(vocabulary.error ?? progress.error)?.message}
+        {(vocabulary.error ?? progress.error ?? sentences.error)?.message}
       </InlineMessage>
     );
   }
-  return <RoundRunner key={params.toString()} vocabulary={vocabulary.data} progress={progress.byWord} config={config} />;
+  return (
+    <RoundRunner
+      key={params.toString()}
+      vocabulary={vocabulary.data}
+      progress={progress.byWord}
+      sentences={sentences.data}
+      config={config}
+    />
+  );
 };
 
 export default RoundPage;

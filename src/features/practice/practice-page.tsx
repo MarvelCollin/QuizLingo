@@ -7,9 +7,10 @@ import { Skeleton } from '../../components/ui/skeleton';
 import { plural } from '../../lib/format';
 import { usePageMeta } from '../../lib/use-page-meta';
 import { useProgress } from '../progress/use-progress';
+import { useSentences } from '../study/use-study-data';
 import { useVocabulary } from '../vocabulary/use-vocabulary';
 import { LEVEL_LABELS, PRACTICE_MODES, ROUND_SIZES, WORD_SET_LABELS } from './constants';
-import { wordsInLevel, wordsInSet } from './pick-words';
+import { wordsForMode, wordsInLevel, wordsInSet } from './pick-words';
 import { configFromParams, configToSearch } from './round-config';
 import { isSpeechSupported } from './speech';
 import type { LevelFilter, RoundConfig, WordSetId } from './types';
@@ -32,6 +33,7 @@ const PracticePage = () => {
   const config = configFromParams(params);
   const vocabulary = useVocabulary();
   const progress = useProgress();
+  const sentences = useSentences();
   const [now] = useState(() => Date.now());
 
   // The options are kept in the URL, so Back and links from the dashboard restore them
@@ -40,17 +42,18 @@ const PracticePage = () => {
 
   const counts = useMemo(() => {
     if (!vocabulary.data) return null;
-    const level = wordsInLevel(vocabulary.data, config.level);
+    const usable = wordsForMode(vocabulary.data, config.mode, sentences.data);
+    const level = wordsInLevel(usable, config.level);
     const count = (set: WordSetId) => wordsInSet(level, set, progress.byWord, now).length;
     return {
       levels: Object.fromEntries(
-        (['all', '1', '2', '3'] as LevelFilter[]).map((l) => [l, wordsInLevel(vocabulary.data, l).length]),
+        (['all', '1', '2', '3'] as LevelFilter[]).map((l) => [l, wordsInLevel(usable, l).length]),
       ) as Record<LevelFilter, number>,
       sets: { due: count('due'), new: count('new'), all: level.length } as Record<WordSetId, number>,
     };
-  }, [vocabulary.data, progress.byWord, config.level, now]);
+  }, [vocabulary.data, sentences.data, progress.byWord, config.level, config.mode, now]);
 
-  const modes = isSpeechSupported() ? PRACTICE_MODES : PRACTICE_MODES.filter((m) => m.id !== 'listening');
+  const modes = isSpeechSupported() ? PRACTICE_MODES : PRACTICE_MODES.filter((m) => !m.needsVoice);
   const available = counts?.sets[config.set] ?? 0;
   const roundLength = Math.min(available, Number(config.size));
   const modeLabel = PRACTICE_MODES.find((m) => m.id === config.mode)!.label;

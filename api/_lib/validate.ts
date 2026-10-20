@@ -1,6 +1,21 @@
 import { HttpError } from './http.js';
 
-export const MODES = ['flashcard', 'quiz', 'listening', 'pinyin'] as const;
+export const MODES = [
+  'flashcard',
+  'quiz',
+  'listening',
+  'pinyin',
+  'reading',
+  'sentence-listening',
+  'order',
+  'gap',
+  'hanzi',
+  'writing',
+  'tones',
+  'listening-test',
+  'mock-test',
+  'speaking',
+] as const;
 export type Mode = (typeof MODES)[number];
 
 export const level = (value: unknown): number => {

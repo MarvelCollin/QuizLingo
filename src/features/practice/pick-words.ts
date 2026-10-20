@@ -1,7 +1,10 @@
 import { shuffle } from '../../lib/random';
 import type { WordProgress } from '../progress/types';
+import type { SentenceIndex } from '../study/types';
 import type { Word } from '../vocabulary/types';
-import type { LevelFilter, RoundConfig, WordSetId } from './types';
+import { hasSentence } from './build-sentence-question';
+import { PRACTICE_MODES } from './constants';
+import type { LevelFilter, PracticeModeId, RoundConfig, SentenceModeId, WordSetId } from './types';
 
 export const wordsInLevel = (words: Word[], level: LevelFilter) =>
   level === 'all' ? words : words.filter((w) => w.level === Number(level));
@@ -23,3 +26,9 @@ export const pickRoundWords = (
   progress: Map<string, WordProgress>,
   now: number,
 ) => shuffle(wordsInSet(wordsInLevel(words, config.level), config.set, progress, now).slice(0, Number(config.size)));
+
+export const wordsForMode = (words: Word[], mode: PracticeModeId, sentences: SentenceIndex | undefined) => {
+  if (!PRACTICE_MODES.find((m) => m.id === mode)!.usesSentences) return words;
+  if (!sentences) return [];
+  return words.filter((w) => hasSentence(w, mode as SentenceModeId, sentences));
+};

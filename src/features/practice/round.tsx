@@ -3,23 +3,34 @@ import { useMemo } from 'react';
 import { Link } from 'react-router';
 import { StackedBar } from '../../components/ui/stacked-bar';
 import { buildQuestion } from './build-question';
+import { buildSentenceQuestion } from './build-sentence-question';
 import { ChoiceQuestion } from './choice-question';
 import { LEVEL_LABELS, PRACTICE_MODES } from './constants';
 import { Flashcard } from './flashcard';
 import { RoundSummary } from './round-summary';
+import { SentenceChoice } from './sentence-choice';
 import { useRound } from './use-round';
-import type { RoundProps } from './types';
+import { WordOrder } from './word-order';
+import type { RoundProps, SentenceModeId, WordModeId } from './types';
 
-export const Round = ({ words, pool, config, onPracticeWords, onNewRound }: RoundProps) => {
+export const Round = ({ words, pool, sentences, config, onPracticeWords, onNewRound }: RoundProps) => {
   const round = useRound(words, config.mode, config.level);
-  const modeLabel = PRACTICE_MODES.find((m) => m.id === config.mode)!.label;
+  const mode = PRACTICE_MODES.find((m) => m.id === config.mode)!;
+  const modeLabel = mode.label;
   const current = round.current;
   const question = useMemo(
-    () => (current ? buildQuestion(current, config.mode, pool) : null),
-    [current, config.mode, pool],
+    () => (current && !mode.usesSentences ? buildQuestion(current, config.mode as WordModeId, pool) : null),
+    [current, config.mode, mode.usesSentences, pool],
+  );
+  const sentenceQuestion = useMemo(
+    () =>
+      current && mode.usesSentences
+        ? buildSentenceQuestion(current, config.mode as SentenceModeId, pool, sentences)
+        : null,
+    [current, config.mode, mode.usesSentences, pool, sentences],
   );
 
-  if (round.isDone || !question) {
+  if (round.isDone || (!question && !sentenceQuestion)) {
     return (
       <RoundSummary
         records={round.records}
@@ -69,7 +80,19 @@ export const Round = ({ words, pool, config, onPracticeWords, onNewRound }: Roun
         </div>
       </div>
 
-      {config.mode === 'flashcard' ? (
+      {sentenceQuestion ? (
+        config.mode === 'order' ? (
+          <WordOrder key={round.index} question={sentenceQuestion} onAnswer={round.answer} onNext={round.next} />
+        ) : (
+          <SentenceChoice
+            key={round.index}
+            question={sentenceQuestion}
+            mode={config.mode as Exclude<SentenceModeId, 'order'>}
+            onAnswer={round.answer}
+            onNext={round.next}
+          />
+        )
+      ) : question && config.mode === 'flashcard' ? (
         <Flashcard
           key={round.index}
           word={question.word}
@@ -79,13 +102,15 @@ export const Round = ({ words, pool, config, onPracticeWords, onNewRound }: Roun
           }}
         />
       ) : (
-        <ChoiceQuestion
-          key={round.index}
-          question={question}
-          mode={config.mode}
-          onAnswer={round.answer}
-          onNext={round.next}
-        />
+        question && (
+          <ChoiceQuestion
+            key={round.index}
+            question={question}
+            mode={config.mode as Exclude<WordModeId, 'flashcard'>}
+            onAnswer={round.answer}
+            onNext={round.next}
+          />
+        )
       )}
     </div>
   );

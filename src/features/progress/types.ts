@@ -12,7 +12,21 @@ export type WordProgress = {
 
 export type WordStatus = 'new' | 'learning' | 'due' | 'mastered';
 
-export type ApiMode = 'flashcard' | 'quiz' | 'listening' | 'pinyin';
+export type ApiMode =
+  | 'flashcard'
+  | 'quiz'
+  | 'listening'
+  | 'pinyin'
+  | 'reading'
+  | 'sentence-listening'
+  | 'order'
+  | 'gap'
+  | 'hanzi'
+  | 'writing'
+  | 'tones'
+  | 'listening-test'
+  | 'mock-test'
+  | 'speaking';
 
 export type Answer = { word: string; level: HskLevel; correct: boolean };
 
