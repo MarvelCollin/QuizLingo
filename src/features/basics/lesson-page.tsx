@@ -1,10 +1,11 @@
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router';
 import { Button, ButtonLink } from '../../components/ui/button';
 import { InlineMessage } from '../../components/ui/inline-message';
 import { Skeleton } from '../../components/ui/skeleton';
 import { percent } from '../../lib/format';
 import { usePageMeta } from '../../lib/use-page-meta';
+import { preloadRecording } from '../practice/speech';
 import { useKeyboard } from '../practice/use-keyboard';
 import type { Answer } from '../progress/types';
 import { useSaveAnswers } from '../progress/use-save-answers';
@@ -56,6 +57,12 @@ const LessonPage = () => {
     // run rebuilds the questions with a fresh shuffle
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lesson, needsData, vocabulary.data, audio.data, run]);
+
+  // The next card is fetched while this one is on screen, so Listen answers at once
+  useEffect(() => {
+    const upcoming = content?.cards[cardIndex + 1];
+    if (upcoming) preloadRecording(upcoming);
+  }, [content, cardIndex]);
 
   const hasCards = (content?.cards.length ?? 0) > 0;
   const current = phase ?? (hasCards ? 'cards' : 'quiz');

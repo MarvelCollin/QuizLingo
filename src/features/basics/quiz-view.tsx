@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Button } from '../../components/ui/button';
 import { ChoiceOption } from '../practice/choice-option';
 import { KeyHint } from '../practice/key-hint';
-import { playSyllable, speak } from '../practice/speech';
+import { playSyllable, preloadRecording, speak } from '../practice/speech';
 import { useKeyboard } from '../practice/use-keyboard';
 import { cn } from '../../lib/utils';
 import { LessonHeader } from './lesson-header';
@@ -31,6 +31,11 @@ export const QuizView = ({ questions, onFinish }: QuizViewProps) => {
   useEffect(() => {
     playQuestion(question);
   }, [question]);
+
+  useEffect(() => {
+    const upcoming = questions[index + 1];
+    if (upcoming) preloadRecording(upcoming);
+  }, [questions, index]);
 
   useEffect(() => {
     if (isAnswered) nextRef.current?.focus();
