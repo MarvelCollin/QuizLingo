@@ -65,6 +65,18 @@ npm run dev                  # open http://localhost:5173/quizlingo/
 
 The app lives under the `/quizlingo/` base path, and the API is served at `/quizlingo/api/`.
 
+Tests:
+
+```bash
+npm test          # 71 tests in three groups, about 15 seconds
+```
+
+| Group | Folder | What it covers |
+|-------|--------|----------------|
+| web | `tests/web/` | pinyin and tone helpers, question builders, round setup, character filters, tone items, speech matching, mock test papers and scoring, and components (End round, word order, answer options, level picker keys, listening questions with Locate, the script view, the mock answer grid, the round hook that saves results) |
+| api | `tests/api/` | review schedule, input checks, password hashing, and full flows against a temporary SQLite file: sign up, duplicate email, sign in, fake sessions, saving answers, rounds of every mode, stats, sign out and the 10 attempt sign in limit |
+| data | `tests/data/` | word counts per level, sentences rebuild from their words and stay within their level, 3,088 characters with stroke data, every listed recording exists, listening test and grammar note structure |
+
 Deploying on Vercel:
 
 1. Import this repository at vercel.com/new (framework preset: Vite).
