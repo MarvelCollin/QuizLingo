@@ -5,16 +5,16 @@
   and neutrals tinted with the same hue. Built in OKLCH so lightness steps look even.
 */
 :root {
-  --bg: oklch(0.985 0.008 190);
-  --surface: oklch(0.962 0.016 190);
-  --tint: oklch(0.925 0.035 190);
-  --soft: oklch(0.85 0.06 190);
-  --line: oklch(0.6 0.05 200);
-  --hairline: oklch(0.9 0.015 200);
-  --strong: oklch(0.45 0.08 205);
-  --ink: oklch(0.26 0.04 230);
-  --muted: oklch(0.47 0.03 220);
-  --on-strong: oklch(0.99 0.005 190);
+  --bg: oklch(0.985 0.008 290);
+  --surface: oklch(0.962 0.016 290);
+  --tint: oklch(0.925 0.035 290);
+  --soft: oklch(0.85 0.06 290);
+  --line: oklch(0.6 0.06 288);
+  --hairline: oklch(0.9 0.015 288);
+  --strong: oklch(0.45 0.13 285);
+  --ink: oklch(0.26 0.045 280);
+  --muted: oklch(0.47 0.035 282);
+  --on-strong: oklch(0.99 0.005 290);
 
   --accent-tint: oklch(0.94 0.035 60);
   --accent-soft: oklch(0.87 0.07 60);
@@ -25,24 +25,24 @@
   --bad-tint: oklch(0.94 0.035 25);
   --bad-strong: oklch(0.5 0.15 25);
 
-  --shadow-raise: 0 1px 2px oklch(0.26 0.04 230 / 0.06), 0 2px 8px oklch(0.26 0.04 230 / 0.05);
-  --shadow-overlay: 0 8px 24px oklch(0.26 0.04 230 / 0.14), 0 2px 6px oklch(0.26 0.04 230 / 0.08);
+  --shadow-raise: 0 1px 2px oklch(0.26 0.045 280 / 0.06), 0 2px 8px oklch(0.26 0.045 280 / 0.05);
+  --shadow-overlay: 0 8px 24px oklch(0.26 0.045 280 / 0.14), 0 2px 6px oklch(0.26 0.045 280 / 0.08);
 
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: oklch(0.2 0.015 205);
-    --surface: oklch(0.235 0.018 205);
-    --tint: oklch(0.29 0.03 200);
-    --soft: oklch(0.37 0.05 195);
-    --line: oklch(0.6 0.05 195);
-    --hairline: oklch(0.31 0.02 205);
-    --strong: oklch(0.8 0.08 190);
-    --ink: oklch(0.94 0.01 190);
-    --muted: oklch(0.74 0.02 200);
-    --on-strong: oklch(0.2 0.02 205);
+    --bg: oklch(0.2 0.02 285);
+    --surface: oklch(0.235 0.022 285);
+    --tint: oklch(0.29 0.035 287);
+    --soft: oklch(0.37 0.06 288);
+    --line: oklch(0.6 0.06 288);
+    --hairline: oklch(0.31 0.025 285);
+    --strong: oklch(0.8 0.1 290);
+    --ink: oklch(0.94 0.01 290);
+    --muted: oklch(0.74 0.025 285);
+    --on-strong: oklch(0.2 0.02 285);
 
     --accent-tint: oklch(0.3 0.04 55);
     --accent-soft: oklch(0.4 0.07 55);
