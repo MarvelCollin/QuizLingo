@@ -1,6 +1,6 @@
 import type { AudioIndex } from '../study/types';
 
-type SpeakOptions = { rate?: number; onStart?: () => void; onEnd?: () => void };
+type SpeakOptions = { rate?: number; pitch?: number; onStart?: () => void; onEnd?: () => void };
 
 let recordedWords = new Set<string>();
 let recordedSyllables = new Set<string>();
@@ -31,7 +31,7 @@ export const stopSpeaking = () => {
   if (isSpeechSupported()) window.speechSynthesis.cancel();
 };
 
-const speakWithVoice = (text: string, { rate = 1, onStart, onEnd }: SpeakOptions) => {
+const speakWithVoice = (text: string, { rate = 1, pitch = 1, onStart, onEnd }: SpeakOptions) => {
   if (!isSpeechSupported()) {
     onEnd?.();
     return;
@@ -39,6 +39,7 @@ const speakWithVoice = (text: string, { rate = 1, onStart, onEnd }: SpeakOptions
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = 'zh-CN';
   utterance.rate = 0.85 * rate;
+  utterance.pitch = pitch;
   const voice = chineseVoice();
   if (voice) utterance.voice = voice;
   utterance.onstart = () => onStart?.();
@@ -72,4 +73,9 @@ export const speak = (text: string, options: SpeakOptions = {}) => {
 export const playSyllable = (syllable: string, options: SpeakOptions = {}) => {
   stopSpeaking();
   playFile(audioUrl('syllables', syllable), null, options);
+};
+
+export const speakLine = (text: string, options: SpeakOptions = {}) => {
+  stopSpeaking();
+  speakWithVoice(text, options);
 };

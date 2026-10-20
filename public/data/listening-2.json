@@ -1,0 +1,123 @@
+[
+  {
+    "id": "l2-01",
+    "title": "Finding the subway station",
+    "scene": "A traveler asks a woman on the street for directions",
+    "lines": [
+      { "speaker": "男", "zh": "不好意思，请问这儿离地铁站远吗？", "py": "Bù hǎoyìsi, qǐngwèn zhèr lí dìtiězhàn yuǎn ma?", "en": "Excuse me, is the subway station far from here?" },
+      { "speaker": "女", "zh": "不太远，走路10分钟就到了。", "py": "Bú tài yuǎn, zǒulù shí fēnzhōng jiù dào le.", "en": "Not too far. It's a ten-minute walk." },
+      { "speaker": "男", "zh": "怎么走呢？", "py": "Zěnme zǒu ne?", "en": "How do I get there?" },
+      { "speaker": "女", "zh": "你往前走，看见一个商场就往右走，地铁站在商场旁边。", "py": "Nǐ wǎng qián zǒu, kànjiàn yí gè shāngchǎng jiù wǎng yòu zǒu, dìtiězhàn zài shāngchǎng pángbiān.", "en": "Go straight, turn right when you see a shopping mall. The station is next to the mall." },
+      { "speaker": "男", "zh": "我要去机场，坐地铁要多长时间？", "py": "Wǒ yào qù jīchǎng, zuò dìtiě yào duō cháng shíjiān?", "en": "I'm going to the airport. How long does it take by subway?" },
+      { "speaker": "女", "zh": "要一个多小时。你也可以打车，但是打车很贵。", "py": "Yào yí gè duō xiǎoshí. Nǐ yě kěyǐ dǎchē, dànshì dǎchē hěn guì.", "en": "Over an hour. You could also take a taxi, but a taxi is expensive." },
+      { "speaker": "男", "zh": "没关系，我坐地铁。谢谢你！", "py": "Méi guānxi, wǒ zuò dìtiě. Xièxie nǐ!", "en": "That's fine, I'll take the subway. Thank you!" }
+    ],
+    "questions": [
+      { "prompt": "走路去地铁站要多长时间？", "promptPy": "Zǒulù qù dìtiězhàn yào duō cháng shíjiān?", "promptEn": "How long is the walk to the subway station?", "options": ["5分钟", "10分钟", "一个多小时"], "answer": 1, "line": 1, "explanation": "She says 走路10分钟就到了 in line 2. Over an hour is the subway ride to the airport." },
+      { "prompt": "地铁站在哪儿？", "promptPy": "Dìtiězhàn zài nǎr?", "promptEn": "Where is the subway station?", "options": ["商场旁边", "商场里面", "饭馆前面"], "answer": 0, "line": 3, "explanation": "Line 4 says 地铁站在商场旁边." },
+      { "prompt": "男的要去哪儿？", "promptPy": "Nán de yào qù nǎr?", "promptEn": "Where is the man going?", "options": ["火车站", "酒店", "机场"], "answer": 2, "line": 4, "explanation": "He says 我要去机场 in line 5." },
+      { "prompt": "男的要怎么去机场？", "promptPy": "Nán de yào zěnme qù jīchǎng?", "promptEn": "How will the man get to the airport?", "options": ["打车", "坐地铁", "坐公交车"], "answer": 1, "line": 6, "explanation": "Taxis are expensive, so in line 7 he says 我坐地铁." }
+    ]
+  },
+  {
+    "id": "l2-02",
+    "title": "Feeling unwell",
+    "scene": "Two colleagues talk in the morning",
+    "lines": [
+      { "speaker": "女", "zh": "你怎么了？今天是不是身体不舒服？", "py": "Nǐ zěnme le? Jīntiān shì bu shì shēntǐ bù shūfu?", "en": "What's wrong? Are you not feeling well today?" },
+      { "speaker": "男", "zh": "我头很疼，昨天晚上也没有睡好。", "py": "Wǒ tóu hěn téng, zuótiān wǎnshang yě méiyǒu shuì hǎo.", "en": "I have a bad headache, and I didn't sleep well last night." },
+      { "speaker": "女", "zh": "你去医院看看吧。", "py": "Nǐ qù yīyuàn kànkan ba.", "en": "You should go to the hospital and get checked." },
+      { "speaker": "男", "zh": "我已经吃药了，我想在家休息一下。", "py": "Wǒ yǐjīng chī yào le, wǒ xiǎng zài jiā xiūxi yíxià.", "en": "I've already taken medicine. I want to rest at home for a bit." },
+      { "speaker": "女", "zh": "那你今天别来公司了，多喝水。", "py": "Nà nǐ jīntiān bié lái gōngsī le, duō hē shuǐ.", "en": "Then don't come into the office today. Drink lots of water." },
+      { "speaker": "男", "zh": "好。下午的会我不能去了，你帮我告诉大家吧。", "py": "Hǎo. Xiàwǔ de huì wǒ bù néng qù le, nǐ bāng wǒ gàosu dàjiā ba.", "en": "OK. I can't make the afternoon meeting. Could you tell everyone for me?" },
+      { "speaker": "女", "zh": "好的，你好好休息。", "py": "Hǎo de, nǐ hǎohǎo xiūxi.", "en": "Sure. Get some good rest." }
+    ],
+    "questions": [
+      { "prompt": "男的哪儿不舒服？", "promptPy": "Nán de nǎr bù shūfu?", "promptEn": "What is bothering the man?", "options": ["眼睛", "头", "手"], "answer": 1, "line": 1, "explanation": "He says 我头很疼 in line 2." },
+      { "prompt": "女的让男的去哪儿？", "promptPy": "Nǚ de ràng nán de qù nǎr?", "promptEn": "Where does the woman tell the man to go?", "options": ["医院", "公司", "药店"], "answer": 0, "line": 2, "explanation": "She says 你去医院看看吧 in line 3." },
+      { "prompt": "男的今天想做什么？", "promptPy": "Nán de jīntiān xiǎng zuò shénme?", "promptEn": "What does the man want to do today?", "options": ["去医院", "去公司", "在家休息"], "answer": 2, "line": 3, "explanation": "He has taken medicine and says 我想在家休息一下 in line 4." },
+      { "prompt": "男的让女的做什么？", "promptPy": "Nán de ràng nǚ de zuò shénme?", "promptEn": "What does the man ask the woman to do?", "options": ["给他买药", "告诉大家", "送他回家"], "answer": 1, "line": 5, "explanation": "He can't go to the meeting and asks 你帮我告诉大家吧 in line 6." }
+    ]
+  },
+  {
+    "id": "l2-03",
+    "title": "Mom's birthday",
+    "scene": "A daughter talks about plans for her mother's birthday",
+    "lines": [
+      { "speaker": "女", "zh": "下个星期六是我妈妈的生日。", "py": "Xià ge xīngqīliù shì wǒ māma de shēngrì.", "en": "Next Saturday is my mom's birthday." },
+      { "speaker": "女", "zh": "我和爸爸准备在家给她过生日。", "py": "Wǒ hé bàba zhǔnbèi zài jiā gěi tā guò shēngrì.", "en": "Dad and I are planning to celebrate it at home." },
+      { "speaker": "女", "zh": "爸爸做饭做得很好，那天他会做妈妈最喜欢的鱼。", "py": "Bàba zuò fàn zuò de hěn hǎo, nà tiān tā huì zuò māma zuì xǐhuan de yú.", "en": "Dad is a good cook. That day he'll make Mom's favorite fish." },
+      { "speaker": "女", "zh": "我想送妈妈一块手表。", "py": "Wǒ xiǎng sòng māma yí kuài shǒubiǎo.", "en": "I wanted to give Mom a watch." },
+      { "speaker": "女", "zh": "但是手表要一千块，我没有那么多钱。", "py": "Dànshì shǒubiǎo yào yìqiān kuài, wǒ méiyǒu nàme duō qián.", "en": "But a watch costs a thousand kuai, and I don't have that much money." },
+      { "speaker": "女", "zh": "所以我准备送她一些花。", "py": "Suǒyǐ wǒ zhǔnbèi sòng tā yìxiē huā.", "en": "So I'm going to give her some flowers." },
+      { "speaker": "女", "zh": "妈妈非常喜欢红色，我要买红色的花。", "py": "Māma fēicháng xǐhuan hóngsè, wǒ yào mǎi hóngsè de huā.", "en": "Mom really likes red, so I'll buy red flowers." }
+    ],
+    "questions": [
+      { "prompt": "妈妈的生日是哪天？", "promptPy": "Māma de shēngrì shì nǎ tiān?", "promptEn": "When is Mom's birthday?", "options": ["这个星期六", "下个星期六", "下个星期天"], "answer": 1, "line": 0, "explanation": "Line 1 says 下个星期六是我妈妈的生日." },
+      { "prompt": "爸爸那天会做什么菜？", "promptPy": "Bàba nà tiān huì zuò shénme cài?", "promptEn": "What dish will Dad make that day?", "options": ["肉", "鱼", "饺子"], "answer": 1, "line": 2, "explanation": "Line 3 says he will make 妈妈最喜欢的鱼." },
+      { "prompt": "她为什么不买手表？", "promptPy": "Tā wèi shénme bù mǎi shǒubiǎo?", "promptEn": "Why isn't she buying the watch?", "options": ["妈妈不喜欢", "商店没有", "手表很贵"], "answer": 2, "line": 4, "explanation": "Line 5 says the watch costs 一千块 and she doesn't have that much money." },
+      { "prompt": "她要买什么颜色的花？", "promptPy": "Tā yào mǎi shénme yánsè de huā?", "promptEn": "What color flowers will she buy?", "options": ["红色", "白色", "黑色"], "answer": 0, "line": 6, "explanation": "Line 7 says Mom likes red, so she will buy 红色的花." }
+    ]
+  },
+  {
+    "id": "l2-04",
+    "title": "Favorite sports",
+    "scene": "Two classmates talk about what they do for exercise",
+    "lines": [
+      { "speaker": "男", "zh": "你有什么爱好？", "py": "Nǐ yǒu shénme àihào?", "en": "What are your hobbies?" },
+      { "speaker": "女", "zh": "我喜欢游泳，每个星期去游两次。", "py": "Wǒ xǐhuan yóuyǒng, měi gè xīngqī qù yóu liǎng cì.", "en": "I like swimming. I go twice a week." },
+      { "speaker": "男", "zh": "我游得不好，我喜欢踢足球。", "py": "Wǒ yóu de bù hǎo, wǒ xǐhuan tī zúqiú.", "en": "I'm not a good swimmer. I like playing soccer." },
+      { "speaker": "女", "zh": "你经常踢吗？", "py": "Nǐ jīngcháng tī ma?", "en": "Do you play often?" },
+      { "speaker": "男", "zh": "我和同学们每天都踢一个小时。", "py": "Wǒ hé tóngxuémen měitiān dōu tī yí gè xiǎoshí.", "en": "My classmates and I play for an hour every day." },
+      { "speaker": "女", "zh": "运动对身体很好。这个星期天我们一起去跑步吧？", "py": "Yùndòng duì shēntǐ hěn hǎo. Zhège xīngqītiān wǒmen yìqǐ qù pǎobù ba?", "en": "Exercise is good for you. Shall we go running together this Sunday?" },
+      { "speaker": "男", "zh": "好啊！早上七点在学校门口见。", "py": "Hǎo a! Zǎoshang qī diǎn zài xuéxiào ménkǒu jiàn.", "en": "Sure! See you at the school gate at seven in the morning." }
+    ],
+    "questions": [
+      { "prompt": "女的喜欢什么运动？", "promptPy": "Nǚ de xǐhuan shénme yùndòng?", "promptEn": "What sport does the woman like?", "options": ["跑步", "游泳", "足球"], "answer": 1, "line": 1, "explanation": "She says 我喜欢游泳 in line 2. Soccer is the man's sport." },
+      { "prompt": "女的一个星期游泳几次？", "promptPy": "Nǚ de yí gè xīngqī yóuyǒng jǐ cì?", "promptEn": "How many times a week does the woman swim?", "options": ["两次", "一次", "三次"], "answer": 0, "line": 1, "explanation": "Line 2 says 每个星期去游两次." },
+      { "prompt": "男的每天踢多长时间足球？", "promptPy": "Nán de měitiān tī duō cháng shíjiān zúqiú?", "promptEn": "How long does the man play soccer each day?", "options": ["半个小时", "两个小时", "一个小时"], "answer": 2, "line": 4, "explanation": "Line 5 says 每天都踢一个小时." },
+      { "prompt": "他们星期天在哪儿见？", "promptPy": "Tāmen xīngqītiān zài nǎr jiàn?", "promptEn": "Where will they meet on Sunday?", "options": ["学校门口", "饭馆门口", "车站旁边"], "answer": 0, "line": 6, "explanation": "Line 7 says 在学校门口见." }
+    ]
+  },
+  {
+    "id": "l2-05",
+    "title": "Buying trousers",
+    "scene": "A customer and a shop assistant in a clothing store",
+    "lines": [
+      { "speaker": "女", "zh": "这条裤子很好看，有大一点儿的吗？", "py": "Zhè tiáo kùzi hěn hǎokàn, yǒu dà yìdiǎnr de ma?", "en": "These trousers look nice. Do you have a bigger size?" },
+      { "speaker": "男", "zh": "有，你穿多大的？", "py": "Yǒu, nǐ chuān duō dà de?", "en": "Yes. What size do you wear?" },
+      { "speaker": "女", "zh": "我个子很高，要最大的。", "py": "Wǒ gèzi hěn gāo, yào zuì dà de.", "en": "I'm tall, so I need the biggest one." },
+      { "speaker": "男", "zh": "好，这条是最大的。你喜欢黑色还是白色？", "py": "Hǎo, zhè tiáo shì zuì dà de. Nǐ xǐhuan hēisè háishi báisè?", "en": "OK, this is the biggest. Do you prefer black or white?" },
+      { "speaker": "女", "zh": "黑色的。多少钱？", "py": "Hēisè de. Duōshao qián?", "en": "Black. How much is it?" },
+      { "speaker": "男", "zh": "四百块。今天买两条，六百块就可以。", "py": "Sìbǎi kuài. Jīntiān mǎi liǎng tiáo, liùbǎi kuài jiù kěyǐ.", "en": "Four hundred kuai. Today you can get two pairs for six hundred." },
+      { "speaker": "女", "zh": "那我要两条，一条黑色的，一条白色的。", "py": "Nà wǒ yào liǎng tiáo, yì tiáo hēisè de, yì tiáo báisè de.", "en": "Then I'll take two, one black and one white." },
+      { "speaker": "男", "zh": "好的，请跟我来。", "py": "Hǎo de, qǐng gēn wǒ lái.", "en": "Sure, please come with me." }
+    ],
+    "questions": [
+      { "prompt": "女的要买什么？", "promptPy": "Nǚ de yào mǎi shénme?", "promptEn": "What does the woman want to buy?", "options": ["手表", "书包", "裤子"], "answer": 2, "line": 0, "explanation": "Line 1 is about 这条裤子." },
+      { "prompt": "女的为什么要最大的？", "promptPy": "Nǚ de wèi shénme yào zuì dà de?", "promptEn": "Why does the woman want the biggest size?", "options": ["她个子很高", "最大的很便宜", "给她丈夫买"], "answer": 0, "line": 2, "explanation": "Line 3 says 我个子很高，要最大的." },
+      { "prompt": "一条裤子多少钱？", "promptPy": "Yì tiáo kùzi duōshao qián?", "promptEn": "How much is one pair of trousers?", "options": ["三百块", "四百块", "六百块"], "answer": 1, "line": 5, "explanation": "Line 6 says 四百块. Six hundred is the price for two." },
+      { "prompt": "女的买了几条？", "promptPy": "Nǚ de mǎile jǐ tiáo?", "promptEn": "How many pairs does the woman buy?", "options": ["三条", "一条", "两条"], "answer": 2, "line": 6, "explanation": "Line 7 says 我要两条, one black and one white." }
+    ]
+  },
+  {
+    "id": "l2-06",
+    "title": "A new school year",
+    "scene": "A high school student talks about his new school",
+    "lines": [
+      { "speaker": "男", "zh": "我今年上高中了。", "py": "Wǒ jīnnián shàng gāozhōng le.", "en": "I started high school this year." },
+      { "speaker": "男", "zh": "新学校离我家很远，坐公交车要40分钟。", "py": "Xīn xuéxiào lí wǒ jiā hěn yuǎn, zuò gōngjiāochē yào sìshí fēnzhōng.", "en": "My new school is far from home. It takes forty minutes by bus." },
+      { "speaker": "男", "zh": "所以我每天早上六点就起床了。", "py": "Suǒyǐ wǒ měitiān zǎoshang liù diǎn jiù qǐchuáng le.", "en": "So I get up at six every morning." },
+      { "speaker": "男", "zh": "我们班有四十个学生，老师和同学都很好。", "py": "Wǒmen bān yǒu sìshí gè xuésheng, lǎoshī hé tóngxué dōu hěn hǎo.", "en": "There are forty students in my class. The teachers and classmates are all nice." },
+      { "speaker": "男", "zh": "我最喜欢上汉语课，因为汉语老师经常给我们说有意思的事。", "py": "Wǒ zuì xǐhuan shàng Hànyǔ kè, yīnwèi Hànyǔ lǎoshī jīngcháng gěi wǒmen shuō yǒu yìsi de shì.", "en": "My favorite class is Chinese, because the Chinese teacher often tells us interesting things." },
+      { "speaker": "男", "zh": "下午五点下课，我和同学们一起去打篮球。", "py": "Xiàwǔ wǔ diǎn xiàkè, wǒ hé tóngxuémen yìqǐ qù dǎ lánqiú.", "en": "Classes end at five in the afternoon, and I play basketball with my classmates." },
+      { "speaker": "男", "zh": "虽然很累，但是我很快乐。", "py": "Suīrán hěn lèi, dànshì wǒ hěn kuàilè.", "en": "It's tiring, but I'm happy." }
+    ],
+    "questions": [
+      { "prompt": "他怎么去学校？", "promptPy": "Tā zěnme qù xuéxiào?", "promptEn": "How does he get to school?", "options": ["走路", "坐公交车", "坐地铁"], "answer": 1, "line": 1, "explanation": "Line 2 says 坐公交车要40分钟." },
+      { "prompt": "他们班有多少学生？", "promptPy": "Tāmen bān yǒu duōshao xuésheng?", "promptEn": "How many students are in his class?", "options": ["十四个", "四十个", "四百个"], "answer": 1, "line": 3, "explanation": "Line 4 says 我们班有四十个学生." },
+      { "prompt": "他为什么最喜欢汉语课？", "promptPy": "Tā wèi shénme zuì xǐhuan Hànyǔ kè?", "promptEn": "Why is Chinese his favorite class?", "options": ["汉语考试很少", "老师经常说有意思的事", "他的朋友都在那个班"], "answer": 1, "line": 4, "explanation": "Line 5 gives the reason with 因为: the teacher 经常给我们说有意思的事." },
+      { "prompt": "他几点下课？", "promptPy": "Tā jǐ diǎn xiàkè?", "promptEn": "What time do his classes end?", "options": ["六点", "四点", "五点"], "answer": 2, "line": 5, "explanation": "Line 6 says 下午五点下课. Six is when he gets up." }
+    ]
+  }
+]

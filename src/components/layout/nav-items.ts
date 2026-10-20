@@ -1,8 +1,9 @@
-import { BookOpen, House, Layers } from 'lucide-react';
+import { BookOpen, ClipboardCheck, House, Layers } from 'lucide-react';
 
 export const NAV_ITEMS = [
   { to: '/', label: 'Home', icon: House, end: true, match: [] },
   { to: '/practice', label: 'Practice', icon: Layers, end: false, match: ['/practice'] },
+  { to: '/tests', label: 'Tests', icon: ClipboardCheck, end: false, match: ['/tests'] },
   { to: '/words', label: 'Library', icon: BookOpen, end: false, match: ['/words', '/characters', '/grammar'] },
 ] as const;
 

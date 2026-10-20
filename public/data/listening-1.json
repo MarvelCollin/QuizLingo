@@ -1,0 +1,108 @@
+[
+  {
+    "id": "l1-01",
+    "title": "Buying apples",
+    "scene": "A shopper and a seller at a fruit stall",
+    "lines": [
+      { "speaker": "女", "zh": "你好，苹果多少钱？", "py": "Nǐ hǎo, píngguǒ duōshao qián?", "en": "Hello, how much are the apples?" },
+      { "speaker": "男", "zh": "大苹果五块钱一个。", "py": "Dà píngguǒ wǔ kuài qián yí gè.", "en": "The big apples are five kuai each." },
+      { "speaker": "女", "zh": "太贵了！有便宜一点儿的吗？", "py": "Tài guì le! Yǒu piányi yìdiǎnr de ma?", "en": "That's too expensive! Do you have cheaper ones?" },
+      { "speaker": "男", "zh": "这些小的三块钱一个。", "py": "Zhèxiē xiǎo de sān kuài qián yí gè.", "en": "These small ones are three kuai each." },
+      { "speaker": "女", "zh": "好，我买四个小的。", "py": "Hǎo, wǒ mǎi sì gè xiǎo de.", "en": "OK, I'll buy four small ones." },
+      { "speaker": "男", "zh": "好的，十二块钱。谢谢！", "py": "Hǎo de, shí'èr kuài qián. Xièxie!", "en": "Sure, that's twelve kuai. Thank you!" }
+    ],
+    "questions": [
+      { "prompt": "大苹果多少钱一个？", "promptPy": "Dà píngguǒ duōshao qián yí gè?", "promptEn": "How much is one big apple?", "options": ["三块", "五块", "十二块"], "answer": 1, "line": 1, "explanation": "The seller says 大苹果五块钱一个 in line 2." },
+      { "prompt": "她买了几个苹果？", "promptPy": "Tā mǎile jǐ gè píngguǒ?", "promptEn": "How many apples did she buy?", "options": ["四个", "三个", "五个"], "answer": 0, "line": 4, "explanation": "She says 我买四个小的 in line 5." },
+      { "prompt": "她觉得大苹果怎么样？", "promptPy": "Tā juéde dà píngguǒ zěnmeyàng?", "promptEn": "What does she think of the big apples?", "options": ["很好吃", "太小了", "太贵了"], "answer": 2, "line": 2, "explanation": "She says 太贵了 in line 3 after hearing the price." }
+    ]
+  },
+  {
+    "id": "l1-02",
+    "title": "Breakfast before school",
+    "scene": "Two classmates at home in the morning",
+    "lines": [
+      { "speaker": "男", "zh": "现在几点？", "py": "Xiànzài jǐ diǎn?", "en": "What time is it now?" },
+      { "speaker": "女", "zh": "现在七点半。", "py": "Xiànzài qī diǎn bàn.", "en": "It's half past seven." },
+      { "speaker": "男", "zh": "我们几点去学校？", "py": "Wǒmen jǐ diǎn qù xuéxiào?", "en": "What time are we going to school?" },
+      { "speaker": "女", "zh": "八点。我们现在吃早饭吧。", "py": "Bā diǎn. Wǒmen xiànzài chī zǎofàn ba.", "en": "At eight. Let's have breakfast now." },
+      { "speaker": "男", "zh": "好，我想喝牛奶。", "py": "Hǎo, wǒ xiǎng hē niúnǎi.", "en": "OK, I'd like some milk." },
+      { "speaker": "女", "zh": "这里有面包和牛奶。", "py": "Zhèlǐ yǒu miànbāo hé niúnǎi.", "en": "There's bread and milk here." }
+    ],
+    "questions": [
+      { "prompt": "现在几点？", "promptPy": "Xiànzài jǐ diǎn?", "promptEn": "What time is it now?", "options": ["七点", "七点半", "八点"], "answer": 1, "line": 1, "explanation": "She says 现在七点半 in line 2." },
+      { "prompt": "他们几点去学校？", "promptPy": "Tāmen jǐ diǎn qù xuéxiào?", "promptEn": "What time do they go to school?", "options": ["七点半", "九点", "八点"], "answer": 2, "line": 3, "explanation": "She answers 八点 in line 4." },
+      { "prompt": "男的想喝什么？", "promptPy": "Nán de xiǎng hē shénme?", "promptEn": "What does the man want to drink?", "options": ["牛奶", "茶", "水"], "answer": 0, "line": 4, "explanation": "He says 我想喝牛奶 in line 5." }
+    ]
+  },
+  {
+    "id": "l1-03",
+    "title": "My family",
+    "scene": "A student talks about his family",
+    "lines": [
+      { "speaker": "男", "zh": "我家有五口人。", "py": "Wǒ jiā yǒu wǔ kǒu rén.", "en": "There are five people in my family." },
+      { "speaker": "男", "zh": "爸爸、妈妈、哥哥、妹妹和我。", "py": "Bàba, māma, gēge, mèimei hé wǒ.", "en": "Dad, Mom, my older brother, my younger sister and me." },
+      { "speaker": "男", "zh": "爸爸是医生，在医院工作。", "py": "Bàba shì yīshēng, zài yīyuàn gōngzuò.", "en": "My dad is a doctor and works at a hospital." },
+      { "speaker": "男", "zh": "妈妈是老师。", "py": "Māma shì lǎoshī.", "en": "My mom is a teacher." },
+      { "speaker": "男", "zh": "哥哥是大学生，今年二十岁。", "py": "Gēge shì dàxuéshēng, jīnnián èrshí suì.", "en": "My brother is a university student. He is twenty this year." },
+      { "speaker": "男", "zh": "我家还有一只猫。", "py": "Wǒ jiā hái yǒu yì zhī māo.", "en": "We also have a cat." }
+    ],
+    "questions": [
+      { "prompt": "他家有几口人？", "promptPy": "Tā jiā yǒu jǐ kǒu rén?", "promptEn": "How many people are in his family?", "options": ["四口", "五口", "六口"], "answer": 1, "line": 0, "explanation": "Line 1 says 我家有五口人." },
+      { "prompt": "爸爸在哪儿工作？", "promptPy": "Bàba zài nǎr gōngzuò?", "promptEn": "Where does his dad work?", "options": ["医院", "学校", "商店"], "answer": 0, "line": 2, "explanation": "Line 3 says his dad 在医院工作. The teacher is his mom." },
+      { "prompt": "哥哥今年多大？", "promptPy": "Gēge jīnnián duō dà?", "promptEn": "How old is his brother this year?", "options": ["十二岁", "十八岁", "二十岁"], "answer": 2, "line": 4, "explanation": "Line 5 says 今年二十岁." }
+    ]
+  },
+  {
+    "id": "l1-04",
+    "title": "A rainy day",
+    "scene": "Two friends talk on the phone",
+    "lines": [
+      { "speaker": "女", "zh": "喂，你在哪儿？", "py": "Wéi, nǐ zài nǎr?", "en": "Hello, where are you?" },
+      { "speaker": "男", "zh": "我在家。今天下雨，我不想去外边。", "py": "Wǒ zài jiā. Jīntiān xià yǔ, wǒ bù xiǎng qù wàibian.", "en": "I'm at home. It's raining today, so I don't want to go out." },
+      { "speaker": "女", "zh": "明天天气怎么样？", "py": "Míngtiān tiānqì zěnmeyàng?", "en": "What will the weather be like tomorrow?" },
+      { "speaker": "男", "zh": "明天没有雨，很热。", "py": "Míngtiān méiyǒu yǔ, hěn rè.", "en": "It won't rain tomorrow. It'll be hot." },
+      { "speaker": "女", "zh": "那我们明天去看电影吧。", "py": "Nà wǒmen míngtiān qù kàn diànyǐng ba.", "en": "Then let's go and see a movie tomorrow." },
+      { "speaker": "男", "zh": "好，明天见！", "py": "Hǎo, míngtiān jiàn!", "en": "OK, see you tomorrow!" }
+    ],
+    "questions": [
+      { "prompt": "男的今天在哪儿？", "promptPy": "Nán de jīntiān zài nǎr?", "promptEn": "Where is the man today?", "options": ["学校", "家里", "饭店"], "answer": 1, "line": 1, "explanation": "He says 我在家 in line 2." },
+      { "prompt": "明天天气怎么样？", "promptPy": "Míngtiān tiānqì zěnmeyàng?", "promptEn": "What will the weather be like tomorrow?", "options": ["下雨", "很冷", "很热"], "answer": 2, "line": 3, "explanation": "Line 4 says 明天没有雨，很热. The rain is today." },
+      { "prompt": "他们明天去做什么？", "promptPy": "Tāmen míngtiān qù zuò shénme?", "promptEn": "What will they do tomorrow?", "options": ["看电影", "买东西", "看朋友"], "answer": 0, "line": 4, "explanation": "She suggests 明天去看电影 in line 5 and he agrees." }
+    ]
+  },
+  {
+    "id": "l1-05",
+    "title": "Ordering dumplings",
+    "scene": "A customer orders at a small restaurant",
+    "lines": [
+      { "speaker": "男", "zh": "你好，请问你想吃什么？", "py": "Nǐ hǎo, qǐngwèn nǐ xiǎng chī shénme?", "en": "Hello, what would you like to eat?" },
+      { "speaker": "女", "zh": "我想吃饺子。有包子吗？", "py": "Wǒ xiǎng chī jiǎozi. Yǒu bāozi ma?", "en": "I'd like dumplings. Do you have steamed buns?" },
+      { "speaker": "男", "zh": "对不起，今天没有包子。", "py": "Duìbuqǐ, jīntiān méiyǒu bāozi.", "en": "Sorry, we don't have buns today." },
+      { "speaker": "女", "zh": "没关系。我要饺子和茶。", "py": "Méi guānxi. Wǒ yào jiǎozi hé chá.", "en": "That's fine. I'll have dumplings and tea." },
+      { "speaker": "男", "zh": "好的，饺子二十块，茶五块。", "py": "Hǎo de, jiǎozi èrshí kuài, chá wǔ kuài.", "en": "Sure. The dumplings are twenty kuai and the tea is five." }
+    ],
+    "questions": [
+      { "prompt": "今天没有什么？", "promptPy": "Jīntiān méiyǒu shénme?", "promptEn": "What don't they have today?", "options": ["饺子", "包子", "茶"], "answer": 1, "line": 2, "explanation": "The waiter says 今天没有包子 in line 3." },
+      { "prompt": "女的要喝什么？", "promptPy": "Nǚ de yào hē shénme?", "promptEn": "What does the woman want to drink?", "options": ["牛奶", "水", "茶"], "answer": 2, "line": 3, "explanation": "She orders 饺子和茶 in line 4." },
+      { "prompt": "饺子多少钱？", "promptPy": "Jiǎozi duōshao qián?", "promptEn": "How much are the dumplings?", "options": ["二十块", "五块", "二十五块"], "answer": 0, "line": 4, "explanation": "Line 5 says 饺子二十块. Five kuai is the tea." }
+    ]
+  },
+  {
+    "id": "l1-06",
+    "title": "A student's day",
+    "scene": "A middle school student describes her week",
+    "lines": [
+      { "speaker": "女", "zh": "我是中学生。", "py": "Wǒ shì zhōngxuéshēng.", "en": "I'm a middle school student." },
+      { "speaker": "女", "zh": "我早上六点起床。", "py": "Wǒ zǎoshang liù diǎn qǐchuáng.", "en": "I get up at six in the morning." },
+      { "speaker": "女", "zh": "上午和下午在学校上课。", "py": "Shàngwǔ hé xiàwǔ zài xuéxiào shàngkè.", "en": "In the morning and afternoon I have classes at school." },
+      { "speaker": "女", "zh": "星期六我不上学，我和同学去书店看书。", "py": "Xīngqīliù wǒ bú shàngxué, wǒ hé tóngxué qù shūdiàn kàn shū.", "en": "On Saturday I don't go to school. I go to the bookstore with classmates to read." },
+      { "speaker": "女", "zh": "晚上十点我睡觉。", "py": "Wǎnshang shí diǎn wǒ shuìjiào.", "en": "I go to bed at ten at night." }
+    ],
+    "questions": [
+      { "prompt": "她早上几点起床？", "promptPy": "Tā zǎoshang jǐ diǎn qǐchuáng?", "promptEn": "What time does she get up?", "options": ["五点", "六点", "七点"], "answer": 1, "line": 1, "explanation": "Line 2 says 我早上六点起床." },
+      { "prompt": "星期六她去哪儿？", "promptPy": "Xīngqīliù tā qù nǎr?", "promptEn": "Where does she go on Saturday?", "options": ["书店", "学校", "医院"], "answer": 0, "line": 3, "explanation": "Line 4 says she doesn't go to school on Saturday and goes 去书店." },
+      { "prompt": "她晚上几点睡觉？", "promptPy": "Tā wǎnshang jǐ diǎn shuìjiào?", "promptEn": "What time does she go to bed?", "options": ["九点", "十一点", "十点"], "answer": 2, "line": 4, "explanation": "Line 5 says 晚上十点我睡觉." }
+    ]
+  }
+]

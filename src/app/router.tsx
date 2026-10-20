@@ -12,6 +12,9 @@ const PracticePage = lazy(() => import('../features/practice/practice-page'));
 const RoundPage = lazy(() => import('../features/practice/round-page'));
 const WordsPage = lazy(() => import('../features/words/words-page'));
 const WordPage = lazy(() => import('../features/words/word-page'));
+const TestsPage = lazy(() => import('../features/tests/tests-page'));
+const ListeningTestPage = lazy(() => import('../features/tests/listening-test-page'));
+const MockTestPage = lazy(() => import('../features/tests/mock-test-page'));
 const TonesPage = lazy(() => import('../features/tones/tones-page'));
 const CharactersPage = lazy(() => import('../features/characters/characters-page'));
 const CharacterPage = lazy(() => import('../features/characters/character-page'));
@@ -46,6 +49,9 @@ export const router = createBrowserRouter([
       { path: 'practice/characters', element: page(<CharacterQuizPage />) },
       { path: 'practice/writing', element: page(<WritingPracticePage />) },
       { path: 'practice/tones', element: page(<TonesPage />) },
+      { path: 'tests', element: page(<TestsPage />) },
+      { path: 'tests/listening/:id', element: page(<ListeningTestPage />) },
+      { path: 'tests/mock/:level', element: page(<MockTestPage />) },
     ],
   },
   { path: '*', element: page(<NotFoundPage />) },

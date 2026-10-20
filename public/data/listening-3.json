@@ -1,0 +1,143 @@
+[
+  {
+    "id": "l3-01",
+    "title": "A weekend hike",
+    "scene": "Two friends plan a trip to the mountains",
+    "lines": [
+      { "speaker": "男", "zh": "这个周末你有什么打算？", "py": "Zhège zhōumò nǐ yǒu shénme dǎsuàn?", "en": "What are your plans for this weekend?" },
+      { "speaker": "女", "zh": "我想去爬山，听说山上的花都开了。", "py": "Wǒ xiǎng qù pá shān, tīngshuō shān shàng de huā dōu kāi le.", "en": "I want to go hiking. I hear the flowers on the mountain are all in bloom." },
+      { "speaker": "男", "zh": "是吗？我也想去。你打算什么时候出发？", "py": "Shì ma? Wǒ yě xiǎng qù. Nǐ dǎsuàn shénme shíhou chūfā?", "en": "Really? I'd like to go too. When are you planning to leave?" },
+      { "speaker": "女", "zh": "星期六早上七点，我们在地铁站见面吧。", "py": "Xīngqīliù zǎoshang qī diǎn, wǒmen zài dìtiězhàn jiànmiàn ba.", "en": "Saturday at seven in the morning. Let's meet at the subway station." },
+      { "speaker": "男", "zh": "七点太早了，能不能八点？", "py": "Qī diǎn tài zǎo le, néng bu néng bā diǎn?", "en": "Seven is too early. Could we make it eight?" },
+      { "speaker": "女", "zh": "不行，山很远，坐车要两个小时，太晚了人会很多。", "py": "Bùxíng, shān hěn yuǎn, zuò chē yào liǎng gè xiǎoshí, tài wǎn le rén huì hěn duō.", "en": "No. The mountain is far, two hours by bus, and if we're late there'll be lots of people." },
+      { "speaker": "男", "zh": "好吧。要带什么东西？", "py": "Hǎo ba. Yào dài shénme dōngxi?", "en": "All right. What should I bring?" },
+      { "speaker": "女", "zh": "带一些水和水果，山上的东西很贵。", "py": "Dài yìxiē shuǐ hé shuǐguǒ, shān shàng de dōngxi hěn guì.", "en": "Bring some water and fruit. Things on the mountain are expensive." },
+      { "speaker": "男", "zh": "听说星期六可能会下雨，需要带伞吗？", "py": "Tīngshuō xīngqīliù kěnéng huì xià yǔ, xūyào dài sǎn ma?", "en": "I heard it might rain on Saturday. Should we bring umbrellas?" },
+      { "speaker": "女", "zh": "带吧。下雨的话，我们就在山下的饭馆吃饭。", "py": "Dài ba. Xià yǔ dehuà, wǒmen jiù zài shān xià de fànguǎn chī fàn.", "en": "Yes. If it rains, we'll just eat at a restaurant at the foot of the mountain." }
+    ],
+    "questions": [
+      { "prompt": "他们这个周末打算去做什么？", "promptPy": "Tāmen zhège zhōumò dǎsuàn qù zuò shénme?", "promptEn": "What are they planning to do this weekend?", "options": ["游泳", "爬山", "去公园"], "answer": 1, "line": 1, "explanation": "She says 我想去爬山 in line 2 and he wants to join." },
+      { "prompt": "他们几点在哪儿见面？", "promptPy": "Tāmen jǐ diǎn zài nǎr jiànmiàn?", "promptEn": "When and where will they meet?", "options": ["八点，在地铁站", "七点，在学校门口", "七点，在地铁站"], "answer": 2, "line": 3, "explanation": "Line 4 says 早上七点 at the 地铁站. He asks for eight, but she says no." },
+      { "prompt": "女的为什么不想八点出发？", "promptPy": "Nǚ de wèi shénme bù xiǎng bā diǎn chūfā?", "promptEn": "Why doesn't the woman want to leave at eight?", "options": ["她八点要上班", "山很远，晚了人多", "八点会下雨"], "answer": 1, "line": 5, "explanation": "Line 6 says the mountain is two hours away and 太晚了人会很多." },
+      { "prompt": "女的为什么让男的带水果？", "promptPy": "Nǚ de wèi shénme ràng nán de dài shuǐguǒ?", "promptEn": "Why does she tell him to bring fruit?", "options": ["山上的东西很贵", "男的喜欢吃水果", "山上没有饭馆"], "answer": 0, "line": 7, "explanation": "Line 8 says 山上的东西很贵." },
+      { "prompt": "如果下雨，他们打算怎么办？", "promptPy": "Rúguǒ xià yǔ, tāmen dǎsuàn zěnme bàn?", "promptEn": "What will they do if it rains?", "options": ["在家休息", "去看电影", "在山下的饭馆吃饭"], "answer": 2, "line": 9, "explanation": "Line 10 says 下雨的话，我们就在山下的饭馆吃饭." }
+    ]
+  },
+  {
+    "id": "l3-02",
+    "title": "Moving to a new place",
+    "scene": "Two coworkers talk about a new apartment",
+    "lines": [
+      { "speaker": "女", "zh": "听说你搬家了？新房子怎么样？", "py": "Tīngshuō nǐ bānjiā le? Xīn fángzi zěnmeyàng?", "en": "I heard you moved. How's the new place?" },
+      { "speaker": "男", "zh": "挺好的，比以前的大，有两个房间。", "py": "Tǐng hǎo de, bǐ yǐqián de dà, yǒu liǎng gè fángjiān.", "en": "Pretty good. It's bigger than my old one and has two rooms." },
+      { "speaker": "女", "zh": "在哪儿？离公司远吗？", "py": "Zài nǎr? Lí gōngsī yuǎn ma?", "en": "Where is it? Is it far from the office?" },
+      { "speaker": "男", "zh": "在城市东边的一个小区，离公司很近，骑自行车10分钟就到了。", "py": "Zài chéngshì dōngbian de yí gè xiǎoqū, lí gōngsī hěn jìn, qí zìxíngchē shí fēnzhōng jiù dào le.", "en": "It's in a housing estate on the east side of the city, close to the office. Ten minutes by bike." },
+      { "speaker": "女", "zh": "那太方便了！以前你每天坐地铁要一个小时吧？", "py": "Nà tài fāngbiàn le! Yǐqián nǐ měitiān zuò dìtiě yào yí gè xiǎoshí ba?", "en": "That's so convenient! Before, you spent an hour on the subway every day, right?" },
+      { "speaker": "男", "zh": "对，所以我决定搬家。而且新家附近有一个大公园，周末可以去跑步。", "py": "Duì, suǒyǐ wǒ juédìng bānjiā. Érqiě xīn jiā fùjìn yǒu yí gè dà gōngyuán, zhōumò kěyǐ qù pǎobù.", "en": "Right, that's why I decided to move. And there's a big park near the new place, so I can go running on weekends." },
+      { "speaker": "女", "zh": "房子贵不贵？", "py": "Fángzi guì bu guì?", "en": "Is it expensive?" },
+      { "speaker": "男", "zh": "比以前的贵一点儿，一个月四千块。", "py": "Bǐ yǐqián de guì yìdiǎnr, yí gè yuè sìqiān kuài.", "en": "A bit more than the old one, four thousand kuai a month." },
+      { "speaker": "女", "zh": "什么时候请我们去做客？", "py": "Shénme shíhou qǐng wǒmen qù zuòkè?", "en": "When are you inviting us over?" },
+      { "speaker": "男", "zh": "下个星期六吧，我做饭给大家吃。", "py": "Xià ge xīngqīliù ba, wǒ zuò fàn gěi dàjiā chī.", "en": "How about next Saturday? I'll cook for everyone." }
+    ],
+    "questions": [
+      { "prompt": "新房子有几个房间？", "promptPy": "Xīn fángzi yǒu jǐ gè fángjiān?", "promptEn": "How many rooms does the new place have?", "options": ["一个", "两个", "三个"], "answer": 1, "line": 1, "explanation": "Line 2 says 有两个房间." },
+      { "prompt": "男的现在怎么去公司？", "promptPy": "Nán de xiànzài zěnme qù gōngsī?", "promptEn": "How does the man get to work now?", "options": ["骑自行车", "坐地铁", "走路"], "answer": 0, "line": 3, "explanation": "Line 4 says 骑自行车10分钟就到了. The subway was how he went before." },
+      { "prompt": "男的为什么搬家？", "promptPy": "Nán de wèi shénme bānjiā?", "promptEn": "Why did the man move?", "options": ["以前的房子太贵", "以前去公司要很长时间", "他想住在公园旁边"], "answer": 1, "line": 5, "explanation": "Line 5 says he spent an hour on the subway every day, and in line 6 he answers 对，所以我决定搬家. The new place costs more, not less." },
+      { "prompt": "新房子一个月多少钱？", "promptPy": "Xīn fángzi yí gè yuè duōshao qián?", "promptEn": "How much is the new place per month?", "options": ["三千块", "一千块", "四千块"], "answer": 2, "line": 7, "explanation": "Line 8 says 一个月四千块." },
+      { "prompt": "男的打算什么时候请朋友去做客？", "promptPy": "Nán de dǎsuàn shénme shíhou qǐng péngyou qù zuòkè?", "promptEn": "When does the man plan to have friends over?", "options": ["这个星期六", "下个星期六", "下个星期天"], "answer": 1, "line": 9, "explanation": "Line 10 says 下个星期六吧." }
+    ]
+  },
+  {
+    "id": "l3-03",
+    "title": "A summer trip south",
+    "scene": "A woman remembers a trip with her older sister",
+    "lines": [
+      { "speaker": "女", "zh": "去年夏天，我和姐姐去南方旅游了一个星期。", "py": "Qùnián xiàtiān, wǒ hé jiějie qù nánfāng lǚyóu le yí gè xīngqī.", "en": "Last summer my older sister and I traveled in the south for a week." },
+      { "speaker": "女", "zh": "我们是坐高铁去的，路上用了五个小时。", "py": "Wǒmen shì zuò gāotiě qù de, lùshang yòngle wǔ gè xiǎoshí.", "en": "We went by high-speed train. The trip took five hours." },
+      { "speaker": "女", "zh": "那里的夏天特别热，所以我们白天常常在宾馆里休息，晚上才出去玩。", "py": "Nàlǐ de xiàtiān tèbié rè, suǒyǐ wǒmen báitiān chángcháng zài bīnguǎn lǐ xiūxi, wǎnshang cái chūqù wán.", "en": "Summer there is really hot, so we often rested in the hotel during the day and only went out at night." },
+      { "speaker": "女", "zh": "晚上的街上人很多，有很多好吃的东西。", "py": "Wǎnshang de jiē shang rén hěn duō, yǒu hěn duō hǎochī de dōngxi.", "en": "The streets were crowded at night, with lots of good food." },
+      { "speaker": "女", "zh": "我最喜欢那里的鱼，又新鲜又便宜。", "py": "Wǒ zuì xǐhuan nàlǐ de yú, yòu xīnxiān yòu piányi.", "en": "I liked the fish there best. It was fresh and cheap." },
+      { "speaker": "女", "zh": "第三天，我们去了海边，姐姐在那里照了很多照片。", "py": "Dì-sān tiān, wǒmen qùle hǎibiān, jiějie zài nàlǐ zhàole hěn duō zhàopiàn.", "en": "On the third day we went to the beach, and my sister took lots of photos there." },
+      { "speaker": "女", "zh": "可是那天我在海里游泳的时间太长，晚上就感冒了。", "py": "Kěshì nà tiān wǒ zài hǎi lǐ yóuyǒng de shíjiān tài cháng, wǎnshang jiù gǎnmào le.", "en": "But that day I swam in the sea for too long and caught a cold that night." },
+      { "speaker": "女", "zh": "我在宾馆里休息了两天，身体才好。", "py": "Wǒ zài bīnguǎn lǐ xiūxile liǎng tiān, shēntǐ cái hǎo.", "en": "I had to rest in the hotel for two days before I got better." },
+      { "speaker": "女", "zh": "虽然生病了，但是这次旅游还是很有意思。明年我们还想去。", "py": "Suīrán shēngbìng le, dànshì zhè cì lǚyóu háishi hěn yǒu yìsi. Míngnián wǒmen hái xiǎng qù.", "en": "Even though I got sick, the trip was still a lot of fun. We want to go again next year." }
+    ],
+    "questions": [
+      { "prompt": "她们是怎么去南方的？", "promptPy": "Tāmen shì zěnme qù nánfāng de?", "promptEn": "How did they travel to the south?", "options": ["坐飞机", "坐高铁", "开车"], "answer": 1, "line": 1, "explanation": "Line 2 says 我们是坐高铁去的." },
+      { "prompt": "她们为什么白天在宾馆里休息？", "promptPy": "Tāmen wèi shénme báitiān zài bīnguǎn lǐ xiūxi?", "promptEn": "Why did they rest in the hotel during the day?", "options": ["姐姐生病了", "白天下雨", "白天太热"], "answer": 2, "line": 2, "explanation": "Line 3 says 夏天特别热，所以 they rested during the day. The one who got sick was the speaker, not her sister." },
+      { "prompt": "她觉得那里的鱼怎么样？", "promptPy": "Tā juéde nàlǐ de yú zěnmeyàng?", "promptEn": "What did she think of the fish there?", "options": ["又新鲜又便宜", "很新鲜，但是很贵", "不太好吃"], "answer": 0, "line": 4, "explanation": "Line 5 says 又新鲜又便宜." },
+      { "prompt": "第三天她们去了哪儿？", "promptPy": "Dì-sān tiān tāmen qùle nǎr?", "promptEn": "Where did they go on the third day?", "options": ["山上", "海边", "饭馆"], "answer": 1, "line": 5, "explanation": "Line 6 says 第三天，我们去了海边." },
+      { "prompt": "她为什么感冒了？", "promptPy": "Tā wèi shénme gǎnmào le?", "promptEn": "Why did she catch a cold?", "options": ["天气太冷", "晚上没有睡觉", "在海里游泳的时间太长"], "answer": 2, "line": 6, "explanation": "Line 7 says 我在海里游泳的时间太长，晚上就感冒了." }
+    ]
+  },
+  {
+    "id": "l3-04",
+    "title": "Calling in sick",
+    "scene": "A student phones his teacher in the morning",
+    "lines": [
+      { "speaker": "男", "zh": "喂，老师，您好。我是小张。", "py": "Wéi, lǎoshī, nín hǎo. Wǒ shì Xiǎo Zhāng.", "en": "Hello, teacher. This is Xiao Zhang." },
+      { "speaker": "女", "zh": "小张，你好。有什么事吗？", "py": "Xiǎo Zhāng, nǐ hǎo. Yǒu shénme shì ma?", "en": "Hi, Xiao Zhang. What's up?" },
+      { "speaker": "男", "zh": "我从昨天晚上开始发烧，今天想请假，不能去上课了。", "py": "Wǒ cóng zuótiān wǎnshang kāishǐ fāshāo, jīntiān xiǎng qǐngjià, bù néng qù shàngkè le.", "en": "I've had a fever since last night. I'd like to take today off. I can't come to class." },
+      { "speaker": "女", "zh": "没关系，身体最重要。你去医院检查了吗？", "py": "Méi guānxi, shēntǐ zuì zhòngyào. Nǐ qù yīyuàn jiǎnchále ma?", "en": "That's fine, your health comes first. Have you been to the hospital for a checkup?" },
+      { "speaker": "男", "zh": "去了，医生说是感冒，让我在家休息两天。", "py": "Qù le, yīshēng shuō shì gǎnmào, ràng wǒ zài jiā xiūxi liǎng tiān.", "en": "Yes. The doctor said it's a cold and told me to rest at home for two days." },
+      { "speaker": "女", "zh": "好的。今天的作业我会发到你的邮箱。", "py": "Hǎo de. Jīntiān de zuòyè wǒ huì fā dào nǐ de yóuxiāng.", "en": "OK. I'll send today's homework to your email." },
+      { "speaker": "男", "zh": "谢谢老师。星期五的数学考试我能参加吗？", "py": "Xièxie lǎoshī. Xīngqīwǔ de shùxué kǎoshì wǒ néng cānjiā ma?", "en": "Thank you. Can I still take Friday's math test?" },
+      { "speaker": "女", "zh": "如果你那天好了，就来参加；如果还不舒服，就下个星期再考。", "py": "Rúguǒ nǐ nà tiān hǎo le, jiù lái cānjiā; rúguǒ hái bù shūfu, jiù xià ge xīngqī zài kǎo.", "en": "If you're better by then, come and take it. If you still don't feel well, you can take it next week." },
+      { "speaker": "男", "zh": "好的，我一定认真复习。", "py": "Hǎo de, wǒ yídìng rènzhēn fùxí.", "en": "OK, I'll be sure to review carefully." },
+      { "speaker": "女", "zh": "别着急，先把身体照顾好。", "py": "Bié zháojí, xiān bǎ shēntǐ zhàogù hǎo.", "en": "Don't worry. Take care of your health first." }
+    ],
+    "questions": [
+      { "prompt": "小张为什么给老师打电话？", "promptPy": "Xiǎo Zhāng wèi shénme gěi lǎoshī dǎ diànhuà?", "promptEn": "Why does Xiao Zhang call his teacher?", "options": ["他要请假", "他找不到作业", "他想问考试的时间"], "answer": 0, "line": 2, "explanation": "Line 3 says he has a fever and 今天想请假." },
+      { "prompt": "医生让他做什么？", "promptPy": "Yīshēng ràng tā zuò shénme?", "promptEn": "What did the doctor tell him to do?", "options": ["马上住院", "在家休息两天", "多去运动"], "answer": 1, "line": 4, "explanation": "Line 5 says the doctor 让我在家休息两天." },
+      { "prompt": "老师会怎么把作业给他？", "promptPy": "Lǎoshī huì zěnme bǎ zuòyè gěi tā?", "promptEn": "How will the teacher get the homework to him?", "options": ["让同学送到他家", "明天在学校给他", "发到他的邮箱"], "answer": 2, "line": 5, "explanation": "Line 6 says 作业我会发到你的邮箱." },
+      { "prompt": "星期五有什么考试？", "promptPy": "Xīngqīwǔ yǒu shénme kǎoshì?", "promptEn": "What test is on Friday?", "options": ["数学", "汉语", "历史"], "answer": 0, "line": 6, "explanation": "Line 7 mentions 星期五的数学考试." },
+      { "prompt": "如果星期五他还不舒服，怎么办？", "promptPy": "Rúguǒ xīngqīwǔ tā hái bù shūfu, zěnme bàn?", "promptEn": "What happens if he still feels unwell on Friday?", "options": ["在家考", "下个星期再考", "不用考了"], "answer": 1, "line": 7, "explanation": "Line 8 says 如果还不舒服，就下个星期再考." }
+    ]
+  },
+  {
+    "id": "l3-05",
+    "title": "The meeting is moved",
+    "scene": "An employee checks tomorrow's meeting with her manager",
+    "lines": [
+      { "speaker": "女", "zh": "经理，明天上午的会议还是九点开始吗？", "py": "Jīnglǐ, míngtiān shàngwǔ de huìyì háishi jiǔ diǎn kāishǐ ma?", "en": "Manager, does tomorrow morning's meeting still start at nine?" },
+      { "speaker": "男", "zh": "不是，我们换到下午两点了。", "py": "Bú shì, wǒmen huàn dào xiàwǔ liǎng diǎn le.", "en": "No, we've moved it to two in the afternoon." },
+      { "speaker": "女", "zh": "为什么换时间了？", "py": "Wèi shénme huàn shíjiān le?", "en": "Why was the time changed?" },
+      { "speaker": "男", "zh": "因为有几位客人的飞机晚点了，明天中午才到。", "py": "Yīnwèi yǒu jǐ wèi kèrén de fēijī wǎndiǎn le, míngtiān zhōngwǔ cái dào.", "en": "Some of the guests' flights are delayed. They won't arrive until tomorrow at noon." },
+      { "speaker": "女", "zh": "会议还在三层的会议室吗？", "py": "Huìyì hái zài sān céng de huìyìshì ma?", "en": "Is the meeting still in the meeting room on the third floor?" },
+      { "speaker": "男", "zh": "不，那个会议室太小了。我们用八层那个大的。", "py": "Bù, nàge huìyìshì tài xiǎo le. Wǒmen yòng bā céng nàge dà de.", "en": "No, that room is too small. We'll use the big one on the eighth floor." },
+      { "speaker": "女", "zh": "好的。我需要准备什么？", "py": "Hǎo de. Wǒ xūyào zhǔnbèi shénme?", "en": "OK. What do I need to prepare?" },
+      { "speaker": "男", "zh": "你帮我准备十位客人的饮料和水果。", "py": "Nǐ bāng wǒ zhǔnbèi shí wèi kèrén de yǐnliào hé shuǐguǒ.", "en": "Please get drinks and fruit ready for ten guests." },
+      { "speaker": "女", "zh": "客人晚上住在哪儿？需要我找一个宾馆吗？", "py": "Kèrén wǎnshang zhù zài nǎr? Xūyào wǒ zhǎo yí gè bīnguǎn ma?", "en": "Where are the guests staying tonight? Should I find a hotel?" },
+      { "speaker": "男", "zh": "不用了，他们开完会就坐高铁回去。", "py": "Búyòng le, tāmen kāiwán huì jiù zuò gāotiě huíqù.", "en": "No need. They'll take the high-speed train back right after the meeting." }
+    ],
+    "questions": [
+      { "prompt": "会议现在几点开始？", "promptPy": "Huìyì xiànzài jǐ diǎn kāishǐ?", "promptEn": "What time does the meeting start now?", "options": ["上午九点", "中午十二点", "下午两点"], "answer": 2, "line": 1, "explanation": "Line 2 says it was moved 到下午两点. Nine was the old time." },
+      { "prompt": "为什么换时间？", "promptPy": "Wèi shénme huàn shíjiān?", "promptEn": "Why was the time changed?", "options": ["经理有别的事", "客人的飞机晚点了", "会议室有人用"], "answer": 1, "line": 3, "explanation": "Line 4 says 因为有几位客人的飞机晚点了." },
+      { "prompt": "会议在几层开？", "promptPy": "Huìyì zài jǐ céng kāi?", "promptEn": "Which floor is the meeting on?", "options": ["八层", "三层", "十层"], "answer": 0, "line": 5, "explanation": "Line 6 says the third-floor room is too small, so they will use the one on 八层." },
+      { "prompt": "女的要准备什么？", "promptPy": "Nǚ de yào zhǔnbèi shénme?", "promptEn": "What does the woman need to prepare?", "options": ["会议的名单", "客人的机票", "饮料和水果"], "answer": 2, "line": 7, "explanation": "Line 8 says 准备十位客人的饮料和水果." },
+      { "prompt": "客人开完会以后做什么？", "promptPy": "Kèrén kāiwán huì yǐhòu zuò shénme?", "promptEn": "What will the guests do after the meeting?", "options": ["住在宾馆", "坐高铁回去", "和经理吃饭"], "answer": 1, "line": 9, "explanation": "Line 10 says no hotel is needed because 他们开完会就坐高铁回去." }
+    ]
+  },
+  {
+    "id": "l3-06",
+    "title": "Getting back in shape",
+    "scene": "An office worker talks about starting to run",
+    "lines": [
+      { "speaker": "男", "zh": "以前我工作很忙，每天在办公室坐十个小时，也不锻炼身体。", "py": "Yǐqián wǒ gōngzuò hěn máng, měitiān zài bàngōngshì zuò shí gè xiǎoshí, yě bú duànliàn shēntǐ.", "en": "I used to be very busy at work. I sat in the office ten hours a day and never exercised." },
+      { "speaker": "男", "zh": "去年我胖了十公斤，还经常感冒。", "py": "Qùnián wǒ pàngle shí gōngjīn, hái jīngcháng gǎnmào.", "en": "Last year I put on ten kilos and caught colds all the time." },
+      { "speaker": "男", "zh": "医生告诉我，如果不运动，身体会越来越差。", "py": "Yīshēng gàosu wǒ, rúguǒ bú yùndòng, shēntǐ huì yuè lái yuè chà.", "en": "My doctor told me that if I didn't exercise, my health would keep getting worse." },
+      { "speaker": "男", "zh": "所以我决定每天早上去小区旁边的公园跑步。", "py": "Suǒyǐ wǒ juédìng měitiān zǎoshang qù xiǎoqū pángbiān de gōngyuán pǎobù.", "en": "So I decided to run every morning in the park next to my housing estate." },
+      { "speaker": "男", "zh": "开始的时候，我跑10分钟就累了。", "py": "Kāishǐ de shíhou, wǒ pǎo shí fēnzhōng jiù lèi le.", "en": "At first I got tired after ten minutes." },
+      { "speaker": "男", "zh": "后来我的邻居也和我一起跑，我们一边跑一边聊天儿，时间过得很快。", "py": "Hòulái wǒ de línjū yě hé wǒ yìqǐ pǎo, wǒmen yìbiān pǎo yìbiān liáotiānr, shíjiān guò de hěn kuài.", "en": "Later my neighbor started running with me. We chat while we run, and the time goes by fast." },
+      { "speaker": "男", "zh": "现在我每天能跑40分钟，已经瘦了五公斤。", "py": "Xiànzài wǒ měitiān néng pǎo sìshí fēnzhōng, yǐjīng shòule wǔ gōngjīn.", "en": "Now I can run forty minutes a day, and I've already lost five kilos." },
+      { "speaker": "男", "zh": "下个月，我们打算参加城市的跑步比赛。", "py": "Xià ge yuè, wǒmen dǎsuàn cānjiā chéngshì de pǎobù bǐsài.", "en": "Next month we plan to enter the city running race." }
+    ],
+    "questions": [
+      { "prompt": "他以前为什么不锻炼身体？", "promptPy": "Tā yǐqián wèi shénme bú duànliàn shēntǐ?", "promptEn": "Why didn't he exercise before?", "options": ["工作很忙", "身体不好", "没有地方跑步"], "answer": 0, "line": 0, "explanation": "Line 1 says 以前我工作很忙 and he sat in the office all day." },
+      { "prompt": "医生告诉他什么？", "promptPy": "Yīshēng gàosu tā shénme?", "promptEn": "What did the doctor tell him?", "options": ["他应该多吃水果", "不运动身体会越来越差", "他要马上住院"], "answer": 1, "line": 2, "explanation": "Line 3 says 如果不运动，身体会越来越差." },
+      { "prompt": "他每天早上在哪儿跑步？", "promptPy": "Tā měitiān zǎoshang zài nǎr pǎobù?", "promptEn": "Where does he run every morning?", "options": ["公司旁边", "学校里", "小区旁边的公园"], "answer": 2, "line": 3, "explanation": "Line 4 says he runs in 小区旁边的公园." },
+      { "prompt": "他现在每天能跑多长时间？", "promptPy": "Tā xiànzài měitiān néng pǎo duō cháng shíjiān?", "promptEn": "How long can he run each day now?", "options": ["40分钟", "10分钟", "一个小时"], "answer": 0, "line": 6, "explanation": "Line 7 says 现在我每天能跑40分钟. Ten minutes was when he started." },
+      { "prompt": "他们下个月打算做什么？", "promptPy": "Tāmen xià ge yuè dǎsuàn zuò shénme?", "promptEn": "What do they plan to do next month?", "options": ["去外地旅游", "搬家", "参加跑步比赛"], "answer": 2, "line": 7, "explanation": "Line 8 says 我们打算参加城市的跑步比赛." }
+    ]
+  }
+]
