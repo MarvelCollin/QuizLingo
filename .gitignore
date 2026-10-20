@@ -29,3 +29,6 @@ dist-ssr
 *.db
 *.db-journal
 .vercel
+
+# Claude Code skills stay local
+.claude/skills/
