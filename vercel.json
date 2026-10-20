@@ -31,6 +31,14 @@
       "destination": "/quizlingo/index.html"
     },
     {
+      "source": "/quizlingo/basics",
+      "destination": "/quizlingo/index.html"
+    },
+    {
+      "source": "/quizlingo/basics/:lessonId",
+      "destination": "/quizlingo/index.html"
+    },
+    {
       "source": "/quizlingo/practice",
       "destination": "/quizlingo/index.html"
     },

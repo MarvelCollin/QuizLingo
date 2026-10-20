@@ -6,7 +6,7 @@ import { cn } from '../../lib/utils';
 import { BrandMark } from './brand-mark';
 import { isNavActive, NAV_ITEMS } from './nav-items';
 
-// Desktop: navigation stays visible in the top bar. Mobile: a bottom tab bar with the same three places.
+// Desktop: navigation stays visible in the top bar. Mobile: a bottom tab bar with the same places.
 export const AppShell = () => {
   const session = useSession();
   const logout = useLogout();
@@ -70,7 +70,7 @@ export const AppShell = () => {
         aria-label="Main"
         className="fixed inset-x-0 bottom-0 z-30 border-t border-hairline bg-bg pb-[env(safe-area-inset-bottom)] sm:hidden"
       >
-        <ul className="grid grid-cols-4">
+        <ul className="grid" style={{ gridTemplateColumns: `repeat(${NAV_ITEMS.length}, minmax(0, 1fr))` }}>
           {NAV_ITEMS.map((item) => {
             const isActive = isNavActive(item, pathname);
             const Icon = item.icon;
