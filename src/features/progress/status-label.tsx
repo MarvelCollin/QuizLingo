@@ -14,7 +14,7 @@ const SHAPES: Record<WordStatus, string> = {
 const TEXT: Record<WordStatus, string> = {
   new: 'text-muted',
   learning: 'text-ink',
-  due: 'text-accent-strong font-semibold',
+  due: 'text-strong font-semibold',
   mastered: 'text-strong font-semibold',
 };
 
