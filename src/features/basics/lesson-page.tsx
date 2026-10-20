@@ -4,6 +4,7 @@ import { Button, ButtonLink } from '../../components/ui/button';
 import { InlineMessage } from '../../components/ui/inline-message';
 import { Skeleton } from '../../components/ui/skeleton';
 import { percent } from '../../lib/format';
+import { shuffle } from '../../lib/random';
 import { usePageMeta } from '../../lib/use-page-meta';
 import { preloadRecording } from '../practice/speech';
 import { useKeyboard } from '../practice/use-keyboard';
@@ -145,6 +146,13 @@ const LessonPage = () => {
     return <QuizView key={run} questions={content.questions} onFinish={submit} />;
   }
 
+  if (current === 'missed') {
+    const again = answers
+      .filter((a) => !a.question.options[a.chosen].isCorrect)
+      .map(({ question }) => ({ ...question, options: shuffle(question.options) }));
+    return <QuizView key={`missed-${run}`} label="Missed questions" questions={again} onFinish={() => setPhase('result')} />;
+  }
+
   if (current === 'result') {
     return (
       <LessonResult
@@ -156,6 +164,7 @@ const LessonPage = () => {
         onRetrySave={retrySave}
         onTryAgain={() => restart('quiz')}
         onReview={hasCards ? () => restart('cards') : null}
+        onPracticeMissed={() => setPhase('missed')}
       />
     );
   }

@@ -228,3 +228,10 @@ body {
     transform: scale(0.6);
   }
 }
+
+@keyframes burst {
+  to {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) scale(0.4);
+  }
+}

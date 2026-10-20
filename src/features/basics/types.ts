@@ -99,7 +99,7 @@ export type LessonHeaderProps = {
 
 export type CardViewProps = { card: LearnCard };
 
-export type QuizViewProps = { questions: QuizQuestion[]; onFinish: (answers: QuizAnswer[]) => void };
+export type QuizViewProps = { questions: QuizQuestion[]; onFinish: (answers: QuizAnswer[]) => void; label?: string };
 
 export type LessonResultProps = {
   lesson: Lesson;
@@ -110,10 +110,11 @@ export type LessonResultProps = {
   onRetrySave: () => void;
   onTryAgain: () => void;
   onReview: (() => void) | null;
+  onPracticeMissed: () => void;
 };
 
 export type StampProps = { kind: 'lesson' | 'milestone' };
 
-export type LessonPhase = 'cards' | 'quiz' | 'result';
+export type LessonPhase = 'cards' | 'quiz' | 'result' | 'missed';
 
 export type GlyphProps = { status: LessonStatus; isCheckpoint: boolean; isNext: boolean };

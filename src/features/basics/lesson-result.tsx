@@ -15,6 +15,7 @@ export const LessonResult = ({
   onRetrySave,
   onTryAgain,
   onReview,
+  onPracticeMissed,
 }: LessonResultProps) => {
   const { path } = useBasicsPath();
   const total = answers.length;
@@ -108,6 +109,14 @@ export const LessonResult = ({
           </>
         )}
       </div>
+      {missed.length > 0 && (
+        <div>
+          <Button variant="secondary" onClick={onPracticeMissed}>
+            Practice the {missed.length === 1 ? 'one' : missed.length} you missed
+          </Button>
+          <p className="mt-2 text-sm text-muted">This is extra practice. It does not change your score.</p>
+        </div>
+      )}
 
       {missed.length > 0 && (
         <div>
