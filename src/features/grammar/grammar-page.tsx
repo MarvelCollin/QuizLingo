@@ -25,7 +25,7 @@ const GrammarRow = ({ point, isOpen, onToggle }: GrammarRowProps) => (
     >
       <span className="min-w-0 flex-1">
         <span lang="zh-CN" className="block font-hanzi text-xl text-ink">
-          {point.point}
+          {point.point || point.detail}
         </span>
         <span className="block text-base text-muted">{point.title}</span>
       </span>
