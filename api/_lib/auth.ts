@@ -1,5 +1,6 @@
 import { createHash, randomBytes, scrypt, timingSafeEqual } from 'node:crypto';
 import { promisify } from 'node:util';
+import type { InStatement, ResultSet, TransactionMode } from '@libsql/client';
 import { getDb } from './db.js';
 import { HttpError, parseCookies } from './http.js';
 
@@ -43,16 +44,17 @@ const hashToken = (token: string) => createHash('sha256').update(token).digest('
 const cookie = (value: string, maxAge: number) =>
   `${COOKIE}=${value}; Path=/quizlingo; HttpOnly; Secure; SameSite=Lax; Max-Age=${maxAge}`;
 
-export const createSession = async (userId: string): Promise<string> => {
-  const db = await getDb();
+export const newSession = (userId: string): { statement: InStatement; cookie: string } => {
   const token = randomBytes(32).toString('base64url');
   const now = Date.now();
   const maxAge = SESSION_DAYS * 24 * 60 * 60;
-  await db.execute({
-    sql: 'INSERT INTO sessions (id, user_id, created_at, expires_at) VALUES (?, ?, ?, ?)',
-    args: [hashToken(token), userId, now, now + maxAge * 1000],
-  });
-  return cookie(token, maxAge);
+  return {
+    statement: {
+      sql: 'INSERT INTO sessions (id, user_id, created_at, expires_at) VALUES (?, ?, ?, ?)',
+      args: [hashToken(token), userId, now, now + maxAge * 1000],
+    },
+    cookie: cookie(token, maxAge),
+  };
 };
 
 export const destroySession = async (request: Request): Promise<string> => {
@@ -64,39 +66,67 @@ export const destroySession = async (request: Request): Promise<string> => {
   return cookie('', 0);
 };
 
-export const getUser = async (request: Request): Promise<User | null> => {
-  const token = parseCookies(request)[COOKIE];
-  if (!token) return null;
-  const db = await getDb();
-  const result = await db.execute({
-    sql: `SELECT users.id, users.email, users.name FROM sessions
-          JOIN users ON users.id = sessions.user_id
-          WHERE sessions.id = ? AND sessions.expires_at > ?`,
-    args: [hashToken(token), Date.now()],
-  });
+export type Scope = { sid: string; now: number };
+
+export const CURRENT_USER = '(SELECT user_id FROM sessions WHERE id = :sid AND expires_at > :now)';
+
+const userLookup = (scope: Scope): InStatement => ({
+  sql: `SELECT users.id, users.email, users.name FROM sessions
+        JOIN users ON users.id = sessions.user_id
+        WHERE sessions.id = :sid AND sessions.expires_at > :now`,
+  args: scope,
+});
+
+const toUser = (result: ResultSet): User | null => {
   const row = result.rows[0];
   if (!row) return null;
   return { id: String(row.id), email: String(row.email), name: String(row.name) };
 };
 
-export const requireUser = async (request: Request): Promise<User> => {
-  const user = await getUser(request);
-  if (!user) throw new HttpError(401, 'Please sign in to continue.');
-  return user;
+const readScope = (request: Request): Scope | null => {
+  const token = parseCookies(request)[COOKIE];
+  return token ? { sid: hashToken(token), now: Date.now() } : null;
+};
+
+const signInRequired = () => new HttpError(401, 'Please sign in to continue.');
+
+export const requireScope = (request: Request): Scope => {
+  const scope = readScope(request);
+  if (!scope) throw signInRequired();
+  return scope;
+};
+
+export const getUser = async (request: Request): Promise<User | null> => {
+  const scope = readScope(request);
+  if (!scope) return null;
+  const db = await getDb();
+  return toUser(await db.execute(userLookup(scope)));
+};
+
+export const queryAsUser = async (
+  request: Request,
+  statements: (scope: Scope) => InStatement[],
+  mode: TransactionMode = 'read',
+): Promise<{ user: User; results: ResultSet[] }> => {
+  const scope = requireScope(request);
+  const db = await getDb();
+  const [lookup, ...results] = await db.batch([userLookup(scope), ...statements(scope)], mode);
+  const user = toUser(lookup);
+  if (!user) throw signInRequired();
+  return { user, results };
 };
 
 // Login throttling: at most 10 failed attempts per email in 15 minutes
 const WINDOW_MS = 15 * 60 * 1000;
 const MAX_FAILURES = 10;
 
-export const checkLoginAllowed = async (email: string) => {
-  const db = await getDb();
-  const since = Date.now() - WINDOW_MS;
-  const result = await db.execute({
-    sql: 'SELECT COUNT(*) AS n FROM login_attempts WHERE email = ? AND attempted_at > ?',
-    args: [email, since],
-  });
-  if (Number(result.rows[0]?.n ?? 0) >= MAX_FAILURES) {
+export const loginAttempts = (email: string): InStatement => ({
+  sql: 'SELECT COUNT(*) AS n FROM login_attempts WHERE email = ? AND attempted_at > ?',
+  args: [email, Date.now() - WINDOW_MS],
+});
+
+export const assertLoginAllowed = (attempts: ResultSet) => {
+  if (Number(attempts.rows[0]?.n ?? 0) >= MAX_FAILURES) {
     throw new HttpError(429, 'Too many failed attempts. Wait 15 minutes, then try again.');
   }
 };
@@ -113,10 +143,10 @@ export const recordLoginFailure = async (email: string) => {
   );
 };
 
-export const clearLoginFailures = async (email: string) => {
-  const db = await getDb();
-  await db.execute({ sql: 'DELETE FROM login_attempts WHERE email = ?', args: [email] });
-};
+export const clearLoginFailures = (email: string): InStatement => ({
+  sql: 'DELETE FROM login_attempts WHERE email = ?',
+  args: [email],
+});
 
 export const normalizeEmail = (value: unknown): string => {
   const email = typeof value === 'string' ? value.trim().toLowerCase() : '';

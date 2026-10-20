@@ -1,4 +1,4 @@
-import { newId, requireUser } from './_lib/auth.js';
+import { newId, requireScope } from './_lib/auth.js';
 import { getDb } from './_lib/db.js';
 import { handle, HttpError, json, readJson } from './_lib/http.js';
 import * as validate from './_lib/validate.js';
@@ -7,7 +7,7 @@ type Body = { mode?: unknown; level?: unknown; total?: unknown; correct?: unknow
 
 // Saves the summary of one finished practice round
 export const POST = handle(async (request) => {
-  const user = await requireUser(request);
+  const scope = requireScope(request);
   const body = await readJson<Body>(request);
   const session = {
     id: newId(),
@@ -21,10 +21,12 @@ export const POST = handle(async (request) => {
   if (session.correct > session.total) throw new HttpError(400, 'Correct answers cannot exceed the total.');
 
   const db = await getDb();
-  await db.execute({
+  const result = await db.execute({
     sql: `INSERT INTO practice_sessions (id, user_id, mode, level, total, correct, created_at)
-          VALUES (?, ?, ?, ?, ?, ?, ?)`,
-    args: [session.id, user.id, session.mode, session.level, session.total, session.correct, session.createdAt],
+          SELECT :id, user_id, :mode, :level, :total, :correct, :createdAt
+          FROM sessions WHERE id = :sid AND expires_at > :now`,
+    args: { ...scope, ...session },
   });
+  if (result.rowsAffected === 0) throw new HttpError(401, 'Please sign in to continue.');
   return json({ session }, { status: 201 });
 });

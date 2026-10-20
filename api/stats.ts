@@ -1,5 +1,4 @@
-import { requireUser } from './_lib/auth.js';
-import { getDb } from './_lib/db.js';
+import { CURRENT_USER, queryAsUser } from './_lib/auth.js';
 import { handle, json } from './_lib/http.js';
 import { MASTERED_BOX } from './_lib/srs.js';
 
@@ -9,36 +8,34 @@ const DAY = 24 * 60 * 60 * 1000;
 const dayOf = (time: number, tz: number) => Math.floor((time - tz * 60 * 1000) / DAY);
 
 export const GET = handle(async (request) => {
-  const user = await requireUser(request);
   const params = new URL(request.url).searchParams;
   const tzParam = Number(params.get('tz'));
   const tz = Number.isFinite(tzParam) && Math.abs(tzParam) <= 14 * 60 ? tzParam : 0;
-  const now = Date.now();
-  const db = await getDb();
 
-  const [levels, totals, sessions, days] = await db.batch(
-    [
-      {
-        sql: `SELECT level, COUNT(*) AS seen, SUM(box >= ?) AS mastered, SUM(due_at <= ?) AS due
-              FROM word_progress WHERE user_id = ? GROUP BY level`,
-        args: [MASTERED_BOX, now, user.id],
-      },
-      {
-        sql: 'SELECT COALESCE(SUM(correct), 0) AS correct, COALESCE(SUM(wrong), 0) AS wrong FROM word_progress WHERE user_id = ?',
-        args: [user.id],
-      },
-      {
-        sql: `SELECT id, mode, level, total, correct, created_at FROM practice_sessions
-              WHERE user_id = ? ORDER BY created_at DESC LIMIT 10`,
-        args: [user.id],
-      },
-      {
-        sql: `SELECT created_at, total FROM practice_sessions WHERE user_id = ? AND created_at > ?`,
-        args: [user.id, now - 400 * DAY],
-      },
-    ],
-    'read',
-  );
+  const {
+    results: [levels, totals, sessions, days],
+  } = await queryAsUser(request, (scope) => [
+    {
+      sql: `SELECT level, COUNT(*) AS seen, SUM(box >= :mastered) AS mastered, SUM(due_at <= :now) AS due
+            FROM word_progress WHERE user_id = ${CURRENT_USER} GROUP BY level`,
+      args: { ...scope, mastered: MASTERED_BOX },
+    },
+    {
+      sql: `SELECT COALESCE(SUM(correct), 0) AS correct, COALESCE(SUM(wrong), 0) AS wrong
+            FROM word_progress WHERE user_id = ${CURRENT_USER}`,
+      args: scope,
+    },
+    {
+      sql: `SELECT id, mode, level, total, correct, created_at FROM practice_sessions
+            WHERE user_id = ${CURRENT_USER} ORDER BY created_at DESC LIMIT 10`,
+      args: scope,
+    },
+    {
+      sql: `SELECT created_at, total FROM practice_sessions WHERE user_id = ${CURRENT_USER} AND created_at > :since`,
+      args: { ...scope, since: scope.now - 400 * DAY },
+    },
+  ]);
+  const now = Date.now();
 
   // Answers per day for the last 14 days, and the run of consecutive practice days up to today
   const today = dayOf(now, tz);

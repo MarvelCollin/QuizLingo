@@ -1,4 +1,4 @@
-import { requireUser } from './_lib/auth.js';
+import { CURRENT_USER, queryAsUser } from './_lib/auth.js';
 import { getDb } from './_lib/db.js';
 import { handle, HttpError, json, readJson } from './_lib/http.js';
 import { review } from './_lib/srs.js';
@@ -16,12 +16,15 @@ const toProgress = (row: Record<string, unknown>) => ({
 
 // Every word the signed-in user has practised
 export const GET = handle(async (request) => {
-  const user = await requireUser(request);
-  const db = await getDb();
-  const result = await db.execute({
-    sql: 'SELECT word, level, box, correct, wrong, due_at, last_seen_at FROM word_progress WHERE user_id = ?',
-    args: [user.id],
-  });
+  const {
+    results: [result],
+  } = await queryAsUser(request, (scope) => [
+    {
+      sql: `SELECT word, level, box, correct, wrong, due_at, last_seen_at FROM word_progress
+            WHERE user_id = ${CURRENT_USER}`,
+      args: scope,
+    },
+  ]);
   return json({ progress: result.rows.map((row) => toProgress(row as Record<string, unknown>)) });
 });
 
@@ -32,7 +35,6 @@ const MAX_RESULTS = 100;
 
 // Records answers and schedules each word's next review
 export const POST = handle(async (request) => {
-  const user = await requireUser(request);
   const body = await readJson<Body>(request);
   if (!Array.isArray(body.results) || body.results.length === 0 || body.results.length > MAX_RESULTS) {
     throw new HttpError(400, `Send between 1 and ${MAX_RESULTS} results.`);
@@ -42,13 +44,17 @@ export const POST = handle(async (request) => {
     return { word: validate.word(item.word), level: validate.level(item.level), correct: item.correct };
   });
 
-  const db = await getDb();
   const words = [...new Set(results.map((r) => r.word))];
-  const existing = await db.execute({
-    sql: `SELECT word, level, box, correct, wrong, due_at, last_seen_at FROM word_progress
-          WHERE user_id = ? AND word IN (${words.map(() => '?').join(',')})`,
-    args: [user.id, ...words],
-  });
+  const {
+    user,
+    results: [existing],
+  } = await queryAsUser(request, (scope) => [
+    {
+      sql: `SELECT word, level, box, correct, wrong, due_at, last_seen_at FROM word_progress
+            WHERE user_id = ${CURRENT_USER} AND word IN (${words.map((_, i) => `:w${i}`).join(',')})`,
+      args: { ...scope, ...Object.fromEntries(words.map((w, i) => [`w${i}`, w])) },
+    },
+  ]);
 
   const state = new Map(
     existing.rows.map((row) => {
@@ -80,6 +86,7 @@ export const POST = handle(async (request) => {
   }
 
   const updated = words.map((w) => state.get(w)!);
+  const db = await getDb();
   await db.batch(
     updated.map((p) => ({
       sql: `INSERT INTO word_progress (user_id, word, level, box, correct, wrong, due_at, last_seen_at)

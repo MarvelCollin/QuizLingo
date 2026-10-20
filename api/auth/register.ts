@@ -1,14 +1,11 @@
-import {
-  createSession,
-  hashPassword,
-  newId,
-  normalizeEmail,
-  validatePassword,
-} from '../_lib/auth.js';
+import { hashPassword, newId, newSession, normalizeEmail, validatePassword } from '../_lib/auth.js';
 import { getDb } from '../_lib/db.js';
 import { handle, HttpError, json, readJson } from '../_lib/http.js';
 
 type Body = { name?: unknown; email?: unknown; password?: unknown };
+
+const isTakenEmail = (error: unknown) =>
+  error instanceof Error && error.message.includes('UNIQUE constraint failed: users.email');
 
 export const POST = handle(async (request) => {
   const body = await readJson<Body>(request);
@@ -17,15 +14,23 @@ export const POST = handle(async (request) => {
   const email = normalizeEmail(body.email);
   const password = validatePassword(body.password);
 
-  const db = await getDb();
-  const existing = await db.execute({ sql: 'SELECT 1 FROM users WHERE email = ?', args: [email] });
-  if (existing.rows.length > 0) throw new HttpError(409, 'An account with this email already exists. Sign in instead.');
-
   const user = { id: newId(), email, name };
-  await db.execute({
-    sql: 'INSERT INTO users (id, email, name, password_hash, created_at) VALUES (?, ?, ?, ?, ?)',
-    args: [user.id, email, name, await hashPassword(password), Date.now()],
-  });
-  const cookie = await createSession(user.id);
-  return json({ user }, { status: 201, headers: { 'Set-Cookie': cookie } });
+  const session = newSession(user.id);
+  const db = await getDb();
+  try {
+    await db.batch(
+      [
+        {
+          sql: 'INSERT INTO users (id, email, name, password_hash, created_at) VALUES (?, ?, ?, ?, ?)',
+          args: [user.id, email, name, await hashPassword(password), Date.now()],
+        },
+        session.statement,
+      ],
+      'write',
+    );
+  } catch (error) {
+    if (isTakenEmail(error)) throw new HttpError(409, 'An account with this email already exists. Sign in instead.');
+    throw error;
+  }
+  return json({ user }, { status: 201, headers: { 'Set-Cookie': session.cookie } });
 });
