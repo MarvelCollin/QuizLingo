@@ -8,7 +8,7 @@ const iconButton =
   'inline-flex size-11 cursor-pointer items-center justify-center rounded-full text-ink transition-colors duration-150 hover:bg-tint disabled:cursor-default disabled:opacity-40';
 
 export const AudioBar = ({ player, total }: AudioBarProps) => (
-  <div className="flex flex-col gap-3 rounded-xl border border-hairline bg-bg px-4 py-3 shadow-raise sm:flex-row sm:items-center">
+  <div className="flex flex-wrap items-center gap-x-3 gap-y-2 rounded-xl border border-hairline bg-bg px-3 py-2 shadow-raise sm:flex-nowrap sm:px-4 sm:py-3">
     <div className="flex items-center gap-1">
       <button
         type="button"
@@ -42,7 +42,7 @@ export const AudioBar = ({ player, total }: AudioBarProps) => (
       </button>
     </div>
 
-    <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+    <div className="order-last flex w-full min-w-0 flex-col gap-1.5 sm:order-none sm:w-auto sm:flex-1">
       <div className="flex gap-0.5" role="group" aria-label="Jump to a line">
         {Array.from({ length: total }, (_, i) => (
           <button
@@ -63,7 +63,7 @@ export const AudioBar = ({ player, total }: AudioBarProps) => (
       </p>
     </div>
 
-    <div className="flex items-center gap-1" role="radiogroup" aria-label="Speed">
+    <div className="ml-auto flex items-center gap-0.5 sm:gap-1" role="radiogroup" aria-label="Speed">
       {RATES.map((rate) => (
         <button
           key={rate}
@@ -72,7 +72,7 @@ export const AudioBar = ({ player, total }: AudioBarProps) => (
           aria-checked={player.rate === rate}
           onClick={() => player.setRate(rate)}
           className={cn(
-            'min-h-11 cursor-pointer rounded-md px-3 text-sm transition-colors duration-150',
+            'min-h-11 cursor-pointer rounded-md px-1.5 text-sm transition-colors duration-150 sm:px-3',
             player.rate === rate ? 'bg-tint font-semibold text-ink' : 'font-medium text-muted hover:bg-tint hover:text-ink',
           )}
         >

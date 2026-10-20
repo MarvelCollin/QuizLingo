@@ -52,12 +52,15 @@ export const SegmentedControl = <T extends string>({
               onClick={() => onChange(option.value)}
               onKeyDown={(event) => handleKeyDown(event, index)}
               className={cn(
-                'flex min-h-11 cursor-pointer flex-col justify-center rounded-md px-3 py-2 text-left transition-colors duration-150',
+                'flex min-h-11 cursor-pointer flex-col justify-center rounded-md py-2 text-left transition-colors duration-150',
+                isWrapped ? 'px-1 sm:px-3' : 'px-3',
                 isStacked ? 'items-start' : 'items-center text-center',
                 isSelected ? 'bg-bg text-ink shadow-raise' : 'text-muted hover:bg-tint hover:text-ink',
               )}
             >
-              <span className={cn('text-base', isSelected ? 'font-semibold' : 'font-medium')}>{option.label}</span>
+              <span className={cn(isWrapped ? 'text-sm whitespace-nowrap sm:text-base' : 'text-base', isSelected ? 'font-semibold' : 'font-medium')}>
+                {option.label}
+              </span>
               {option.detail && <span className="text-sm text-muted">{option.detail}</span>}
             </button>
           );
