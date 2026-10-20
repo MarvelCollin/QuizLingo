@@ -35,3 +35,9 @@ export const ROUND_SIZES: readonly RoundSize[] = ['10', '20', '30'];
 export const DEFAULT_CONFIG: RoundConfig = { mode: 'flashcard', set: 'new', level: '1', size: '10' };
 
 export const OPTION_COUNT = 4;
+
+export const MORE_PRACTICE = [
+  { to: '/practice/tones', label: 'Tones', detail: 'Native recordings of syllables and words, pick the tone you hear' },
+  { to: '/practice/characters', label: 'Character quiz', detail: 'Recognise each character by its pinyin and meaning' },
+  { to: '/practice/writing', label: 'Writing practice', detail: 'Draw the characters you need to write, stroke by stroke' },
+] as const;

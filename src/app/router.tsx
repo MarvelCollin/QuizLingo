@@ -12,6 +12,7 @@ const PracticePage = lazy(() => import('../features/practice/practice-page'));
 const RoundPage = lazy(() => import('../features/practice/round-page'));
 const WordsPage = lazy(() => import('../features/words/words-page'));
 const WordPage = lazy(() => import('../features/words/word-page'));
+const TonesPage = lazy(() => import('../features/tones/tones-page'));
 const CharactersPage = lazy(() => import('../features/characters/characters-page'));
 const CharacterPage = lazy(() => import('../features/characters/character-page'));
 const CharacterQuizPage = lazy(() =>
@@ -44,6 +45,7 @@ export const router = createBrowserRouter([
       { path: 'characters/:char', element: page(<CharacterPage />) },
       { path: 'practice/characters', element: page(<CharacterQuizPage />) },
       { path: 'practice/writing', element: page(<WritingPracticePage />) },
+      { path: 'practice/tones', element: page(<TonesPage />) },
     ],
   },
   { path: '*', element: page(<NotFoundPage />) },

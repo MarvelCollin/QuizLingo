@@ -1,5 +1,6 @@
+import { ChevronRight } from 'lucide-react';
 import { useMemo, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router';
+import { Link, useNavigate, useSearchParams } from 'react-router';
 import { Button } from '../../components/ui/button';
 import { InlineMessage } from '../../components/ui/inline-message';
 import { SegmentedControl } from '../../components/ui/segmented-control';
@@ -9,7 +10,7 @@ import { usePageMeta } from '../../lib/use-page-meta';
 import { useProgress } from '../progress/use-progress';
 import { useSentences } from '../study/use-study-data';
 import { useVocabulary } from '../vocabulary/use-vocabulary';
-import { LEVEL_FILTERS, LEVEL_LABELS, PRACTICE_MODES, ROUND_SIZES, WORD_SET_LABELS } from './constants';
+import { LEVEL_FILTERS, LEVEL_LABELS, MORE_PRACTICE, PRACTICE_MODES, ROUND_SIZES, WORD_SET_LABELS } from './constants';
 import { wordsForMode, wordsInLevel, wordsInSet } from './pick-words';
 import { configFromParams, configToSearch } from './round-config';
 import { isSpeechSupported } from './speech';
@@ -130,6 +131,25 @@ const PracticePage = () => {
           </div>
         </form>
       )}
+
+      <section aria-labelledby="more-title" className="flex flex-col gap-3">
+        <h2 id="more-title" className="text-lg font-semibold text-ink">
+          More ways to practice
+        </h2>
+        <ul className="divide-y divide-hairline border-y border-hairline">
+          {MORE_PRACTICE.map((item) => (
+            <li key={item.to}>
+              <Link to={item.to} className="flex items-center justify-between gap-4 py-4 hover:bg-surface">
+                <span>
+                  <span className="block text-base font-semibold text-ink">{item.label}</span>
+                  <span className="block text-sm text-muted">{item.detail}</span>
+                </span>
+                <ChevronRight aria-hidden="true" className="size-5 shrink-0 text-muted" strokeWidth={1.75} />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 };
