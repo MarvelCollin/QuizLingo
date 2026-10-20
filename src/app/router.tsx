@@ -10,6 +10,7 @@ const RegisterPage = lazy(() => import('../features/auth/register-page'));
 const DashboardPage = lazy(() => import('../features/dashboard/dashboard-page'));
 const PracticePage = lazy(() => import('../features/practice/practice-page'));
 const RoundPage = lazy(() => import('../features/practice/round-page'));
+const WordsPage = lazy(() => import('../features/words/words-page'));
 const NotFoundPage = lazy(() => import('../pages/not-found-page'));
 
 const page = (element: ReactNode) => <Suspense fallback={<PageFallback />}>{element}</Suspense>;
@@ -28,6 +29,7 @@ export const router = createBrowserRouter([
       { index: true, element: page(<DashboardPage />) },
       { path: 'practice', element: page(<PracticePage />) },
       { path: 'practice/round', element: page(<RoundPage />) },
+      { path: 'words', element: page(<WordsPage />) },
     ],
   },
   { path: '*', element: page(<NotFoundPage />) },
