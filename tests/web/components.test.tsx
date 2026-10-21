@@ -152,6 +152,7 @@ describe('listening test parts', () => {
     const player: ScriptPlayer = {
       current: 1,
       isPlaying: true,
+      failure: null,
       rate: 1,
       setRate: vi.fn(),
       playFrom: vi.fn(),

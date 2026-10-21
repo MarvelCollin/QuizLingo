@@ -71,6 +71,11 @@ const ListeningTestView = ({ test }: ListeningTestViewProps) => {
 
       <div className="sticky top-16 z-20 -mx-1 bg-bg/95 px-1 py-2 backdrop-blur-sm">
         <AudioBar player={player} total={test.lines.length} />
+        {player.failure && (
+          <InlineMessage tone="error" className="mt-2">
+            {player.failure}
+          </InlineMessage>
+        )}
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">

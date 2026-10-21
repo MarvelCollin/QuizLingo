@@ -78,7 +78,9 @@ const MockRun = ({ paper, onRestart }: MockRunProps) => {
     setAnswers(answers.map((list, s) => (s === sectionIndex ? list.map((a, i) => (i === current ? value : a)) : list)));
   const play = (choice: ChoiceItem) => {
     if (!isReviewing) setPlays({ ...plays, [choice.audioKey]: (plays[choice.audioKey] ?? 0) + 1 });
-    player.play(choice.audioKey, choice.audio);
+    player.play(choice.audioKey, choice.audio, 1, () => {
+      if (!isReviewing) setPlays((counts) => ({ ...counts, [choice.audioKey]: Math.max(0, (counts[choice.audioKey] ?? 1) - 1) }));
+    });
   };
   const playsLeft = item.kind === 'choice' ? Math.max(0, paper.format.plays - (plays[item.audioKey] ?? 0)) : 0;
   const score = isReviewing ? scoreSections(paper, answers)[sectionIndex] : null;
@@ -108,6 +110,7 @@ const MockRun = ({ paper, onRestart }: MockRunProps) => {
           )}
         </div>
         <Navigator items={section.items} answers={answers[sectionIndex]} current={current} isReviewing={isReviewing} onJump={setCurrent} />
+        {player.failure && <InlineMessage tone="error">{player.failure}</InlineMessage>}
       </div>
 
       <MockItemView

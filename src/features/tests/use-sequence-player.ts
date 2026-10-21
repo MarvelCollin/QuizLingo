@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { speakLine, stopSpeaking } from '../practice/speech';
+import { SPEECH_FAILURE, speakLine, stopSpeaking } from '../practice/speech';
 import type { ScriptLine } from './types';
 
 const PITCH = { 男: 0.8, 女: 1.15, 旁白: 1 } as const;
 
 export const useSequencePlayer = () => {
   const [playingKey, setPlayingKey] = useState<string | null>(null);
+  const [failure, setFailure] = useState<string | null>(null);
   const run = useRef(0);
   const timer = useRef<number | undefined>(undefined);
 
@@ -25,10 +26,11 @@ export const useSequencePlayer = () => {
     [],
   );
 
-  const play = (key: string, lines: ScriptLine[], repeat = 1) => {
+  const play = (key: string, lines: ScriptLine[], repeat = 1, onFail?: () => void) => {
     run.current += 1;
     const token = run.current;
     window.clearTimeout(timer.current);
+    setFailure(null);
     setPlayingKey(key);
     const queue = Array.from({ length: repeat }, () => lines).flat();
     const step = (index: number) => {
@@ -44,6 +46,13 @@ export const useSequencePlayer = () => {
           speakLine(line.zh, {
             pitch: PITCH[line.speaker] ?? 1,
             onEnd: () => step(index + 1),
+            onError: () => {
+              if (token !== run.current) return;
+              run.current += 1;
+              setPlayingKey(null);
+              setFailure(SPEECH_FAILURE);
+              onFail?.();
+            },
           }),
         isNewRound ? 1500 : index === 0 ? 0 : 400,
       );
@@ -51,5 +60,5 @@ export const useSequencePlayer = () => {
     step(0);
   };
 
-  return { playingKey, play, stop };
+  return { playingKey, failure, play, stop };
 };

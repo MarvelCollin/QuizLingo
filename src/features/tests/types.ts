@@ -26,6 +26,7 @@ export type ListeningTest = {
 export type ScriptPlayer = {
   current: number;
   isPlaying: boolean;
+  failure: string | null;
   rate: number;
   setRate: (rate: number) => void;
   playFrom: (index: number) => void;

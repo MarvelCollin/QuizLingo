@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { speakLine, stopSpeaking } from '../practice/speech';
+import { SPEECH_FAILURE, speakLine, stopSpeaking } from '../practice/speech';
 import type { ScriptLine, ScriptPlayer } from './types';
 
 const PITCH = { 男: 0.8, 女: 1.15, 旁白: 1 } as const;
@@ -9,6 +9,7 @@ export const useScriptPlayer = (lines: ScriptLine[]): ScriptPlayer => {
   const [current, setCurrent] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [rate, setRate] = useState(1);
+  const [failure, setFailure] = useState<string | null>(null);
   const run = useRef(0);
   const rateRef = useRef(rate);
   const timer = useRef<number | undefined>(undefined);
@@ -45,12 +46,19 @@ export const useScriptPlayer = (lines: ScriptLine[]): ScriptPlayer => {
         }
         timer.current = window.setTimeout(() => speakAt(index + 1, true, token), GAP_MS);
       },
+      onError: () => {
+        if (token !== run.current) return;
+        run.current += 1;
+        setIsPlaying(false);
+        setFailure(SPEECH_FAILURE);
+      },
     });
   };
 
   const start = (index: number, isContinuous: boolean) => {
     run.current += 1;
     window.clearTimeout(timer.current);
+    setFailure(null);
     setIsPlaying(true);
     speakAt(Math.max(0, Math.min(index, lines.length - 1)), isContinuous, run.current);
   };
@@ -65,6 +73,7 @@ export const useScriptPlayer = (lines: ScriptLine[]): ScriptPlayer => {
   return {
     current,
     isPlaying,
+    failure,
     rate,
     setRate,
     playFrom: (index) => start(index, true),

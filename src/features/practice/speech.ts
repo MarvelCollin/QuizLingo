@@ -1,10 +1,22 @@
 import type { AudioIndex } from '../study/types';
 
-type SpeakOptions = { rate?: number; pitch?: number; onStart?: () => void; onEnd?: () => void };
+type SpeakOptions = {
+  rate?: number;
+  pitch?: number;
+  onStart?: () => void;
+  onEnd?: () => void;
+  onError?: (reason: string) => void;
+};
+
+const START_TIMEOUT_MS = 6000;
+const STOPPED_ERRORS = new Set(['interrupted', 'canceled']);
 
 let recordedWords = new Set<string>();
 let recordedSyllables = new Set<string>();
 let playing: HTMLAudioElement | null = null;
+const speaking = new Set<SpeechSynthesisUtterance>();
+let startTimer: number | undefined;
+let generation = 0;
 
 export const registerRecordings = (index: AudioIndex) => {
   recordedWords = index.words;
@@ -31,45 +43,90 @@ export const preloadRecording = ({ sound, word }: { sound?: string; word?: strin
 };
 
 export const stopSpeaking = () => {
+  generation += 1;
+  window.clearTimeout(startTimer);
   if (playing) {
-    playing.onended = null;
     playing.pause();
     playing = null;
   }
+  speaking.clear();
   if (isSpeechSupported()) window.speechSynthesis.cancel();
 };
 
-const speakWithVoice = (text: string, { rate = 1, pitch = 1, onStart, onEnd }: SpeakOptions) => {
+const fail = (reason: string, options: SpeakOptions) => {
+  if (options.onError) options.onError(reason);
+  else options.onEnd?.();
+};
+
+const speakWithVoice = (text: string, options: SpeakOptions) => {
+  const { rate = 1, pitch = 1, onStart, onEnd } = options;
   if (!isSpeechSupported()) {
-    onEnd?.();
+    fail('unsupported', options);
     return;
   }
+  const turn = generation;
+  let isSettled = false;
+  const settle = (action: () => void) => {
+    if (turn !== generation || isSettled) return;
+    isSettled = true;
+    window.clearTimeout(startTimer);
+    speaking.delete(utterance);
+    action();
+  };
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = 'zh-CN';
   utterance.rate = 0.85 * rate;
   utterance.pitch = pitch;
   const voice = chineseVoice();
   if (voice) utterance.voice = voice;
-  utterance.onstart = () => onStart?.();
-  utterance.onend = () => onEnd?.();
+  utterance.onstart = () => {
+    if (turn !== generation) return;
+    window.clearTimeout(startTimer);
+    onStart?.();
+  };
+  utterance.onend = () => settle(() => onEnd?.());
+  utterance.onerror = (event) => {
+    if (STOPPED_ERRORS.has(event.error)) return;
+    settle(() => fail(event.error, options));
+  };
+  speaking.add(utterance);
+  window.clearTimeout(startTimer);
+  startTimer = window.setTimeout(() => {
+    if (window.speechSynthesis.speaking) return;
+    settle(() => {
+      window.speechSynthesis.cancel();
+      fail('no-start', options);
+    });
+  }, START_TIMEOUT_MS);
   window.speechSynthesis.speak(utterance);
 };
 
 const playFile = (url: string, fallbackText: string | null, options: SpeakOptions) => {
+  const turn = generation;
+  let isSettled = false;
   const audio = new Audio(url);
+  const settle = (action: () => void) => {
+    if (turn !== generation || isSettled) return;
+    isSettled = true;
+    playing = null;
+    action();
+  };
   audio.playbackRate = options.rate ?? 1;
-  audio.onplay = () => options.onStart?.();
-  audio.onended = () => {
-    playing = null;
-    options.onEnd?.();
+  audio.onplay = () => {
+    if (turn === generation) options.onStart?.();
   };
-  audio.onerror = () => {
-    playing = null;
-    if (fallbackText) speakWithVoice(fallbackText, options);
-    else options.onEnd?.();
-  };
+  audio.onended = () => settle(() => options.onEnd?.());
+  const recover = () =>
+    settle(() => {
+      if (fallbackText) speakWithVoice(fallbackText, options);
+      else fail('recording', options);
+    });
+  audio.onerror = recover;
   playing = audio;
-  void audio.play().catch(() => audio.onerror?.(new Event('error')));
+  audio.play().catch((error: unknown) => {
+    if (error instanceof DOMException && error.name === 'AbortError') return;
+    recover();
+  });
 };
 
 export const speak = (text: string, options: SpeakOptions = {}) => {
@@ -87,3 +144,6 @@ export const speakLine = (text: string, options: SpeakOptions = {}) => {
   stopSpeaking();
   speakWithVoice(text, options);
 };
+
+export const SPEECH_FAILURE =
+  'This browser could not read the audio aloud. Chrome and Edge include a Chinese voice. On other browsers, add a Chinese (Mandarin) voice in your device settings, then try again.';
