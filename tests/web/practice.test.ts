@@ -4,6 +4,7 @@ import { buildSentenceQuestion, hasSentence } from '../../src/features/practice/
 import { isKnown, learningStep, stepQueue, stepTarget } from '../../src/features/practice/learning-step';
 import { NEW_PER_SESSION, REVIEWS_PER_SESSION } from '../../src/features/practice/constants';
 import { openWordSet, pickRoundWords, sessionWords, wordsForMode, wordsInLevel, wordsInSet } from '../../src/features/practice/pick-words';
+import { readTargetLevel, saveTargetLevel } from '../../src/features/practice/target-level';
 import { afterAnswer, RETRY_GAP, SESSION_GOAL, SPACING_GAP, startSession } from '../../src/features/practice/session-queue';
 import { configFromParams, configToSearch, highestLevel } from '../../src/features/practice/round-config';
 import type { WordProgress } from '../../src/features/progress/types';
@@ -95,9 +96,28 @@ describe('picking round words', () => {
     ['好', { word: '好', level: 1, box: 2, correct: 2, wrong: 0, dueAt: now + 86400000, lastSeenAt: now }],
   ]);
 
-  it('filters by level', () => {
-    expect(wordsInLevel(pool, '4').map((w) => w.hanzi)).toEqual(['经济']);
+  it('builds up every level from HSK 1 to the target', () => {
+    expect(wordsInLevel(pool, '1').map((w) => w.hanzi)).not.toContain('经济');
+    expect(wordsInLevel(pool, '3')).toHaveLength(pool.length - 1);
+    expect(wordsInLevel(pool, '4')).toHaveLength(pool.length);
     expect(wordsInLevel(pool, 'all')).toHaveLength(pool.length);
+  });
+
+  it('opens HSK 1 words before HSK 2 words for a higher target', () => {
+    const mixed = [word('经济', 4, 'jīngjì', 'economy'), ...pool.slice(0, 3)];
+    expect(learningStep(wordsInLevel(mixed, '4'), new Map()).open.map((w) => w.level)).toEqual([1, 1, 1, 4]);
+  });
+
+  it('remembers the target level per account', () => {
+    const store = new Map<string, string>();
+    const fake = { getItem: (k: string) => store.get(k) ?? null, setItem: (k: string, v: string) => void store.set(k, v) };
+    expect(readTargetLevel('a', fake)).toBe('1');
+    saveTargetLevel('a', '3', fake);
+    saveTargetLevel('a', 'all', fake);
+    expect(readTargetLevel('a', fake)).toBe('3');
+    expect(readTargetLevel('b', fake)).toBe('1');
+    expect(configFromParams(new URLSearchParams(''), '3').level).toBe('3');
+    expect(configFromParams(new URLSearchParams('level=2'), '3').level).toBe('2');
   });
 
   it('separates due and new words', () => {

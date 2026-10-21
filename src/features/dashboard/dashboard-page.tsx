@@ -14,6 +14,7 @@ import type { HskLevel } from '../vocabulary/types';
 import type { LevelFilter } from '../practice/types';
 import { learningStep, stepQueue } from '../practice/learning-step';
 import { wordsInLevel } from '../practice/pick-words';
+import { readTargetLevel } from '../practice/target-level';
 import { ActivityChart } from './activity-chart';
 import { LevelProgress } from './level-progress';
 import { NextStep } from './next-step';
@@ -45,14 +46,11 @@ const DashboardPage = () => {
     return counts;
   }, [vocabulary.data]);
 
+  const target = readTargetLevel(session.data?.id ?? 'guest');
   const nextNewLevel = useMemo((): LevelFilter | null => {
-    for (const level of LEVELS) {
-      if (vocabulary.data?.some((w) => w.level === level && !progress.byWord.has(w.hanzi))) {
-        return String(level) as LevelFilter;
-      }
-    }
-    return null;
-  }, [vocabulary.data, progress.byWord]);
+    const hasUnseen = vocabulary.data?.some((w) => w.level <= Number(target) && !progress.byWord.has(w.hanzi));
+    return hasUnseen ? target : null;
+  }, [vocabulary.data, progress.byWord, target]);
 
   const [now] = useState(() => Date.now());
   const stepReady = useMemo(() => {

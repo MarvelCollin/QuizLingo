@@ -8,7 +8,7 @@ import { MIXED_PER_SESSION, NEW_PER_SESSION, PRACTICE_MODES, REVIEWS_PER_SESSION
 import type { LevelFilter, PracticeModeId, RoundConfig, SentenceModeId, WordSetId } from './types';
 
 export const wordsInLevel = (words: Word[], level: LevelFilter) =>
-  level === 'all' ? words : words.filter((w) => w.level === Number(level));
+  level === 'all' ? words : words.filter((w) => w.level <= Number(level));
 
 export const openWordSet = (vocabulary: Word[], level: LevelFilter, progress: Map<string, WordProgress>) =>
   new Set(learningStep(wordsInLevel(vocabulary, level), progress).open.map((w) => w.hanzi));

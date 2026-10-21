@@ -237,7 +237,7 @@ describe('useRound', () => {
       .spyOn(globalThis, 'fetch')
       .mockImplementation(async () => new Response(JSON.stringify({ progress: [], session: {} }), { status: 200 }));
     const words = [word('好', 1, 'hǎo', 'good'), word('我', 1, 'wǒ', 'I')];
-    const { result } = renderHook(() => useRound(words, new Map(), 'meaning', '1'), { wrapper });
+    const { result } = renderHook(() => useRound(words, new Map(), 'meaning'), { wrapper });
     const answerAndNext = (isCorrect: boolean) => {
       act(() => result.current.answer(isCorrect));
       act(() => result.current.next());

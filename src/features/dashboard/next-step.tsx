@@ -33,10 +33,11 @@ export const NextStep = ({ due, nextNewLevel, stepReady, isFirstVisit }: NextSte
       <section className="rounded-xl bg-surface px-6 py-8 sm:px-8">
         <h2 className="text-2xl font-bold text-ink">Nothing due right now</h2>
         <p className="mt-2 text-base text-muted">
-          You have started every word in HSK 1 to 9. Come back when reviews are due, or run a mixed round.
+          You have started every word up to your target level. Come back when reviews are due, or raise your target on the
+          Practice page.
         </p>
-        <ButtonLink className="mt-6" size="lg" to="/practice?set=all&level=all">
-          Practice a mixed round
+        <ButtonLink className="mt-6" size="lg" to="/practice">
+          Choose a new target
         </ButtonLink>
       </section>
     );
@@ -49,7 +50,7 @@ export const NextStep = ({ due, nextNewLevel, stepReady, isFirstVisit }: NextSte
           Your open words are resting
         </h2>
         <p className="mt-2 max-w-prose text-base text-muted">
-          Every word in your current HSK {nextNewLevel} step has been practiced. Words stick better when you recall them
+          Every word in your current step toward HSK {nextNewLevel} has been practiced. Words stick better when you recall them
           again after a gap, so they come back when they are due. Once you know most of them, the next words open.
         </p>
         <ButtonLink className="mt-6" size="lg" variant="quiet" to={`/practice?set=step&level=${nextNewLevel}`}>
@@ -62,7 +63,7 @@ export const NextStep = ({ due, nextNewLevel, stepReady, isFirstVisit }: NextSte
   return (
     <section aria-labelledby="next-title" className="rounded-xl bg-surface px-6 py-8 sm:px-8">
       <h2 id="next-title" className="text-2xl font-bold text-ink">
-        {isFirstVisit ? 'Start with HSK 1' : `Learn new HSK ${nextNewLevel} words`}
+        {isFirstVisit ? 'Start with HSK 1' : `Learn new words toward HSK ${nextNewLevel}`}
       </h2>
       <p className="mt-2 max-w-prose text-base text-muted">
         {isFirstVisit

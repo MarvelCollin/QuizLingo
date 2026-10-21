@@ -20,7 +20,8 @@ Live at [marvelcollin.com/quizlingo](https://marvelcollin.com/quizlingo/).
 - **Tap to listen**: every word in example sentences and listening scripts plays on its own when tapped, and each character of a word has its own button that plays the native recording of its syllable with its tone
 - **Review schedule**: right answers push a word further out (1, 3, 7, 14, 30 days), wrong answers bring it back in 10 minutes
 - **Sessions that build themselves**: no round length to pick. A session takes the open words that are due (up to 40) and up to 8 new ones. A missed word comes back three cards later, a new or missed word has to be right twice in a row with other cards in between, and a known review word goes after one right answer. Only the first try of each word and any later miss reach the review schedule, so a word answered three times in one sitting is not pushed weeks ahead
-- **Step by step words**: each level opens 30 words first. Once 90% of them are known (answered right again after at least a day), 20 more open, so 30 becomes 50, then 70, then 90 and so on. Rounds mix the open words that are due with the ones not seen yet, and words that are resting until their next review are left out, because spacing is what makes words stick
+- **Target level**: pick the HSK level you are aiming for and the words build up from HSK 1 to it, so a target of HSK 3 opens HSK 1 words first, then HSK 2, then HSK 3. The target is remembered per account and the home page follows it
+- **Step by step words**: each target opens 30 words first. Once 90% of them are known (answered right again after at least a day), 20 more open, so 30 becomes 50, then 70, then 90 and so on. Rounds mix the open words that are due with the ones not seen yet, and words that are resting until their next review are left out, because spacing is what makes words stick
 - **Dashboard**: words due today, words mastered per level, accuracy, streak, the last 14 days and recent rounds
 - **Word list**: all 10,896 words with search, a filter on every column, sorting, and filters saved in the URL
 - **Word pages**: readings, the characters in the word, and example sentences with pinyin and English
@@ -80,7 +81,7 @@ The app lives under the `/quizlingo/` base path, and the API is served at `/quiz
 Tests:
 
 ```bash
-npm test          # 169 tests in four groups
+npm test          # 171 tests in four groups
 ```
 
 | Group | Folder | What it covers |

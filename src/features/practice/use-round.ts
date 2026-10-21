@@ -5,9 +5,9 @@ import type { Answer, WordProgress } from '../progress/types';
 import type { HskLevel, Word } from '../vocabulary/types';
 import { PRACTICE_MODES } from './constants';
 import { afterAnswer, startSession, type SessionState } from './session-queue';
-import type { AnswerRecord, LevelFilter, PracticeModeId } from './types';
+import type { AnswerRecord, PracticeModeId } from './types';
 
-export const useRound = (words: Word[], progress: Map<string, WordProgress>, mode: PracticeModeId, level: LevelFilter) => {
+export const useRound = (words: Word[], progress: Map<string, WordProgress>, mode: PracticeModeId) => {
   const [session, setSession] = useState<SessionState>(() => startSession(words, progress));
   const [step, setStep] = useState(0);
   const [pending, setPending] = useState<boolean | null>(null);
@@ -41,7 +41,7 @@ export const useRound = (words: Word[], progress: Map<string, WordProgress>, mod
     const final = recordsRef.current;
     const firstTries = new Map<string, boolean>();
     for (const r of final) if (!firstTries.has(r.word.hanzi)) firstTries.set(r.word.hanzi, r.isCorrect);
-    const roundLevel = (level === 'all' ? Math.min(...words.map((w) => w.level)) : Number(level)) as HskLevel;
+    const roundLevel = Math.max(...words.map((w) => w.level)) as HskLevel;
     saveRound.mutate({
       mode: PRACTICE_MODES.find((m) => m.id === mode)!.apiMode,
       level: roundLevel,

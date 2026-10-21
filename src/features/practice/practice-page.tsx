@@ -14,6 +14,8 @@ import { LEVEL_FILTERS, LEVEL_LABELS, MORE_PRACTICE, PRACTICE_MODES, WORD_SET_LA
 import { learningStep, STEP_GROWTH } from './learning-step';
 import { sessionWords, wordsForMode, wordsInLevel, wordsInSet } from './pick-words';
 import { configFromParams, configToSearch } from './round-config';
+import { readTargetLevel, saveTargetLevel, TARGET_LEVELS } from './target-level';
+import { useSession } from '../auth/use-session';
 import { isSpeechSupported } from './speech';
 import type { LevelFilter, RoundConfig, StepProgressProps, WordSetId } from './types';
 
@@ -31,7 +33,7 @@ const SetupSkeleton = () => (
 const StepProgress = ({ step, level }: StepProgressProps) => (
   <div className="flex flex-col gap-2 rounded-lg border border-hairline px-4 py-3" aria-live="polite">
     <p className="text-sm font-semibold text-ink">
-      {step.size.toLocaleString('en-US')} of {plural(step.total, `${level} word`)} open
+      {step.size.toLocaleString('en-US')} of {plural(step.total, 'word')} up to {level} open
     </p>
     <div
       role="progressbar"
@@ -57,15 +59,18 @@ const PracticePage = () => {
   usePageMeta('Practice', 'Set up a practice round: pick the HSK level, the words and the way you want to practice.');
   const navigate = useNavigate();
   const [params, setParams] = useSearchParams();
-  const config = configFromParams(params);
+  const userId = useSession().data?.id ?? 'guest';
+  const config = configFromParams(params, readTargetLevel(userId));
   const vocabulary = useVocabulary();
   const progress = useProgress();
   const usesSentences = PRACTICE_MODES.find((m) => m.id === config.mode)!.usesSentences;
   const sentences = useSentences(usesSentences ? 7 : 1);
   const [now] = useState(() => Date.now());
 
-  const update = (change: Partial<RoundConfig>) =>
+  const update = (change: Partial<RoundConfig>) => {
+    if (change.level) saveTargetLevel(userId, change.level);
     setParams(new URLSearchParams({ ...config, ...change }), { replace: true });
+  };
 
   const counts = useMemo(() => {
     if (!vocabulary.data) return null;
@@ -113,11 +118,11 @@ const PracticePage = () => {
           }}
         >
           <SegmentedControl
-            label="Level"
+            label="Target level"
             value={config.level}
             onChange={(level) => update({ level })}
             isWrapped
-            options={LEVEL_FILTERS.map((value) => ({
+            options={TARGET_LEVELS.map((value) => ({
               value,
               label: LEVEL_LABELS[value],
               detail: plural(counts.levels[value], 'word'),
@@ -133,6 +138,9 @@ const PracticePage = () => {
               detail: `${counts.sets[value].toLocaleString('en-US')} available`,
             }))}
           />
+          <p className="-mt-6 text-sm text-muted">
+            Words build up from HSK 1 to your target, so {LEVEL_LABELS[config.level]} includes every level below it.
+          </p>
           {config.set === 'step' && <StepProgress step={counts.step} level={LEVEL_LABELS[config.level]} />}
           <SegmentedControl
             label="Way to practice"
@@ -145,7 +153,7 @@ const PracticePage = () => {
           <div className="flex flex-col gap-3 border-t border-hairline pt-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-base text-ink" aria-live="polite">
               {roundLength > 0
-                ? `${roundLength} ${setWord} ${roundLength === 1 ? 'word' : 'words'} from ${LEVEL_LABELS[config.level]} in ${modeLabel} mode. Words you miss come back a few cards later, and the session ends when you know them all.`
+                ? `${roundLength} ${setWord} ${roundLength === 1 ? 'word' : 'words'} up to ${LEVEL_LABELS[config.level]} in ${modeLabel} mode. Words you miss come back a few cards later, and the session ends when you know them all.`
                 : config.set === 'step'
                   ? 'Your open words are resting until their next review. Come back when they are due.'
                   : config.set === 'due'

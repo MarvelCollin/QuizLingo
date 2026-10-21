@@ -14,7 +14,7 @@ import { WordOrder } from './word-order';
 import type { RoundProps, SentenceModeId, WordModeId } from './types';
 
 export const Round = ({ words, progress, pool, sentences, config, onPracticeWords, onNewRound }: RoundProps) => {
-  const round = useRound(words, progress, config.mode, config.level);
+  const round = useRound(words, progress, config.mode);
   const mode = PRACTICE_MODES.find((m) => m.id === config.mode)!;
   const modeLabel = mode.label;
   const current = round.current;
@@ -61,7 +61,7 @@ export const Round = ({ words, progress, pool, sentences, config, onPracticeWord
         <div className="flex-1">
           <div className="flex justify-between text-sm text-muted">
             <span>
-              {modeLabel}, {LEVEL_LABELS[config.level]}
+              {modeLabel}, up to {LEVEL_LABELS[config.level]}
             </span>
             <span aria-live="polite">
               {round.learned} of {round.total} learned
