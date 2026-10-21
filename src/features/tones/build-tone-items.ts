@@ -1,4 +1,6 @@
 import { shuffle } from '../../lib/random';
+import { TONE_NAMES } from '../basics/constants';
+import type { ToneNumber } from '../basics/types';
 import type { AudioIndex } from '../study/types';
 import { markTone, splitSyllable } from '../vocabulary/pinyin';
 import type { HskLevel, Word } from '../vocabulary/types';
@@ -33,7 +35,7 @@ const syllableItems = (words: Word[], audio: AudioIndex): ToneItem[] => {
   return [...seen.values()];
 };
 
-const TONE_SHAPES = ['ˉ  Tone 1, high and flat', 'ˊ  Tone 2, rising', 'ˇ  Tone 3, dipping', 'ˋ  Tone 4, falling'];
+const TONE_SHAPES = ['ˉ', 'ˊ', 'ˇ', 'ˋ'];
 
 const basicItems = (words: Word[], audio: AudioIndex): ToneItem[] => {
   const examples = new Map(syllableItems(words, audio).map((item) => [item.sound, item]));
@@ -50,7 +52,7 @@ const basicItems = (words: Word[], audio: AudioIndex): ToneItem[] => {
         hanzi: example?.hanzi ?? '',
         meaning: example?.meaning ?? '',
         prompt: markTone(parts.base, 0),
-        options: TONES.map((tone) => ({ label: TONE_SHAPES[tone - 1], isCorrect: tone === parts.tone })),
+        options: TONES.map((tone) => ({ label: `${TONE_SHAPES[tone - 1]}  ${TONE_NAMES[tone as ToneNumber]}`, isCorrect: tone === parts.tone })),
       },
     ];
   });

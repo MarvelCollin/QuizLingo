@@ -36,8 +36,8 @@ const ToneRound = ({ kind, level, items, onRestart, onEnd }: ToneRoundProps) => 
         )}
         isSaving={round.isSaving}
         onRestart={onRestart}
-        backTo="/practice"
-        backLabel="Back to practice"
+        backTo={kind === 'basic' ? '/basics' : '/practice'}
+        backLabel={kind === 'basic' ? 'Back to starter path' : 'Back to practice'}
       />
     );
   }

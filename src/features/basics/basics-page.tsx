@@ -9,6 +9,7 @@ import { PathSummary } from './path-summary';
 import { ResetPath } from './reset-path';
 import { StageSection } from './stage-section';
 import { useBasicsPath } from './use-basics';
+import { ToneDrillCard } from './tone-drill-card';
 import { WeakCard } from './weak-card';
 import { readWeakSpots } from './weak-spots';
 
@@ -56,6 +57,7 @@ const BasicsPage = () => {
         <>
           <NextLesson next={path.next} stagesDone={path.stagesDone} isFresh={data.length === 0} />
           {weakCount > 0 && <WeakCard count={weakCount} />}
+          <ToneDrillCard />
           <PathSummary
             stagesDone={path.stagesDone}
             stagesTotal={path.stages.length}
