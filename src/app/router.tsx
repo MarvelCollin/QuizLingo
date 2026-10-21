@@ -2,7 +2,7 @@ import { lazy, Suspense, type ReactNode } from 'react';
 import { createBrowserRouter } from 'react-router';
 import { AppShell } from '../components/layout/app-shell';
 import { PageFallback } from '../components/layout/page-fallback';
-import { RedirectIfSignedIn, RequireSignIn } from '../features/auth/route-guards';
+import { RedirectIfSignedIn, SessionGate } from '../features/auth/route-guards';
 
 const LoginPage = lazy(() => import('../features/auth/login-page'));
 const RegisterPage = lazy(() => import('../features/auth/register-page'));
@@ -40,9 +40,9 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: (
-      <RequireSignIn>
+      <SessionGate>
         <AppShell />
-      </RequireSignIn>
+      </SessionGate>
     ),
     children: [
       { index: true, element: page(<DashboardPage />) },

@@ -1,9 +1,10 @@
-import { LogOut, UserRound } from 'lucide-react';
-import { NavLink, Outlet, useLocation, useNavigate } from 'react-router';
+import { LogIn, LogOut, UserRound } from 'lucide-react';
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router';
 import { useLogout, useSession } from '../../features/auth/use-session';
 import { useRecordings } from '../../features/practice/use-recordings';
 import { cn } from '../../lib/utils';
 import { BrandMark } from './brand-mark';
+import { GuestBanner } from './guest-banner';
 import { isNavActive, NAV_ITEMS } from './nav-items';
 
 export const AppShell = () => {
@@ -13,7 +14,8 @@ export const AppShell = () => {
   const { pathname } = useLocation();
   useRecordings();
 
-  const handleSignOut = () => logout.mutate(undefined, { onSuccess: () => navigate('/login', { replace: true }) });
+  const isGuest = session.data === null;
+  const handleSignOut = () => logout.mutate(undefined, { onSuccess: () => navigate('/', { replace: true }) });
 
   return (
     <div className="flex min-h-dvh flex-col">
@@ -46,20 +48,31 @@ export const AppShell = () => {
           <div className="ml-auto flex items-center gap-2">
             <span className="hidden items-center gap-2 text-sm text-muted md:flex">
               <UserRound aria-hidden="true" className="size-4" strokeWidth={1.75} />
-              {session.data?.name}
+              {isGuest ? 'Guest' : session.data?.name}
             </span>
-            <button
-              type="button"
-              onClick={handleSignOut}
-              disabled={logout.isPending}
-              className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-md px-3 text-sm font-semibold text-strong hover:bg-tint disabled:opacity-60"
-            >
-              <LogOut aria-hidden="true" className="size-4" strokeWidth={1.75} />
-              {logout.isPending ? 'Signing out' : 'Sign out'}
-            </button>
+            {isGuest ? (
+              <Link
+                to="/login"
+                className="inline-flex min-h-11 items-center gap-2 rounded-md px-3 text-sm font-semibold text-strong hover:bg-tint"
+              >
+                <LogIn aria-hidden="true" className="size-4" strokeWidth={1.75} />
+                Sign in
+              </Link>
+            ) : (
+              <button
+                type="button"
+                onClick={handleSignOut}
+                disabled={logout.isPending}
+                className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-md px-3 text-sm font-semibold text-strong hover:bg-tint disabled:opacity-60"
+              >
+                <LogOut aria-hidden="true" className="size-4" strokeWidth={1.75} />
+                {logout.isPending ? 'Signing out' : 'Sign out'}
+              </button>
+            )}
           </div>
         </div>
       </header>
+      {isGuest && <GuestBanner />}
 
       <main id="main" className="mx-auto w-full max-w-5xl flex-1 px-4 pt-6 pb-28 sm:pt-10 sm:pb-16">
         <Outlet />

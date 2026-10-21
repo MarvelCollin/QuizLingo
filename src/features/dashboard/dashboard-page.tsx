@@ -90,7 +90,7 @@ const DashboardPage = () => {
 
   return (
     <div className="flex flex-col gap-10">
-      <h1 className="text-xl font-semibold text-ink">Hi {session.data?.name}</h1>
+      <h1 className="text-xl font-semibold text-ink">{session.data ? `Hi ${session.data.name}` : 'Hi, welcome to QuizLingo'}</h1>
       {isFirstVisit && basics.path?.next ? (
         <StarterHero next={basics.path.next} isFresh={basics.data?.length === 0} />
       ) : (

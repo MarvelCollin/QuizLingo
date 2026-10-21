@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import { BrandMark } from '../../components/layout/brand-mark';
 import type { AuthLayoutProps } from './types';
 import { useWarmApp } from './use-warm-app';
@@ -29,6 +30,13 @@ export const AuthLayout = ({ title, intro, children, footer }: AuthLayoutProps) 
           <p className="mt-2 text-base text-muted">{intro}</p>
           <div className="mt-8">{children}</div>
           <div className="mt-6 text-base text-muted">{footer}</div>
+          <p className="mt-3 text-base text-muted">
+            Just looking?{' '}
+            <Link to="/" className="font-semibold text-strong underline underline-offset-4">
+              Try it as a guest
+            </Link>
+            , with progress kept only in this browser.
+          </p>
         </div>
       </main>
     </div>

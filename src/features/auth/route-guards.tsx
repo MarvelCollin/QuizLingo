@@ -1,4 +1,4 @@
-import { Navigate, useLocation } from 'react-router';
+import { Navigate } from 'react-router';
 import { Button } from '../../components/ui/button';
 import { InlineMessage } from '../../components/ui/inline-message';
 import { Skeleton } from '../../components/ui/skeleton';
@@ -13,9 +13,8 @@ const SessionSkeleton = () => (
   </div>
 );
 
-export const RequireSignIn = ({ children }: GuardProps) => {
+export const SessionGate = ({ children }: GuardProps) => {
   const session = useSession();
-  const location = useLocation();
 
   if (session.isPending) return <SessionSkeleton />;
   if (session.isError) {
@@ -33,10 +32,6 @@ export const RequireSignIn = ({ children }: GuardProps) => {
         </InlineMessage>
       </div>
     );
-  }
-  if (!session.data) {
-    const next = encodeURIComponent(location.pathname + location.search);
-    return <Navigate to={`/login?next=${next}`} replace />;
   }
   return children;
 };

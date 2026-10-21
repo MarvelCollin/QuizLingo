@@ -14,7 +14,7 @@ Live at [marvelcollin.com/quizlingo](https://marvelcollin.com/quizlingo/).
 - **Sound pairs**: train the ear on b and p, j q x, zh and z, an and ang and the rest of the pairs learners mix up
 - **Weak spots**: questions you miss are collected, and two right answers in a row clear each one. You can also start the path over from its page
 - **Try the strokes yourself**: draw the eight basic strokes over an outline, with a hint after a miss
-- **Accounts**: sign up with name, email and password. Progress follows you to any device
+- **Accounts or guest mode**: open the app and start right away as a guest, with no sign in. A guest's words, rounds, stats and starter path are kept in this browser's localStorage, never in the database, and a banner says so on every page. Sign up with name, email and password to keep progress on the server and on any device
 - **Eight ways to practice**: meaning (the default), flashcards, listening, pinyin, reading a sentence, sentence listening, fill the gap and word order
 - **Native audio**: real recordings for 6,941 words, the browser voice for the rest, picking a natural Chinese voice (Microsoft Xiaoxiao, Google 普通话 and the like) when the device has one
 - **Tap to listen**: every word in example sentences and listening scripts plays on its own when tapped, and each character of a word has its own button that plays the native recording of its syllable with its tone
@@ -81,7 +81,7 @@ The app lives under the `/quizlingo/` base path, and the API is served at `/quiz
 Tests:
 
 ```bash
-npm test          # 171 tests in four groups
+npm test          # 178 tests in four groups
 ```
 
 | Group | Folder | What it covers |

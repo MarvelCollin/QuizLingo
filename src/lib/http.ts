@@ -1,3 +1,13 @@
+import { GuestError, guestRequest } from './guest-store';
+
+let isGuestMode = false;
+
+export const setGuestMode = (value: boolean) => {
+  isGuestMode = value;
+};
+
+export const isGuest = () => isGuestMode;
+
 export class ApiError extends Error {
   status: number;
   constructor(status: number, message: string) {
@@ -9,6 +19,14 @@ export class ApiError extends Error {
 type Options = { method?: 'GET' | 'POST' | 'DELETE'; body?: unknown; signal?: AbortSignal };
 
 export const apiFetch = async <T>(path: string, { method = 'GET', body, signal }: Options = {}): Promise<T> => {
+  if (isGuestMode && !path.startsWith('/auth/')) {
+    try {
+      return guestRequest(path, method, body) as T;
+    } catch (error) {
+      if (error instanceof GuestError) throw new ApiError(error.status, error.message);
+      throw error;
+    }
+  }
   let response: Response;
   try {
     response = await fetch(`${import.meta.env.BASE_URL}api${path}`, {
