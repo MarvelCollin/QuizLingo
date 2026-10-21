@@ -7,7 +7,7 @@ const pick = <T extends string>(value: string | null, allowed: readonly T[], fal
 
 export const configFromParams = (params: URLSearchParams): RoundConfig => ({
   mode: pick(params.get('mode'), PRACTICE_MODES.map((m) => m.id), DEFAULT_CONFIG.mode),
-  set: pick<WordSetId>(params.get('set'), ['due', 'new', 'all'], DEFAULT_CONFIG.set),
+  set: pick<WordSetId>(params.get('set'), ['step', 'due', 'new', 'all'], DEFAULT_CONFIG.set),
   level: pick<LevelFilter>(params.get('level'), LEVEL_FILTERS, DEFAULT_CONFIG.level),
   size: pick<RoundSize>(params.get('size'), ROUND_SIZES, DEFAULT_CONFIG.size),
 });

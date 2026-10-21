@@ -2,11 +2,12 @@ import type { WordProgress } from '../progress/types';
 import type { ApiMode } from '../progress/types';
 import type { Sentence, SentenceIndex } from '../study/types';
 import type { Word } from '../vocabulary/types';
+import type { LearningStep } from './learning-step';
 
 export type WordModeId = 'flashcard' | 'meaning' | 'listening' | 'pinyin';
 export type SentenceModeId = 'reading' | 'sentence-listening' | 'gap' | 'order';
 export type PracticeModeId = WordModeId | SentenceModeId;
-export type WordSetId = 'due' | 'new' | 'all';
+export type WordSetId = 'step' | 'due' | 'new' | 'all';
 export type LevelFilter = 'all' | '1' | '2' | '3' | '4' | '5' | '6' | '7';
 export type RoundSize = '10' | '20' | '30';
 
@@ -107,3 +108,5 @@ export type ToolSummaryProps = {
 };
 
 export type ToolHeaderProps = { label: string; index: number; total: number; correct: number; answered: number; onEnd: () => void };
+
+export type StepProgressProps = { step: LearningStep; level: string };

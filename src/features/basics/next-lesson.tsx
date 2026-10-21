@@ -19,7 +19,7 @@ export const NextLesson = ({ next, stagesDone, isFresh }: NextLessonProps) => {
           <ButtonLink
             className="mt-6"
             size="lg"
-            to={`/practice/round${configToSearch({ mode: 'flashcard', set: 'new', level: '1', size: '10' })}`}
+            to={`/practice/round${configToSearch({ mode: 'flashcard', set: 'step', level: '1', size: '10' })}`}
           >
             Learn your first HSK 1 words
           </ButtonLink>

@@ -3,7 +3,7 @@ import { plural } from '../../lib/format';
 import { configToSearch } from '../practice/round-config';
 import type { NextStepProps } from './types';
 
-export const NextStep = ({ due, nextNewLevel, isFirstVisit }: NextStepProps) => {
+export const NextStep = ({ due, nextNewLevel, stepReady, isFirstVisit }: NextStepProps) => {
   if (due > 0) {
     return (
       <section aria-labelledby="next-title" className="rounded-xl bg-surface px-6 py-8 sm:px-8">
@@ -42,6 +42,23 @@ export const NextStep = ({ due, nextNewLevel, isFirstVisit }: NextStepProps) => 
     );
   }
 
+  if (stepReady === 0) {
+    return (
+      <section aria-labelledby="next-title" className="rounded-xl bg-surface px-6 py-8 sm:px-8">
+        <h2 id="next-title" className="text-2xl font-bold text-ink">
+          Your open words are resting
+        </h2>
+        <p className="mt-2 max-w-prose text-base text-muted">
+          Every word in your current HSK {nextNewLevel} step has been practiced. Words stick better when you recall them
+          again after a gap, so they come back when they are due. Once you know most of them, the next words open.
+        </p>
+        <ButtonLink className="mt-6" size="lg" variant="quiet" to={`/practice?set=step&level=${nextNewLevel}`}>
+          See your step
+        </ButtonLink>
+      </section>
+    );
+  }
+
   return (
     <section aria-labelledby="next-title" className="rounded-xl bg-surface px-6 py-8 sm:px-8">
       <h2 id="next-title" className="text-2xl font-bold text-ink">
@@ -50,14 +67,14 @@ export const NextStep = ({ due, nextNewLevel, isFirstVisit }: NextStepProps) => 
       <p className="mt-2 max-w-prose text-base text-muted">
         {isFirstVisit
           ? 'Ten flashcards to begin. Say whether you knew each word, and QuizLingo schedules when to show it again.'
-          : 'Nothing is due for review, so this is a good moment to add ten new words.'}
+          : 'Nothing is due for review, so this is a good moment to learn the next words in your step.'}
       </p>
       <ButtonLink
         className="mt-6"
         size="lg"
-        to={`/practice/round${configToSearch({ mode: 'flashcard', set: 'new', level: nextNewLevel, size: '10' })}`}
+        to={`/practice/round${configToSearch({ mode: 'flashcard', set: 'step', level: nextNewLevel, size: '10' })}`}
       >
-        Learn 10 new words
+        Learn the next words
       </ButtonLink>
     </section>
   );

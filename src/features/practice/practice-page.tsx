@@ -5,16 +5,17 @@ import { Button } from '../../components/ui/button';
 import { InlineMessage } from '../../components/ui/inline-message';
 import { SegmentedControl } from '../../components/ui/segmented-control';
 import { Skeleton } from '../../components/ui/skeleton';
-import { plural } from '../../lib/format';
+import { percent, plural } from '../../lib/format';
 import { usePageMeta } from '../../lib/use-page-meta';
 import { useProgress } from '../progress/use-progress';
 import { useSentences } from '../study/use-study-data';
 import { useVocabulary } from '../vocabulary/use-vocabulary';
 import { LEVEL_FILTERS, LEVEL_LABELS, MORE_PRACTICE, PRACTICE_MODES, ROUND_SIZES, WORD_SET_LABELS } from './constants';
+import { learningStep, STEP_GROWTH } from './learning-step';
 import { wordsForMode, wordsInLevel, wordsInSet } from './pick-words';
 import { configFromParams, configToSearch } from './round-config';
 import { isSpeechSupported } from './speech';
-import type { LevelFilter, RoundConfig, WordSetId } from './types';
+import type { LevelFilter, RoundConfig, StepProgressProps, WordSetId } from './types';
 
 const SetupSkeleton = () => (
   <div className="flex flex-col gap-8" aria-busy="true" aria-label="Loading practice options">
@@ -24,6 +25,31 @@ const SetupSkeleton = () => (
         <Skeleton className="h-14 w-full" />
       </div>
     ))}
+  </div>
+);
+
+const StepProgress = ({ step, level }: StepProgressProps) => (
+  <div className="flex flex-col gap-2 rounded-lg border border-hairline px-4 py-3" aria-live="polite">
+    <p className="text-sm font-semibold text-ink">
+      {step.size.toLocaleString('en-US')} of {plural(step.total, `${level} word`)} open
+    </p>
+    <div
+      role="progressbar"
+      aria-label="Known words in this step"
+      aria-valuemin={0}
+      aria-valuemax={step.needed}
+      aria-valuenow={Math.min(step.known, step.needed)}
+      className="h-2 overflow-hidden rounded-full bg-tint"
+    >
+      <div className="h-full rounded-full bg-strong" style={{ width: `${percent(Math.min(step.known, step.needed), step.needed)}%` }} />
+    </div>
+    <p className="text-sm text-muted">
+      {step.isComplete
+        ? 'Every word in this level is open and known. Keep reviewing them when they are due.'
+        : step.size === step.total
+          ? `${plural(step.known, 'word')} known. All words are open, so keep reviewing until you know ${step.needed}.`
+          : `${plural(step.known, 'word')} known. Know ${step.needed} to open ${Math.min(STEP_GROWTH, step.total - step.size)} more. A word counts as known once you get it right again after at least a day.`}
+    </p>
   </div>
 );
 
@@ -45,12 +71,15 @@ const PracticePage = () => {
     if (!vocabulary.data) return null;
     const usable = wordsForMode(vocabulary.data, config.mode, sentences.data);
     const level = wordsInLevel(usable, config.level);
-    const count = (set: WordSetId) => wordsInSet(level, set, progress.byWord, now).length;
+    const step = learningStep(wordsInLevel(vocabulary.data, config.level), progress.byWord);
+    const open = new Set(step.open.map((w) => w.hanzi));
+    const count = (set: WordSetId) => wordsInSet(level, set, progress.byWord, now, open).length;
     return {
+      step,
       levels: Object.fromEntries(
         LEVEL_FILTERS.map((l) => [l, wordsInLevel(usable, l).length]),
       ) as Record<LevelFilter, number>,
-      sets: { due: count('due'), new: count('new'), all: level.length } as Record<WordSetId, number>,
+      sets: { step: count('step'), due: count('due'), new: count('new'), all: level.length } as Record<WordSetId, number>,
     };
   }, [vocabulary.data, sentences.data, progress.byWord, config.level, config.mode, now]);
 
@@ -58,7 +87,7 @@ const PracticePage = () => {
   const available = counts?.sets[config.set] ?? 0;
   const roundLength = Math.min(available, Number(config.size));
   const modeLabel = PRACTICE_MODES.find((m) => m.id === config.mode)!.label;
-  const setWord = { new: 'new', due: 'due', all: 'mixed' }[config.set];
+  const setWord = { step: 'open', new: 'new', due: 'due', all: 'mixed' }[config.set];
 
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-8">
@@ -96,12 +125,13 @@ const PracticePage = () => {
             label="Words"
             value={config.set}
             onChange={(set) => update({ set })}
-            options={(['new', 'due', 'all'] as WordSetId[]).map((value) => ({
+            options={(['step', 'new', 'due', 'all'] as WordSetId[]).map((value) => ({
               value,
               label: WORD_SET_LABELS[value],
               detail: `${counts.sets[value].toLocaleString('en-US')} available`,
             }))}
           />
+          {config.set === 'step' && <StepProgress step={counts.step} level={LEVEL_LABELS[config.level]} />}
           <SegmentedControl
             label="Way to practice"
             value={config.mode}
@@ -120,7 +150,9 @@ const PracticePage = () => {
             <p className="text-base text-ink" aria-live="polite">
               {roundLength > 0
                 ? `${roundLength} ${setWord} ${roundLength === 1 ? 'word' : 'words'} from ${LEVEL_LABELS[config.level]} in ${modeLabel} mode.`
-                : config.set === 'due'
+                : config.set === 'step'
+                  ? 'Your open words are resting until their next review. Come back when they are due.'
+                  : config.set === 'due'
                   ? 'Nothing is due right now. Pick New words to keep going.'
                   : 'No words left in this set. Pick another set or level.'}
             </p>

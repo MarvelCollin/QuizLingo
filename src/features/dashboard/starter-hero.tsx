@@ -19,7 +19,7 @@ export const StarterHero = ({ next, isFresh }: StarterHeroProps) => (
       <ButtonLink
         size="lg"
         variant="quiet"
-        to={`/practice/round${configToSearch({ mode: 'flashcard', set: 'new', level: '1', size: '10' })}`}
+        to={`/practice/round${configToSearch({ mode: 'flashcard', set: 'step', level: '1', size: '10' })}`}
       >
         I know the basics, learn HSK 1 words
       </ButtonLink>

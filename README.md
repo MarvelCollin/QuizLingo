@@ -18,6 +18,7 @@ Live at [marvelcollin.com/quizlingo](https://marvelcollin.com/quizlingo/).
 - **Eight ways to practice**: flashcards, meaning, listening, pinyin, reading a sentence, sentence listening, fill the gap and word order
 - **Native audio**: real recordings for 6,941 words, the browser voice for the rest
 - **Review schedule**: right answers push a word further out (1, 3, 7, 14, 30 days), wrong answers bring it back in 10 minutes
+- **Step by step words**: each level opens 30 words first. Once 90% of them are known (answered right again after at least a day), 20 more open, so 30 becomes 50, then 70, then 90 and so on. Rounds mix the open words that are due with the ones not seen yet, and words that are resting until their next review are left out, because spacing is what makes words stick
 - **Dashboard**: words due today, words mastered per level, accuracy, streak, the last 14 days and recent rounds
 - **Word list**: all 10,896 words with search, a filter on every column, sorting, and filters saved in the URL
 - **Word pages**: readings, the characters in the word, and example sentences with pinyin and English
@@ -77,12 +78,12 @@ The app lives under the `/quizlingo/` base path, and the API is served at `/quiz
 Tests:
 
 ```bash
-npm test          # 147 tests in four groups
+npm test          # 153 tests in four groups
 ```
 
 | Group | Folder | What it covers |
 |-------|--------|----------------|
-| web | `tests/web/` | pinyin and tone helpers, question builders, round setup, character filters, tone items, speech matching, mock test papers and scoring, and components (End round, word order, answer options, level picker keys, listening questions with Locate, the script view, the mock answer grid, the round hook that saves results, the starter path rows, quiz, result and reset, the speech fallbacks for Brave, the pinyin chart) |
+| web | `tests/web/` | pinyin and tone helpers, question builders, round setup, the step by step word sets, character filters, tone items, speech matching, mock test papers and scoring, and components (End round, word order, answer options, level picker keys, listening questions with Locate, the script view, the mock answer grid, the round hook that saves results, the starter path rows, quiz, result and reset, the speech fallbacks for Brave, the pinyin chart) |
 | logic | `tests/web/basics`, `pinyin`, `sounds`, `weak-spots` | the starter path (unlocking, test out, lesson and milestone questions, tone line geometry), weak spots, the pinyin chart and sound pairs, run in plain Node |
 | api | `tests/api/` | review schedule, input checks, password hashing, and full flows against a temporary SQLite file: sign up, duplicate email, sign in, fake sessions, saving answers, rounds of every mode, starter path scores, stats, sign out, the 10 attempt sign in limit, the sign up limit, the row caps and the password hash upgrade |
 | data | `tests/data/` | word counts per level, sentences rebuild from their words and stay within their level, 3,088 characters with stroke data, every listed recording exists, listening test and grammar note structure, and the starter path (every sound it plays has a recording, every animated character has stroke data, every word is HSK 1, no semicolons or em dashes in its text) |

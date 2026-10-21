@@ -26,16 +26,18 @@ const RoundRunner = ({ vocabulary, progress, sentences, config }: RoundRunnerPro
     return inLevel.length >= 8 ? inLevel : vocabulary;
   }, [vocabulary, config.level]);
   const usable = useMemo(() => wordsForMode(vocabulary, config.mode, sentences), [vocabulary, config.mode, sentences]);
-  const [round, setRound] = useState(() => ({ id: 0, words: pickRoundWords(usable, config, progress, Date.now()) }));
+  const [round, setRound] = useState(() => ({ id: 0, words: pickRoundWords(usable, config, progress, Date.now(), vocabulary) }));
 
   if (round.words.length === 0) {
     return (
       <div className="mx-auto flex max-w-xl flex-col items-start gap-4">
         <h1 className="text-2xl font-bold text-ink">No words in this round</h1>
         <p className="text-base text-muted">
-          {config.set === 'due'
-            ? 'Nothing is due for review right now. Learn some new words, and they will come back here when it is time.'
-            : 'You have already started every word in this level. Try the words due for review or a mixed round.'}
+          {config.set === 'step'
+            ? 'Every open word is waiting for its next review. Come back when they are due, and the next words open once you know most of this step.'
+            : config.set === 'due'
+              ? 'Nothing is due for review right now. Learn some new words, and they will come back here when it is time.'
+              : 'You have already started every word in this level. Try the words due for review or a mixed round.'}
         </p>
         <ButtonLink to="/practice">Choose another round</ButtonLink>
       </div>
@@ -51,7 +53,7 @@ const RoundRunner = ({ vocabulary, progress, sentences, config }: RoundRunnerPro
       config={config}
       onPracticeWords={(words) => setRound({ id: round.id + 1, words })}
       onNewRound={() =>
-        setRound({ id: round.id + 1, words: pickRoundWords(usable, config, progress, Date.now()) })
+        setRound({ id: round.id + 1, words: pickRoundWords(usable, config, progress, Date.now(), vocabulary) })
       }
     />
   );

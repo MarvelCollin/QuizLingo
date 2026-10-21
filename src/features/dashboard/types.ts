@@ -7,7 +7,7 @@ export type SummaryStripProps = { mastered: number; totalWords: number; accuracy
 
 export type RecentRoundsProps = { rounds: RecentRound[] };
 
-export type NextStepProps = { due: number; nextNewLevel: LevelFilter | null; isFirstVisit: boolean };
+export type NextStepProps = { due: number; nextNewLevel: LevelFilter | null; stepReady: number; isFirstVisit: boolean };
 
 export type LevelProgressProps = { totals: Record<HskLevel, number>; stats: LevelStats[] };
 

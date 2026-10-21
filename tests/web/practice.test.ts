@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { buildQuestion } from '../../src/features/practice/build-question';
 import { buildSentenceQuestion, hasSentence } from '../../src/features/practice/build-sentence-question';
-import { pickRoundWords, wordsForMode, wordsInLevel, wordsInSet } from '../../src/features/practice/pick-words';
+import { isKnown, learningStep, stepQueue, stepTarget } from '../../src/features/practice/learning-step';
+import { openWordSet, pickRoundWords, wordsForMode, wordsInLevel, wordsInSet } from '../../src/features/practice/pick-words';
 import { configFromParams, configToSearch, highestLevel } from '../../src/features/practice/round-config';
 import type { WordProgress } from '../../src/features/progress/types';
 import { buildSentenceIndex, isWordToken } from '../../src/features/study/api';
@@ -108,6 +109,68 @@ describe('picking round words', () => {
   });
 });
 
+describe('step by step word sets', () => {
+  const now = Date.now();
+  const DAY = 86400000;
+  const many = Array.from({ length: 95 }, (_, i) => word(`字${i}`, i < 80 ? 1 : 2, `zi${i}`, `word ${i}`));
+  const known = (count: number, from = 0) =>
+    new Map<string, WordProgress>(
+      many.slice(from, from + count).map((w) => [w.hanzi, { word: w.hanzi, level: w.level, box: 2, correct: 2, wrong: 0, dueAt: now + 3 * DAY, lastSeenAt: now }]),
+    );
+
+  it('opens 30 words to start', () => {
+    const step = learningStep(many, new Map());
+    expect(step.size).toBe(30);
+    expect(step.open.map((w) => w.hanzi)).toEqual(many.slice(0, 30).map((w) => w.hanzi));
+    expect(step.needed).toBe(27);
+    expect(step.known).toBe(0);
+    expect(step.isComplete).toBe(false);
+  });
+
+  it('counts a word as known only after a right answer that came a day later', () => {
+    expect(isKnown(undefined)).toBe(false);
+    expect(isKnown({ word: 'a', level: 1, box: 1, correct: 1, wrong: 0, dueAt: now, lastSeenAt: now })).toBe(false);
+    expect(isKnown({ word: 'a', level: 1, box: 2, correct: 2, wrong: 0, dueAt: now, lastSeenAt: now })).toBe(true);
+  });
+
+  it('grows by 20 once 90 percent of the open words are known', () => {
+    expect(learningStep(many, known(26)).size).toBe(30);
+    expect(learningStep(many, known(27)).size).toBe(50);
+    expect(learningStep(many, known(45)).size).toBe(70);
+    expect(learningStep(many, known(63)).size).toBe(90);
+    expect(stepTarget(50)).toBe(45);
+  });
+
+  it('stops at the end of the list and keeps lower levels first', () => {
+    const shuffled = [...many].reverse();
+    const step = learningStep(shuffled, known(95));
+    expect(step.size).toBe(95);
+    expect(step.isComplete).toBe(true);
+    expect(step.open[0].level).toBe(1);
+    expect(step.open.at(-1)!.level).toBe(2);
+  });
+
+  it('serves due words first, then unseen ones, and leaves words that are still resting', () => {
+    const progress = new Map<string, WordProgress>([
+      [many[0].hanzi, { word: many[0].hanzi, level: 1, box: 1, correct: 1, wrong: 0, dueAt: now - 1000, lastSeenAt: now - DAY }],
+      [many[1].hanzi, { word: many[1].hanzi, level: 1, box: 1, correct: 1, wrong: 0, dueAt: now + DAY, lastSeenAt: now }],
+    ]);
+    const queue = stepQueue(learningStep(many, progress).open, progress, now).map((w) => w.hanzi);
+    expect(queue[0]).toBe(many[0].hanzi);
+    expect(queue).not.toContain(many[1].hanzi);
+    expect(queue).toHaveLength(29);
+  });
+
+  it('keeps rounds inside the open step even when a mode filters the words', () => {
+    const open = openWordSet(many, '1', new Map());
+    expect(open.size).toBe(30);
+    expect(wordsInSet(many.slice(10), 'step', new Map(), now, open)).toHaveLength(20);
+    const round = pickRoundWords(many, { mode: 'flashcard', set: 'step', level: '1', size: '30' }, new Map(), now);
+    expect(round).toHaveLength(30);
+    expect(round.every((w) => open.has(w.hanzi))).toBe(true);
+  });
+});
+
 describe('round config in the URL', () => {
   it('reads and writes every option', () => {
     const config = configFromParams(new URLSearchParams('mode=order&set=due&level=7&size=20'));
@@ -116,7 +179,7 @@ describe('round config in the URL', () => {
   });
 
   it('falls back to defaults for unknown values', () => {
-    expect(configFromParams(new URLSearchParams('mode=hack&level=10'))).toEqual({ mode: 'flashcard', set: 'new', level: '1', size: '10' });
+    expect(configFromParams(new URLSearchParams('mode=hack&level=10'))).toEqual({ mode: 'flashcard', set: 'step', level: '1', size: '10' });
   });
 
   it('maps a level filter to the highest level it needs', () => {

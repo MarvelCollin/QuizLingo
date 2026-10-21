@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Button } from '../../components/ui/button';
 import { InlineMessage } from '../../components/ui/inline-message';
 import { Skeleton } from '../../components/ui/skeleton';
@@ -12,6 +12,8 @@ import { useVocabulary } from '../vocabulary/use-vocabulary';
 import { LEVELS } from '../vocabulary/constants';
 import type { HskLevel } from '../vocabulary/types';
 import type { LevelFilter } from '../practice/types';
+import { learningStep, stepQueue } from '../practice/learning-step';
+import { wordsInLevel } from '../practice/pick-words';
 import { ActivityChart } from './activity-chart';
 import { LevelProgress } from './level-progress';
 import { NextStep } from './next-step';
@@ -52,6 +54,13 @@ const DashboardPage = () => {
     return null;
   }, [vocabulary.data, progress.byWord]);
 
+  const [now] = useState(() => Date.now());
+  const stepReady = useMemo(() => {
+    if (!vocabulary.data || !nextNewLevel) return 0;
+    const step = learningStep(wordsInLevel(vocabulary.data, nextNewLevel), progress.byWord);
+    return stepQueue(step.open, progress.byWord, now).length;
+  }, [vocabulary.data, progress.byWord, nextNewLevel, now]);
+
   if (stats.isPending || vocabulary.isPending || progress.isPending) return <DashboardSkeleton />;
   if (stats.isError || vocabulary.isError || progress.isError) {
     return (
@@ -87,7 +96,7 @@ const DashboardPage = () => {
       {isFirstVisit && basics.path?.next ? (
         <StarterHero next={basics.path.next} isFresh={basics.data?.length === 0} />
       ) : (
-        <NextStep due={due} nextNewLevel={nextNewLevel} isFirstVisit={isFirstVisit} />
+        <NextStep due={due} nextNewLevel={nextNewLevel} stepReady={stepReady} isFirstVisit={isFirstVisit} />
       )}
       {!isFirstVisit && basics.path?.next && basics.data && basics.data.length > 0 && (
         <StarterStrip next={basics.path.next} stagesDone={basics.path.stagesDone} stagesTotal={basics.path.stages.length} />

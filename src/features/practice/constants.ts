@@ -12,6 +12,7 @@ export const PRACTICE_MODES: readonly PracticeMode[] = [
 ];
 
 export const WORD_SET_LABELS: Record<WordSetId, string> = {
+  step: 'Step by step',
   due: 'Due for review',
   new: 'New words',
   all: 'Mixed',
@@ -32,7 +33,7 @@ export const LEVEL_LABELS: Record<LevelFilter, string> = {
 
 export const ROUND_SIZES: readonly RoundSize[] = ['10', '20', '30'];
 
-export const DEFAULT_CONFIG: RoundConfig = { mode: 'flashcard', set: 'new', level: '1', size: '10' };
+export const DEFAULT_CONFIG: RoundConfig = { mode: 'flashcard', set: 'step', level: '1', size: '10' };
 
 export const OPTION_COUNT = 4;
 
