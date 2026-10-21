@@ -55,7 +55,8 @@ describe('characters', () => {
   it('lists 3,088 characters with 1,200 to write', () => {
     expect(hanzi).toHaveLength(3088);
     expect(hanzi.filter((h) => h.x > 0)).toHaveLength(1200);
-    expect(LEVELS.map((l) => hanzi.filter((h) => h.l === l).length).slice(0, 3)).toEqual([246, 125, 284]);
+    expect(LEVELS.map((l) => hanzi.filter((h) => h.l === l).length)).toEqual([246, 125, 284, 441, 431, 413, 1148]);
+    expect(LEVELS.map((l) => hanzi.filter((h) => h.x === l).length)).toEqual([0, 100, 150, 150, 150, 150, 500]);
   });
 
   it('gives every character a reading, a meaning and stroke data', () => {

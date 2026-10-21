@@ -99,7 +99,7 @@ const CharacterPracticePage = ({ kind }: CharacterPracticePageProps) => {
         <h1 className="text-2xl font-bold text-ink">{isWriting ? 'Writing practice' : 'Character quiz'}</h1>
         <p className="mt-1 text-base text-muted">
           {isWriting
-            ? 'You see the pinyin and meaning, then draw the character. After two wrong strokes the next stroke is shown. Three mistakes or fewer counts as right.'
+            ? 'You see the pinyin and meaning, then draw the character. After two wrong strokes the next stroke is shown. Three mistakes or fewer counts as right. On the computer-based HSK you type pinyin and pick the character, so handwriting matters only if you sit the paper exam.'
             : 'You see a character and pick its pinyin and meaning.'}
         </p>
       </div>
