@@ -1,6 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { registerRecordings, speak, speakLine, stopSpeaking } from '../../src/features/practice/speech';
+import { registerRecordings, sayCharacter, speak, speakLine, stopSpeaking } from '../../src/features/practice/speech';
+import { splitWords } from '../../src/features/study/split-words';
 import { useScriptPlayer } from '../../src/features/tests/use-script-player';
 import { useSequencePlayer } from '../../src/features/tests/use-sequence-player';
 
@@ -86,7 +87,7 @@ beforeEach(() => {
   vi.stubGlobal('speechSynthesis', synth);
   vi.stubGlobal('SpeechSynthesisUtterance', FakeUtterance);
   vi.stubGlobal('Audio', FakeAudio);
-  registerRecordings({ words: new Set(['爱', '半']), syllables: new Set() });
+  registerRecordings({ words: new Set(['爱', '半']), syllables: new Set(['re4']) });
 });
 
 afterEach(() => {
@@ -183,5 +184,22 @@ describe('listening players', () => {
     await act(() => vi.advanceTimersByTimeAsync(3000));
     expect(spoken.map((u) => u.text)).toEqual(['你好', '你好']);
     expect(result.current.playingKey).toBeNull();
+  });
+});
+
+describe('tapping words and characters', () => {
+  it('splits a line into the longest known words', () => {
+    expect(splitWords('你好吗？我很好。', new Set(['你好', '吗', '我', '很', '好']))).toEqual(['你好', '吗', '？', '我', '很', '好', '。']);
+    expect(splitWords('苹果多少钱', new Set(['苹果', '多少', '多少钱', '钱']))).toEqual(['苹果', '多少钱']);
+    expect(splitWords('你好')).toEqual(['你', '好']);
+  });
+
+  it('plays the native syllable for a character when there is one', () => {
+    sayCharacter('热', 're4');
+    expect(FakeAudio.made.map((a) => decodeURIComponent(a.src).split('/').slice(-2).join('/'))).toEqual(['syllables/re4.mp3']);
+    sayCharacter('爱', 'ai4');
+    expect(decodeURIComponent(FakeAudio.made.at(-1)!.src).split('/').slice(-2).join('/')).toBe('words/爱.mp3');
+    sayCharacter('吗', 'ma5');
+    expect(spoken.map((u) => u.text)).toEqual(['吗']);
   });
 });

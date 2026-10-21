@@ -16,7 +16,8 @@ Live at [marvelcollin.com/quizlingo](https://marvelcollin.com/quizlingo/).
 - **Try the strokes yourself**: draw the eight basic strokes over an outline, with a hint after a miss
 - **Accounts**: sign up with name, email and password. Progress follows you to any device
 - **Eight ways to practice**: flashcards, meaning, listening, pinyin, reading a sentence, sentence listening, fill the gap and word order
-- **Native audio**: real recordings for 6,941 words, the browser voice for the rest
+- **Native audio**: real recordings for 6,941 words, the browser voice for the rest, picking a natural Chinese voice (Microsoft Xiaoxiao, Google 普通话 and the like) when the device has one
+- **Tap to listen**: every word in example sentences and listening scripts plays on its own when tapped, and each character of a word has its own button that plays the native recording of its syllable with its tone
 - **Review schedule**: right answers push a word further out (1, 3, 7, 14, 30 days), wrong answers bring it back in 10 minutes
 - **Step by step words**: each level opens 30 words first. Once 90% of them are known (answered right again after at least a day), 20 more open, so 30 becomes 50, then 70, then 90 and so on. Rounds mix the open words that are due with the ones not seen yet, and words that are resting until their next review are left out, because spacing is what makes words stick
 - **Dashboard**: words due today, words mastered per level, accuracy, streak, the last 14 days and recent rounds
@@ -78,7 +79,7 @@ The app lives under the `/quizlingo/` base path, and the API is served at `/quiz
 Tests:
 
 ```bash
-npm test          # 162 tests in four groups
+npm test          # 164 tests in four groups
 ```
 
 | Group | Folder | What it covers |

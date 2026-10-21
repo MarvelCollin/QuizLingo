@@ -1,5 +1,5 @@
 import { ArrowLeft, ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router';
 import { Button, ButtonLink } from '../../components/ui/button';
 import { InlineMessage } from '../../components/ui/inline-message';
@@ -7,6 +7,7 @@ import { Skeleton } from '../../components/ui/skeleton';
 import { usePageMeta } from '../../lib/use-page-meta';
 import { useSaveRound } from '../progress/use-save-round';
 import { levelLabel } from '../vocabulary/constants';
+import { useVocabulary } from '../vocabulary/use-vocabulary';
 import { levelOfTestId } from './api';
 import { AudioBar } from './audio-bar';
 import { QuestionCard } from './question-card';
@@ -18,6 +19,8 @@ import type { ListeningTestViewProps } from './types';
 const ListeningTestView = ({ test }: ListeningTestViewProps) => {
   usePageMeta(`${test.title}, listening`, `${levelLabel(test.level)} listening practice: ${test.scene}.`);
   const player = useScriptPlayer(test.lines);
+  const vocabulary = useVocabulary();
+  const dictionary = useMemo(() => new Set((vocabulary.data ?? []).map((w) => w.hanzi)), [vocabulary.data]);
   const saveRound = useSaveRound();
   const [answers, setAnswers] = useState<(number | null)[]>(() => test.questions.map(() => null));
   const [isReviewing, setIsReviewing] = useState(false);
@@ -158,11 +161,12 @@ const ListeningTestView = ({ test }: ListeningTestViewProps) => {
                 focusLine={focusLine}
                 isPinyinShown={isPinyinShown}
                 isEnglishShown={isEnglishShown}
+                dictionary={dictionary}
               />
             </div>
           ) : (
             <p id="script-body" className="text-base text-muted">
-              Listen first. Open the script any time to read along, tap a line to play from there.
+              Listen first. Open the script any time to read along, play from any line, or tap a word to hear it alone.
             </p>
           )}
         </section>

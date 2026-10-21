@@ -1,3 +1,4 @@
+import { CharacterSounds } from '../study/character-sounds';
 import { SentenceView } from '../study/sentence-view';
 import { useSentences } from '../study/use-study-data';
 import type { WordRevealProps } from './types';
@@ -13,6 +14,7 @@ export const WordReveal = ({ word, isExampleShown = true }: WordRevealProps) => 
           <dd className="text-base text-ink">{reading.meanings.slice(0, 4).join(', ')}</dd>
         </div>
       ))}
+      <CharacterSounds text={word.hanzi} />
       {word.traditional !== word.hanzi && (
         <div className="text-sm text-muted">
           <dt className="inline">Traditional: </dt>

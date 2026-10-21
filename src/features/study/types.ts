@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import type { HskLevel } from '../vocabulary/types';
 
 export type RawSentence = { i: number; z: string; w: string[]; p: string[]; e: string; l: number };
@@ -40,3 +41,7 @@ export type SentenceViewProps = {
 };
 
 export type SourceNoteProps = { sentence: Sentence };
+
+export type SpeakTokenProps = { token: string; className?: string; children?: ReactNode };
+
+export type CharacterSoundsProps = { text: string };

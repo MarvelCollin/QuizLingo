@@ -1,6 +1,7 @@
 import { cn } from '../../lib/utils';
 import { ListenButton } from '../practice/listen-button';
 import { isWordToken } from './api';
+import { SpeakToken } from './speak-token';
 import type { SentenceViewProps, SourceNoteProps } from './types';
 
 export const SentenceView = ({
@@ -14,15 +15,16 @@ export const SentenceView = ({
     <div className="flex items-start gap-2">
       <p lang="zh-CN" className={cn('flex flex-wrap items-end gap-x-1 font-hanzi text-ink', size === 'lg' ? 'text-3xl' : 'text-xl')}>
         {sentence.tokens.map((token, index) => (
-          <ruby
-            key={index}
-            className={cn(token === highlight && 'font-semibold text-strong underline decoration-2 underline-offset-[6px]')}
-          >
-            {token}
-            {isPinyinShown && isWordToken(token) && (
-              <rt className="pb-0.5 font-sans text-xs font-medium text-muted">{sentence.pinyin[index]}</rt>
-            )}
-          </ruby>
+          isWordToken(token) ? (
+            <SpeakToken key={index} token={token}>
+              <ruby className={cn(token === highlight && 'font-semibold text-strong underline decoration-2 underline-offset-[6px]')}>
+                {token}
+                {isPinyinShown && <rt className="pb-0.5 font-sans text-xs font-medium text-muted">{sentence.pinyin[index]}</rt>}
+              </ruby>
+            </SpeakToken>
+          ) : (
+            <span key={index}>{token}</span>
+          )
         ))}
       </p>
       <ListenButton text={sentence.text} label="" className="shrink-0 px-2" />

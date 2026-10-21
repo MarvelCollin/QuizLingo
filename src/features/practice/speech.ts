@@ -27,9 +27,20 @@ export const hasSyllableRecording = (syllable: string) => recordedSyllables.has(
 
 export const isSpeechSupported = () => typeof window !== 'undefined' && 'speechSynthesis' in window;
 
+const NATURAL_VOICE = /natural|neural|online|xiaoxiao|xiaoyi|yunxi|yunjian|yunyang|google|tingting|lili|meijia/i;
+
+const voiceScore = (voice: SpeechSynthesisVoice) => {
+  const lang = voice.lang.toLowerCase().replace('_', '-');
+  if (!lang.startsWith('zh')) return 0;
+  const isMainland = lang.startsWith('zh-cn') || lang === 'zh' || lang.startsWith('cmn');
+  return (isMainland ? 2 : 1) + (NATURAL_VOICE.test(voice.name) ? 4 : 0);
+};
+
 const chineseVoice = () =>
-  window.speechSynthesis.getVoices().find((voice) => voice.lang.toLowerCase().replace('_', '-').startsWith('zh-cn')) ??
-  window.speechSynthesis.getVoices().find((voice) => voice.lang.toLowerCase().startsWith('zh'));
+  window.speechSynthesis
+    .getVoices()
+    .filter((voice) => voiceScore(voice) > 0)
+    .sort((a, b) => voiceScore(b) - voiceScore(a))[0];
 
 const audioUrl = (folder: string, name: string) =>
   `${import.meta.env.BASE_URL}audio/${folder}/${encodeURIComponent(name)}.mp3`;
@@ -138,6 +149,12 @@ export const speak = (text: string, options: SpeakOptions = {}) => {
 export const playSyllable = (syllable: string, options: SpeakOptions = {}) => {
   stopSpeaking();
   playFile(audioUrl('syllables', syllable), null, options);
+};
+
+export const sayCharacter = (char: string, numeric = '', options: SpeakOptions = {}) => {
+  const sound = numeric.toLowerCase().split(/[\s,]+/)[0];
+  if (sound && recordedSyllables.has(sound)) playSyllable(sound, options);
+  else speak(char, options);
 };
 
 export const speakLine = (text: string, options: SpeakOptions = {}) => {

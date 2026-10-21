@@ -43,6 +43,7 @@ export type ScriptViewProps = {
   focusLine: number | null;
   isPinyinShown: boolean;
   isEnglishShown: boolean;
+  dictionary?: Set<string>;
 };
 
 export type QuestionCardProps = {
