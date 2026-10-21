@@ -15,10 +15,11 @@ Live at [marvelcollin.com/quizlingo](https://marvelcollin.com/quizlingo/).
 - **Weak spots**: questions you miss are collected, and two right answers in a row clear each one. You can also start the path over from its page
 - **Try the strokes yourself**: draw the eight basic strokes over an outline, with a hint after a miss
 - **Accounts**: sign up with name, email and password. Progress follows you to any device
-- **Eight ways to practice**: flashcards, meaning, listening, pinyin, reading a sentence, sentence listening, fill the gap and word order
+- **Eight ways to practice**: meaning (the default), flashcards, listening, pinyin, reading a sentence, sentence listening, fill the gap and word order
 - **Native audio**: real recordings for 6,941 words, the browser voice for the rest, picking a natural Chinese voice (Microsoft Xiaoxiao, Google 普通话 and the like) when the device has one
 - **Tap to listen**: every word in example sentences and listening scripts plays on its own when tapped, and each character of a word has its own button that plays the native recording of its syllable with its tone
 - **Review schedule**: right answers push a word further out (1, 3, 7, 14, 30 days), wrong answers bring it back in 10 minutes
+- **Sessions that build themselves**: no round length to pick. A session takes the open words that are due (up to 40) and up to 8 new ones. A missed word comes back three cards later, a new or missed word has to be right twice in a row with other cards in between, and a known review word goes after one right answer. Only the first try of each word and any later miss reach the review schedule, so a word answered three times in one sitting is not pushed weeks ahead
 - **Step by step words**: each level opens 30 words first. Once 90% of them are known (answered right again after at least a day), 20 more open, so 30 becomes 50, then 70, then 90 and so on. Rounds mix the open words that are due with the ones not seen yet, and words that are resting until their next review are left out, because spacing is what makes words stick
 - **Dashboard**: words due today, words mastered per level, accuracy, streak, the last 14 days and recent rounds
 - **Word list**: all 10,896 words with search, a filter on every column, sorting, and filters saved in the URL
@@ -79,7 +80,7 @@ The app lives under the `/quizlingo/` base path, and the API is served at `/quiz
 Tests:
 
 ```bash
-npm test          # 164 tests in four groups
+npm test          # 169 tests in four groups
 ```
 
 | Group | Folder | What it covers |

@@ -91,7 +91,7 @@ const WordPageContent = ({ word }: WordPageContentProps) => {
       </section>
 
       <div className="flex flex-wrap gap-3 border-t border-hairline pt-6">
-        <ButtonLink to={`/practice/round${configToSearch({ mode: 'flashcard', set: 'all', level: String(word.level) as LevelFilter, size: '10' })}`}>
+        <ButtonLink to={`/practice/round${configToSearch({ mode: 'meaning', set: 'step', level: String(word.level) as LevelFilter })}`}>
           Practice {levelLabel(word.level)}
         </ButtonLink>
       </div>

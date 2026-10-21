@@ -10,9 +10,9 @@ import { usePageMeta } from '../../lib/use-page-meta';
 import { useProgress } from '../progress/use-progress';
 import { useSentences } from '../study/use-study-data';
 import { useVocabulary } from '../vocabulary/use-vocabulary';
-import { LEVEL_FILTERS, LEVEL_LABELS, MORE_PRACTICE, PRACTICE_MODES, ROUND_SIZES, WORD_SET_LABELS } from './constants';
+import { LEVEL_FILTERS, LEVEL_LABELS, MORE_PRACTICE, PRACTICE_MODES, WORD_SET_LABELS } from './constants';
 import { learningStep, STEP_GROWTH } from './learning-step';
-import { wordsForMode, wordsInLevel, wordsInSet } from './pick-words';
+import { sessionWords, wordsForMode, wordsInLevel, wordsInSet } from './pick-words';
 import { configFromParams, configToSearch } from './round-config';
 import { isSpeechSupported } from './speech';
 import type { LevelFilter, RoundConfig, StepProgressProps, WordSetId } from './types';
@@ -76,16 +76,16 @@ const PracticePage = () => {
     const count = (set: WordSetId) => wordsInSet(level, set, progress.byWord, now, open).length;
     return {
       step,
+      session: sessionWords(wordsInSet(level, config.set, progress.byWord, now, open), config.set, progress.byWord).length,
       levels: Object.fromEntries(
         LEVEL_FILTERS.map((l) => [l, wordsInLevel(usable, l).length]),
       ) as Record<LevelFilter, number>,
       sets: { step: count('step'), due: count('due'), new: count('new'), all: level.length } as Record<WordSetId, number>,
     };
-  }, [vocabulary.data, sentences.data, progress.byWord, config.level, config.mode, now]);
+  }, [vocabulary.data, sentences.data, progress.byWord, config.level, config.mode, config.set, now]);
 
   const modes = isSpeechSupported() ? PRACTICE_MODES : PRACTICE_MODES.filter((m) => !m.needsVoice);
-  const available = counts?.sets[config.set] ?? 0;
-  const roundLength = Math.min(available, Number(config.size));
+  const roundLength = counts?.session ?? 0;
   const modeLabel = PRACTICE_MODES.find((m) => m.id === config.mode)!.label;
   const setWord = { step: 'open', new: 'new', due: 'due', all: 'mixed' }[config.set];
 
@@ -93,7 +93,9 @@ const PracticePage = () => {
     <div className="mx-auto flex max-w-2xl flex-col gap-8">
       <div>
         <h1 className="text-2xl font-bold text-ink">Practice</h1>
-        <p className="mt-1 text-base text-muted">Choose what to practice. Every answer updates your review schedule.</p>
+        <p className="mt-1 text-base text-muted">
+          QuizLingo picks the words for you: reviews that are due first, then a few new ones. Every answer updates your review schedule.
+        </p>
       </div>
 
       {(vocabulary.isError || progress.isError) && (
@@ -139,17 +141,11 @@ const PracticePage = () => {
             isStacked
             options={modes.map((m) => ({ value: m.id, label: m.label, detail: m.detail }))}
           />
-          <SegmentedControl
-            label="Round length"
-            value={config.size}
-            onChange={(size) => update({ size })}
-            options={ROUND_SIZES.map((value) => ({ value, label: `${value} words` }))}
-          />
 
           <div className="flex flex-col gap-3 border-t border-hairline pt-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-base text-ink" aria-live="polite">
               {roundLength > 0
-                ? `${roundLength} ${setWord} ${roundLength === 1 ? 'word' : 'words'} from ${LEVEL_LABELS[config.level]} in ${modeLabel} mode.`
+                ? `${roundLength} ${setWord} ${roundLength === 1 ? 'word' : 'words'} from ${LEVEL_LABELS[config.level]} in ${modeLabel} mode. Words you miss come back a few cards later, and the session ends when you know them all.`
                 : config.set === 'step'
                   ? 'Your open words are resting until their next review. Come back when they are due.'
                   : config.set === 'due'
@@ -157,7 +153,7 @@ const PracticePage = () => {
                   : 'No words left in this set. Pick another set or level.'}
             </p>
             <Button type="submit" size="lg" disabled={roundLength === 0}>
-              Start round
+              Start session
             </Button>
           </div>
         </form>

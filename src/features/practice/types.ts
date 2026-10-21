@@ -9,7 +9,6 @@ export type SentenceModeId = 'reading' | 'sentence-listening' | 'gap' | 'order';
 export type PracticeModeId = WordModeId | SentenceModeId;
 export type WordSetId = 'step' | 'due' | 'new' | 'all';
 export type LevelFilter = 'all' | '1' | '2' | '3' | '4' | '5' | '6' | '7';
-export type RoundSize = '10' | '20' | '30';
 
 export type PracticeMode = {
   id: PracticeModeId;
@@ -20,7 +19,7 @@ export type PracticeMode = {
   needsVoice: boolean;
 };
 
-export type RoundConfig = { mode: PracticeModeId; set: WordSetId; level: LevelFilter; size: RoundSize };
+export type RoundConfig = { mode: PracticeModeId; set: WordSetId; level: LevelFilter };
 
 export type ChoiceOption = { label: string; detail?: string; isHanzi: boolean; isCorrect: boolean };
 
@@ -34,6 +33,7 @@ export type WordRevealProps = { word: Word; isExampleShown?: boolean };
 
 export type RoundProps = {
   words: Word[];
+  progress: Map<string, WordProgress>;
   pool: Word[];
   sentences: SentenceIndex;
   config: RoundConfig;

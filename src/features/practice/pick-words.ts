@@ -4,7 +4,7 @@ import type { SentenceIndex } from '../study/types';
 import type { Word } from '../vocabulary/types';
 import { hasSentence } from './build-sentence-question';
 import { learningStep, stepQueue } from './learning-step';
-import { PRACTICE_MODES } from './constants';
+import { MIXED_PER_SESSION, NEW_PER_SESSION, PRACTICE_MODES, REVIEWS_PER_SESSION } from './constants';
 import type { LevelFilter, PracticeModeId, RoundConfig, SentenceModeId, WordSetId } from './types';
 
 export const wordsInLevel = (words: Word[], level: LevelFilter) =>
@@ -33,6 +33,15 @@ export const wordsInSet = (
   return shuffle(words);
 };
 
+export const sessionWords = (words: Word[], set: WordSetId, progress: Map<string, WordProgress>) => {
+  if (set === 'due') return words.slice(0, REVIEWS_PER_SESSION);
+  if (set === 'new') return words.slice(0, NEW_PER_SESSION);
+  if (set === 'all') return words.slice(0, MIXED_PER_SESSION);
+  const reviews = words.filter((w) => progress.has(w.hanzi)).slice(0, REVIEWS_PER_SESSION);
+  const fresh = words.filter((w) => !progress.has(w.hanzi)).slice(0, NEW_PER_SESSION);
+  return [...reviews, ...fresh];
+};
+
 export const pickRoundWords = (
   words: Word[],
   config: RoundConfig,
@@ -41,7 +50,7 @@ export const pickRoundWords = (
   vocabulary: Word[] = words,
 ) => {
   const open = config.set === 'step' ? openWordSet(vocabulary, config.level, progress) : undefined;
-  return shuffle(wordsInSet(wordsInLevel(words, config.level), config.set, progress, now, open).slice(0, Number(config.size)));
+  return shuffle(sessionWords(wordsInSet(wordsInLevel(words, config.level), config.set, progress, now, open), config.set, progress));
 };
 
 export const wordsForMode = (words: Word[], mode: PracticeModeId, sentences: SentenceIndex | undefined) => {

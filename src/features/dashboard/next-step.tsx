@@ -16,7 +16,7 @@ export const NextStep = ({ due, nextNewLevel, stepReady, isFirstVisit }: NextSte
         <div className="mt-6 flex flex-wrap gap-3">
           <ButtonLink
             size="lg"
-            to={`/practice/round${configToSearch({ mode: 'flashcard', set: 'due', level: 'all', size: '20' })}`}
+            to={`/practice/round${configToSearch({ mode: 'meaning', set: 'due', level: 'all' })}`}
           >
             Review now
           </ButtonLink>
@@ -66,13 +66,13 @@ export const NextStep = ({ due, nextNewLevel, stepReady, isFirstVisit }: NextSte
       </h2>
       <p className="mt-2 max-w-prose text-base text-muted">
         {isFirstVisit
-          ? 'Ten flashcards to begin. Say whether you knew each word, and QuizLingo schedules when to show it again.'
+          ? 'Pick the meaning of each word. Words you miss come back a few cards later, and words you know are hidden for longer each time.'
           : 'Nothing is due for review, so this is a good moment to learn the next words in your step.'}
       </p>
       <ButtonLink
         className="mt-6"
         size="lg"
-        to={`/practice/round${configToSearch({ mode: 'flashcard', set: 'step', level: nextNewLevel, size: '10' })}`}
+        to={`/practice/round${configToSearch({ mode: 'meaning', set: 'step', level: nextNewLevel })}`}
       >
         Learn the next words
       </ButtonLink>

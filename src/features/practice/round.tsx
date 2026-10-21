@@ -13,8 +13,8 @@ import { useRound } from './use-round';
 import { WordOrder } from './word-order';
 import type { RoundProps, SentenceModeId, WordModeId } from './types';
 
-export const Round = ({ words, pool, sentences, config, onPracticeWords, onNewRound }: RoundProps) => {
-  const round = useRound(words, config.mode, config.level);
+export const Round = ({ words, progress, pool, sentences, config, onPracticeWords, onNewRound }: RoundProps) => {
+  const round = useRound(words, progress, config.mode, config.level);
   const mode = PRACTICE_MODES.find((m) => m.id === config.mode)!;
   const modeLabel = mode.label;
   const current = round.current;
@@ -44,7 +44,6 @@ export const Round = ({ words, pool, sentences, config, onPracticeWords, onNewRo
     );
   }
 
-  const correctSoFar = round.records.filter((r) => r.isCorrect).length;
 
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-6">
@@ -57,7 +56,7 @@ export const Round = ({ words, pool, sentences, config, onPracticeWords, onNewRo
           className="-ml-3 inline-flex min-h-11 items-center gap-1.5 rounded-md px-3 text-sm font-semibold text-strong hover:bg-tint"
         >
           <X aria-hidden="true" className="size-4" strokeWidth={2} />
-          End round
+          End session
         </Link>
         <div className="flex-1">
           <div className="flex justify-between text-sm text-muted">
@@ -65,17 +64,14 @@ export const Round = ({ words, pool, sentences, config, onPracticeWords, onNewRo
               {modeLabel}, {LEVEL_LABELS[config.level]}
             </span>
             <span aria-live="polite">
-              Word {round.index + 1} of {round.total}
+              {round.learned} of {round.total} learned
             </span>
           </div>
           <StackedBar
-            label="Round progress"
+            label="Session progress"
             total={round.total}
             className="mt-1.5 h-1.5"
-            segments={[
-              { label: 'right', value: correctSoFar, className: 'bg-strong' },
-              { label: 'missed', value: round.records.length - correctSoFar, className: 'bg-accent-strong' },
-            ]}
+            segments={[{ label: 'learned', value: round.learned, className: 'bg-strong' }]}
           />
         </div>
       </div>

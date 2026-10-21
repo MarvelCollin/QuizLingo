@@ -1,4 +1,4 @@
-import type { LevelFilter, PracticeMode, RoundConfig, RoundSize, WordSetId } from './types';
+import type { LevelFilter, PracticeMode, RoundConfig, WordSetId } from './types';
 
 export const PRACTICE_MODES: readonly PracticeMode[] = [
   { id: 'flashcard', label: 'Flashcards', detail: 'See the word, then say if you knew it', apiMode: 'flashcard', usesSentences: false, needsVoice: false },
@@ -31,9 +31,11 @@ export const LEVEL_LABELS: Record<LevelFilter, string> = {
   '7': 'HSK 7-9',
 };
 
-export const ROUND_SIZES: readonly RoundSize[] = ['10', '20', '30'];
+export const NEW_PER_SESSION = 8;
+export const REVIEWS_PER_SESSION = 40;
+export const MIXED_PER_SESSION = 20;
 
-export const DEFAULT_CONFIG: RoundConfig = { mode: 'flashcard', set: 'step', level: '1', size: '10' };
+export const DEFAULT_CONFIG: RoundConfig = { mode: 'meaning', set: 'step', level: '1' };
 
 export const OPTION_COUNT = 4;
 

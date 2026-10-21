@@ -1,59 +1,76 @@
 import { useRef, useState } from 'react';
 import { useSaveAnswer } from '../progress/use-save-answer';
 import { useSaveRound } from '../progress/use-save-round';
-import type { Answer } from '../progress/types';
+import type { Answer, WordProgress } from '../progress/types';
 import type { HskLevel, Word } from '../vocabulary/types';
 import { PRACTICE_MODES } from './constants';
+import { afterAnswer, startSession, type SessionState } from './session-queue';
 import type { AnswerRecord, LevelFilter, PracticeModeId } from './types';
 
-export const useRound = (words: Word[], mode: PracticeModeId, level: LevelFilter) => {
-  const [index, setIndex] = useState(0);
+export const useRound = (words: Word[], progress: Map<string, WordProgress>, mode: PracticeModeId, level: LevelFilter) => {
+  const [session, setSession] = useState<SessionState>(() => startSession(words, progress));
+  const [step, setStep] = useState(0);
+  const [pending, setPending] = useState<boolean | null>(null);
+  const pendingRef = useRef<boolean | null>(null);
   const [records, setRecords] = useState<AnswerRecord[]>([]);
   const recordsRef = useRef<AnswerRecord[]>([]);
+  const savedOnce = useRef(new Set<string>());
   const [unsaved, setUnsaved] = useState<Answer[]>([]);
   const saveAnswer = useSaveAnswer();
   const saveRound = useSaveRound();
 
-  const isDone = index >= words.length;
-  const current = isDone ? null : words[index];
-  const hasAnsweredCurrent = records.length > index;
+  const isDone = session.queue.length === 0;
+  const current = isDone ? null : session.queue[0];
+  const hasAnsweredCurrent = pending !== null;
 
   const save = (answer: Answer) =>
     saveAnswer.mutate(answer, { onError: () => setUnsaved((list) => [...list, answer]) });
 
   const answer = (isCorrect: boolean) => {
-    if (!current || recordsRef.current.length > index) return;
+    if (!current || pendingRef.current !== null) return;
+    pendingRef.current = isCorrect;
+    setPending(isCorrect);
     recordsRef.current = [...recordsRef.current, { word: current, isCorrect }];
     setRecords(recordsRef.current);
-    save({ word: current.hanzi, level: current.level, correct: isCorrect });
+    const isFirst = !savedOnce.current.has(current.hanzi);
+    savedOnce.current.add(current.hanzi);
+    if (isFirst || !isCorrect) save({ word: current.hanzi, level: current.level, correct: isCorrect });
+  };
+
+  const finish = () => {
+    const final = recordsRef.current;
+    const firstTries = new Map<string, boolean>();
+    for (const r of final) if (!firstTries.has(r.word.hanzi)) firstTries.set(r.word.hanzi, r.isCorrect);
+    const roundLevel = (level === 'all' ? Math.min(...words.map((w) => w.level)) : Number(level)) as HskLevel;
+    saveRound.mutate({
+      mode: PRACTICE_MODES.find((m) => m.id === mode)!.apiMode,
+      level: roundLevel,
+      total: firstTries.size,
+      correct: [...firstTries.values()].filter(Boolean).length,
+    });
   };
 
   const next = () => {
-    if (isDone) return;
-    const nextIndex = index + 1;
-    setIndex(nextIndex);
-    if (nextIndex === words.length) {
-      const final = recordsRef.current;
-      const correct = final.filter((r) => r.isCorrect).length;
-      const roundLevel = (level === 'all' ? Math.min(...words.map((w) => w.level)) : Number(level)) as HskLevel;
-      saveRound.mutate({
-        mode: PRACTICE_MODES.find((m) => m.id === mode)!.apiMode,
-        level: roundLevel,
-        total: final.length,
-        correct,
-      });
-    }
+    const result = pendingRef.current;
+    if (isDone || result === null) return;
+    const updated = afterAnswer(session, result);
+    setSession(updated);
+    pendingRef.current = null;
+    setPending(null);
+    setStep(step + 1);
+    if (updated.queue.length === 0) finish();
   };
 
   const retryUnsaved = () => {
-    const pending = unsaved;
+    const list = unsaved;
     setUnsaved([]);
-    pending.forEach(save);
+    list.forEach(save);
   };
 
   return {
-    index,
-    total: words.length,
+    index: step,
+    total: session.total,
+    learned: session.done.length,
     current,
     records,
     isDone,

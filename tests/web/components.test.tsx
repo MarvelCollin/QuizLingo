@@ -7,6 +7,7 @@ import { SegmentedControl } from '../../src/components/ui/segmented-control';
 import { CharacterQuiz } from '../../src/features/characters/character-quiz';
 import { ChoiceOption } from '../../src/features/practice/choice-option';
 import { ToolHeader, ToolSummary } from '../../src/features/practice/tool-round-parts';
+import { useRound } from '../../src/features/practice/use-round';
 import { useToolRound } from '../../src/features/practice/use-tool-round';
 import { WordOrder } from '../../src/features/practice/word-order';
 import { MockItemView } from '../../src/features/tests/mock-item-view';
@@ -227,5 +228,32 @@ describe('useToolRound', () => {
     const [url, init] = fetchMock.mock.calls[0];
     expect(String(url).endsWith('/api/sessions')).toBe(true);
     expect(JSON.parse(String(init?.body))).toEqual({ mode: 'tones', level: 1, total: 2, correct: 1 });
+  });
+});
+
+describe('useRound', () => {
+  it('saves the first try of each word and later misses, and ends when every word is learned', async () => {
+    const fetchMock = vi
+      .spyOn(globalThis, 'fetch')
+      .mockImplementation(async () => new Response(JSON.stringify({ progress: [], session: {} }), { status: 200 }));
+    const words = [word('好', 1, 'hǎo', 'good'), word('我', 1, 'wǒ', 'I')];
+    const { result } = renderHook(() => useRound(words, new Map(), 'meaning', '1'), { wrapper });
+    const answerAndNext = (isCorrect: boolean) => {
+      act(() => result.current.answer(isCorrect));
+      act(() => result.current.next());
+    };
+    answerAndNext(false);
+    answerAndNext(true);
+    answerAndNext(true);
+    answerAndNext(true);
+    expect(result.current.isDone).toBe(false);
+    answerAndNext(true);
+    expect(result.current.isDone).toBe(true);
+    expect(result.current.learned).toBe(2);
+    await waitFor(() => expect(fetchMock.mock.calls.some(([url]) => String(url).endsWith('/api/sessions'))).toBe(true));
+    const saved = fetchMock.mock.calls.filter(([url]) => String(url).endsWith('/api/progress')).map(([, init]) => JSON.parse(String(init?.body)));
+    expect(saved).toHaveLength(2);
+    const session = fetchMock.mock.calls.find(([url]) => String(url).endsWith('/api/sessions'))!;
+    expect(JSON.parse(String(session[1]?.body))).toEqual({ mode: 'quiz', level: 1, total: 2, correct: 1 });
   });
 });

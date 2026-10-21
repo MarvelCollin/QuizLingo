@@ -1,7 +1,7 @@
 import { Button, ButtonLink } from '../../components/ui/button';
 import { InlineMessage } from '../../components/ui/inline-message';
 import { plural } from '../../lib/format';
-import type { RoundSummaryProps } from './types';
+import type { AnswerRecord, RoundSummaryProps } from './types';
 
 export const RoundSummary = ({
   records,
@@ -12,20 +12,22 @@ export const RoundSummary = ({
   onPracticeWords,
   onNewRound,
 }: RoundSummaryProps) => {
-  const correct = records.filter((r) => r.isCorrect).length;
-  const missed = records.filter((r) => !r.isCorrect).map((r) => r.word);
+  const firstTries = new Map<string, AnswerRecord>();
+  for (const r of records) if (!firstTries.has(r.word.hanzi)) firstTries.set(r.word.hanzi, r);
+  const correct = [...firstTries.values()].filter((r) => r.isCorrect).length;
+  const missed = [...new Map(records.filter((r) => !r.isCorrect).map((r) => [r.word.hanzi, r.word])).values()];
 
   return (
     <section aria-labelledby="summary-title" className="flex flex-col gap-8">
       <div>
         <h1 id="summary-title" className="text-2xl font-bold text-ink">
-          Round complete
+          Session complete
         </h1>
         <p className="mt-3 text-3xl font-bold text-strong">
-          {correct} of {records.length} right
+          {correct} of {firstTries.size} right the first time
         </p>
         <p className="mt-1 text-base text-muted" role="status">
-          {isSaving ? 'Saving your round' : 'Saved. Words you missed come back sooner, words you knew come back later.'}
+          {isSaving ? 'Saving your round' : 'Saved. Words you knew stay hidden for longer each time, and words you missed come back sooner.'}
         </p>
       </div>
 
@@ -50,7 +52,7 @@ export const RoundSummary = ({
           </Button>
         )}
         <Button size="lg" variant={missed.length > 0 ? 'secondary' : 'primary'} onClick={onNewRound}>
-          Start a new round
+          Start a new session
         </Button>
         <ButtonLink to="/" size="lg" variant="quiet">
           Back to home

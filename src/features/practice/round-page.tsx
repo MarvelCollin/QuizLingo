@@ -48,6 +48,7 @@ const RoundRunner = ({ vocabulary, progress, sentences, config }: RoundRunnerPro
     <Round
       key={round.id}
       words={round.words}
+      progress={progress}
       pool={pool}
       sentences={sentences}
       config={config}

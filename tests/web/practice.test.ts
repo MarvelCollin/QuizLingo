@@ -2,7 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { buildQuestion } from '../../src/features/practice/build-question';
 import { buildSentenceQuestion, hasSentence } from '../../src/features/practice/build-sentence-question';
 import { isKnown, learningStep, stepQueue, stepTarget } from '../../src/features/practice/learning-step';
-import { openWordSet, pickRoundWords, wordsForMode, wordsInLevel, wordsInSet } from '../../src/features/practice/pick-words';
+import { NEW_PER_SESSION, REVIEWS_PER_SESSION } from '../../src/features/practice/constants';
+import { openWordSet, pickRoundWords, sessionWords, wordsForMode, wordsInLevel, wordsInSet } from '../../src/features/practice/pick-words';
+import { afterAnswer, RETRY_GAP, SESSION_GOAL, SPACING_GAP, startSession } from '../../src/features/practice/session-queue';
 import { configFromParams, configToSearch, highestLevel } from '../../src/features/practice/round-config';
 import type { WordProgress } from '../../src/features/progress/types';
 import { buildSentenceIndex, isWordToken } from '../../src/features/study/api';
@@ -103,9 +105,17 @@ describe('picking round words', () => {
     expect(wordsInSet(pool, 'new', progress, now)).toHaveLength(pool.length - 2);
   });
 
-  it('respects the round size', () => {
-    const words = pickRoundWords(pool, { mode: 'flashcard', set: 'all', level: '1', size: '10' }, progress, now);
-    expect(words).toHaveLength(9);
+  it('sizes each session by itself', () => {
+    expect(pickRoundWords(pool, { mode: 'flashcard', set: 'all', level: '1' }, progress, now)).toHaveLength(9);
+    const many = Array.from({ length: 60 }, (_, i) => word(`词${i}`, 1, `ci${i}`, `word ${i}`));
+    const old = new Map<string, WordProgress>(
+      many.slice(0, 50).map((w) => [w.hanzi, { word: w.hanzi, level: 1, box: 1, correct: 1, wrong: 0, dueAt: now - 1000, lastSeenAt: now - 86400000 }]),
+    );
+    expect(sessionWords(many, 'new', new Map())).toHaveLength(NEW_PER_SESSION);
+    expect(sessionWords(many, 'due', old)).toHaveLength(REVIEWS_PER_SESSION);
+    const mixed = sessionWords(many, 'step', old);
+    expect(mixed.filter((w) => old.has(w.hanzi))).toHaveLength(REVIEWS_PER_SESSION);
+    expect(mixed.filter((w) => !old.has(w.hanzi))).toHaveLength(NEW_PER_SESSION);
   });
 });
 
@@ -165,21 +175,68 @@ describe('step by step word sets', () => {
     const open = openWordSet(many, '1', new Map());
     expect(open.size).toBe(30);
     expect(wordsInSet(many.slice(10), 'step', new Map(), now, open)).toHaveLength(20);
-    const round = pickRoundWords(many, { mode: 'flashcard', set: 'step', level: '1', size: '30' }, new Map(), now);
-    expect(round).toHaveLength(30);
+    const round = pickRoundWords(many, { mode: 'flashcard', set: 'step', level: '1' }, new Map(), now);
+    expect(round).toHaveLength(NEW_PER_SESSION);
     expect(round.every((w) => open.has(w.hanzi))).toBe(true);
+  });
+});
+
+describe('adaptive sessions', () => {
+  const now = Date.now();
+  const words = Array.from({ length: 10 }, (_, i) => word(`字${i}`, 1, `zi${i}`, `word ${i}`));
+  const known = new Map<string, WordProgress>([
+    [words[0].hanzi, { word: words[0].hanzi, level: 1, box: 2, correct: 2, wrong: 0, dueAt: now - 1000, lastSeenAt: now - 86400000 }],
+  ]);
+  const keys = (list: { hanzi: string }[]) => list.map((w) => w.hanzi);
+
+  it('lets a known review word go after one right answer', () => {
+    const state = afterAnswer(startSession(words, known), true);
+    expect(keys(state.done)).toEqual([words[0].hanzi]);
+    expect(state.queue).toHaveLength(9);
+  });
+
+  it('asks a new word again a few cards later until it is right twice in a row', () => {
+    let state = afterAnswer(startSession(words.slice(1), new Map()), true);
+    expect(state.done).toHaveLength(0);
+    expect(state.queue.findIndex((w) => w.hanzi === words[1].hanzi)).toBe(SPACING_GAP);
+    for (let i = 0; i < SPACING_GAP; i++) state = afterAnswer(state, true);
+    expect(state.queue[0].hanzi).toBe(words[1].hanzi);
+    state = afterAnswer(state, true);
+    expect(keys(state.done)).toContain(words[1].hanzi);
+    expect(SESSION_GOAL).toBe(2);
+  });
+
+  it('brings a missed word back soon and needs two right answers in a row after a miss', () => {
+    let state = afterAnswer(startSession(words, known), false);
+    expect(state.queue.findIndex((w) => w.hanzi === words[0].hanzi)).toBe(RETRY_GAP);
+    for (let i = 0; i < RETRY_GAP; i++) state = afterAnswer(state, true);
+    state = afterAnswer(state, true);
+    expect(keys(state.done)).not.toContain(words[0].hanzi);
+    const at = state.queue.findIndex((w) => w.hanzi === words[0].hanzi);
+    for (let i = 0; i < at; i++) state = afterAnswer(state, true);
+    state = afterAnswer(state, true);
+    expect(keys(state.done)).toContain(words[0].hanzi);
+  });
+
+  it('ends when every word is learned', () => {
+    let state = startSession(words.slice(0, 2), new Map());
+    let guard = 0;
+    while (state.queue.length > 0 && guard++ < 20) state = afterAnswer(state, true);
+    expect(state.queue).toHaveLength(0);
+    expect(state.done).toHaveLength(2);
+    expect(state.attempts).toBe(4);
   });
 });
 
 describe('round config in the URL', () => {
   it('reads and writes every option', () => {
     const config = configFromParams(new URLSearchParams('mode=order&set=due&level=7&size=20'));
-    expect(config).toEqual({ mode: 'order', set: 'due', level: '7', size: '20' });
-    expect(configToSearch(config)).toBe('?mode=order&set=due&level=7&size=20');
+    expect(config).toEqual({ mode: 'order', set: 'due', level: '7' });
+    expect(configToSearch(config)).toBe('?mode=order&set=due&level=7');
   });
 
   it('falls back to defaults for unknown values', () => {
-    expect(configFromParams(new URLSearchParams('mode=hack&level=10'))).toEqual({ mode: 'flashcard', set: 'step', level: '1', size: '10' });
+    expect(configFromParams(new URLSearchParams('mode=hack&level=10'))).toEqual({ mode: 'meaning', set: 'step', level: '1' });
   });
 
   it('maps a level filter to the highest level it needs', () => {
