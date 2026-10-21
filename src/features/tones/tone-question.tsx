@@ -11,11 +11,11 @@ export const ToneQuestion = ({ item, onAnswer, onNext }: ToneQuestionProps) => {
   const [chosen, setChosen] = useState<number | null>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const isAnswered = chosen !== null;
-  const play = () => (item.kind === 'syllable' ? playSyllable(item.sound) : speak(item.sound));
+  const play = () => (item.kind === 'pair' ? speak(item.sound) : playSyllable(item.sound));
 
   useEffect(() => {
-    if (item.kind === 'syllable') playSyllable(item.sound);
-    else speak(item.sound);
+    if (item.kind === 'pair') speak(item.sound);
+    else playSyllable(item.sound);
   }, [item.kind, item.sound]);
 
   useEffect(() => {
@@ -48,13 +48,27 @@ export const ToneQuestion = ({ item, onAnswer, onNext }: ToneQuestionProps) => {
     <section aria-label="Tone question" className="flex flex-col gap-6">
       <div className="flex flex-col items-center gap-4 rounded-xl bg-surface px-6 py-10 text-center">
         <h2 className="text-base font-medium text-muted">
-          {item.kind === 'syllable' ? 'Which tone did you hear?' : 'Which tones did you hear?'}
+          {item.kind === 'pair' ? 'Which tones did you hear?' : 'Which tone did you hear?'}
         </h2>
+        {item.prompt && !isAnswered && <p className="text-5xl font-semibold text-ink">{item.prompt}</p>}
         <Button variant="secondary" size="lg" onClick={play}>
           <Volume2 aria-hidden="true" className="size-5" strokeWidth={1.75} />
           Play again <KeyHint>Space</KeyHint>
         </Button>
-        {isAnswered && (
+        {isAnswered && item.kind === 'basic' && (
+          <div className="flex flex-col items-center gap-1">
+            <p className="text-5xl font-semibold text-ink">{item.answer}</p>
+            {item.hanzi && (
+              <p className="text-base text-muted">
+                <span lang="zh-CN" className="font-hanzi text-lg text-ink">
+                  {item.hanzi}
+                </span>{' '}
+                {item.meaning}
+              </p>
+            )}
+          </div>
+        )}
+        {isAnswered && item.kind !== 'basic' && (
           <div className="flex flex-col items-center gap-1">
             <p lang="zh-CN" className="font-hanzi text-5xl text-ink">
               {item.hanzi}

@@ -33,6 +33,29 @@ const syllableItems = (words: Word[], audio: AudioIndex): ToneItem[] => {
   return [...seen.values()];
 };
 
+const TONE_SHAPES = ['ˉ  Tone 1, high and flat', 'ˊ  Tone 2, rising', 'ˇ  Tone 3, dipping', 'ˋ  Tone 4, falling'];
+
+const basicItems = (words: Word[], audio: AudioIndex): ToneItem[] => {
+  const examples = new Map(syllableItems(words, audio).map((item) => [item.sound, item]));
+  return [...audio.syllables].flatMap((sound) => {
+    const parts = splitSyllable(sound);
+    if (!parts || parts.tone > 4) return [];
+    const example = examples.get(sound);
+    return [
+      {
+        key: sound,
+        kind: 'basic' as const,
+        sound,
+        answer: markTone(parts.base, parts.tone),
+        hanzi: example?.hanzi ?? '',
+        meaning: example?.meaning ?? '',
+        prompt: markTone(parts.base, 0),
+        options: TONES.map((tone) => ({ label: TONE_SHAPES[tone - 1], isCorrect: tone === parts.tone })),
+      },
+    ];
+  });
+};
+
 const pairItems = (words: Word[], audio: AudioIndex): ToneItem[] =>
   words
     .filter((w) => w.hanzi.length === 2 && w.readings.length === 1 && audio.words.has(w.hanzi))
@@ -57,6 +80,7 @@ const pairItems = (words: Word[], audio: AudioIndex): ToneItem[] =>
     });
 
 export const toneItemsFor = (words: Word[], audio: AudioIndex, kind: ToneKind, level: HskLevel) => {
+  if (kind === 'basic') return basicItems(words, audio);
   const inLevel = words.filter((w) => w.level === level);
   return kind === 'syllable' ? syllableItems(inLevel, audio) : pairItems(inLevel, audio);
 };

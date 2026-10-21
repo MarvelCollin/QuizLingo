@@ -18,16 +18,22 @@ import type { ToneItem, ToneKind, ToneRoundProps } from './types';
 
 const ROUND = 15;
 
+const KIND_LABELS: Record<ToneKind, string> = { basic: 'Basics', syllable: 'Single tones', pair: 'Tone pairs' };
+
 const ToneRound = ({ kind, level, items, onRestart, onEnd }: ToneRoundProps) => {
   const round = useToolRound(items, 'tones', level);
-  const label = `${kind === 'syllable' ? 'Single tones' : 'Tone pairs'}, ${levelLabel(level)}`;
+  const label = kind === 'basic' ? 'Basics, every syllable' : `${KIND_LABELS[kind]}, ${levelLabel(level)}`;
   if (round.isDone || !round.current) {
     return (
       <ToolSummary
         title="Round complete"
         correct={round.correct}
         total={round.total}
-        missed={round.missed.map((item) => ({ key: item.key, main: item.hanzi, detail: `${item.answer}, ${item.meaning}` }))}
+        missed={round.missed.map((item) =>
+          item.kind === 'basic'
+            ? { key: item.key, main: item.answer, detail: item.hanzi ? `${item.hanzi}, ${item.meaning}` : `tone ${item.sound.slice(-1)}` }
+            : { key: item.key, main: item.hanzi, detail: `${item.answer}, ${item.meaning}` },
+        )}
         isSaving={round.isSaving}
         onRestart={onRestart}
         backTo="/practice"
@@ -49,7 +55,7 @@ const TonesPage = () => {
   const vocabulary = useVocabulary();
   const audio = useAudioIndex();
   const [params, setParams] = useSearchParams();
-  const kind: ToneKind = params.get('kind') === 'pair' ? 'pair' : 'syllable';
+  const kind: ToneKind = (['basic', 'pair'] as const).find((k) => k === params.get('kind')) ?? 'syllable';
   const requested = Number(params.get('level')) as HskLevel;
   const level = LEVELS.includes(requested) ? requested : 1;
   const [round, setRound] = useState<{ id: number; items: ToneItem[] } | null>(null);
@@ -79,22 +85,25 @@ const TonesPage = () => {
         value={kind}
         onChange={(value) => update({ kind: value })}
         options={[
+          { value: 'basic', label: 'Basics', detail: 'Every syllable, pick the tone mark ˉ ˊ ˇ ˋ' },
           { value: 'syllable', label: 'Single tones', detail: 'One syllable, pick tone 1 to 4' },
           { value: 'pair', label: 'Tone pairs', detail: 'A two character word, pick both tones' },
         ]}
       />
-      <SegmentedControl
-        label="Level"
-        value={String(level)}
-        onChange={(value) => update({ level: value })}
-        isWrapped
-        options={LEVELS.map((l) => ({ value: String(l), label: levelLabel(l) }))}
-      />
+      {kind !== 'basic' && (
+        <SegmentedControl
+          label="Level"
+          value={String(level)}
+          onChange={(value) => update({ level: value })}
+          isWrapped
+          options={LEVELS.map((l) => ({ value: String(l), label: levelLabel(l) }))}
+        />
+      )}
       <div className="flex flex-col gap-3 border-t border-hairline pt-6 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-base text-ink">
           {pool.length === 0
             ? 'No recordings for this choice yet. Pick another level.'
-            : `${Math.min(ROUND, pool.length)} of ${pool.length.toLocaleString('en-US')} recordings from ${levelLabel(level)}.`}
+            : `${Math.min(ROUND, pool.length)} of ${pool.length.toLocaleString('en-US')} recordings from ${kind === 'basic' ? 'every syllable' : levelLabel(level)}.`}
         </p>
         <Button size="lg" disabled={pool.length === 0} onClick={() => start(0)}>
           Start round

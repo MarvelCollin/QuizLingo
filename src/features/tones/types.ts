@@ -1,6 +1,6 @@
 import type { HskLevel } from '../vocabulary/types';
 
-export type ToneKind = 'syllable' | 'pair';
+export type ToneKind = 'basic' | 'syllable' | 'pair';
 
 export type ToneOption = { label: string; isCorrect: boolean };
 
@@ -11,6 +11,7 @@ export type ToneItem = {
   answer: string;
   hanzi: string;
   meaning: string;
+  prompt?: string;
   options: ToneOption[];
 };
 

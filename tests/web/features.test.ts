@@ -62,6 +62,16 @@ describe('tone items', () => {
     }
   });
 
+  it('builds basics from every recorded syllable with the tone marks in tone order', () => {
+    const items = toneItemsFor(words, { ...audio, syllables: new Set([...audio.syllables, 'lv3']) }, 'basic', 4);
+    expect(items.map((i) => i.sound).sort()).toEqual(['hao3', 'kan4', 'lv3', 'ma1']);
+    const lv = items.find((i) => i.sound === 'lv3')!;
+    expect(lv.prompt).toBe('lü');
+    expect(lv.answer).toBe('lǚ');
+    expect(lv.options.findIndex((o) => o.isCorrect)).toBe(2);
+    expect(items.find((i) => i.sound === 'ma1')?.hanzi).toBe('妈');
+  });
+
   it('builds tone pairs from recorded two character words', () => {
     const [pair] = toneItemsFor(words, audio, 'pair', 1);
     expect(pair.answer).toBe('hǎo kàn');
