@@ -1,0 +1,28 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch, tag or commit to deploy
+        default: main
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Start a production deployment on Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          REF: ${{ inputs.ref }}
+        run: |
+          body=$(jq -n --arg ref "$REF" '{name: "quizlingo", project: "prj_099PE25TynK7ucC9kh20JCpD3WrW", target: "production", gitSource: {type: "github", org: "MarvelCollin", repo: "QuizLingo", ref: $ref}}')
+          curl -sf -X POST "https://api.vercel.com/v13/deployments?teamId=team_GfV3YqmYwK59Qlny9e2QJhON" \
+            -H "Authorization: Bearer $VERCEL_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "$body" | jq '{id, url, readyState}'

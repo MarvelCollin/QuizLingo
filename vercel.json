@@ -2,7 +2,9 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
   "outputDirectory": "dist",
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':(exclude)*.md' ':(exclude)tests' ':(exclude)vitest.config.ts' ':(exclude)hsk_wp2.png' ':(exclude)hsk_wp3.png'",
+  "git": {
+    "deploymentEnabled": false
+  },
   "regions": [
     "hnd1"
   ],
